@@ -1,6 +1,6 @@
 <template>
     <div class="init-home-container">
-        <div class="title">请选择首页视图</div>
+        <div class="title">{{t('components.InitHome.index.5rovdljazws0')}}</div>
 
         <div class="choose-view">
             <div class="view-content">
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="btn">
-                <j-button type="primary" @click="confirm">保存修改</j-button>
+                <j-button type="primary" @click="confirm">{{t('components.InitHome.index.5sauwfj2lwo0')}}</j-button>
             </div>
         </div>
     </div>
@@ -37,7 +37,9 @@
 import { setView_api } from '@/api/home';
 import { getImage } from '@/utils/comm';
 import { useUserInfo } from '@/store/userInfo';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const user = useUserInfo();
 const emits = defineEmits(['refresh']);
 const selectValue = ref('device');

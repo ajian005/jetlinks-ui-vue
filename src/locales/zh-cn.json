@@ -158,6 +158,7 @@
         },
         "tips": {
             "device": "请选择设备",
+            "product": "请选择产品",
             "export": "确认导出？",
             "suc": "操作成功",
             "err": "操作失败",
@@ -231,7 +232,7 @@
     },
     "login": {
         "remember": "记住我",
-        "introduce": "团队全新力作可视化大屏系统",
+        "introduce": "JETLINKS团队全新力作可视化大屏系统",
         "experience_button": "体验",
         "otherLogin": "其他登录方式"
     },
@@ -244,7 +245,7 @@
                 "iotGuidance": {
                     "title": "物联网引导",
                     "step2": "创建设备",
-                    "step3": "规矩引擎"
+                    "step3": "规则引擎"
                 },
                 "op": {
                     "title": "运维引导",
@@ -1842,7 +1843,8 @@
         "InitHome": {
             "index": {
                 "5rovdljazws0": "请选择首页视图",
-                "5rovdljb1q00": "确定"
+                "5rovdljb1q00": "确定",
+                "5sauwfj2lwo0": "保存修改"
             }
         },
         "Metadata": {
@@ -3295,6 +3297,22 @@
                 "explain2": "2、平台支持订阅kafka中告警处理数据，并更新告警记录状态。",
                 "deviceName": "1楼烟感S01",
                 "rule": "1楼烟感统一告警规则设置"
+            }
+        },
+        "Debug": {
+            "index": {
+                "5savfddxf2s0": "调试",
+                "5savfddxgxo0": "取消",
+                "5savfddxh740": "确定",
+                "5savfddxheg0": "通知模板",
+                "5savfddxhlc0": "该字段为必填字段",
+                "5savfddxhsg0": "请选择通知模板",
+                "5savfddxhyo0": "变量",
+                "5savfddxi4o0": "最多可输入64个字符",
+                "5savfddxidc0": "请输入有效号码",
+                "5savfddxis80": "名称",
+                "5savfddxj8c0": "值",
+                "5savfddxjfs0": "操作成功"
             }
         }
     },
@@ -6448,6 +6466,9 @@
             },
             "StepCard": {
                 "5rovgp3dsts0": "暂无权限，请联系管理员"
+            },
+            "PlatformPicCard": {
+                "5sav76km0uc0": "平台架构图"
             }
         }
     }

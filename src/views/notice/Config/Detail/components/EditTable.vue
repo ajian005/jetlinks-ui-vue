@@ -8,9 +8,9 @@
                         <j-form-item :name="[index, column.dataIndex]"  :rules="[
                             {
                             max: 64,
-                            message: '最多可输入64个字符'
+                            message: t('common.tips.max64')
                             }, 
-                            { required: true, message: `请输入${column.title}`, trigger: 'blur' }]"
+                            { required: true, message: `${t('common.tips.input')+column.title}`, trigger: 'blur' }]"
                             >
                             <j-input v-model:value="record[column.dataIndex]"/></j-form-item>
                     </template>
@@ -27,7 +27,7 @@
                 <template #icon>
                     <plus-outlined />
                 </template>
-                添加
+                {{ t('common.add')}}
             </j-button>
         </j-form>
     </div>
@@ -39,6 +39,9 @@ import { PropType } from 'vue';
 import type { IHeaders } from '../../types';
 import { randomString } from '@/utils/utils'
 import { reject } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 type Emits = {
     (e: 'update:headers', data: IHeaders[]): void;
 };
@@ -65,7 +68,7 @@ const columns = [
         dataIndex: 'value',
     },
     {
-        title: '操作',
+        title: t('common.action'),
         dataIndex: 'operation',
         width: 80,
         fixed: 'right',

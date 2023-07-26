@@ -15,7 +15,7 @@
             >
                 <template #top>
                     <div class="card">
-                        <h3 style="margin: 0 0 24px 0">基本信息</h3>
+                        <h3 style="margin: 0 0 24px 0">{{t('views.home.index.5rovh57d0uo0')}}</h3>
                         <p>
                             <span class="label">clientId: </span>
                             <span class="value">{{ clientId }}</span>
@@ -52,7 +52,9 @@ import { useUserInfo } from '@/store/userInfo';
 import { isNoCommunity } from '@/utils/utils';
 import { getMe_api, getView_api } from '@/api/home';
 import { getAppInfo_api } from '@/api/system/apply';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const currentView = ref<string>('');
 const clientId = useUserInfo().$state.userInfos.id;
 const secureKey = ref<string>('');

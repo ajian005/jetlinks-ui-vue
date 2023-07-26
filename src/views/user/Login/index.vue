@@ -40,36 +40,36 @@
                                     :rules='rules'
                                 >
                                     <j-form-item
-                                        label="账号"
+                                        :label="t('common.id')"
                                         name="username"
                                     >
                                         <j-input
                                             v-model:value="form.username"
-                                            placeholder="请输入账号"
+                                            :placeholder="t('common.idTips')"
                                             :maxlength="64"
                                         ></j-input>
                                     </j-form-item>
                                     <j-form-item
-                                        label="密码"
+                                        :label="t('common.pwd')"
                                         name="password"
                                     >
                                         <j-input-password
                                             v-model:value="form.password"
-                                            placeholder="请输入密码"
+                                            :placeholder="t('common.pwdTips')"
                                             :maxlength="64"
                                         ></j-input-password>
                                     </j-form-item>
                                     <j-form-item
                                         v-if="codeConfig"
                                         class="verifyCode"
-                                        label="验证码"
+                                        :label="t('common.verification')"
                                         name="verifyCode"
                                     >
                                         <j-input
                                             v-model:value="form.verifyCode"
                                             autocomplete="off"
                                             :maxlength="64"
-                                            placeholder="请输入验证码"
+                                            :placeholder="t('common.verificationTips')"
                                         >
                                             <template #addonAfter>
                                                 <div>
@@ -94,7 +94,7 @@
                                                             ? -1
                                                             : 3600000)
                                             "
-                                            >记住我</j-checkbox
+                                            >{{ t('login.remember') }}</j-checkbox
                                         >
                                     </j-form-item>
                                     <j-form-item>
@@ -105,14 +105,14 @@
                                             class="login-form-button"
                                             block
                                         >
-                                            登录
+                                        {{ t('common.login') }}
                                         </j-button>
                                     </j-form-item>
                                 </j-form>
                                 <div class="other">
                                     <j-divider plain>
                                         <div class="other-text">
-                                            其他登录方式
+                                            {{ t('login.otherLogin') }}
                                         </div>
                                     </j-divider>
                                     <div class="other-button">
@@ -139,7 +139,7 @@
                     </div>
                     <div v-if="basis.recommend" class="bottom">
                         <div class="view">
-                            JETLINKS团队全新力作可视化大屏系统
+                            {{t('login.introduce')}}
                         </div>
                         <div class="url">
                             <div style="height: 33px">
@@ -150,7 +150,7 @@
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                体验DEMO
+                            {{t('login.experience_button'+'DEMO')}}
                             </a>
                         </div>
                     </div>
@@ -214,7 +214,7 @@ const rules = {
     {
       validator(_: any, value: string) {
         if (!value) {
-          return Promise.reject('请输入账号!')
+          return Promise.reject(t('common.idTips'))
         }
         return Promise.resolve()
       }
@@ -224,7 +224,7 @@ const rules = {
     {
       validator(_: any, value: string) {
         if (!value) {
-          return Promise.reject('请输入密码!')
+          return Promise.reject(t('common.pwdTips'))
         }
         return Promise.resolve()
       }
@@ -234,7 +234,7 @@ const rules = {
     {
       validator(_: any, value: string) {
         if (!value) {
-          return Promise.reject('请输入验证码!')
+          return Promise.reject(t('common.verificationTips'))
         }
         return Promise.resolve()
       }
