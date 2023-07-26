@@ -178,7 +178,9 @@ import { LocalStore } from '@/utils/comm';
 import { BASE_API_PATH, TOKEN_KEY, Version_Code } from '@/utils/variable';
 import { SystemConst } from '@/utils/consts';
 import {encrypt} from '@/utils/encrypt'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const store = useUserInfo();
 const systemStore = useSystem();
 const router = useRouter();
