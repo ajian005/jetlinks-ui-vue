@@ -26,7 +26,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('device.Firmware.index.5rg3o0pa74w0')}}
                         </PermissionButton>
                     </template>
                     <template #productId="slotProps">
@@ -79,7 +79,9 @@ import Save from './Save/index.vue';
 import { useMenuStore } from 'store/menu';
 import type { FormDataType } from './type';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 
 const tableRef = ref<Record<string, any>>({});
@@ -91,7 +93,7 @@ const current = ref({});
 
 const columns = [
     {
-        title: '固件名称',
+        title: t('device.Firmware.index.5rg3o0pa84c0'),
         key: 'name',
         dataIndex: 'name',
         fixed: 'left',
@@ -102,7 +104,7 @@ const columns = [
         },
     },
     {
-        title: '固件版本',
+        title: t('device.Firmware.index.5rg3o0pa8ds0'),
         dataIndex: 'version',
         key: 'version',
         ellipsis: true,
@@ -111,7 +113,7 @@ const columns = [
         },
     },
     {
-        title: '所属产品',
+        title: t('device.Firmware.index.5rg3o0pa8iw0'),
         dataIndex: 'productId',
         key: 'productId',
         ellipsis: true,
@@ -123,7 +125,7 @@ const columns = [
         },
     },
     {
-        title: '签名方式',
+        title: t('device.Firmware.index.5rg3o0pa8mw0'),
         dataIndex: 'signMethod',
         key: 'signMethod',
         scopedSlots: true,
@@ -143,7 +145,7 @@ const columns = [
         width: 150,
     },
     {
-        title: '创建时间',
+        title: t('device.Firmware.index.5rg3o0pa8sw0'),
         key: 'createTime',
         dataIndex: 'createTime',
         search: {
@@ -153,7 +155,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '说明',
+        title: t('device.Firmware.index.5rg3o0pa8wk0'),
         dataIndex: 'description',
         key: 'description',
         ellipsis: true,
@@ -163,7 +165,7 @@ const columns = [
     },
 
     {
-        title: '操作',
+        title: t('device.Firmware.index.5rg3o0pa91s0'),
         key: 'action',
         fixed: 'right',
         width: 120,
@@ -178,9 +180,9 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
     return [
         {
             key: 'view',
-            text: '升级任务',
+            text: t('device.Firmware.index.5rg3o0pa9600'),
             tooltip: {
-                title: '升级任务',
+                title: t('device.Firmware.index.5rg3o0pa9600'),
             },
             icon: 'FileTextOutlined',
             onClick: async () => {
@@ -189,9 +191,9 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
         },
         {
             key: 'update',
-            text: '编辑',
+            text: t('device.Firmware.index.5rg3o0pa99k0'),
             tooltip: {
-                title: '编辑',
+                title: t('device.Firmware.index.5rg3o0pa99k0'),
             },
             icon: 'EditOutlined',
             onClick: async () => {
@@ -200,15 +202,15 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('device.Firmware.index.5rg3o0pa9d00'),
             tooltip: {
-                title: '删除',
+                title: t('device.Firmware.index.5rg3o0pa9d00'),
             },
             popConfirm: {
-                title: '确认删除?',
+                title: t('device.Firmware.index.5rg3o0pa9gs0'),
                 okText: ' 确定',
                 placement: 'topLeft',
-                cancelText: '取消',
+                cancelText: t('device.Firmware.index.5rg3o0pa9k40'),
                 onConfirm: async () => {
                     handlDelete(data.id);
                 },
@@ -242,7 +244,7 @@ const saveChange = (value: FormDataType) => {
     visible.value = false;
     current.value = {};
     if (value) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('device.Firmware.index.5rg3o0pa9o00'), 'success');
         tableRef.value.reload();
     }
 };
@@ -250,7 +252,7 @@ const saveChange = (value: FormDataType) => {
 const handlDelete = async (id: string) => {
     const res = await remove(id);
     if (res.status === 200) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('device.Firmware.index.5rg3o0pa9o00'), 'success');
         tableRef.value.reload();
     } else {
         onlyMessage(res?.message, 'error');

@@ -1,26 +1,26 @@
 <template>
     <div>
-        <TitleComponent data="基本信息">
+        <TitleComponent :data="t('ChildDevice.SaveChild.index.5rcycozqht00')">
             <template #extra>
-                <j-button @click="comeBack" style="margin-left: 10px;">返回</j-button>
+                <j-button @click="comeBack" style="margin-left: 10px;">{{t('ChildDevice.SaveChild.index.5rcycozqjh00')}}</j-button>
             </template>
         </TitleComponent>
         <j-form layout="vertical" :model="form" ref="formRef">
             <j-row :gutter="24">
                 <j-col :span="12">
                     <j-form-item
-                        label="设备名称"
+                        :label="t('ChildDevice.SaveChild.index.5rcycozqjpg0')"
                         name="name"
-                        :rules="{ required: true, message: '请输入设备名称' }"
+                        :rules="{ required: true, message: t('ChildDevice.SaveChild.index.5rcycozqjy80') }"
                     >
                         <j-input v-model:value="form.name"></j-input>
                     </j-form-item>
                 </j-col>
                 <j-col :span="12">
                     <j-form-item
-                        label="产品名称"
+                        :label="t('ChildDevice.SaveChild.index.5rcycozqk6s0')"
                         name="productId"
-                        :rules="{ required: true, message: '请选择产品名称' }"
+                        :rules="{ required: true, message: t('ChildDevice.SaveChild.index.5rcycozqkcs0') }"
                     >
                         <j-select
                             :disabled="props.childData?.id"
@@ -56,6 +56,9 @@ import { useInstanceStore } from '@/store/instance';
 import { storeToRefs } from 'pinia';
 import { provide } from 'vue';
 import { getEdgeMap, removeEdgeMap } from '@/api/device/instance';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const instanceStore = useInstanceStore();
 const { current } = storeToRefs(instanceStore);
 const props = defineProps(['childData']);

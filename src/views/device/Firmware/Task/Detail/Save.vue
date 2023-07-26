@@ -1,17 +1,20 @@
 <template lang="">
     <j-modal
-        title="查看"
-        ok-text="确认"
-        cancel-text="取消"
+        :title="t('Task.Detail.Save.5rg3lv59ig00')"
+        :ok-text="t('Task.Detail.Save.5rg3lv59j7w0')"
+        :cancel-text="t('Task.Detail.Save.5rg3lv59jdg0')"
         :visible="true"
         width="500px"
         @cancel="handleCancel"
         @ok="handleOk"
     >
-        <span>失败原因：{{ data }}</span>
+        <span>{{t('Task.Detail.Save.err') + data }}</span>
     </j-modal>
 </template>
 <script lang="ts" setup name="TaskDetailSavePage">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Object,

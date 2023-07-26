@@ -30,7 +30,7 @@
                                             onConfirm: confirm,
                                         }"
                                     >
-                                        批量重试
+                                        {{t('Task.Detail.index.5rg3ld5xs5k0')}}
                                     </PermissionButton>
                                 </div>
 
@@ -143,7 +143,9 @@ import moment from 'moment';
 import { cloneDeep } from 'lodash-es';
 import Save from './Save.vue';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const tableRef = ref<Record<string, any>>({});
 const route = useRoute();
 const params = ref<Record<string, any>>({});
@@ -162,27 +164,27 @@ colorMap.set('canceled', '#999');
 const stateList = [
     {
         key: 'waiting',
-        name: '等待升级',
+        name: t('Task.Detail.index.5rg3ld5xtek0'),
         img: getImage('/firmware/waiting.png'),
     },
     {
         key: 'processing',
-        name: '升级中',
+        name: t('Task.Detail.index.5rg3ld5xtns0'),
         img: getImage('/firmware/loading.png'),
     },
     {
         key: 'success',
-        name: '升级完成',
+        name: t('Task.Detail.index.5rg3ld5xtu40'),
         img: getImage('/firmware/finish.png'),
     },
     {
         key: 'failed',
-        name: '升级失败',
+        name: t('Task.Detail.index.5rg3ld5xu0k0'),
         img: getImage('/firmware/error.png'),
     },
     {
         key: 'canceled',
-        name: '已停止',
+        name: t('Task.Detail.index.5rg3ld5xu6g0'),
         img: getImage('/firmware/cancel.png'),
     },
 ];
@@ -199,7 +201,7 @@ const stateInfo = ref();
 
 const columns = [
     {
-        title: '设备名称',
+        title: t('Task.Detail.index.5rg3ld5xuc00'),
         dataIndex: 'deviceName',
         key: 'deviceName',
         fixed: 'left',
@@ -209,7 +211,7 @@ const columns = [
         },
     },
     {
-        title: '所属产品',
+        title: t('Task.Detail.index.5rg3ld5xui40'),
         dataIndex: 'productId',
         key: 'productId',
         ellipsis: true,
@@ -220,14 +222,14 @@ const columns = [
         // },
     },
     {
-        title: '创建时间',
+        title: t('Task.Detail.index.5rg3ld5xuog0'),
         key: 'createTime',
         dataIndex: 'createTime',
         width: 200,
         scopedSlots: true,
     },
     {
-        title: '完成时间',
+        title: t('Task.Detail.index.5rg3ld5xuuc0'),
         key: 'completeTime',
         ellipsis: true,
         dataIndex: 'completeTime',
@@ -238,7 +240,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '进度',
+        title: t('Task.Detail.index.5rg3ld5xuzo0'),
         dataIndex: 'progress',
         key: 'progress',
         ellipsis: true,
@@ -248,7 +250,7 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('Task.Detail.index.5rg3ld5xva40'),
         dataIndex: 'state',
         key: 'state',
         ellipsis: true,
@@ -264,7 +266,7 @@ const columns = [
     },
 
     {
-        title: '操作',
+        title: t('Task.Detail.index.5rg3ld5xvfc0'),
         key: 'action',
         fixed: 'right',
         width: 120,
@@ -290,9 +292,9 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
     const Actions: any = [
         {
             key: 'view',
-            text: '查看',
+            text: t('Task.Detail.index.5rg3ld5xvkg0'),
             tooltip: {
-                title: '查看',
+                title: t('Task.Detail.index.5rg3ld5xvkg0'),
             },
             icon: 'EyeOutlined',
             onClick: async () => {
@@ -305,9 +307,9 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
     if (mode.value === 'push' && state.value === 'failed') {
         Actions.push({
             key: 'update',
-            text: '重试',
+            text: t('Task.Detail.index.5rg3ld5xvps0'),
             tooltip: {
-                title: '重试',
+                title: t('Task.Detail.index.5rg3ld5xvps0'),
             },
             icon: 'RedoOutlined',
             popConfirm: {
@@ -330,7 +332,7 @@ const handlEye = (data: string) => {
 const handlTry = async (id: string) => {
     const res = await startOneTask([id]);
     if (res.success) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('Task.Detail.index.5rg3ld5xvv40'), 'success');
         tableRef.value.reload();
     }
 };
@@ -341,7 +343,7 @@ const saveChange = (value: boolean) => {
 const confirm = async (e: MouseEvent) => {
     const res = await startTask(taskId, ['failed']);
     if (res.success) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('Task.Detail.index.5rg3ld5xvv40'), 'success');
         stateList.forEach((item) => {
             handleRefresh(item.key);
         });

@@ -1,18 +1,18 @@
 <template>
     <j-modal
         width="900px"
-        title="批量映射"
+        :title="t('components.EditTable.PatchMapping.5rcyeb76mkg0')"
         visible
         @ok="handleClick"
         @cancel="handleClose"
     >
         <div class="map-tree">
             <div class="map-tree-top">
-                采集器的点位名称与属性名称一致时将自动映射绑定；有多个采集器点位名称与属性名称一致时以第1个采集器的点位数据进行绑定
+                {{t('components.EditTable.PatchMapping.5rcyeb76o400')}}
             </div>
             <j-spin :spinning="loading">
                 <div class="map-tree-content">
-                    <j-card class="map-tree-content-card" title="源数据">
+                    <j-card class="map-tree-content-card" :title="t('components.EditTable.PatchMapping.5rcyeb76ods0')">
                         <j-tree
                             checkable
                             :height="300"
@@ -25,10 +25,10 @@
                         <j-button
                             :disabled="rightList.length >= leftList.length"
                             @click="onRight"
-                            >加入右侧</j-button
+                            >{{t('components.EditTable.PatchMapping.5rcyeb76ol80')}}</j-button
                         >
                     </div>
-                    <j-card class="map-tree-content-card" title="采集器">
+                    <j-card class="map-tree-content-card" :title="t('components.EditTable.PatchMapping.5rcyeb76oso0')">
                         <j-list
                             size="small"
                             :data-source="rightList"
@@ -39,7 +39,7 @@
                                     {{ item.title }}
                                     <template #actions>
                                         <j-popconfirm
-                                            title="确定删除?"
+                                            :title="t('components.EditTable.PatchMapping.5rcyeb76p6c0')"
                                             @confirm="_delete(item.key)"
                                         >
                                             <AIcon type="DeleteOutlined" />
@@ -58,6 +58,9 @@
 <script lang="ts" setup>
 import { treeMapping, saveMapping } from '@/api/device/instance';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const _props = defineProps({
     type: {
         type: String,
@@ -135,7 +138,7 @@ const _delete = (_key: string) => {
 
 const handleClick = async () => {
     if (!rightList.value.length) {
-        onlyMessage('请选择采集器', 'warning');
+        onlyMessage(t('components.EditTable.PatchMapping.5rcyeb76pd80'), 'warning');
     } else {
         const params: any[] = [];
         rightList.value.map((item: any) => {
@@ -154,11 +157,11 @@ const handleClick = async () => {
         if (filterParms && filterParms.length !== 0) {
             const res = await saveMapping(_props.deviceId, _props.type, filterParms);
             if (res.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('components.EditTable.PatchMapping.5rcyeb76pkk0'));
                 _emits('save');
             }
         } else {
-            onlyMessage('暂无对应属性的映射', 'error');
+            onlyMessage(t('components.EditTable.PatchMapping.5rcyeb76pww0'), 'error');
         }
     }
 };

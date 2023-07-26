@@ -47,23 +47,23 @@
                             _current = {};
                             childVisible = true;
                         "
-                        >新增并绑定</PermissionButton
+                        >{{t('Detail.ChildDevice.index.5rcyczrkjyw0')}}</PermissionButton
                     >
                     <PermissionButton
                         type="primary"
                         @click="visible = true"
                         hasPermission="device/Instance:update"
                     >
-                        绑定</PermissionButton
+                        {{t('Detail.ChildDevice.index.5rcyczrkkt40')}}</PermissionButton
                     >
                     <PermissionButton
                         type="primary"
                         hasPermission="device/Instance:update"
                         :popConfirm="{
-                            title: '确定解绑吗？',
+                            title: t('Detail.ChildDevice.index.5rcyczrkky80'),
                             onConfirm: handleUnBind,
                         }"
-                        >批量解除</PermissionButton
+                        >{{t('Detail.ChildDevice.index.5rcyczrkl1w0')}}</PermissionButton
                     >
                 </j-space>
             </template>
@@ -119,7 +119,9 @@ import BindChildDevice from './BindChildDevice/index.vue';
 import { usePermissionStore } from '@/store/permission';
 import SaveChild from './SaveChild/index.vue';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const instanceStore = useInstanceStore();
 const { detail } = storeToRefs(instanceStore);
 const router = useRouter();
@@ -152,7 +154,7 @@ const columns = [
         },
     },
     {
-        title: '设备名称',
+        title: t('Detail.ChildDevice.index.5rcyczrkl5o0'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -161,7 +163,7 @@ const columns = [
         },
     },
     {
-        title: '所属产品',
+        title: t('Detail.ChildDevice.index.5rcyczrkl980'),
         dataIndex: 'productName',
         key: 'productName',
         search: {
@@ -169,7 +171,7 @@ const columns = [
         },
     },
     {
-        title: '注册时间',
+        title: t('Detail.ChildDevice.index.5rcyczrklds0'),
         dataIndex: 'registryTime',
         key: 'registryTime',
         scopedSlots: true,
@@ -178,21 +180,21 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('Detail.ChildDevice.index.5rcyczrklgw0'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '禁用', value: 'notActive' },
-                { label: '离线', value: 'offline' },
-                { label: '在线', value: 'online' },
+                { label: t('Detail.ChildDevice.index.5rcyczrklk40'), value: 'notActive' },
+                { label: t('Detail.ChildDevice.index.5rcyczrkln00'), value: 'offline' },
+                { label: t('Detail.ChildDevice.index.5rcyczrklqw0'), value: 'online' },
             ],
         },
     },
     {
-        title: '说明',
+        title: t('Detail.ChildDevice.index.5rcyczrklu00'),
         dataIndex: 'describe',
         key: 'describe',
         ellipsis: true,
@@ -201,7 +203,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('Detail.ChildDevice.index.5rcyczrklx00'),
         key: 'action',
         fixed: 'right',
         width: 200,
@@ -214,9 +216,9 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
     return [
         {
             key: 'view',
-            text: '查看',
+            text: t('Detail.ChildDevice.index.5rcyczrkm040'),
             tooltip: {
-                title: '查看',
+                title: t('Detail.ChildDevice.index.5rcyczrkm040'),
             },
             icon: 'EyeOutlined',
             onClick: () => {
@@ -225,15 +227,15 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
         },
         {
             key: 'action',
-            text: '解绑',
+            text: t('Detail.ChildDevice.index.5rcyczrkm340'),
             tooltip: {
-                title: '解绑',
+                title: t('Detail.ChildDevice.index.5rcyczrkm340'),
             },
             icon: 'DisconnectOutlined',
             popConfirm: {
-                title: '确认解绑吗？',
-                okText: '确定',
-                cancelText: '取消',
+                title: t('Detail.ChildDevice.index.5rcyczrkm5s0'),
+                okText: t('Detail.ChildDevice.index.5rcyczrkma80'),
+                cancelText: t('Detail.ChildDevice.index.5rcyczrkmdg0'),
                 onConfirm: async () => {
                     const resp = await unbindDevice(
                         detail.value.id,
@@ -242,16 +244,16 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
                     );
                     if (resp.status === 200) {
                         childDeviceRef.value?.reload();
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('Detail.ChildDevice.index.5rcyczrkmg80'));
                     }
                 },
             },
         },
         {
             key: 'update',
-            text: '编辑',
+            text: t('Detail.ChildDevice.index.5rcyczrkmj40'),
             tooltip: {
-                title: '编辑',
+                title: t('Detail.ChildDevice.index.5rcyczrkmj40'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -281,12 +283,12 @@ const handleUnBind = async () => {
             _selectedRowKeys.value,
         );
         if (resp.status === 200) {
-            onlyMessage('操作成功！');
+            onlyMessage(t('Detail.ChildDevice.index.5rcyczrkmg80'));
             cancelSelect();
             childDeviceRef.value?.reload();
         }
     } else {
-        onlyMessage('请勾选需要解绑的数据', 'warning');
+        onlyMessage(t('Detail.ChildDevice.index.5rcyczrkmnk0'), 'warning');
     }
 };
 

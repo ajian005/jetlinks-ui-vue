@@ -13,7 +13,7 @@
           />
         </div>
         <div class='multiple' v-if='multiple'>
-          <j-checkbox @change='checkChange'>全选</j-checkbox>
+          <j-checkbox @change='checkChange'>{{t('components.InklingDevice.index.5rnqdm6q8b40')}}</j-checkbox>
         </div>
       </div>
       <div class='device-list-warp'>
@@ -23,7 +23,7 @@
               <template v-for='item in deviceList'>
                 <template v-if='disabledKeys.includes(item.id)'>
                   <j-tooltip
-                      title='该设备已绑定平台设备'
+                      :title="t('components.InklingDevice.index.5rnqdm6qi7c0')"
                   >
                     <div
                         :class='{
@@ -77,7 +77,7 @@
         </j-scrollbar>
         <j-empty
           v-else
-          description='暂无数据'
+          :description="t('components.InklingDevice.index.5rnqdm6qikc0')"
           style='padding-top: 24px'
         />
         <div class='device-list-pagination'>
@@ -86,11 +86,11 @@
             :total='pageData.total'
             :current='pageData.pageIndex + 1'
             :pageSize='pageData.pageSize'
-            :show-total='() => {
+            :show-total="() => {
               const minSize = pageData.pageIndex *  pageData.pageSize + 1;
               const MaxSize = (pageData.pageIndex + 1) * pageData.pageSize;
-              return `第 ${minSize} - ${MaxSize > pageData.total ? pageData.total : MaxSize } 条/总共 ${pageData.total} 条`;
-            }'
+              return `${t('components.InklingDevice.index.5rnqdm6qk640',{position:minSize-MaxSize>pageData.total ? pageData.total:MaxSize,total:pageData.total})}`;
+            }"
             @change='pageChange'
           />
         </div>
@@ -104,7 +104,9 @@
 import { getCommandsByAccess, getCommandsDevicesByAccessId } from '@/api/link/accessConfig'
 import { getInkingDevices } from '@/api/device/instance'
 import { isArray } from 'lodash-es'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'update:value', data: string | string[]): void
   (e: 'change', data: any | any[]): void

@@ -8,7 +8,7 @@
             @change="(e) => handleBtnChange(e.target.value)"
         >
             <j-radio-button
-                v-for="item in quickBtnList"
+                v-for="item in btnList"
                 :key="item.value"
                 :value="item.value"
             >
@@ -54,18 +54,20 @@ const props = defineProps({
     // 快捷按钮列表
     quickBtnList: {
         type: Array as PropType<BtnOptions[]>,
-        default: [
-            { label: '今日', value: 'today' },
-            { label: '近一周', value: 'week' },
-            { label: '近一月', value: 'month' },
-            { label: '近一年', value: 'year' },
-        ],
     },
     type: {
         type: String,
         default: 'today',
     },
 });
+const btnList = computed(() => {
+    return props.quickBtnList || [
+        { label: t('DashBoard.components.TimeSelect.5rcxzrvjee40'), value: 'today' },
+        { label: t('DashBoard.components.TimeSelect.5rcxzrvjftk0'), value: 'week' },
+        { label: t('DashBoard.components.TimeSelect.5rcxzrvjkgg0'), value: 'month' },
+        { label: t('DashBoard.components.TimeSelect.5rcxzrvjl700'), value: 'year' },
+    ]
+})
 const radioValue = ref(props.type || 'week' || undefined);
 const rangeVal = ref<[string, string]>();
 

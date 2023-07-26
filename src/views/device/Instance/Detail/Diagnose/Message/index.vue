@@ -16,7 +16,7 @@
                 </j-col>
             </j-row>
             <div>
-                <TitleComponent data="调试" />
+                <TitleComponent :data="t('Diagnose.Message.index.5rcyfxsdxiw0')" />
                 <div class="content">
                     <div class="dialog" id="dialog">
                         <template v-for="item in dialogList" :key="item.key">
@@ -29,7 +29,7 @@
         </j-col>
         <j-col :span="8">
             <div class="right-log">
-                <TitleComponent data="日志" />
+                <TitleComponent :data="t('Diagnose.Message.index.5rcyfxsdzd80')" />
                 <div class="right-log-box">
                     <template v-if="logList.length">
                         <Log
@@ -58,14 +58,16 @@ import { useInstanceStore } from '@/store/instance';
 import { getWebSocket } from '@/utils/websocket';
 import { randomString } from '@/utils/utils';
 import _ from 'lodash';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const message = reactive<MessageType>({
     up: {
-        text: '上行消息诊断中',
+        text: t('Diagnose.Message.index.5rcyfxsdzt00'),
         status: 'loading',
     },
     down: {
-        text: '下行消息诊断中',
+        text: t('Diagnose.Message.index.5rcyfxse0340'),
         status: 'loading',
     },
 });
@@ -111,23 +113,23 @@ const subscribeLog = () => {
                     });
                 if (!data.upstream) {
                     message.down = {
-                        text: !flag ? '下行消息通信异常' : '下行消息通信正常',
+                        text: !flag ? t('Diagnose.Message.index.5rcyfxse0bg0') : t('Diagnose.Message.index.5rcyfxse0kw0'),
                         status: !flag ? 'error' : 'success',
                     };
                 } else {
                     message.up = {
-                        text: !flag ? '上行消息通信异常' : '上行消息通信正常',
+                        text: !flag ? t('Diagnose.Message.index.5rcyfxse0t00') : t('Diagnose.Message.index.5rcyfxse1140'),
                         status: !flag ? 'error' : 'success',
                     };
                 }
                 const list: any[] = _.cloneDeep(dialogList.value);
-                const t = list.find(
+                const n = list.find(
                     (item) =>
                         item.traceId === data.traceId &&
                         data.downstream === item.downstream &&
                         data.upstream === item.upstream,
                 );
-                if (t) {
+                if (n) {
                     const arr = list.map((item) => {
                         if (item.traceId === data.traceId) {
                             item.list.push(data);

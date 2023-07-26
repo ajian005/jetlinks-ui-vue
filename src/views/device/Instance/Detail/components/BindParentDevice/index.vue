@@ -4,9 +4,9 @@
         :maskClosable="false"
         width="1000px"
         :visible="true"
-        title="绑定父设备"
-        okText="确定"
-        cancelText="取消"
+        :title="t('components.BindParentDevice.index.5rcydoml5hk0')"
+        :okText="t('components.BindParentDevice.index.5rcydoml75w0')"
+        :cancelText="t('components.BindParentDevice.index.5rcydoml7m40')"
         @ok="handleOk"
         @cancel="handleCancel"
         :confirmLoading="btnLoading"
@@ -53,7 +53,9 @@
 import { query, bindDevice } from '@/api/device/instance';
 import { onlyMessage } from '@/utils/comm';
 import dayjs from 'dayjs';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['cancel', 'ok']);
 
 const bindDeviceRef = ref<Record<string, any>>({});
@@ -100,7 +102,7 @@ const columns = [
         },
     },
     {
-        title: '设备名称',
+        title: t('components.BindParentDevice.index.5rcydoml7y80'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -109,7 +111,7 @@ const columns = [
         },
     },
     {
-        title: '所属产品',
+        title: t('components.BindParentDevice.index.5rcydoml88k0'),
         dataIndex: 'productName',
         key: 'productName',
         search: {
@@ -117,7 +119,7 @@ const columns = [
         },
     },
     {
-        title: '注册时间',
+        title: t('components.BindParentDevice.index.5rcydoml8k00'),
         dataIndex: 'registryTime',
         key: 'registryTime',
         scopedSlots: true,
@@ -126,16 +128,16 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('components.BindParentDevice.index.5rcydoml8u40'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '禁用', value: 'notActive' },
-                { label: '离线', value: 'offline' },
-                { label: '在线', value: 'online' },
+                { label: t('components.BindParentDevice.index.5rcydoml93k0'), value: 'notActive' },
+                { label: t('components.BindParentDevice.index.5rcydoml9e00'), value: 'offline' },
+                { label: t('components.BindParentDevice.index.5rcydoml9rk0'), value: 'online' },
             ],
         },
     },
@@ -151,7 +153,7 @@ const onSelectChange = (keys: string[]) => {
 
 const handleOk = () => {
     if (_selectedRowKeys.value.length === 0) {
-        onlyMessage('请选择需要绑定的设备', 'warning');
+        onlyMessage(t('components.BindParentDevice.index.5rcydomla5w0'), 'warning');
         return;
     }
     btnLoading.value = true;
@@ -159,7 +161,7 @@ const handleOk = () => {
         .then((resp) => {
             if(resp.status === 200){
                 emit('ok', _selectedRowKeys.value[0]);
-                onlyMessage('操作成功');
+                onlyMessage(t('components.BindParentDevice.index.5rcydomlagg0'));
             }
         })
         .finally(() => {

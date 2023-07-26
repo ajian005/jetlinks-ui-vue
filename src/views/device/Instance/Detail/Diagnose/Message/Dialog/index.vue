@@ -51,16 +51,18 @@
 
 <script lang="ts" setup>
 import moment from 'moment';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const operationMap = new Map();
-operationMap.set('connection', '连接');
-operationMap.set('auth', '权限验证');
-operationMap.set('decode', '解码');
-operationMap.set('encode', '编码');
-operationMap.set('request', '请求');
-operationMap.set('response', '响应');
-operationMap.set('downstream', '下行消息');
-operationMap.set('upstream', '上行消息');
+operationMap.set('connection', t('Message.Dialog.index.5rcyex1we400'));
+operationMap.set('auth', t('Message.Dialog.index.5rcyex1wfk40'));
+operationMap.set('decode', t('Message.Dialog.index.5rcyex1wfsg0'));
+operationMap.set('encode', t('Message.Dialog.index.5rcyex1wfzs0'));
+operationMap.set('request', t('Message.Dialog.index.5rcyex1wg6o0'));
+operationMap.set('response', t('Message.Dialog.index.5rcyex1wge40'));
+operationMap.set('downstream', t('Message.Dialog.index.5rcyex1wgkw0'));
+operationMap.set('upstream', t('Message.Dialog.index.5rcyex1wgts0'));
 
 const statusColor = new Map();
 statusColor.set('error', '#E50012');

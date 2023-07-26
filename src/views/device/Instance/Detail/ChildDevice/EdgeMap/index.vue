@@ -2,13 +2,13 @@
     <j-spin :spinning="loading" v-if="_metadata?.length">
         <j-card :bordered="false">
             <template #title>
-                <TitleComponent data="点位映射"></TitleComponent>
+                <TitleComponent :data="t('ChildDevice.EdgeMap.index.5rcybkuuwc00')"></TitleComponent>
             </template>
             <template #extra>
                 <j-space>
-                    <j-button @click="showModal">批量映射</j-button>
+                    <j-button @click="showModal">{{t('ChildDevice.EdgeMap.index.5rcybkuuxpk0')}}</j-button>
                     <j-button type="primary" @click="onSave"
-                        >保存并应用</j-button
+                        >{{t('ChildDevice.EdgeMap.index.5rcybkuuxxs0')}}</j-button
                     >
                 </j-space>
             </template>
@@ -16,8 +16,8 @@
                 <j-table :dataSource="modelRef.dataSource" :columns="columns">
                     <template #headerCell="{ column }">
                         <template v-if="column.key === 'collectorId'">
-                            采集器
-                            <j-tooltip title="边缘网关代理的真实物理设备">
+                            {{t('ChildDevice.EdgeMap.index.5rcybkuuy4k0')}}
+                            <j-tooltip :title="t('ChildDevice.EdgeMap.index.5rcybkuuya00')">
                                 <AIcon type="QuestionCircleOutlined" />
                             </j-tooltip>
                         </template>
@@ -30,7 +30,7 @@
                                 <j-select
                                     style="width: 100%"
                                     v-model:value="record[column.dataIndex]"
-                                    placeholder="请选择"
+                                    :placeholder="t('ChildDevice.EdgeMap.index.5rcybkuuyfw0')"
                                     allowClear
                                     :filter-option="filterOption"
                                 >
@@ -50,7 +50,7 @@
                                 :rules="[
                                     {
                                         required: !!record.channelId,
-                                        message: '请选择采集器',
+                                        message: t('ChildDevice.EdgeMap.index.5rcybkuuykw0'),
                                     },
                                 ]"
                             >
@@ -68,7 +68,7 @@
                                 :rules="[
                                     {
                                         required: !!record.channelId,
-                                        message: '请选择点位',
+                                        message: t('ChildDevice.EdgeMap.index.5rcybkuuyq00'),
                                     },
                                 ]"
                             >
@@ -84,14 +84,14 @@
                             <j-badge
                                 v-if="record[column.dataIndex]"
                                 status="success"
-                                text="已绑定"
+                                :text="t('ChildDevice.EdgeMap.index.5rcybkuuywc0')"
                             />
-                            <j-badge v-else status="error" text="未绑定" />
+                            <j-badge v-else status="error" :text="t('ChildDevice.EdgeMap.index.5rcybkuuz1c0')" />
                         </template>
                         <template v-if="column.key === 'action'">
-                            <j-tooltip title="解绑">
+                            <j-tooltip :title="t('ChildDevice.EdgeMap.index.5rcybkuuz6g0')">
                                 <j-popconfirm
-                                    title="确认解绑"
+                                    :title="t('ChildDevice.EdgeMap.index.5rcybkuuzbc0')"
                                     :disabled="!record.id"
                                     @confirm="unbind(record.id)"
                                 >
@@ -116,7 +116,7 @@
         />
     </j-spin>
     <j-card v-else>
-        <JEmpty description="暂无数据，请配置物模型" style="margin: 10% 0" />
+        <JEmpty :description="t('ChildDevice.EdgeMap.index.5rcybkuuzn00')" style="margin: 10% 0" />
     </j-card>
 </template>
 
@@ -135,39 +135,42 @@ import MSelect from './MSelect.vue';
 import PatchMapping from './PatchMapping.vue';
 import { inject } from 'vue';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const columns = [
     {
-        title: '名称',
+        title: t('ChildDevice.EdgeMap.index.5rcybkuuzs00'),
         dataIndex: 'metadataName',
         key: 'metadataName',
         width: '20%',
     },
     {
-        title: '通道',
+        title: t('ChildDevice.EdgeMap.index.5rcybkuuzwg0'),
         dataIndex: 'channelId',
         key: 'channelId',
         width: '20%',
     },
     {
-        title: '采集器',
+        title: t('ChildDevice.EdgeMap.index.5rcybkuuy4k0'),
         dataIndex: 'collectorId',
         key: 'collectorId',
         width: '20%',
     },
     {
-        title: '点位',
+        title: t('ChildDevice.EdgeMap.index.5rcybkuv0140'),
         key: 'pointId',
         dataIndex: 'pointId',
         width: '20%',
     },
     {
-        title: '状态',
+        title: t('ChildDevice.EdgeMap.index.5rcybkuv07o0'),
         key: 'id',
         dataIndex: 'id',
         width: '10%',
     },
     {
-        title: '操作',
+        title: t('ChildDevice.EdgeMap.index.5rcybkuv0g40'),
         key: 'action',
         width: '10%',
     },
@@ -227,7 +230,7 @@ const unbind = async (id: string) => {
             },
         );
         if (resp.status === 200) {
-            onlyMessage('操作成功！');
+            onlyMessage(t('ChildDevice.EdgeMap.index.5rcybkuv0kw0'));
             _emit('getEdgeMap');
         }
     }
@@ -250,7 +253,7 @@ const onSave = async () => {
     if (form.value) {
         formRef.value.validateFields().then(async () => {
             if (modelRef.dataSource.length === 0) {
-                onlyMessage('请配置物模型', 'error');
+                onlyMessage(t('ChildDevice.EdgeMap.index.5rcybkuv0pk0'), 'error');
             } else {
                 channelList.value.forEach((item: any) => {
                     modelRef.dataSource.forEach((i: any) => {
@@ -298,7 +301,7 @@ const onSave = async () => {
 const save = async (item: any) => {
     const res = await saveEdgeMap(instanceStore.current.id, item);
     if (res.status === 200) {
-        onlyMessage('保存成功');
+        onlyMessage(t('ChildDevice.EdgeMap.index.5rcybkuv0xc0'));
         _emit('close');
     }
 };

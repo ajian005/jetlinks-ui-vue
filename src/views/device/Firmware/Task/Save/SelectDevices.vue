@@ -1,6 +1,6 @@
 <template lang="">
     <j-input
-        placeholder="请选择设备"
+        :placeholder="t('Task.Save.SelectDevices.5rg3nf1cszo0')"
         v-model:value="checkLable"
         :disabled="true"
     >
@@ -14,9 +14,9 @@
     </j-input>
     <j-modal
         v-if="visible"
-        title="选择设备"
-        ok-text="确认"
-        cancel-text="取消"
+        :title="t('Task.Save.SelectDevices.5rg3nf1culg0')"
+        :ok-text="t('Task.Save.SelectDevices.5rg3nf1cutk0')"
+        :cancel-text="t('Task.Save.SelectDevices.5rg3nf1cv3k0')"
         :visible="true"
         width="80%"
         @cancel="handleCancel"
@@ -50,7 +50,7 @@
                     @change="onCheckAllChange"
                     style="margin-left: 8px"
                 >
-                    全选
+                    {{t('Task.Save.SelectDevices.5rg3nf1cv8w0')}}
                 </j-checkbox>
             </template>
             <template #productId="slotProps">
@@ -79,7 +79,9 @@ import {
     queryDetailList,
 } from '@/api/device/firmware';
 import moment from 'moment';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type T = any;
 const emit = defineEmits(['update:modelValue', 'change']);
 
@@ -142,7 +144,7 @@ const columns = [
         },
     },
     {
-        title: '设备名称',
+        title: t('Task.Save.SelectDevices.5rg3nf1cvjw0'),
         key: 'name',
         dataIndex: 'name',
         ellipsis: true,
@@ -151,7 +153,7 @@ const columns = [
         },
     },
     {
-        title: '固件版本',
+        title: t('Task.Save.SelectDevices.5rg3nf1cvq80'),
         dataIndex: 'version',
         key: 'version',
         ellipsis: true,
@@ -161,7 +163,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '注册时间',
+        title: t('Task.Save.SelectDevices.5rg3nf1cvvw0'),
         key: 'registerTime',
         dataIndex: 'registerTime',
         search: {
@@ -172,16 +174,16 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '状态',
+        title: t('Task.Save.SelectDevices.5rg3nf1cw1c0'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '在线', value: 'online' },
-                { label: '离线', value: 'offline' },
-                { label: '禁用', value: 'notActive' },
+                { label: t('Task.Save.SelectDevices.5rg3nf1cw6c0'), value: 'online' },
+                { label: t('Task.Save.SelectDevices.5rg3nf1cwb80'), value: 'offline' },
+                { label: t('Task.Save.SelectDevices.5rg3nf1cwg80'), value: 'notActive' },
             ],
         },
         width: 150,

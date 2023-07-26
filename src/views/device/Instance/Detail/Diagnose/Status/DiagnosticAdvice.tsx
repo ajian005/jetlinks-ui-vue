@@ -2,6 +2,8 @@ import { Badge, Descriptions, Modal, Tooltip, AIcon, DescriptionsItem } from "je
 import TitleComponent from '@/components/TitleComponent/index.vue'
 import styles from './index.module.less'
 import _ from "lodash";
+import { useI18n } from 'vue-i18n'
+
 
 const DiagnosticAdvice = defineComponent({
     props: {
@@ -12,8 +14,9 @@ const DiagnosticAdvice = defineComponent({
     },
     emits: ['close'],
     setup(props, { emit }) {
+        const { t } = useI18n()
         const { data } = props
-        return () => <Modal visible title="设备诊断" width={1000} onOk={() => {
+        return () => <Modal visible title={t('Instance.tsx.diagnostic.modalTitle')} width={1000} onOk={() => {
             emit('close')
         }}
             onCancel={() => {
@@ -25,7 +28,7 @@ const DiagnosticAdvice = defineComponent({
                 <div class={styles.advice}>
                     <div class={styles.alert}>
                         <span style={{ marginRight: 10 }}><AIcon type="InfoCircleOutlined" /></span>
-                        所有诊断均无异常但设备仍未上线，请检查以下内容
+                        {t('Instance.tsx.diagnostic.tip')}
                     </div>
                     <div style={{ marginLeft: 10 }}>
                         {
@@ -39,13 +42,13 @@ const DiagnosticAdvice = defineComponent({
                 </div>
             </div>
             <div style={{ marginTop: 15 }}>
-                <TitleComponent data="连接信息" />
+                <TitleComponent data={t('Instance.tsx.diagnostic.join')} />
                 <Descriptions column={2}>
-                    <DescriptionsItem span={1} label="设备ID">
+                    <DescriptionsItem span={1} label={t('Instance.tsx.diagnostic.deviceId')}>
                         {data?.info?.id || ''}
                     </DescriptionsItem>
                     {data?.info?.address?.length > 0 && (
-                        <DescriptionsItem span={1} label="连接地址">
+                        <DescriptionsItem span={1} label={t('Instance.tsx.diagnostic.address')}>
                             <Tooltip
                                 placement="topLeft"
                                 title={

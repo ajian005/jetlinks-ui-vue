@@ -16,9 +16,9 @@
                 "5rcxkm5e4580": "当月设备消息量",
                 "5rcxkm5e4m80": "在线数",
                 "5rcxkm5e4xs0": "消息量",
-                "last1":"最近1小时",
-                "last24":"最近24小时",
-                "lastWeek":"近一周"
+                "last1": "最近1小时",
+                "last24": "最近24小时",
+                "lastWeek": "近一周"
             }
         },
         "Product": {
@@ -1866,6 +1866,22 @@
                 "5rra77wjae40": "标签定义",
                 "5rra77wjakk0": "操作成功"
             }
+        },
+        "Events": {
+            "ConfigParams": {
+                "5sayetrlchs0": "参数标识",
+                "5sayetrlflk0": "该标识已存在",
+                "5sayetrlfy80": "请输入标识",
+                "5sayetrlg5w0": "最多可输入64个字符",
+                "5sayetrlgcw0": "参数名称",
+                "5sayetrlgk00": "请输入参数名称",
+                "5sayetrlgso0": "数据类型",
+                "5sayetrlh9g0": "请选择数据类型",
+                "5sayetrlhnk0": "其他配置",
+                "5sayetrlias0": "操作",
+                "5sayetrlisw0": "请选择",
+                "IDTip": "ID只能由数字、字母、下划线、中划线组成"
+            }
         }
     },
     "Instance": {
@@ -2192,7 +2208,8 @@
                 "5rcyf72g3js0": "否",
                 "5rcyf72g3ps0": "参数名称",
                 "5rcyf72g3tk0": "类型",
-                "5rcyf72g3x00": "值"
+                "5rcyf72g3x00": "值",
+                "5saz0kcuqx00": "该字段为必填字段"
             },
             "index": {
                 "5rcyferuv3k0": "请选择",

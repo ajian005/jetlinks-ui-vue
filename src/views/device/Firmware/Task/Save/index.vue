@@ -1,8 +1,8 @@
 <template lang="">
     <j-modal
-        :title="data.id ? '查看' : '新增' + '任务'"
-        ok-text="确认"
-        cancel-text="取消"
+        :title="data.id ? t('Task.Save.index.5rg3m1fsf1o0') : t('Task.Save.index.5rg3m1fsgm80') + t('Task.Save.index.5rg3m1fsgxk0')"
+        :ok-text="t('Task.Save.index.5rg3m1fsh5s0')"
+        :cancel-text="t('Task.Save.index.5rg3m1fshd00')"
         :visible="true"
         width="700px"
         :confirm-loading="loading"
@@ -20,22 +20,22 @@
         >
             <j-row :gutter="[24, 0]">
                 <j-col :span="24">
-                    <j-form-item label="任务名称" name="name">
+                    <j-form-item :label="t('Task.Save.index.5rg3m1fshks0')" name="name">
                         <j-input
-                            placeholder="请输入任务名称"
+                            :placeholder="t('Task.Save.index.5rg3m1fshs00')"
                             v-model:value="formData.name"
                             :disabled="view"
                     /></j-form-item>
                 </j-col>
                 <j-col :span="24"
-                    ><j-form-item label="推送方式" name="mode">
+                    ><j-form-item :label="t('Task.Save.index.5rg3m1fshyk0')" name="mode">
                         <j-select
                             v-model:value="formData.mode"
                             :options="[
-                                { label: '平台推送', value: 'push' },
-                                { label: '设备拉取', value: 'pull' },
+                                { label: t('Task.Save.index.5rg3m1fsi5k0'), value: 'push' },
+                                { label: t('Task.Save.index.5rg3m1fsic00'), value: 'pull' },
                             ]"
-                            placeholder="请选择推送方式"
+                            :placeholder="t('Task.Save.index.5rg3m1fsiiw0')"
                             allowClear
                             show-search
                             :filter-option="filterOption"
@@ -45,11 +45,11 @@
                 ></j-col>
                 <j-col :span="12" v-if="formData.mode === 'push'"
                     ><j-form-item
-                        label="响应超时时间"
+                        :label="t('Task.Save.index.5rg3m1fsipc0')"
                         name="responseTimeoutSeconds"
                     >
                         <j-input-number
-                            placeholder="请输入响应超时时间(秒)"
+                            :placeholder="t('Task.Save.index.5rg3m1fsj280')"
                             style="width: 100%"
                             :min="1"
                             :max="99999"
@@ -61,9 +61,9 @@
                 <j-col
                     :span="formData.mode === 'push' ? 12 : 24"
                     v-if="formData.mode === 'push' || formData.mode === 'pull'"
-                    ><j-form-item label="升级超时时间" name="timeoutSeconds">
+                    ><j-form-item :label="t('Task.Save.index.5rg3m1fsjdk0')" name="timeoutSeconds">
                         <j-input-number
-                            placeholder="请输入升级超时时间(秒)"
+                            :placeholder="t('Task.Save.index.5rg3m1fsjmo0')"
                             style="width: 100%"
                             :min="1"
                             :max="99999"
@@ -73,29 +73,29 @@
                             " /></j-form-item
                 ></j-col>
                 <j-col :span="12" v-if="!!formData.mode"
-                    ><j-form-item label="升级设备" name="releaseType">
+                    ><j-form-item :label="t('Task.Save.index.5rg3m1fsjss0')" name="releaseType">
                         <j-radio-group
                             v-model:value="formData.releaseType"
                             button-style="solid"
                             @change="changeShareCluster"
                             :disabled="view"
                         >
-                            <j-radio value="all">所有设备</j-radio>
-                            <j-radio value="part">选择设备</j-radio>
+                            <j-radio value="all">{{t('Task.Save.index.5rg3m1fsjzc0')}}</j-radio>
+                            <j-radio value="part">{{t('Task.Save.index.5rg3m1fsk540')}}</j-radio>
                         </j-radio-group>
                     </j-form-item>
                 </j-col>
                 <j-col :span="12" v-if="formData.releaseType === 'part'">
-                    <j-form-item label="选择设备" name="deviceId">
+                    <j-form-item :label="t('Task.Save.index.5rg3m1fsk540')" name="deviceId">
                         <SelectDevices
                             v-model:modelValue="formData.deviceId"
                             :data="data"
                         ></SelectDevices> </j-form-item
                 ></j-col>
                 <j-col :span="24">
-                    <j-form-item label="说明" name="description">
+                    <j-form-item :label="t('Task.Save.index.5rg3m1fskb40')" name="description">
                         <j-textarea
-                            placeholder="请输入说明"
+                            :placeholder="t('Task.Save.index.5rg3m1fski40')"
                             v-model:value="formData.description"
                             :maxlength="200"
                             :rows="3"
@@ -111,7 +111,9 @@
 import { queryProduct, saveTask } from '@/api/device/firmware';
 import type { FormInstance } from 'ant-design-vue';
 import SelectDevices from './SelectDevices.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Object,
@@ -142,15 +144,15 @@ const formData: any = ref({
 
 const rules = {
     name: [
-        { required: true, message: '请输入任务名称' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Task.Save.index.5rg3m1fshs00') },
+        { max: 64, message: t('Task.Save.index.5rg3m1fskss0') },
     ],
-    mode: [{ required: true, message: '请选择推送方式' }],
-    responseTimeoutSeconds: [{ required: true, message: '请输入响应超时时间' }],
-    timeoutSeconds: [{ required: true, message: '请输入升级超时时间' }],
+    mode: [{ required: true, message: t('Task.Save.index.5rg3m1fsiiw0') }],
+    responseTimeoutSeconds: [{ required: true, message: t('Task.Save.index.5rg3m1fskxc0') }],
+    timeoutSeconds: [{ required: true, message: t('Task.Save.index.5rg3m1fsl5k0') }],
     releaseType: [{ required: true }],
-    deviceId: [{ required: true, message: '请选择设备' }],
-    description: [{ max: 200, message: '最多可输入200个字符' }],
+    deviceId: [{ required: true, message: t('Task.Save.index.5rg3m1fslao0') }],
+    description: [{ max: 200, message: t('Task.Save.index.5rg3m1fslfo0') }],
 };
 
 const filterOption = (input: string, option: any) => {

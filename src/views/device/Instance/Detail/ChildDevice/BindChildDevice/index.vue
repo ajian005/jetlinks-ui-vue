@@ -4,9 +4,9 @@
         :maskClosable="false"
         width="1000px"
         :visible="true"
-        title="绑定子设备"
-        okText="确定"
-        cancelText="取消"
+        :title="t('ChildDevice.BindChildDevice.index.5rcybahs76g0')"
+        :okText="t('ChildDevice.BindChildDevice.index.5rcybahs8i40')"
+        :cancelText="t('ChildDevice.BindChildDevice.index.5rcybahs8qs0')"
         @ok="handleOk"
         @cancel="handleCancel"
         :confirmLoading="btnLoading"
@@ -99,7 +99,9 @@ import moment from 'moment';
 import { useInstanceStore } from '@/store/instance';
 import { storeToRefs } from 'pinia';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     parentIds: {
         type: Array,
@@ -135,7 +137,7 @@ const columns = [
         },
     },
     {
-        title: '设备名称',
+        title: t('ChildDevice.BindChildDevice.index.5rcybahs8wg0'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -144,7 +146,7 @@ const columns = [
         },
     },
     {
-        title: '所属产品',
+        title: t('ChildDevice.BindChildDevice.index.5rcybahs91k0'),
         dataIndex: 'productName',
         key: 'productName',
         search: {
@@ -152,7 +154,7 @@ const columns = [
         },
     },
     {
-        title: '注册时间',
+        title: t('ChildDevice.BindChildDevice.index.5rcybahs9700'),
         dataIndex: 'registryTime',
         key: 'registryTime',
         scopedSlots: true,
@@ -161,16 +163,16 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('ChildDevice.BindChildDevice.index.5rcybahs9c40'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '禁用', value: 'notActive' },
-                { label: '离线', value: 'offline' },
-                { label: '在线', value: 'online' },
+                { label: t('ChildDevice.BindChildDevice.index.5rcybahs9i00'), value: 'notActive' },
+                { label: t('ChildDevice.BindChildDevice.index.5rcybahs9o00'), value: 'offline' },
+                { label: t('ChildDevice.BindChildDevice.index.5rcybahs9u00'), value: 'online' },
             ],
         },
     },
@@ -196,7 +198,7 @@ const cancelSelect = () => {
 
 const handleOk = () => {
     if (_selectedRowKeys.value.length === 0) {
-        onlyMessage('请选择需要绑定的设备', 'warning');
+        onlyMessage(t('ChildDevice.BindChildDevice.index.5rcybahs9yk0'), 'warning');
         return;
     }
     btnLoading.value = true;
@@ -230,7 +232,7 @@ const handleOk = () => {
             .then((res) => {
                 emit('change', true);
                 cancelSelect();
-                onlyMessage('操作成功');
+                onlyMessage(t('ChildDevice.BindChildDevice.index.5rcybahsa600'));
             })
             .finally(() => {
                 btnLoading.value = false;
@@ -240,7 +242,7 @@ const handleOk = () => {
             .then((res) => {
                 emit('change', true);
                 cancelSelect();
-                onlyMessage('操作成功');
+                onlyMessage(t('ChildDevice.BindChildDevice.index.5rcybahsa600'));
             })
             .finally(() => {
                 btnLoading.value = false;

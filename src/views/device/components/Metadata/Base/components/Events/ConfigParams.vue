@@ -21,10 +21,12 @@ import ConfigModal from '@/views/device/components/Metadata/Base/components/Conf
 import ModelButton from '@/views/device/components/Metadata/Base/components/ModelButton.vue'
 import {omit} from "lodash-es";
 import {TypeStringMap, validatorConfig} from "../../columns";
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const columns = [
     { 
-        title: '参数标识',
+        title: t('components.Events.ConfigParams.5sayetrlchs0'),
         dataIndex: 'id',
         type: 'text',
         form: {
@@ -36,37 +38,37 @@ const columns = [
                     const fieldIndex = Number(field[1])
                     const hasId = _dataSource.some((item, index) => item.id === value && fieldIndex !== index)
                     if (hasId) {
-                        return Promise.reject('该标识已存在')
+                        return Promise.reject(t('components.Events.ConfigParams.5sayetrlflk0'))
                     }
                     return Promise.resolve()
                     }
-                    return Promise.reject('请输入标识')
+                    return Promise.reject(t('components.Events.ConfigParams.5sayetrlfy80'))
                 }
             },
-              { max: 64, message: '最多可输入64个字符' },
+              { max: 64, message: t('components.Events.ConfigParams.5sayetrlg5w0') },
               {
                 pattern: /^[a-zA-Z0-9_\-]+$/,
-                message: 'ID只能由数字、字母、下划线、中划线组成',
+                message: t('components.Events.ConfigParams.IDTip'),
               },
             ]
         }
     },
     { 
-        title: '参数名称',
+        title: t('components.Events.ConfigParams.5sayetrlgcw0'),
         dataIndex: 'name',
         type: 'text',
         form: {
             required: true,
             rules: [{
                 required: true,
-                message: '请输入参数名称'
+                message: t('components.Events.ConfigParams.5sayetrlgk00')
             },
-              { max: 64, message: '最多可输入64个字符' },
+              { max: 64, message: t('components.Events.ConfigParams.5sayetrlg5w0') },
             ]
         }
     },
     {
-        title: '数据类型',
+        title: t('components.Events.ConfigParams.5sayetrlgso0'),
         type: 'components',
         dataIndex: 'valueType',
         components: {
@@ -77,7 +79,7 @@ const columns = [
           rules: [{
             validator(_: any, value: any) {
               if (!value?.type) {
-                return Promise.reject('请选择数据类型')
+                return Promise.reject(t('components.Events.ConfigParams.5sayetrlh9g0'))
               }
               return Promise.resolve()
             }
@@ -88,7 +90,7 @@ const columns = [
       },
     },
     {
-        title: '其他配置',
+        title: t('components.Events.ConfigParams.5sayetrlhnk0'),
         dataIndex: 'config',
         form: {
           required: true,
@@ -113,7 +115,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('components.Events.ConfigParams.5sayetrlias0'),
         dataIndex: 'action',
         width: 80
     },
@@ -132,7 +134,7 @@ const props = defineProps({
     },
     placeholder: {
         type: String,
-        default: '请选择',
+        default: "请选择",
     },
     options: {
         type: Array as PropType<{ label: string; value: string }[]>,
