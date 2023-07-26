@@ -6,12 +6,12 @@
                 <j-col :span="10">
                     <j-form layout="vertical">
                         <j-form-item
-                            label="通知方式"
+                            :label="t('Config.Detail.index.5saxcg071xs0')"
                             v-bind="validateInfos.type"
                         >
                             <j-select
                                 v-model:value="formData.type"
-                                placeholder="请选择通知方式"
+                                :placeholder="t('Config.Detail.index.5saxcg073c00')"
                                 :disabled="_disabled"
                                 @change="handleTypeChange"
                             >
@@ -24,14 +24,14 @@
                                 </j-select-option>
                             </j-select>
                         </j-form-item>
-                        <j-form-item label="名称" v-bind="validateInfos.name">
+                        <j-form-item :label="t('Config.Detail.index.5saxcg073hg0')" v-bind="validateInfos.name">
                             <j-input
                                 v-model:value="formData.name"
-                                placeholder="请输入名称"
+                                :placeholder="t('Config.Detail.index.5saxcg073m80')"
                             />
                         </j-form-item>
                         <j-form-item
-                            label="类型"
+                            :label="t('Config.Detail.index.5saxcg073q40')"
                             v-bind="validateInfos.provider"
                             v-if="formData.type !== 'email'"
                         >
@@ -57,7 +57,7 @@
                                         v-model:value="
                                             formData.configuration.appKey
                                         "
-                                        placeholder="请输入AppKey"
+                                        :placeholder="t('Config.Detail.index.5saxcg073u80')"
                                     />
                                 </j-form-item>
                                 <j-form-item
@@ -70,7 +70,7 @@
                                         v-model:value="
                                             formData.configuration.appSecret
                                         "
-                                        placeholder="请输入AppSecret"
+                                        :placeholder="t('Config.Detail.index.5saxcg073y40')"
                                     />
                                 </j-form-item>
                             </template>
@@ -82,13 +82,13 @@
                                 <j-form-item
                                     label="webHook"
                                     v-bind="validateInfos['configuration.url']"
-                                    :rules='[{ max: 64, message: "最多可输入64个字符" }]'
+                                    :rules='[{ max: 64, message: t('Config.Detail.index.5saxcg0744g0') }]'
                                 >
                                     <j-input
                                         v-model:value="
                                             formData.configuration.url
                                         "
-                                        placeholder="请输入webHook"
+                                        :placeholder="t('Config.Detail.index.5saxcg0748o0')"
                                     />
                                 </j-form-item>
                             </template>
@@ -103,7 +103,7 @@
                                     v-model:value="
                                         formData.configuration.corpId
                                     "
-                                    placeholder="请输入corpId"
+                                    :placeholder="t('Config.Detail.index.5saxcg074hk0')"
                                 />
                             </j-form-item>
                             <j-form-item
@@ -116,14 +116,14 @@
                                     v-model:value="
                                         formData.configuration.corpSecret
                                     "
-                                    placeholder="请输入corpSecret"
+                                    :placeholder="t('Config.Detail.index.5saxcg074s00')"
                                 />
                             </j-form-item>
                         </template>
                         <!-- 邮件 -->
                         <template v-if="formData.type === 'email'">
                             <j-form-item
-                                label="服务器地址"
+                                :label="t('Config.Detail.index.5saxcg074wc0')"
                                 v-bind="validateInfos['configuration.host']"
                             >
                                 <j-space>
@@ -131,7 +131,7 @@
                                         v-model:value="
                                             formData.configuration.host
                                         "
-                                        placeholder="请输入服务器地址"
+                                        :placeholder="t('Config.Detail.index.5saxcg074zs0')"
                                         style="width: 180px"
                                         :options="[
                                             {
@@ -186,12 +186,12 @@
                                         "
                                         @change="handleSslChange"
                                     >
-                                        开启SSL
+                                        {{t('Config.Detail.index.5saxcg0753c0')}}
                                     </j-checkbox>
                                 </j-space>
                             </j-form-item>
                             <j-form-item
-                                label="发件人"
+                                :label="t('Config.Detail.index.5saxcg0756o0')"
                                 v-bind="validateInfos['configuration.sender']"
                             >
                                 <j-input
@@ -202,25 +202,25 @@
                                 />
                             </j-form-item>
                             <j-form-item
-                                label="用户名"
+                                :label="t('Config.Detail.index.5saxcg0759s0')"
                                 v-bind="validateInfos['configuration.username']"
                             >
                                 <j-input
                                     v-model:value="
                                         formData.configuration.username
                                     "
-                                    placeholder="请输入用户名"
+                                    :placeholder="t('Config.Detail.index.5saxcg075dc0')"
                                 />
                             </j-form-item>
                             <j-form-item
-                                label="密码"
+                                :label="t('Config.Detail.index.5saxcg075gw0')"
                                 v-bind="validateInfos['configuration.password']"
                             >
                                 <j-input
                                     v-model:value="
                                         formData.configuration.password
                                     "
-                                    placeholder="请输入密码"
+                                    :placeholder="t('Config.Detail.index.5saxcg075sg0')"
                                 />
                             </j-form-item>
                         </template>
@@ -239,7 +239,7 @@
                                     v-model:value="
                                         formData.configuration.regionId
                                     "
-                                    placeholder="请选择RegionId"
+                                    :placeholder="t('Config.Detail.index.5saxcg075xc0')"
                                 >
                                     <j-select-option
                                         v-for="(item, index) in regionList"
@@ -260,7 +260,7 @@
                                     v-model:value="
                                         formData.configuration.accessKeyId
                                     "
-                                    placeholder="请输入AccessKeyId"
+                                    :placeholder="t('Config.Detail.index.5saxcg0763c0')"
                                 />
                             </j-form-item>
                             <j-form-item
@@ -271,7 +271,7 @@
                                     v-model:value="
                                         formData.configuration.secret
                                     "
-                                    placeholder="请输入Secret"
+                                    :placeholder="t('Config.Detail.index.5saxcg0766c0')"
                                 />
                             </j-form-item>
                         </template>
@@ -283,10 +283,10 @@
                             >
                                 <j-input
                                     v-model:value="formData.configuration.url"
-                                    placeholder="请输入Webhook"
+                                    :placeholder="t('Config.Detail.index.5saxcg076a80')"
                                 />
                             </j-form-item>
-                            <j-form-item label="请求头">
+                            <j-form-item :label="t('Config.Detail.index.5saxcg076dk0')">
                                 <EditTable
                                     ref="editTable"
                                     :headers="
@@ -295,13 +295,13 @@
                                 />
                             </j-form-item>
                         </template>
-                        <j-form-item label="说明">
+                        <j-form-item :label="t('Config.Detail.index.5saxcg076gg0')">
                             <j-textarea
                                 v-model:value="formData.description"
                                 show-count
                                 :maxlength="200"
                                 :rows="5"
-                                placeholder="请输入说明"
+                                :placeholder="t('Config.Detail.index.5saxcg076jc0')"
                             />
                         </j-form-item>
                         <j-form-item>
@@ -310,7 +310,7 @@
                                 @click="handleSubmit"
                                 :loading="btnLoading"
                             >
-                                保存
+                                {{t('Config.Detail.index.5saxcg076m80')}}
                             </j-button>
                         </j-form-item>
                     </j-form>
@@ -336,7 +336,9 @@ import regionList from './regionId';
 import EditTable from './components/EditTable.vue';
 import configApi from '@/api/notice/config';
 import Doc from './doc/index';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter();
 const route = useRoute();
 const useForm = Form.useForm;
@@ -346,12 +348,12 @@ const editTable = ref();
 // 消息类型
 const msgType = ref([
     {
-        label: '钉钉消息',
+        label: t('Config.Detail.index.5saxcg076p40'),
         value: 'dingTalkMessage',
         logo: getImage('/notice/dingtalk.png'),
     },
     {
-        label: '群机器人消息',
+        label: t('Config.Detail.index.5saxcg076rs0'),
         value: 'dingTalkRobotWebHook',
         logo: getImage('/notice/dingTalk-rebot.png'),
     },
@@ -388,73 +390,73 @@ watch(
 
 // 验证规则
 const formRules = ref({
-    type: [{ required: true, message: '请选择通知方式' }],
+    type: [{ required: true, message: t('Config.Detail.index.5saxcg073c00') }],
     name: [
-        { required: true, message: '请输入名称' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Config.Detail.index.5saxcg073m80') },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0') },
     ],
-    provider: [{ required: true, message: '请选择类型' }],
+    provider: [{ required: true, message: t('Config.Detail.index.5saxcg076uk0') }],
     // 钉钉
     'configuration.appKey': [
-        { required: true, message: '请输入AppKey', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符', trigger: 'change' },
+        { required: true, message: t('Config.Detail.index.5saxcg073u80'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0'), trigger: 'change' },
     ],
     'configuration.appSecret': [
-        { required: true, message: '请输入AppSecret', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符', trigger: 'change' },
+        { required: true, message: t('Config.Detail.index.5saxcg073y40'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0'), trigger: 'change' },
     ],
     // 'configuration.url': [{ required: true, message: '请输入WebHook' }],
     // 微信
     'configuration.corpId': [
-        { required: true, message: '请输入corpId', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Config.Detail.index.5saxcg074hk0'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0') },
     ],
     'configuration.corpSecret': [
-        { required: true, message: '请输入corpSecret', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Config.Detail.index.5saxcg074s00'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0') },
     ],
     // 阿里云语音/短信
     'configuration.regionId': [
-        { required: true, message: '请输入RegionId', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Config.Detail.index.5saxcg076xc0'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0') },
     ],
     'configuration.accessKeyId': [
-        { required: true, message: '请输入AccessKeyId', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Config.Detail.index.5saxcg0763c0'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0') },
     ],
     'configuration.secret': [
-        { required: true, message: '请输入Secret', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Config.Detail.index.5saxcg0766c0'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0') },
     ],
     // 邮件
-    'configuration.host': [{ required: true, message: '请输入服务器地址', trigger: 'blur' }],
+    'configuration.host': [{ required: true, message: t('Config.Detail.index.5saxcg074zs0'), trigger: 'blur' }],
     'configuration.sender': [
-        { required: true, message: '请输入发件人', trigger: 'blur' },
+        { required: true, message: t('Config.Detail.index.5saxcg077040'), trigger: 'blur' },
         // { max: 64, message: '最多可输入64个字符' },
         {
             pattern:
                 /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-            message: '请输入正确的邮箱',
+            message: t('Config.Detail.index.5saxcg0772o0'),
         },
     ],
     'configuration.username': [
-        { required: true, message: '请输入用户名', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Config.Detail.index.5saxcg075dc0'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0') },
     ],
     'configuration.password': [
-        { required: true, message: '请输入密码', trigger: 'blur' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Config.Detail.index.5saxcg075sg0'), trigger: 'blur' },
+        { max: 64, message: t('Config.Detail.index.5saxcg0744g0') },
     ],
     // webhook
     'configuration.url': [
-        { required: true, message: '请输入Webhook', trigger: 'blur' },
+        { required: true, message: t('Config.Detail.index.5saxcg076a80'), trigger: 'blur' },
         // {
         //     pattern:
         //         /^(((ht|f)tps?):\/\/)?([^!@#$%^&*?.\s-]([^!@#$%^&*?.\s]{0,63}[^!@#$%^&*?.\s])?\.)+[j-z]{2,6}\/?/,
         //     message: 'Webhook需要是一个合法的URL',
         // },
     ],
-    description: [{ max: 200, message: '最多可输入200个字符' }],
+    description: [{ max: 200, message: t('Config.Detail.index.5saxcg0775s0') }],
 });
 
 const { resetFields, validate, validateInfos, clearValidate } = useForm(
@@ -557,7 +559,7 @@ const handleSubmit = () => {
                 res = await configApi.update(formData.value);
             }
             if (res?.success) {
-                onlyMessage('保存成功');
+                onlyMessage(t('Config.Detail.index.5saxcg0778o0'));
                 if (route.query?.notifyType) {
                     // @ts-ignore
                     window?.onTabSaveSuccess(res.result);
@@ -584,7 +586,7 @@ const handleSubmit = () => {
                 res = await configApi.update(formData.value);
             }
             if (res?.success) {
-                onlyMessage('保存成功');
+                onlyMessage(t('Config.Detail.index.5saxcg0778o0'));
                 if (route.query?.notifyType) {
                     // @ts-ignore
                     window?.onTabSaveSuccess(res.result);

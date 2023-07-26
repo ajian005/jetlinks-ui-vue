@@ -15,7 +15,10 @@
                 "5rcxkm5e3m40": "昨日在线",
                 "5rcxkm5e4580": "当月设备消息量",
                 "5rcxkm5e4m80": "在线数",
-                "5rcxkm5e4xs0": "消息量"
+                "5rcxkm5e4xs0": "消息量",
+                "last1":"最近1小时",
+                "last24":"最近24小时",
+                "lastWeek":"近一周"
             }
         },
         "Product": {
@@ -306,6 +309,7 @@
                     "disposition": "配置名称",
                     "synchronization": "同步用户",
                     "addresser": "发件人",
+                    "wx": "微信公众平台：",
                     "addresserContent": "用于发送邮件时“发件人“信息的显示",
                     "userNameDes": "用该账号进行发送邮件。",
                     "pwdDes": "用于账号身份认证，认证通过后可通过该账号进行发送邮件。",
@@ -3313,6 +3317,79 @@
                 "5savfddxis80": "名称",
                 "5savfddxj8c0": "值",
                 "5savfddxjfs0": "操作成功"
+            }
+        },
+        "Detail": {
+            "index": {
+                "5saxcg071xs0": "通知方式",
+                "5saxcg073c00": "请选择通知方式",
+                "5saxcg073hg0": "名称",
+                "5saxcg073m80": "请输入名称",
+                "5saxcg073q40": "类型",
+                "5saxcg073u80": "请输入AppKey",
+                "5saxcg073y40": "请输入AppSecret",
+                "5saxcg0744g0": "最多可输入64个字符",
+                "5saxcg0748o0": "请输入webHook",
+                "5saxcg074hk0": "请输入corpId",
+                "5saxcg074s00": "请输入corpSecret",
+                "5saxcg074wc0": "服务器地址",
+                "5saxcg074zs0": "请输入服务器地址",
+                "5saxcg0753c0": "开启SSL",
+                "5saxcg0756o0": "发件人",
+                "5saxcg0759s0": "用户名",
+                "5saxcg075dc0": "请输入用户名",
+                "5saxcg075gw0": "密码",
+                "5saxcg075sg0": "请输入密码",
+                "5saxcg075xc0": "请选择RegionId",
+                "5saxcg0763c0": "请输入AccessKeyId",
+                "5saxcg0766c0": "请输入Secret",
+                "5saxcg076a80": "请输入Webhook",
+                "5saxcg076dk0": "请求头",
+                "5saxcg076gg0": "说明",
+                "5saxcg076jc0": "请输入说明",
+                "5saxcg076m80": "保存",
+                "5saxcg076p40": "钉钉消息",
+                "5saxcg076rs0": "群机器人消息",
+                "5saxcg076uk0": "请选择类型",
+                "5saxcg076xc0": "请输入RegionId",
+                "5saxcg077040": "请输入发件人",
+                "5saxcg0772o0": "请输入正确的邮箱",
+                "5saxcg0775s0": "最多可输入200个字符",
+                "5saxcg0778o0": "保存成功"
+            }
+        },
+        "Log": {
+            "index": {
+                "5saxdc8c4vk0": "通知记录",
+                "5saxdc8c5x40": "发送时间",
+                "5saxdc8c6280": "状态",
+                "5saxdc8c66o0": "成功",
+                "5saxdc8c6ac0": "失败",
+                "5saxdc8c6i80": "操作",
+                "5saxdc8c6r40": "错误信息",
+                "5saxdc8c6us0": "详情信息",
+                "5saxdc8c6yw0": "模板中不存在变量"
+            }
+        },
+        "SyncUser": {
+            "index": {
+                "5saxe2ntxc40": "同步用户",
+                "5saxe2ntyb80": "请输入部门名称",
+                "5saxe2ntygg0": "自动绑定",
+                "5saxe2ntykk0": "条/总共",
+                "5saxe2ntyog0": "条`,",
+                "5saxe2ntysk0": "绑定用户",
+                "5saxe2ntyw40": "用户",
+                "5saxe2ntyzo0": "请选择用户",
+                "5saxe2ntz3c0": "钉钉用户名",
+                "5saxe2ntz740": "绑定状态",
+                "5saxe2ntzak0": "操作",
+                "5saxe2ntzhg0": "绑定",
+                "5saxe2ntzl00": "解绑",
+                "5saxe2ntzoo0": "确认解绑?",
+                "5saxe2ntzsg0": "操作成功",
+                "5saxe2ntzvw0": "已绑定",
+                "5saxe2ntzzk0": "未绑定"
             }
         }
     },
@@ -6469,6 +6546,34 @@
             },
             "PlatformPicCard": {
                 "5sav76km0uc0": "平台架构图"
+            }
+        }
+    },
+    "notice": {
+        "Config": {
+            "index": {
+                "5saxhx4p4n80": "新增",
+                "5saxhx4p66k0": "导入",
+                "5saxhx4p6eo0": "确认导出？",
+                "5saxhx4p6l00": "确定",
+                "5saxhx4p6qg0": "取消",
+                "5saxhx4p6x40": "导出",
+                "5saxhx4p72g0": "通知方式",
+                "5saxhx4p77s0": "说明",
+                "5saxhx4p7do0": "配置名称",
+                "5saxhx4p7jo0": "类型",
+                "5saxhx4p7ps0": "操作",
+                "5saxhx4p7v80": "请上传json格式文件",
+                "5saxhx4p8080": "操作成功",
+                "5saxhx4p85o0": "编辑",
+                "5saxhx4p8as0": "调试",
+                "5saxhx4p8fo0": "删除",
+                "5saxhx4p8lc0": "确认删除?",
+                "5saxhx4p8sw0": "操作成功！",
+                "5saxhx4p8yg0": "操作失败！",
+                "5saxhx4p94s0": "其他",
+                "5saxhx4p9d00": "同步用户",
+                "5saxhx4p9hk0": "通知记录"
             }
         }
     }

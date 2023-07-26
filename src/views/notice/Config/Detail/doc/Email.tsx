@@ -1,26 +1,28 @@
 // import './index.less';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const Email = () => {
     return (
         <div class={'doc'}>
-            <h1>1. 概述</h1>
+            <h1>1. {t('common.summarize')}</h1>
             <div>
-                通知配置可以结合通知配置为告警消息通知提供支撑。也可以用于系统中其他自定义模块的调用。
+                {t('common.summarizeContent')}
             </div>
-            <h1>2.通知配置说明</h1>
-            <h2>1、 服务器地址</h2>
+            <h1>2.{t('common.noticonfigdes')}</h1>
+            <h2>1、 {t('pages.iot.notice.config.serverAddress')}</h2>
             <div>
-                下拉可选择国内常用的邮箱服务配置，也支持手动输入其他地址。
+                {t('pages.iot.notice.config.serAddContent1')}
             </div>
             <div>
-                系统使用POP协议。POP允许电子邮件客户端下载服务器上的邮件，但是您在电子邮件客户端的操作（如：移动邮件、标记已读等），这时不会反馈到服务器上。
+                {t('pages.iot.notice.config.serAddContent2')}
             </div>
-            <h2>2、发件人</h2>
-            <div>用于发送邮件时“发件人“信息的显示</div>
-            <h2>3、 用户名</h2>
-            <div>用该账号进行发送邮件。</div>
-            <h2>4、密码</h2>
-            <div>用于账号身份认证，认证通过后可通过该账号进行发送邮件。</div>
+            <h2>2、{t('pages.iot.notice.config.addresser')}</h2>
+            <div>{t('pages.iot.notice.config.addresserContent')}</div>
+            <h2>3、 {t('common.userName')}</h2>
+            <div>{t('pages.iot.notice.config.userNameDes')}</div>
+            <h2>4、{t('common.pwd')}</h2>
+            <div>{t('pages.iot.notice.config.pwdDes')}</div>
         </div>
     );
 };

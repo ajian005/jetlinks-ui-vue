@@ -24,7 +24,7 @@
                             @click="handleAdd"
                             hasPermission="notice/Config:add"
                         >
-                            新增
+                            {{t('notice.Config.index.5saxhx4p4n80')}}
                         </PermissionButton>
                         <j-upload
                             name="file"
@@ -35,19 +35,19 @@
                             <PermissionButton
                                 hasPermission="notice/Config:import"
                             >
-                                导入
+                                {{t('notice.Config.index.5saxhx4p66k0')}}
                             </PermissionButton>
                         </j-upload>
                         <j-popconfirm
-                            title="确认导出？"
-                            ok-text="确定"
-                            cancel-text="取消"
+                            :title="t('notice.Config.index.5saxhx4p6eo0')"
+                            :ok-text="t('notice.Config.index.5saxhx4p6l00')"
+                            :cancel-text="t('notice.Config.index.5saxhx4p6qg0')"
                             @confirm="handleExport"
                         >
                             <PermissionButton
                                 hasPermission="notice/Config:export"
                             >
-                                导出
+                                {{t('notice.Config.index.5saxhx4p6x40')}}
                             </PermissionButton>
                         </j-popconfirm>
                     </j-space>
@@ -79,7 +79,7 @@
                             <j-row>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        通知方式
+                                        {{t('notice.Config.index.5saxhx4p72g0')}}
                                     </div>
                                     <div>
                                         {{ getMethodTxt(slotProps.type) }}
@@ -87,7 +87,7 @@
                                 </j-col>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        说明
+                                        {{t('notice.Config.index.5saxhx4p77s0')}}
                                     </div>
                                     <Ellipsis>
                                         {{ slotProps.description }}
@@ -216,7 +216,9 @@ import Log from './Log/index.vue';
 import { downloadObject } from '@/utils/utils';
 import { useMenuStore } from 'store/menu';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 
 let providerList: any = [];
@@ -229,7 +231,7 @@ const params = ref<Record<string, any>>({});
 
 const columns = [
     {
-        title: '配置名称',
+        title: t('notice.Config.index.5saxhx4p7do0'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -238,7 +240,7 @@ const columns = [
         },
     },
     {
-        title: '通知方式',
+        title: t('notice.Config.index.5saxhx4p72g0'),
         dataIndex: 'type',
         key: 'type',
         scopedSlots: true,
@@ -252,7 +254,7 @@ const columns = [
         },
     },
     {
-        title: '类型',
+        title: t('notice.Config.index.5saxhx4p7jo0'),
         dataIndex: 'provider',
         key: 'provider',
         scopedSlots: true,
@@ -266,7 +268,7 @@ const columns = [
         },
     },
     {
-        title: '说明',
+        title: t('notice.Config.index.5saxhx4p77s0'),
         dataIndex: 'description',
         key: 'description',
         scopedSlots: true,
@@ -276,7 +278,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('notice.Config.index.5saxhx4p7ps0'),
         key: 'action',
         fixed: 'right',
         width: 200,
@@ -314,14 +316,14 @@ const getProviderTxt = (type: string, provider: string) => {
 };
 
 /**
- * 新增
+ * {{t('notice.Config.index.5saxhx4p4n80')}}
  */
 const handleAdd = () => {
     menuStory.jumpPage('notice/Config/Detail', { id: ':id' });
 };
 
 /**
- * 导入
+ * {{t('notice.Config.index.5saxhx4p66k0')}}
  */
 const beforeUpload = (file: any) => {
     console.log('file: ', file);
@@ -331,14 +333,14 @@ const beforeUpload = (file: any) => {
         const text = result.target?.result;
         console.log('text: ', text);
         if (!file.type.includes('json')) {
-            onlyMessage('请上传json格式文件', 'error');
+            onlyMessage(t('notice.Config.index.5saxhx4p7v80'), 'error');
             return false;
         }
         try {
             const data = JSON.parse(text || '{}');
             const { success } = await ConfigApi.update(data);
             if (success) {
-                onlyMessage('操作成功');
+                onlyMessage(t('notice.Config.index.5saxhx4p8080'));
                 configRef.value.reload();
             }
             return true;
@@ -351,7 +353,7 @@ const beforeUpload = (file: any) => {
 };
 
 /**
- * 导出
+ * {{t('notice.Config.index.5saxhx4p6x40')}}
  */
 const handleExport = () => {
     downloadObject(configRef.value._dataSource, `通知配置数据`);
@@ -369,9 +371,9 @@ const getActions = (
     const actions = [
         {
             key: 'update',
-            text: '编辑',
+            text: t('notice.Config.index.5saxhx4p85o0'),
             tooltip: {
-                title: '编辑',
+                title: t('notice.Config.index.5saxhx4p85o0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -382,9 +384,9 @@ const getActions = (
         },
         {
             key: 'debug',
-            text: '调试',
+            text: t('notice.Config.index.5saxhx4p8as0'),
             tooltip: {
-                title: '调试',
+                title: t('notice.Config.index.5saxhx4p8as0'),
             },
             icon: 'BugOutlined',
             onClick: () => {
@@ -394,16 +396,16 @@ const getActions = (
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('notice.Config.index.5saxhx4p8fo0'),
             popConfirm: {
-                title: '确认删除?',
+                title: t('notice.Config.index.5saxhx4p8lc0'),
                 onConfirm: async () => {
                     const resp = await ConfigApi.del(data.id);
                     if (resp.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('notice.Config.index.5saxhx4p8sw0'));
                         configRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('notice.Config.index.5saxhx4p8yg0'), 'error');
                     }
                 },
             },
@@ -413,14 +415,14 @@ const getActions = (
 
     const others: ActionsType = {
         key: 'others',
-        text: '其他',
+        text: t('notice.Config.index.5saxhx4p94s0'),
         icon: 'EllipsisOutlined',
         children: [
             {
                 key: 'export',
-                text: '导出',
+                text: t('notice.Config.index.5saxhx4p6x40'),
                 tooltip: {
-                    title: '导出',
+                    title: t('notice.Config.index.5saxhx4p6x40'),
                 },
                 icon: 'ArrowDownOutlined',
                 onClick: () => {
@@ -429,9 +431,9 @@ const getActions = (
             },
             {
                 key: 'bind',
-                text: '同步用户',
+                text: t('notice.Config.index.5saxhx4p9d00'),
                 tooltip: {
-                    title: '同步用户',
+                    title: t('notice.Config.index.5saxhx4p9d00'),
                 },
                 icon: 'TeamOutlined',
                 onClick: () => {
@@ -441,9 +443,9 @@ const getActions = (
             },
             {
                 key: 'log',
-                text: '通知记录',
+                text: t('notice.Config.index.5saxhx4p9hk0'),
                 tooltip: {
-                    title: '通知记录',
+                    title: t('notice.Config.index.5saxhx4p9hk0'),
                 },
                 icon: 'BarsOutlined',
                 onClick: () => {

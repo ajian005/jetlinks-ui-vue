@@ -4,7 +4,7 @@ import en  from './en-us.json';
 
 // 获取浏览器界面语言，默认语言
 let currentLanguage = navigator.language.replace(/-(\S*)/, '');
-// currentLanguage = 'en';
+currentLanguage = 'en';
 // 如果本地缓存记录了语言环境，则使用本地缓存
 let lsLocale = localStorage.getItem('locale') || ''
 if (lsLocale) {

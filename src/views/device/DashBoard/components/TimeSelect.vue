@@ -31,7 +31,9 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
 import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface BtnOptions {
     label: string;
     value: string;
@@ -64,7 +66,6 @@ const props = defineProps({
         default: 'today',
     },
 });
-
 const radioValue = ref(props.type || 'week' || undefined);
 const rangeVal = ref<[string, string]>();
 

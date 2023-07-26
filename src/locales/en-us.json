@@ -15,7 +15,10 @@
                 "5rcxkm5e3m40": "Online yesterday",
                 "5rcxkm5e4580": "The number of device messages for the month",
                 "5rcxkm5e4m80": "Online number",
-                "5rcxkm5e4xs0": "Message volume"
+                "5rcxkm5e4xs0": "Message volume",
+                "last1":"Last 1 hour",
+                "last24":"Last 24 hours",
+                "lastWeek":"Nearly a week"
             }
         },
         "Product": {

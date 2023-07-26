@@ -1,6 +1,6 @@
 <!-- 通知记录 -->
 <template>
-    <j-modal v-model:visible="_vis" title="通知记录" :footer="null" width="70%">
+    <j-modal v-model:visible="_vis" :title="t('Config.Log.index.5saxdc8c4vk0')" :footer="null" width="70%">
         <pro-search type="simple" :columns="columns" @search="handleSearch" />
 
         <JProTable
@@ -52,7 +52,9 @@ import { PropType } from 'vue';
 import moment from 'moment';
 import { Modal } from 'ant-design-vue';
 import Record from '../../Template/Log/components/Record.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:visible', data: boolean): void;
 };
@@ -88,7 +90,7 @@ const columns = [
         },
     },
     {
-        title: '发送时间',
+        title: t('Config.Log.index.5saxdc8c5x40'),
         dataIndex: 'notifyTime',
         key: 'notifyTime',
         scopedSlots: true,
@@ -100,15 +102,15 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('Config.Log.index.5saxdc8c6280'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '成功', value: 'success' },
-                { label: '失败', value: 'error' },
+                { label: t('Config.Log.index.5saxdc8c66o0'), value: 'success' },
+                { label: t('Config.Log.index.5saxdc8c6ac0'), value: 'error' },
             ],
             handleValue: (v: any) => {
                 return v;
@@ -116,7 +118,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('Config.Log.index.5saxdc8c6i80'),
         key: 'action',
         scopedSlots: true,
     },
@@ -137,7 +139,7 @@ const handleSearch = (e: any) => {
  */
 const handleError = (e: any) => {
     Modal.info({
-        title: '错误信息',
+        title: t('Config.Log.index.5saxdc8c6r40'),
         content: h(
             'p',
             {
@@ -156,7 +158,7 @@ const handleError = (e: any) => {
 const handleDetail = (data: any) => {
     if(Object.keys(data.context).length == 0){
         Modal.info({
-        title: '详情信息',
+        title: t('Config.Log.index.5saxdc8c6us0'),
         content: h(
             "p",
             {
@@ -166,12 +168,12 @@ const handleDetail = (data: any) => {
                     overflowY: 'auto',
                 },
             },
-            '模板中不存在变量'
+            t('Config.Log.index.5saxdc8c6yw0')
         ),
     });
     }else{
         Modal.info({
-        title: '详情信息',
+        title: t('Config.Log.index.5saxdc8c6us0'),
         content: h(
             Record,
             {
