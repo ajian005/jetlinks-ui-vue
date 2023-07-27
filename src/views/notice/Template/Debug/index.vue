@@ -2,22 +2,22 @@
 <template>
     <j-modal
         v-model:visible="_vis"
-        title="调试"
-        cancelText="取消"
-        okText="确定"
+        :title="t('Template.Debug.index.5sbk03u67980')"
+        :cancelText="t('Template.Debug.index.5sbk03u69t80')"
+        :okText="t('Template.Debug.index.5sbk03u6a4w0')"
         @ok="handleOk"
         @cancel="handleCancel"
         :confirmLoading="btnLoading"
     >
         <j-form ref="formRef" layout="vertical" :model="formData">
             <j-form-item
-                label="通知配置"
+                :label="t('Template.Debug.index.5sbk03u6acg0')"
                 name="configId"
-                :rules="{ required: true, message: '请选择通知配置' }"
+                :rules="{ required: true, message: t('Template.Debug.index.5sbk03u6ajs0') }"
             >
                 <j-select
                     v-model:value="formData.configId"
-                    placeholder="请选择通知配置"
+                    :placeholder="t('Template.Debug.index.5sbk03u6ajs0')"
                 >
                     <j-select-option
                         v-for="(item, index) in configList"
@@ -29,7 +29,7 @@
                 </j-select>
             </j-form-item>
             <j-form-item
-                label="变量"
+                :label="t('Template.Debug.index.5sbk03u6ark0')"
                 v-if="
                     formData.templateDetailTable &&
                     formData.templateDetailTable.length
@@ -54,7 +54,7 @@
                                 :rules="[
                                     {
                                         required: record.required,
-                                        message: '该字段为必填字段',
+                                        message: t('Template.Debug.index.5sbk03u6ay80'),
                                     },
                                     ...record.otherRules,
                                 ]"
@@ -119,7 +119,9 @@ import ToTag from '../Detail/components/ToTag.vue';
 import type { Rule } from 'ant-design-vue/es/form';
 import { phoneRegEx } from '@/utils/validate';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:visible', data: boolean): void;
 };
@@ -181,7 +183,7 @@ const getTemplateDetail = async () => {
                     ? [
                           {
                               max: 64,
-                              message: '最多可输入64个字符',
+                              message: t('Template.Debug.index.5sbk03u6b6o0'),
                               trigger: 'change',
                           },
                           {
@@ -189,7 +191,7 @@ const getTemplateDetail = async () => {
                               validator(_rule: Rule, value: string) {
                                   if (!value) return Promise.resolve();
                                   if (!phoneRegEx(value))
-                                      return Promise.reject('请输入有效号码');
+                                      return Promise.reject(t('Template.Debug.index.5sbk03u6bdc0'));
                                   return Promise.resolve();
                               },
                           },
@@ -201,17 +203,17 @@ const getTemplateDetail = async () => {
 
 const columns = [
     {
-        title: '变量',
+        title: t('Template.Debug.index.5sbk03u6ark0'),
         dataIndex: 'id',
         scopedSlots: { customRender: 'id' },
     },
     {
-        title: '名称',
+        title: t('Template.Debug.index.5sbk03u6bjs0'),
         dataIndex: 'name',
         scopedSlots: { customRender: 'name' },
     },
     {
-        title: '值',
+        title: t('Template.Debug.index.5sbk03u6bq40'),
         dataIndex: 'type',
         width: 160,
         scopedSlots: { customRender: 'type' },
@@ -247,7 +249,7 @@ const handleOk = () => {
             TemplateApi.debug(params, formData.value.configId, props.data.id)
                 .then((res) => {
                     if (res.success) {
-                        onlyMessage('操作成功');
+                        onlyMessage(t('Template.Debug.index.5sbk03u6bwg0'));
                         handleCancel();
                     }
                 })

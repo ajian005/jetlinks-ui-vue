@@ -25,9 +25,9 @@
                         class="error-text"
                         v-show="!record.name || record.name.length > 64"
                     >
-                        <span v-show="!record.name"> 该字段是必填字段 </span>
+                        <span v-show="!record.name"> {{t('Detail.components.VariableDefinitions.5sbk0zg5yl40')}} </span>
                         <span v-show="record.name.length > 64">
-                            最多可输入64个字符
+                            {{t('Detail.components.VariableDefinitions.5sbk0zg5zt00')}}
                         </span>
                     </div>
                 </template>
@@ -36,9 +36,9 @@
                     v-model:value="record.type"
                     @change="handleTypeChange(record)"
                 >
-                    <j-select-option value="string">字符串</j-select-option>
-                    <j-select-option value="date">时间</j-select-option>
-                    <j-select-option value="double">数字</j-select-option>
+                    <j-select-option value="string">{{t('Detail.components.VariableDefinitions.5sbk0zg600c0')}}</j-select-option>
+                    <j-select-option value="date">{{t('Detail.components.VariableDefinitions.5sbk0zg60fk0')}}</j-select-option>
+                    <j-select-option value="double">{{t('Detail.components.VariableDefinitions.5sbk0zg60ns0')}}</j-select-option>
                 </j-select>
                 <template v-if="column.dataIndex === 'format'">
                     <span v-if="record.type === 'string'">
@@ -78,7 +78,9 @@
 
 <script setup lang="ts">
 import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface IVariable {
     id: string;
     name: string;
@@ -100,22 +102,22 @@ const props = defineProps({
 
 const columns = [
     {
-        title: '变量',
+        title: t('Detail.components.VariableDefinitions.5sbk0zg60u80'),
         dataIndex: 'id',
         width: 80,
     },
     {
-        title: '名称',
+        title: t('Detail.components.VariableDefinitions.5sbk0zg60zc0'),
         dataIndex: 'name',
         width: 160,
     },
     {
-        title: '类型',
+        title: t('Detail.components.VariableDefinitions.5sbk0zg614g0'),
         dataIndex: 'type',
         // width: 160,
     },
     {
-        title: '格式',
+        title: t('Detail.components.VariableDefinitions.5sbk0zg619w0'),
         dataIndex: 'format',
         width: 150,
     },

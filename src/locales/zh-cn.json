@@ -356,7 +356,7 @@
                     "templateName": "模板名称",
                     "noticeRecord": "通知记录",
                     "bindConfig": "绑定配置",
-                    "configTip": "使用固定的通知配置来发送此通知模板",
+                    "configTip": "使用固定的通知配置发送此通知模板",
                     "bindTip": "请选择绑定配置",
                     "AgentIdTip": "应用唯一标识",
                     "getAgentId": "",
@@ -774,6 +774,26 @@
                 "5rkjp3nvjv40": "请选择",
                 "5rkjp3nvk240": "不支持数据权限配置，默认可查看全部数据",
                 "5rkjp3nvka40": "操作权限"
+            },
+            "ToOrg": {
+                "5sbk0krsd1g0": "请选择收信部门"
+            },
+            "ToTag": {
+                "5sbk0qh71280": "请选择标签推送"
+            },
+            "ToUser": {
+                "5sbk0tzgfy80": "请选择收信人"
+            },
+            "VariableDefinitions": {
+                "5sbk0zg5yl40": "该字段是必填字段",
+                "5sbk0zg5zt00": "最多可输入64个字符",
+                "5sbk0zg600c0": "字符串",
+                "5sbk0zg60fk0": "时间",
+                "5sbk0zg60ns0": "数字",
+                "5sbk0zg60u80": "变量",
+                "5sbk0zg60zc0": "名称",
+                "5sbk0zg614g0": "类型",
+                "5sbk0zg619w0": "格式"
             }
         },
         "Diagnose": {
@@ -6591,6 +6611,24 @@
                 "5saxhx4p94s0": "其他",
                 "5saxhx4p9d00": "同步用户",
                 "5saxhx4p9hk0": "通知记录"
+            }
+        }
+    },
+    "Template": {
+        "Debug": {
+            "index": {
+                "5sbk03u67980": "调试",
+                "5sbk03u69t80": "取消",
+                "5sbk03u6a4w0": "确定",
+                "5sbk03u6acg0": "通知配置",
+                "5sbk03u6ajs0": "请选择通知配置",
+                "5sbk03u6ark0": "变量",
+                "5sbk03u6ay80": "该字段为必填字段",
+                "5sbk03u6b6o0": "最多可输入64个字符",
+                "5sbk03u6bdc0": "请输入有效号码",
+                "5sbk03u6bjs0": "名称",
+                "5sbk03u6bq40": "值",
+                "5sbk03u6bwg0": "操作成功"
             }
         }
     }
