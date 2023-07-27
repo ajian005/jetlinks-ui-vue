@@ -8,28 +8,28 @@
         <j-popover :visible="editIndex === index" placement="left">
           <template #title>
             <div class="edit-title" style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="width: 150px;">枚举项配置</div>
+              <div style="width: 150px;">{{t('Metadata.EnumParam.index.5rlcf40ymec0')}}</div>
               <div @click="handleClose"><AIcon type="CloseOutlined" /></div>
             </div>
           </template>
           <template #content>
             <div class="ant-form-vertical">
               <j-form-item label="Value" :name="name.concat([index, 'value'])" :rules="[
-                { required: true, message: '请输入Value' },
-                { max: 64, message: '最多可输入64个字符' },
+                { required: true, message: t('Metadata.EnumParam.index.5rlcf40yo200') },
+                { max: 64, message: t('Metadata.EnumParam.index.5rlcf40yocg0') },
               ]">
-                <j-input v-model:value="_value[index].value" size="small" placeholder="请输入Value"></j-input>
+                <j-input v-model:value="_value[index].value" size="small" :placeholder="t('Metadata.EnumParam.index.5rlcf40yo200')"></j-input>
               </j-form-item>
               <j-form-item label="Text" :name="name.concat([index, 'text'])" :rules="[
-                { required: true, message: '请输入Text' },
-                { max: 64, message: '最多可输入64个字符' },
+                { required: true, message: t('Metadata.EnumParam.index.5rlcf40yokc0') },
+                { max: 64, message: t('Metadata.EnumParam.index.5rlcf40yocg0') },
               ]">
-                <j-input v-model:value="_value[index].text" size="small" placeholder="请输入Text"></j-input>
+                <j-input v-model:value="_value[index].text" size="small" :placeholder="t('Metadata.EnumParam.index.5rlcf40yokc0')"></j-input>
               </j-form-item>
             </div>
           </template>
           <div class="item-edit" @click="handleEdit(index)">
-            <Ellipsis>{{ item.text || '枚举项配置' }}</Ellipsis>
+            <Ellipsis>{{ item.text || t('Metadata.EnumParam.index.5rlcf40ymec0') }}</Ellipsis>
             <AIcon type="EditOutlined" class="item-icon" />
           </div>
         </j-popover>
@@ -42,13 +42,15 @@
       <template #icon>
         <AIcon type="PlusOutlined" class="item-icon" />
       </template>
-      新增枚举型
+      {{t('Metadata.EnumParam.index.5rlcf40yors0')}}
     </j-button>
   </div>
 </template>
 <script setup lang="ts" name="BooleanParam">
 import { PropType } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type EnumType = {
   text?: string,
   value?: string,

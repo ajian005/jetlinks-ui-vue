@@ -2,10 +2,10 @@
   <div class='terms-params-item'>
     <div v-if='!isFirst' class='term-type-warp'>
       <DropdownButton
-        :options='[
-            { label: "并且", value: "and" },
-            { label: "或者", value: "or" },
-          ]'
+        :options="[
+            { label: t('action.ListItem.FilterCondition.5rg4quec97w0'), value: 'and' },
+            { label: t('action.ListItem.FilterCondition.5rg4quecc3s0'), value: 'or' },
+          ]"
         type='type'
         v-model:value='paramsValue.type'
         @select='typeChange'
@@ -22,7 +22,7 @@
         type='column'
         value-name='id'
         label-name='fullName'
-        placeholder='请选择参数'
+        :placeholder="t('action.ListItem.FilterCondition.5rg4quecch80')"
         v-model:value='paramsValue.column'
         component='treeSelect'
         @select='columnSelect'
@@ -32,14 +32,14 @@
         type="termType"
         value-name='id'
         label-name='name'
-        placeholder="操作符"
+        :placeholder="t('action.ListItem.FilterCondition.5rg4queccs00')"
         v-model:value='paramsValue.termType'
         @select='termsTypeSelect'
       />
       <DoubleParamsDropdown
         v-if='showDouble'
         icon='icon-canshu'
-        placeholder='参数值'
+        :placeholder="t('action.ListItem.FilterCondition.5rg4queccyk0')"
         value-name='id'
         label-name='name'
         :options='valueOptions'
@@ -52,7 +52,7 @@
       <ParamsDropdown
         v-else
         icon='icon-canshu'
-        placeholder='参数值'
+        :placeholder="t('action.ListItem.FilterCondition.5rg4queccyk0')"
         value-name='id'
         label-name='name'
         :options='valueOptions'
@@ -62,7 +62,7 @@
         v-model:source='paramsValue.value.source'
         @select='valueSelect'
       />
-      <j-popconfirm title='确认删除？' @confirm='onDelete'>
+      <j-popconfirm :title="t('action.ListItem.FilterCondition.5rg4quecd880')" @confirm='onDelete'>
         <div v-show='showDelete' class='button-delete'> <AIcon type='CloseOutlined' /></div>
       </j-popconfirm>
     </div>
@@ -87,7 +87,9 @@ import { cloneDeep, flattenDeep, isArray, isObject, set } from 'lodash-es'
 import { Form } from 'jetlinks-ui-components'
 import {treeFilter} from "@/utils/comm";
 import { timeTypeKeys } from '@/views/rule-engine/Scene/Save/components/Terms/util'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data: formModel } = storeToRefs(sceneStore)
 
@@ -167,8 +169,8 @@ const valueColumnOptions = ref<any[]>([])
 
 const tabsOptions = ref<Array<TabsOption>>(
   [
-    { label: '手动输入', key: 'fixed', component: 'string' },
-    { label: '内置参数', key: 'upper', component: 'tree' }
+    { label: t('action.ListItem.FilterCondition.5rg4quecdg00'), key: 'fixed', component: 'string' },
+    { label: t('action.ListItem.FilterCondition.5rg4quecdnc0'), key: 'upper', component: 'tree' }
   ]
 )
 
@@ -188,8 +190,8 @@ const handOptionByColumn = (option: any) => {
         ]
       } else {
         valueOptions.value = _options?.map((item: any) => ({ ...item, label: item.name, value: item.id})) || [
-          { label: '是', name: '是', value: 'true', id: 'true' },
-          { label: '否', name: '否', value: 'false', id: 'false' },
+          { label: t('action.ListItem.FilterCondition.5rg4quecdy40'), name: t('action.ListItem.FilterCondition.5rg4quecdy40'), value: 'true', id: 'true' },
+          { label: t('action.ListItem.FilterCondition.5rg4quece480'), name: t('action.ListItem.FilterCondition.5rg4quece480'), value: 'false', id: 'false' },
         ]
       }
     } else if(option.type === 'enum') {

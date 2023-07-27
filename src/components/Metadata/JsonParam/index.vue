@@ -8,34 +8,34 @@
         <j-popover :visible="editIndex === index" placement="left">
           <template #title>
             <div class="edit-title" style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="width: 150px;">配置参数</div>
+              <div style="width: 150px;">{{t('Metadata.JsonParam.index.5rlcfd0mg9o0')}}</div>
               <div @click="handleClose"><AIcon type="CloseOutlined" /></div>
             </div>
           </template>
           <template #content>
             <div style="max-width: 400px;" class="ant-form-vertical">
-              <j-form-item label="标识" :name="name.concat([index, 'id'])" :rules="[
-                { required: true, message: '请输入标识' },
-                { max: 64, message: '最多可输入64个字符' },
+              <j-form-item :label="t('Metadata.JsonParam.index.5rlcfd0miqg0')" :name="name.concat([index, 'id'])" :rules="[
+                { required: true, message: t('Metadata.JsonParam.index.5rlcfd0mj1s0') },
+                { max: 64, message: t('Metadata.JsonParam.index.5rlcfd0mj980') },
                 {
                   pattern: /^[a-zA-Z0-9_\-]+$/,
-                  message: 'ID只能由数字、字母、下划线、中划线组成',
+                  message:  t('Metadata.JsonParam.index.format'),
                 },
               ]">
-                <j-input v-model:value="_value[index].id" size="small" placeholder="请输入标识"></j-input>
+                <j-input v-model:value="_value[index].id" size="small" :placeholder="t('Metadata.JsonParam.index.5rlcfd0mj1s0')"></j-input>
               </j-form-item>
-              <j-form-item label="名称" :name="name.concat([index, 'name'])" :rules="[
-                { required: true, message: '请输入名称' },
-                { max: 64, message: '最多可输入64个字符' },
+              <j-form-item :label="t('Metadata.JsonParam.index.5rlcfd0mjf00')" :name="name.concat([index, 'name'])" :rules="[
+                { required: true, message: t('Metadata.JsonParam.index.5rlcfd0mjl00') },
+                { max: 64, message: t('Metadata.JsonParam.index.5rlcfd0mj980') },
               ]">
-                <j-input v-model:value="_value[index].name" size="small" placeholder="请输入名称"></j-input>
+                <j-input v-model:value="_value[index].name" size="small" :placeholder="t('Metadata.JsonParam.index.5rlcfd0mjl00')"></j-input>
               </j-form-item>
               <value-type-form v-model:value="_value[index].valueType" :name="name.concat([index, 'valueType'])" :isSub="isSub"
                 key="json_sub"></value-type-form>
             </div>
           </template>
           <div class="item-edit" @click="handleEdit(index)">
-            <Ellipsis>{{ item.name || '配置参数' }}</Ellipsis>
+            <Ellipsis>{{ item.name || t('Metadata.JsonParam.index.5rlcfd0mg9o0') }}</Ellipsis>
             <AIcon type="EditOutlined" class="item-icon" />
           </div>
         </j-popover>
@@ -48,14 +48,16 @@
       <template #icon>
         <AIcon type="PlusOutlined" class="item-icon" />
       </template>
-      添加参数
+      {{t('Metadata.JsonParam.index.5rlcfd0mjts0')}}
     </j-button>
   </div>
 </template>
 <script setup lang="ts" name="JsonParam">
 import { PropType } from 'vue'
 import ValueTypeForm from '@/views/device/components/Metadata/Base/Edit/ValueTypeForm.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type JsonType = Record<any, any>;
 
 interface Emits {

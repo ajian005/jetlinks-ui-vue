@@ -14,18 +14,18 @@
                   <div class='oauth-content-header'>
                     <img :src='headerImg' />
                   </div>
-                  <h2>授权登录</h2>
+                  <h2>{{t('views.oauth.index.5rmy4okjyok0')}}</h2>
                   <div class='oauth-content-content'>
                     <div class='oauth-content-content-text'>
-                      您正在授权登录, {{ appName }} 将获得以下权限:
+                      {{t('views.oauth.index.5rmy4okjzz00',{appName:appName})}}
                     </div>
                     <ul>
-                      <li>关联{{userName}}账号</li>
-                      <li>获取您的个人信息</li>
+                      <li>{{t('views.oauth.index.relevance',{userName:userName})}}</li>
+                      <li>{{t('views.oauth.index.5rmy4okk07o0')}}</li>
                     </ul>
                     <div class='oauth-content-button'>
-                      <j-button type='primary' @click='() => goOAuth2Fn()'> 同意授权 </j-button>
-                      <j-button type='primary' @click='changeAccount'> 切换账号 </j-button>
+                      <j-button type='primary' @click='() => goOAuth2Fn()'> {{t('views.oauth.index.5rmy4okk0dk0')}} </j-button>
+                      <j-button type='primary' @click='changeAccount'> {{t('views.oauth.index.5rmy4okk0j00')}} </j-button>
                     </div>
                   </div>
                 </template>
@@ -33,17 +33,17 @@
                   <div class='oauth-content-header'>
                     <img :src='headerImg' />
                   </div>
-                  <h2>授权登录</h2>
+                  <h2>{{t('views.oauth.index.5rmy4okjyok0')}}</h2>
                   <div class='oauth-content-login'>
                     <j-form layout='vertical' :model='formModel' ref='formRef' >
-                      <j-form-item label='用户名' name='username' required :rules='[{ required: true, message: "请输入用户名"}]'>
-                        <j-input placeholder='用户名' v-model:value='formModel.username' />
+                      <j-form-item :label="t('views.oauth.index.5rmy4okk0os0')" name='username' required :rules="[{ required: true, message: t('views.oauth.index.userNameTip')}]">
+                        <j-input :placeholder="t('views.oauth.index.5rmy4okk0os0')" v-model:value='formModel.username' />
                       </j-form-item>
-                      <j-form-item label='密码' name='password' required :rules='[{ required: true, message: "请输入密码"}]'>
-                        <j-input-password placeholder='密码' v-model:value='formModel.password' />
+                      <j-form-item :label="t('views.oauth.index.5rmy4okk0u80')" name='password' required :rules="[{ required: true, message:  t('views.oauth.index.pwdTip')}]">
+                        <j-input-password :placeholder="t('views.oauth.index.5rmy4okk0u80')" v-model:value='formModel.password' />
                       </j-form-item>
-                      <j-form-item name='verifyCode' v-if='captcha.base64' required :rules='[{ required: true, message: "请输入验证码"}]'>
-                        <j-input placeholder='请输入验证码' v-model:value='formModel.verifyCode' >
+                      <j-form-item name='verifyCode' v-if='captcha.base64' required :rules="[{ required: true, message: t('views.oauth.index.codeTip')}]">
+                        <j-input :placeholder="t('views.oauth.index.5rmy4okk12g0')" v-model:value='formModel.verifyCode' >
                           <template #addonAfter>
                             <img
                               :src='captcha.base64'
@@ -59,7 +59,7 @@
                           @click='doLogin'
                           style='width: 100%'
                         >
-                          登录
+                          {{t('views.oauth.index.5rmy4okk1800')}}
                         </j-button>
                       </j-form-item>
                     </j-form>
@@ -78,7 +78,9 @@ import { config, code, getOAuth2, initApplication, authLogin, settingDetail } fr
 import { getMe_api } from '@/api/home'
 import { getImage, getToken } from '@/utils/comm'
 import Config from '../../../config/config'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const spinning = ref(true)
 const isLogin = ref(false)
 const logoImg = ref('')

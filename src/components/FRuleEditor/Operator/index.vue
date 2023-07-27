@@ -84,6 +84,7 @@ import { PropertyMetadata } from '@/views/device/Product/typings';
 import { getOperator } from '@/api/device/product';
 import Markdown from 'vue3-markdown-it';
 
+const { t } = useI18n()
 const props = defineProps({
     id: String,
 });

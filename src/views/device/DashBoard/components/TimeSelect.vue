@@ -15,15 +15,8 @@
                 {{ item.label }}
             </j-radio-button>
         </j-radio-group>
-        <j-range-picker
-            format="YYYY-MM-DD HH:mm:ss"
-            valueFormat="YYYY-MM-DD HH:mm:ss"
-            style="margin-left: 12px"
-            :show-time="{ format: 'HH:mm:ss' }"
-            @change="rangeChange"
-            v-model:value="rangeVal"
-            :allowClear="false"
-        >
+        <j-range-picker format="YYYY-MM-DD HH:mm:ss" valueFormat="YYYY-MM-DD HH:mm:ss" style="margin-left: 12px"
+            :show-time="{ format: 'HH:mm:ss' }" @change="rangeChange" v-model:value="rangeVal" :allowClear="false">
         </j-range-picker>
     </div>
 </template>

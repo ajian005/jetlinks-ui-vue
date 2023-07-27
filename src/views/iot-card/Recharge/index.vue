@@ -16,13 +16,13 @@
             <template #headerTitle>
                 <j-space>
                     <PermissionButton @click="visible = true" :hasPermission="'iot-card/Recharge:pay'" type="primary">
-                        充值
+                        {{t('iot-card.Recharge.index.5rgbjc3ydao0')}}
                     </PermissionButton>
                     <div class="tips-text">
                         <span style="margin-right: 8px; font-size: 16px">
                             <AIcon type="ExclamationCircleOutlined"></AIcon>
                         </span>
-                        本平台仅提供充值入口，具体充值结果需以运营商的充值结果为准
+                        {{t('iot-card.Recharge.index.5rgbjc3yehs0')}}
                     </div>
                 </j-space>
             </template>
@@ -71,7 +71,9 @@ import type { ActionsType } from '@/components/Table';
 import { queryRechargeList } from '@/api/iot-card/cardManagement';
 import Save from './Save.vue';
 import Detail from './Detail.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const rechargeRef = ref<Record<string, any>>({});
 const params = ref<Record<string, any>>({});
 const visible = ref<boolean>(false);
@@ -80,7 +82,7 @@ const current = ref<Record<string, any>>({});
 
 const columns = [
     {
-        title: '充值金额',
+        title: t('iot-card.Recharge.index.5rgbjc3yeq80'),
         dataIndex: 'chargeMoney',
         key: 'chargeMoney',
         ellipsis: true,
@@ -89,7 +91,7 @@ const columns = [
         },
     },
     {
-        title: '支付方式',
+        title: t('iot-card.Recharge.index.5rgbjc3yeww0'),
         dataIndex: 'paymentType',
         key: 'paymentType',
         search: {
@@ -97,19 +99,19 @@ const columns = [
         },
     },
     {
-        title: '订单号',
+        title: t('iot-card.Recharge.index.5rgbjc3yf200'),
         dataIndex: 'orderNumber',
         key: 'orderNumber',
         ellipsis: true,
     },
     {
-        title: '支付URL',
+        title: t('iot-card.Recharge.index.5rgbjc3yf5s0'),
         dataIndex: 'url',
         key: 'url',
         ellipsis: true,
     },
     {
-        title: '订单时间',
+        title: t('iot-card.Recharge.index.5rgbjc3yf9o0'),
         dataIndex: 'createTime',
         key: 'createTime',
         scopedSlots: true,
@@ -119,7 +121,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('iot-card.Recharge.index.5rgbjc3yfd40'),
         key: 'action',
         fixed: 'right',
         width: 60,
@@ -132,9 +134,9 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
     return [
         {
             key: 'view',
-            text: '查看',
+            text: t('iot-card.Recharge.index.5rgbjc3yfgo0'),
             tooltip: {
-                title: '查看',
+                title: t('iot-card.Recharge.index.5rgbjc3yfgo0'),
             },
             icon: 'EyeOutlined',
             onClick: () => {

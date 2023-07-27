@@ -1,20 +1,20 @@
 <template>
-    <j-modal :width="644" visible title="配置详情" @cancel="emit('close')">
+    <j-modal :width="644" visible :title="t('components.Detail.index.5rga8ahulh80')" @cancel="emit('close')">
         <div class="detail">
             <div class="item">
-                <div class="label">通知方式</div>
+                <div class="label">{{t('components.Detail.index.5rga8ahum8g0')}}</div>
                 <div class="value">
                     <j-ellipsis :lineClamp="2">{{ data.name }}</j-ellipsis>
                 </div>
             </div>
             <div class="item">
-                <div class="label">通知配置</div>
+                <div class="label">{{t('components.Detail.index.5rga8ahume00')}}</div>
                 <div class="value">
                     <j-ellipsis :lineClamp="2">{{ obj.notifier }}</j-ellipsis>
                 </div>
             </div>
             <div class="item">
-                <div class="label">通知模板</div>
+                <div class="label">{{t('components.Detail.index.5rga8ahumig0')}}</div>
                 <div class="value">
                     <j-ellipsis :lineClamp="2">{{ obj.template }}</j-ellipsis>
                 </div>
@@ -26,20 +26,20 @@
                 </div>
             </div>
             <div class="item">
-                <div class="label">模板变量</div>
+                <div class="label">{{t('components.Detail.index.5rga8ahumq80')}}</div>
                 <div class="value">
                     <j-ellipsis :lineClamp="2">{{ variables }}</j-ellipsis>
                 </div>
             </div>
             <div class="item">
-                <div class="label">用户权限</div>
+                <div class="label">{{t('components.Detail.index.5rga8ahumu80')}}</div>
                 <div class="value">
                     <j-ellipsis :lineClamp="2">{{ obj.role }}</j-ellipsis>
                 </div>
             </div>
         </div>
         <template #footer>
-            <j-button type="primary" @click="emit('close')">确定</j-button>
+            <j-button type="primary" @click="emit('close')">{{t('components.Detail.index.5rga8ahumxs0')}}</j-button>
         </template>
     </j-modal>
 </template>
@@ -50,6 +50,9 @@ import TemplateApi from '@/api/notice/template';
 import { queryConfigVariables } from '@/api/system/noticeRule';
 import { getRoleList_api } from '@/api/system/user';
 
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Object,

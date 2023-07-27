@@ -1,15 +1,15 @@
 <template>
-    <j-modal title="详情" visible width="50vw" @ok="onCancel" @cancel="onCancel">
+    <j-modal :title="t('Property.Detail.index.5rcymvg63l00')" visible width="50vw" @ok="onCancel" @cancel="onCancel">
         <div style="margin-bottom: 10px"><TimeComponent v-model="dateValue" /></div>
         <div>
             <j-tabs :destroyInactiveTabPane="true" v-model:activeKey="activeKey" style="max-height: 600px; overflow-y: auto">
-                <j-tab-pane key="table" tab="列表">
+                <j-tab-pane key="table" :tab="t('Property.Detail.index.5rcymvg65ow0')">
                     <Table :data="props.data" :time="_getTimes" />
                 </j-tab-pane>
-                <j-tab-pane key="charts" tab="图表">
+                <j-tab-pane key="charts" :tab="t('Property.Detail.index.5rcymvg66080')">
                     <Charts :data="props.data" :time="_getTimes" />
                 </j-tab-pane>
-                <j-tab-pane key="geo" tab="轨迹" v-if="data?.valueType?.type === 'geoPoint'">
+                <j-tab-pane key="geo" :tab="t('Property.Detail.index.5rcymvg669k0')" v-if="data?.valueType?.type === 'geoPoint'">
                     <PropertyAMap :data="props.data" :time="_getTimes" />
                 </j-tab-pane>
             </j-tabs>
@@ -23,7 +23,9 @@ import TimeComponent from './TimeComponent.vue'
 import Charts from './Charts.vue'
 import PropertyAMap from './PropertyAMap.vue'
 import Table from './Table.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Object,

@@ -3,7 +3,7 @@
         <div v-if="channel === 'fixed-media'" class="card-last">
             <j-row :gutter="[24, 24]">
                 <j-col :span="12">
-                    <title-component data="基本信息" />
+                    <title-component :data="t('components.Media.index.5rg37iwxsow0')" />
                     <div>
                         <j-form
                             :model="formState"
@@ -13,29 +13,29 @@
                             @finish="onFinish"
                         >
                             <j-form-item
-                                label="名称"
+                                :label="t('components.Media.index.5rg37iwxu080')"
                                 name="name"
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入名称',
+                                        message: t('components.Media.index.5rg37iwxu8k0'),
                                         trigger: 'blur',
                                     },
                                     {
                                         max: 64,
-                                        message: '最多可输入64个字符',
+                                        message: t('components.Media.index.5rg37iwxuf40'),
                                         trigger: 'blur',
                                     },
                                 ]"
                             >
                                 <j-input
-                                    placeholder="请输入名称"
+                                    :placeholder="t('components.Media.index.5rg37iwxu8k0')"
                                     v-model:value="formState.name"
                                 />
                             </j-form-item>
-                            <j-form-item label="说明" name="description">
+                            <j-form-item :label="t('components.Media.index.5rg37iwxul00')" name="description">
                                 <j-textarea
-                                    placeholder="请输入说明"
+                                    :placeholder="t('components.Media.index.5rg37iwxurg0')"
                                     :rows="4"
                                     v-model:value="formState.description"
                                     show-count
@@ -51,7 +51,7 @@
                                         id === ':id' ? 'add' : 'update'
                                     }`"
                                 >
-                                    保存
+                                    {{t('components.Media.index.5rg37iwxuzg0')}}
                                 </PermissionButton>
                             </j-form-item>
                         </j-form>
@@ -59,14 +59,14 @@
                 </j-col>
                 <j-col :span="12">
                     <div class="doc">
-                        <h1>接入方式</h1>
+                        <h1>{{t('components.Media.index.5rg37iwxv500')}}</h1>
                         <p>
                             {{ provider.name }}
                         </p>
                         <p>
                             {{ provider.description }}
                         </p>
-                        <h1>消息协议</h1>
+                        <h1>{{t('components.Media.index.5rg37iwxvao0')}}</h1>
                         <p>
                             {{ provider.id === 'fixed-media' ? 'URL' : 'SIP' }}
                         </p>
@@ -84,7 +84,9 @@
 import { onlyMessage } from '@/utils/comm';
 import GB28181 from './GB28181.vue';
 import { update, save } from '@/api/link/accessConfig';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface FormState {
     name: string;
     description: string;
@@ -120,7 +122,7 @@ const onFinish = async (values: any) => {
     const resp =
         id === ':id' ? await save(params) : await update({ ...params, id });
     if (resp.status === 200) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('components.Media.index.5rg37iwxvfw0'), 'success');
 
         if (route.query.save) {
             // @ts-ignore

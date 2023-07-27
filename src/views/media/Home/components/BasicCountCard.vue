@@ -1,19 +1,19 @@
 <template>
     <div class="device-count-container">
         <h5 class="title">
-            <span>基础统计</span>
+            <span>{{t('Home.components.BasicCountCard.5rg85olkqa40')}}</span>
             <a style="font-size: 12px;" @click="jumpPage">
-                详情
+                {{t('Home.components.BasicCountCard.5rg85olkrs80')}}
             </a>
         </h5>
         <div class="box-list">
             <div class="box-item">
-                <div class="label">设备数量</div>
+                <div class="label">{{t('Home.components.BasicCountCard.5rg85olks300')}}</div>
                 <div class="value">{{ deviceCount }}</div>
                 <img :src="getImage('/home/top-1.png')" alt="" />
             </div>
             <div class="box-item">
-                <div class="label">通道数量</div>
+                <div class="label">{{t('Home.components.BasicCountCard.5rg85olks900')}}</div>
                 <div class="value">{{ channelCount }}</div>
                 <img :src="getImage('/home/product.png')" alt="" />
             </div>
@@ -25,7 +25,9 @@
 import homeApi from '@/api/media/home';
 import { getImage } from '@/utils/comm';
 import { useMenuStore } from 'store/menu';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 
 const channelCount = ref(0);

@@ -17,7 +17,7 @@
                         hasPermission="rule-engine/Alarm/Configuration:add"
                     >
                         <template #icon><AIcon type="PlusOutlined" /></template>
-                        新增
+                        {{t('Save.Scene.index.5rg425yim6w0')}}
                     </PermissionButton>
                 </j-space>
             </template>
@@ -54,9 +54,9 @@
                         </Ellipsis>
                         <Ellipsis :lineClamp="2">
                             <div class="subTitle">
-                                说明：{{
+                                {{ t('Save.Scene.index.explain') + (
                                     slotProps?.description ||
-                                    typeMap.get(slotProps.triggerType)?.tip
+                                    typeMap.get(slotProps.triggerType)?.tip)
                                 }}
                             </div>
                         </Ellipsis>
@@ -103,6 +103,9 @@ import { getImage, onlyMessage } from '@/utils/comm';
 import Save from './Save/index.vue';
 import { useAlarmConfigurationStore } from '@/store/alarm';
 import { storeToRefs } from 'pinia';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const route = useRoute();
 const id = route.query?.id;
 
@@ -124,22 +127,22 @@ const terms = [
 const actionRef = ref();
 const typeMap = new Map();
 typeMap.set('manual', {
-    text: '手动触发',
+    text: t('Save.Scene.index.5rg425yinvc0'),
     img: getImage('/scene/scene-hand.png'),
     icon: getImage('/scene/trigger-type-icon/manual.png'),
-    tip: '适用于第三方平台向物联网平台下发指令控制设备',
+    tip: t('Save.Scene.index.5rg425yio4g0'),
 });
 typeMap.set('timer', {
-    text: '定时触发',
+    text: t('Save.Scene.index.5rg425yioa80'),
     img: getImage('/scene/scene-timer.png'),
     icon: getImage('/scene/trigger-type-icon/timing.png'),
-    tip: '适用于定期执行固定任务',
+    tip: t('Save.Scene.index.5rg425yiokw0'),
 });
 typeMap.set('device', {
-    text: '设备触发',
+    text: t('Save.Scene.index.5rg425yiork0'),
     img: getImage('/scene/scene-device.png'),
     icon: getImage('/scene/trigger-type-icon/device.png'),
-    tip: '适用于设备数据或行为满足触发条件时，执行指定的动作',
+    tip: t('Save.Scene.index.5rg425yioxs0'),
 });
 const getActions = (
     data: Partial<Record<string, any>>,
@@ -149,14 +152,14 @@ const getActions = (
     const actions: ActionsType[] = [
         {
             key: 'action',
-            text: '解绑',
+            text: t('Save.Scene.index.5rg425yip440'),
             icon: 'DisconnectOutlined',
             popConfirm: {
-                title: '确定解绑？',
+                title: t('Save.Scene.index.5rg425yip8w0'),
                 onConfirm: async () => {
                     const res = await unbindScene(id, [data.id]);
                     if (res.status === 200) {
-                        onlyMessage('操作成功');
+                        onlyMessage(t('Save.Scene.index.5rg425yipe80'));
                         actionRef.value.reload();
                     }
                 },

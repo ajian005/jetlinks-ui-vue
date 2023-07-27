@@ -11,30 +11,30 @@
     >
         <j-form ref="formRef" :model="form.data" layout="vertical">
             <j-form-item
-                label="名称"
+                :label="t('Relationship.components.EditDialog.5rg9w5kh7s40')"
                 name="name"
                 :rules="[
-                    { required: true, message: '请输入名称' },
-                    { max: 64, message: '最多可输入64个字符' },
+                    { required: true, message: t('Relationship.components.EditDialog.5rg9w5kh8uw0') },
+                    { max: 64, message: t('Relationship.components.EditDialog.5rg9w5kh9080') },
                 ]"
             >
                 <j-input
                     v-model:value="form.data.name"
-                    placeholder="请输入名称"
+                    :placeholder="t('Relationship.components.EditDialog.5rg9w5kh8uw0')"
                 />
             </j-form-item>
             <j-form-item
                 name="relation"
-                label="标识"
+                :label="t('Relationship.components.EditDialog.5rg9w5kh94g0')"
                 :rules="[
-                    { required: true, message: '请输入标识' },
-                    { max: 64, message: '最多可输入64个字符' },
+                    { required: true, message: t('Relationship.components.EditDialog.5rg9w5kh9as0') },
+                    { max: 64, message: t('Relationship.components.EditDialog.5rg9w5kh9080') },
                     { validator: form.rules.checkRelation, trigger: 'change' },
                 ]"
             >
                 <j-input
                     v-model:value="form.data.relation"
-                    placeholder="请输入标识"
+                    :placeholder="t('Relationship.components.EditDialog.5rg9w5kh9as0')"
                     :disabled="!!form.data.id"
                 />
             </j-form-item>
@@ -43,14 +43,14 @@
                 <j-col :span="12">
                     <j-form-item
                         name="objectType"
-                        label="关联方"
-                        :rules="[{ required: true, message: '请选择关联方' }]"
+                        :label="t('Relationship.components.EditDialog.5rg9w5kh9ew0')"
+                        :rules="[{ required: true, message: t('Relationship.components.EditDialog.5rg9w5kh9iw0') }]"
                     >
                         <j-select
                             v-model:value="form.data.objectType"
                             :disabled="!!form.data.id"
                             @change="form.handleObjectTypeChange"
-                            placeholder="请选择关联方"
+                            :placeholder="t('Relationship.components.EditDialog.5rg9w5kh9iw0')"
                         >
                             <j-select-option
                                 v-for="item in form.objectList"
@@ -64,14 +64,14 @@
                 <j-col :span="12">
                     <j-form-item
                         name="targetType"
-                        label="被关联方"
-                        :rules="[{ required: true, message: '请选择被关联方' }]"
+                        :label="t('Relationship.components.EditDialog.5rg9w5kh9mg0')"
+                        :rules="[{ required: true, message: t('Relationship.components.EditDialog.5rg9w5kh9vk0') }]"
                     >
                         <j-select
                             v-model:value="form.data.targetType"
                             :disabled="!!form.data.id"
                             @change="form.rules.checkUnique"
-                            placeholder="请选择被关联方"
+                            :placeholder="t('Relationship.components.EditDialog.5rg9w5kh9vk0')"
                         >
                             <j-select-option
                                 v-for="item in targetList"
@@ -83,10 +83,10 @@
                     </j-form-item>
                 </j-col>
             </j-row>
-            <j-form-item name="description" label="说明">
+            <j-form-item name="description" :label="t('Relationship.components.EditDialog.5rg9w5kh9z00')">
                 <j-textarea
                     v-model:value="form.data.description"
-                    placeholder="请输入说明"
+                    :placeholder="t('Relationship.components.EditDialog.5rg9w5kha280')"
                     show-count
                     :maxlength="200"
                 />
@@ -107,7 +107,9 @@ import {
 } from '@/api/system/relationship';
 import { dictItemType } from '../../DataSource/typing';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emits = defineEmits(['refresh', 'update:visible']);
 const props = defineProps<{
     visible: boolean;
@@ -115,7 +117,7 @@ const props = defineProps<{
 }>();
 // 弹窗相关
 const loading = ref(false);
-const dialogTitle = computed(() => (props.data.id ? '编辑' : '新增'));
+const dialogTitle = computed(() => (props.data.id ? t('Relationship.components.EditDialog.5rg9w5kha6g0') : t('Relationship.components.EditDialog.5rg9w5kha9o0')));
 const confirm = () => {
     loading.value = true;
     formRef.value
@@ -123,7 +125,7 @@ const confirm = () => {
         .then(() => form.submit())
         .then((resp: any) => {
             if (resp.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('Relationship.components.EditDialog.5rg9w5khacw0'));
                 emits('refresh');
                 emits('update:visible', false);
             }
@@ -145,7 +147,7 @@ const form = reactive({
             if (!value) return Promise.reject('');
             if (!reg.test(value))
                 return Promise.reject(
-                    '标识只能由数字、字母、下划线、中划线组成',
+                    t('Relationship.components.EditDialog.5rg9w5khagg0'),
                 );
             return form.rules.checkUnique();
         },
@@ -197,7 +199,7 @@ const form = reactive({
     },
 });
 const targetList = computed(() =>
-    form.data.objectType === 'device' ? [{ id: 'user', name: '用户' }] : [],
+    form.data.objectType === 'device' ? [{ id: 'user', name: t('Relationship.components.EditDialog.5rg9w5khak00') }] : [],
 );
 form.getObjectList();
 

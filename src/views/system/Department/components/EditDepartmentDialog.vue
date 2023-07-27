@@ -7,16 +7,16 @@
         @cancel="emits('update:visible', false)"
         @ok="confirm"
         class="edit-dialog-container"
-        cancelText="取消"
-        okText="确定"
+        :cancelText="t('Department.components.EditDepartmentDialog.5rg93if6vvs0')"
+        :okText="t('Department.components.EditDepartmentDialog.5rg93if6wzk0')"
         :confirmLoading="loading"
     >
         <j-form ref="formRef" :model="form.data" layout="vertical">
-            <j-form-item name="parentId" label="上级组织">
+            <j-form-item name="parentId" :label="t('Department.components.EditDepartmentDialog.5rg93if6xd40')">
                 <j-tree-select
                     v-model:value="form.data.parentId"
                     style="width: 100%"
-                    placeholder="请选择上级组织"
+                    :placeholder="t('Department.components.EditDepartmentDialog.5rg93if6xjk0')"
                     allowClear
                     :tree-data="treeData"
                     :field-names="{ value: 'id' }"
@@ -27,26 +27,26 @@
             </j-form-item>
             <j-form-item
                 name="name"
-                label="名称"
+                :label="t('Department.components.EditDepartmentDialog.5rg93if6xoo0')"
                 :rules="[
-                    { required: true, message: '请输入名称' },
-                    { max: 64, message: '最多可输入64个字符' },
+                    { required: true, message: t('Department.components.EditDepartmentDialog.5rg93if6xu80') },
+                    { max: 64, message: t('Department.components.EditDepartmentDialog.5rg93if6xzo0') },
                 ]"
             >
                 <j-input
                     v-model:value="form.data.name"
-                    placeholder="请输入名称"
+                    :placeholder="t('Department.components.EditDepartmentDialog.5rg93if6xu80')"
                 />
             </j-form-item>
 
             <j-form-item
                 name="sortIndex"
-                label="排序"
-                :rules="[{ required: true, message: '请输入排序' }]"
+                :label="t('Department.components.EditDepartmentDialog.5rg93if6y5o0')"
+                :rules="[{ required: true, message: t('Department.components.EditDepartmentDialog.5rg93if6ybo0') }]"
             >
                 <j-input
                     v-model:value="form.data.sortIndex"
-                    placeholder="请输入排序"
+                    :placeholder="t('Department.components.EditDepartmentDialog.5rg93if6ybo0')"
                     :maxlength="64"
                     @blur="form.checkSort"
                 />
@@ -63,7 +63,9 @@ import {
     updateDepartment_api,
 } from '@/api/system/department';
 import { onlyMessage } from '@/utils/comm'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type treeType = {
     id: string;
     parentId?: string;
@@ -94,7 +96,7 @@ const confirm = () => {
         ?.validate()
         .then(() => form.submit())
         .then((resp: any) => {
-            onlyMessage('操作成功')
+            onlyMessage(t('Department.components.EditDepartmentDialog.5rg93if6ykg0'))
             emits('refresh', resp.result.id);
             emits('update:visible', false);
         })
@@ -144,17 +146,17 @@ const form = reactive({
 
     init: () => {
         if (props.data.id) {
-            title.value = '编辑';
+            title.value = t('Department.components.EditDepartmentDialog.5rg93if6yqc0');
             form.data = cloneDeep(props.data);
         } else if (props.data.parentId) {
-            title.value = '新增子组织';
+            title.value = t('Department.components.EditDepartmentDialog.5rg93if6yvc0');
             form.data = {
                 name: '',
                 sortIndex: props.data.sortIndex,
                 parentId: props.data.parentId,
             };
         } else {
-            title.value = '新增';
+            title.value = t('Department.components.EditDepartmentDialog.5rg93if6z0w0');
             form.data = {
                 name: '',
                 sortIndex: props.data.sortIndex,

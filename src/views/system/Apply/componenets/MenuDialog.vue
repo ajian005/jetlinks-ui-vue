@@ -1,7 +1,7 @@
 <template>
     <j-modal
         visible
-        title="集成菜单"
+        :title="t('Apply.componenets.MenuDialog.5rgb0vzg8jo0')"
         width="600px"
         @ok="handleOk"
         @cancel="cancel"
@@ -12,7 +12,7 @@
             v-model:value="form.checkedSystem"
             @change="(value) => value && getTree(value)"
             style="width: 200px"
-            placeholder="请选择集成系统"
+            :placeholder="t('Apply.componenets.MenuDialog.5rgb0vzga8c0')"
         >
             <j-select-option
                 v-for="item in form.systemList"
@@ -23,7 +23,7 @@
         </j-select>
 
         <p style="margin: 20px 0 0 0" v-show="form.menuTree.length > 0">
-            当前集成菜单
+            {{t('Apply.componenets.MenuDialog.5rgb0vzgaek0')}}
         </p>
         <j-tree
             v-model:checkedKeys="form.checkedMenu"
@@ -55,7 +55,9 @@ import { CheckInfo } from 'ant-design-vue/lib/vc-tree/props';
 import { useMenuStore } from '@/store/menu';
 import { getMenuTree_api } from '@/api/system/menu';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 const emits = defineEmits(['update:visible', 'refresh']);
 const props = defineProps<{
@@ -86,15 +88,15 @@ const handleOk = async () => {
             })
             if (resp.status === 200) {
                 // 保存集成菜单
-                onlyMessage('操作成功');
+                onlyMessage(t('Apply.componenets.MenuDialog.5rgb0vzgb2s0'));
                 emits('update:visible', false);
                 emits('refresh')
             }
         } else {
-            onlyMessage('请勾选配置菜单', 'warning');
+            onlyMessage(t('Apply.componenets.MenuDialog.5rgb0vzgb7w0'), 'warning');
         }
     } else {
-        onlyMessage('请选择所属系统', 'warning');
+        onlyMessage(t('Apply.componenets.MenuDialog.5rgb0vzgbpk0'), 'warning');
     }
 };
 const cancel = () => {

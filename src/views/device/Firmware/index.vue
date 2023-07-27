@@ -208,7 +208,7 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
             },
             popConfirm: {
                 title: t('device.Firmware.index.5rg3o0pa9gs0'),
-                okText: ' 确定',
+                okText: t('device.Firmware.index.5rh83xe7m2w0'),
                 placement: 'topLeft',
                 cancelText: t('device.Firmware.index.5rg3o0pa9k40'),
                 onConfirm: async () => {

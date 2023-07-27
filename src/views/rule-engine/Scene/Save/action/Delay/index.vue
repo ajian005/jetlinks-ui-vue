@@ -1,6 +1,6 @@
 <template>
     <j-modal
-        title="延迟执行"
+        :title="t('action.Delay.index.5rg4ngxgi400')"
         visible
         :width="400"
         @cancel="onCancel"
@@ -9,7 +9,7 @@
     >
         <j-input-number
             style="max-width: 220px"
-            placeholder="请输入时间"
+            :placeholder="t('action.Delay.index.5rg4ngxgl4s0')"
             v-model:value="_value"
             :precision="3"
             :min="0.001"
@@ -18,9 +18,9 @@
             <template #addonAfter>
                 <j-select
                     :options="[
-                        { label: '秒', value: 'seconds' },
-                        { label: '分', value: 'minutes' },
-                        { label: '小时', value: 'hours' },
+                        { label: t('action.Delay.index.5rg4ngxgljs0'), value: 'seconds' },
+                        { label: t('action.Delay.index.5rg4ngxglzg0'), value: 'minutes' },
+                        { label: t('action.Delay.index.5rg4ngxgm680'), value: 'hours' },
                     ]"
                     v-model:value="unit"
                 />
@@ -31,7 +31,9 @@
 
 <script lang="ts" setup>
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     value: {
         type: Object,
@@ -45,9 +47,9 @@ const props = defineProps({
 });
 
 const timeUnitEnum = {
-    seconds: '秒',
-    minutes: '分',
-    hours: '小时',
+    seconds: t('action.Delay.index.5rg4ngxgljs0'),
+    minutes: t('action.Delay.index.5rg4ngxglzg0'),
+    hours: t('action.Delay.index.5rg4ngxgm680'),
 };
 
 const emit = defineEmits(['cancel', 'save']);
@@ -83,11 +85,11 @@ const onOk = () => {
             {
                 name: `${_value.value} ${
                     timeUnitEnum[unit.value]
-                }后，执行后续动作`,
+                }${t('action.Delay.index.action')}`,
             },
         );
     } else {
-        onlyMessage('请输入时间', 'error');
+        onlyMessage(t('action.Delay.index.5rg4ngxgl4s0'), 'error');
     }
 };
 </script>

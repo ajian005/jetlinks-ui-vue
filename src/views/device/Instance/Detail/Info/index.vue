@@ -1,17 +1,17 @@
 <template>
     <j-descriptions bordered>
         <template #title>
-            设备信息
+            {{t('Detail.Info.index.5rcyl6fnhtk0')}}
             <PermissionButton
                 type="link"
                 @click="visible = true"
                 hasPermission="device/Instance:update"
             >
                 <template #icon><AIcon type="EditOutlined" /></template>
-                编辑
+                {{t('Detail.Info.index.5rcyl6fnjsg0')}}
             </PermissionButton>
         </template>
-        <j-descriptions-item label="设备ID">
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnk7k0')">
           <div style="display: flex">
             <div style="flex: 1">
               <j-ellipsis> {{ instanceStore.current?.id }} </j-ellipsis>
@@ -19,8 +19,8 @@
             <div v-if='instanceStore.current?.accessProvider === "plugin_gateway"'>
               <j-tooltip>
                 <template #title>
-                  <p>通过调用SDK或HTTP请求的方式接入第三方系统设备数据时，第三方系统与平台当前设备对应的设备ID。</p>
-                  如双方ID值一致，则无需填写
+                  <p>{{t('Detail.Info.index.5rcyl6fnl040')}}</p>
+                  {{t('Detail.Info.index.5rcyl6fnlnk0')}}
                 </template>
                 <a v-if="!inklingDeviceId" type='link' @click='giveAnInkling'>
                   未映射
@@ -33,36 +33,36 @@
 
           </div>
         </j-descriptions-item>
-        <j-descriptions-item label="产品名称">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnm400')">{{
             instanceStore.current?.productName
         }}</j-descriptions-item>
-        <j-descriptions-item label="设备类型">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnmc40')">{{
             instanceStore.current?.deviceType?.text
         }}</j-descriptions-item>
-        <j-descriptions-item label="固件版本">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnn2o0')">{{
             instanceStore.current?.firmwareInfo?.version
         }}</j-descriptions-item>
-        <j-descriptions-item label="连接协议">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnncg0')">{{
             instanceStore.current?.transport
         }}</j-descriptions-item>
-        <j-descriptions-item label="消息协议">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnny80')">{{
             instanceStore.current?.protocolName
         }}</j-descriptions-item>
-        <j-descriptions-item label="创建时间">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fno5w0')">{{
             instanceStore.current?.createTime
                 ? moment(instanceStore.current?.createTime).format(
                         'YYYY-MM-DD HH:mm:ss',
                     )
                 : ''
         }}</j-descriptions-item>
-        <j-descriptions-item label="注册时间">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnodo0')">{{
             instanceStore.current?.registerTime
                 ? moment(instanceStore.current?.registerTime).format(
                         'YYYY-MM-DD HH:mm:ss',
                     )
                 : ''
         }}</j-descriptions-item>
-        <j-descriptions-item label="最后上线时间">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnovc0')">{{
             instanceStore.current?.onlineTime
                 ? moment(instanceStore.current?.onlineTime).format(
                         'YYYY-MM-DD HH:mm:ss',
@@ -70,13 +70,13 @@
                 : ''
         }}</j-descriptions-item>
         <j-descriptions-item
-            label="父设备"
+            :label="t('Detail.Info.index.5rcyl6fnp2o0')"
             v-if="
                 instanceStore.current?.deviceType?.value === 'childrenDevice'
             "
             >{{ instanceStore.current?.parentId }}</j-descriptions-item
         >
-        <j-descriptions-item label="说明">{{
+        <j-descriptions-item :label="t('Detail.Info.index.5rcyl6fnpac0')">{{
             instanceStore.current?.description
         }}</j-descriptions-item>
     </j-descriptions>
@@ -118,7 +118,9 @@ import InkingModal from './components/InklingModal'
 import moment from 'moment';
 import { detail as queryPluginAccessDetail } from '@/api/link/accessConfig'
 import { getPluginData } from '@/api/link/plugin'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const visible = ref<boolean>(false);
 const inkingVisible = ref<boolean>(false);
 const instanceStore = useInstanceStore();

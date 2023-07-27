@@ -16,7 +16,7 @@
                         sorts: [{ name: 'createTime', order: 'desc' }],
                     }"
                     :params="params"
-                >
+                >       
                     <template #headerTitle>
                         <PermissionButton
                             type="primary"
@@ -26,7 +26,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('link.Certificate.index.5rg3ho1cvv00')}}
                         </PermissionButton>
                     </template>
                     <template #type="slotProps">
@@ -67,14 +67,16 @@ import type { ActionsType } from '@/components/Table/index';
 import { query, remove } from '@/api/link/certificate';
 import { onlyMessage } from '@/utils/comm';
 import { useMenuStore } from 'store/menu';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 const tableRef = ref<Record<string, any>>({});
 const params = ref<Record<string, any>>({});
 
 const columns = [
     {
-        title: '证书标准',
+        title: t('link.Certificate.index.5rg3ho1cwq80'),
         dataIndex: 'type',
         key: 'type',
         fixed: 'left',
@@ -84,7 +86,7 @@ const columns = [
             type: 'select',
             options: [
                 {
-                    label: '国际标准',
+                    label: t('link.Certificate.index.5rg3ho1cwwk0'),
                     value: 'common',
                 },
             ],
@@ -92,7 +94,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '证书名称',
+        title: t('link.Certificate.index.5rg3ho1cx100'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -102,7 +104,7 @@ const columns = [
         },
     },
     {
-        title: '说明',
+        title: t('link.Certificate.index.5rg3ho1cx580'),
         dataIndex: 'description',
         key: 'description',
         ellipsis: true,
@@ -111,7 +113,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('link.Certificate.index.5rg3ho1cxa00'),
         key: 'action',
         fixed: 'right',
         width: 80,
@@ -137,9 +139,9 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
         // },
         {
             key: 'update',
-            text: '编辑',
+            text: t('link.Certificate.index.5rg3ho1cxe40'),
             tooltip: {
-                title: '编辑',
+                title: t('link.Certificate.index.5rg3ho1cxe40'),
             },
             icon: 'EditOutlined',
             onClick: async () => {
@@ -148,14 +150,14 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('link.Certificate.index.5rg3ho1cxhw0'),
             tooltip: {
-                title: '删除',
+                title: t('link.Certificate.index.5rg3ho1cxhw0'),
             },
             popConfirm: {
-                title: '确认删除?',
-                okText: ' 确定',
-                cancelText: '取消',
+                title: t('link.Certificate.index.5rg3ho1cxo40'),
+                okText: t('link.Certificate.index.5rh7zxrwi2o0'),
+                cancelText: t('link.Certificate.index.5rg3ho1cxsc0'),
                 onConfirm: async () => {
                     handlDelete(data.id);
                 },
@@ -184,7 +186,7 @@ const handlEdit = (id: string) => {
 const handlDelete = async (id: string) => {
     const res = await remove(id);
     if (res.success) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('link.Certificate.index.5rg3ho1cxwg0'), 'success');
         tableRef.value.reload();
     }
 };

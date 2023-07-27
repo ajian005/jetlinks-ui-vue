@@ -8,31 +8,31 @@
             @validate="getErrorNum"
         >
             <j-form-item
-                label="名称"
+                :label="t('Save.components.EditForm.5rgb2bzputc0')"
                 name="name"
                 :rules="[
                     {
                         required: true,
-                        message: '请输入名称',
+                        message: t('Save.components.EditForm.5rgb2bzpw1w0'),
                     },
                     {
                         max: 64,
-                        message: '最多可输入64个字符',
+                        message: t('Save.components.EditForm.5rgb2bzpw9k0'),
                     },
                 ]"
             >
                 <j-input
                     v-model:value="form.data.name"
-                    placeholder="请输入名称"
+                    :placeholder="t('Save.components.EditForm.5rgb2bzpw1w0')"
                 />
             </j-form-item>
             <j-form-item
-                label="应用"
+                :label="t('Save.components.EditForm.5rgb2bzpwec0')"
                 name="provider"
                 :rules="[
                     {
                         required: true,
-                        message: '请选择应用',
+                        message: t('Save.components.EditForm.5rgb2bzpwiw0'),
                     },
                 ]"
             >
@@ -1040,7 +1040,7 @@
                                         "
                                     />
                                     <div class="ant-upload-text">
-                                        点击上传图片
+                                        {{t('Save.components.EditForm.5rgb2bzq3s40')}}
                                     </div>
                                 </div>
                             </j-upload>
@@ -1374,10 +1374,10 @@
                 </j-collapse-panel>
             </j-collapse>
 
-            <j-form-item label="说明" name="description">
+            <j-form-item :label="t('Save.components.EditForm.5rgb2bzq5c00')" name="description">
                 <j-textarea
                     v-model:value="form.data.description"
-                    placeholder="请输入说明"
+                    :placeholder="t('Save.components.EditForm.5rgb2bzq5fk0')"
                     showCount
                     :maxlength="200"
                     :rows="3"
@@ -1392,7 +1392,7 @@
             type="primary"
             :loading="loading"
         >
-            保存
+            {{t('Save.components.EditForm.5rgb2bzq5ig0')}}
         </j-button>
 
         <div class="dialog">
@@ -1428,7 +1428,9 @@ import { cloneDeep, difference } from 'lodash';
 import { useMenuStore } from '@/store/menu';
 import { Rule } from 'ant-design-vue/lib/form';
 import ApplyList from './ApplyList/index.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['changeApplyType']);
 const routeQuery = useRoute().query;
 const menuStory = useMenuStore();
@@ -1549,12 +1551,12 @@ const headerValid = ref(true);
 const paramsValid = ref(true);
 const headerValidator = () => {
     return new Promise((resolve, reject) => {
-        headerValid.value ? resolve('') : reject('请输入完整的请求头');
+        headerValid.value ? resolve('') : reject(t('Save.components.EditForm.5rgb2bzq5lc0'));
     });
 };
 const paramsValidator = () => {
     return new Promise((resolve, reject) => {
-        paramsValid.value ? resolve('') : reject('请输入完整的请求参数');
+        paramsValid.value ? resolve('') : reject(t('Save.components.EditForm.5rgb2bzq5o40'));
     });
 };
 const getType = async () => {

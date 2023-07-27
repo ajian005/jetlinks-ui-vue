@@ -1,6 +1,6 @@
 <!-- 绑定设备 -->
 <template>
-  <j-modal :maskClosable='false' width='1100px' :visible='true' title='选择设备' okText='确定' cancelText='取消' @ok='handleOk'
+  <j-modal :maskClosable='false' width='1100px' :visible='true' :title="t('iot-card.CardManagement.BindDevice.5rgbfd1lxrk0')" :okText="t('iot-card.CardManagement.BindDevice.5rgbfd1lz8k0')" :cancelText="t('iot-card.CardManagement.BindDevice.5rgbfd1lzok0')" @ok='handleOk'
            @cancel='handleCancel' :confirmLoading='btnLoading'>
     <div style='margin-top: 10px'>
       <pro-search :columns='columns' target='iot-card-bind-device' @search='handleSearch' type='simple' />
@@ -41,7 +41,9 @@
 import { queryUnbounded, bind } from '@/api/iot-card/cardManagement'
 import moment from 'moment'
 import { onlyMessage } from '@/utils/comm'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['change'])
 
 const props = defineProps({
@@ -72,7 +74,7 @@ const columns = [
     }
   },
   {
-    title: '设备名称',
+    title: t('iot-card.CardManagement.BindDevice.5rgbfd1lzwo0'),
     dataIndex: 'name',
     key: 'name',
     ellipsis: true,
@@ -81,7 +83,7 @@ const columns = [
     }
   },
   {
-    title: '注册时间',
+    title: t('iot-card.CardManagement.BindDevice.5rgbfd1m02w0'),
     dataIndex: 'registryTime',
     key: 'registryTime',
     scopedSlots: true,
@@ -91,16 +93,16 @@ const columns = [
     // sorter: true,
   },
   {
-    title: '状态',
+    title: t('iot-card.CardManagement.BindDevice.5rgbfd1m09g0'),
     dataIndex: 'state',
     key: 'state',
     scopedSlots: true,
     search: {
       type: 'select',
       options: [
-        { label: '禁用', value: 'notActive' },
-        { label: '离线', value: 'offline' },
-        { label: '在线', value: 'online' }
+        { label: t('iot-card.CardManagement.BindDevice.5rgbfd1m0fk0'), value: 'notActive' },
+        { label: t('iot-card.CardManagement.BindDevice.5rgbfd1m0l00'), value: 'offline' },
+        { label: t('iot-card.CardManagement.BindDevice.5rgbfd1m0rk0'), value: 'online' }
       ]
     }
     // filterMultiple: false,
@@ -124,7 +126,7 @@ const handleOk = () => {
   bind(props.cardId, _selectedRowKeys.value[0])
     .then((resp: any) => {
       if (resp.status === 200) {
-        onlyMessage('操作成功')
+        onlyMessage(t('iot-card.CardManagement.BindDevice.5rgbfd1m0x80'))
         emit('change', true)
       }
     })

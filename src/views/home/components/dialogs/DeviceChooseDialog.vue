@@ -20,20 +20,16 @@
             :defaultParams="{ sorts: [{ name: 'createTime', order: 'desc' }] }"
             :rowSelection="{
                 selectedRowKeys: selectedKeys,
-                onChange: (keys:string[])=>selectedKeys = keys,
+                onChange: (keys: string[]) => selectedKeys = keys,
                 type: 'radio',
-            }"
-        >
+            }">
             <template #modifyTime="slotProps">
                 <span>{{
                     moment(slotProps.modifyTime).format('HHHH-MM-DD HH:mm:ss')
                 }}</span>
             </template>
             <template #state="slotProps">
-                <StatusLabel
-                    :status-value="slotProps.state.value"
-                    :status-label="slotProps.state.text"
-                />
+                <StatusLabel :status-value="slotProps.state.value" :status-label="slotProps.state.text" />
             </template>
         </j-pro-table>
     </j-modal>

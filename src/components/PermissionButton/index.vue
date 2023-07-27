@@ -40,7 +40,7 @@
       </j-button>
     </template>
   </template>
-  <j-tooltip v-else title="暂无权限，请联系管理员">
+  <j-tooltip v-else :title="t('components.PermissionButton.index.5rlck0ff7680')">
     <slot v-if="noButton"></slot>
     <j-button v-else v-bind="props" :disabled="_isPermission" :style="props.style">
       <slot></slot>
@@ -56,7 +56,9 @@ import { TooltipProps, PopconfirmProps } from 'ant-design-vue/es'
 import { buttonProps } from 'ant-design-vue/es/button/button'
 import { usePermissionStore } from '@/store/permission';
 import { omit } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 // interface PermissionButtonEmits {
 //   (e: 'click', data: MouseEvent): void;
 // }

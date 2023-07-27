@@ -23,7 +23,7 @@
                         hasPermission="media/Cascade:add"
                     >
                         <template #icon
-                            ><AIcon type="PlusOutlined" />新增</template
+                            ><AIcon type="PlusOutlined" />{{t('media.Cascade.index.5rg8qqd9ts40')}}</template
                         >
                     </PermissionButton>
                 </template>
@@ -163,7 +163,9 @@ import { getImage, onlyMessage } from '@/utils/comm';
 import Publish from './Publish/index.vue';
 
 import { useMenuStore } from 'store/menu';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 
 const listRef = ref<Record<string, any>>({});
@@ -171,7 +173,7 @@ const params = ref<Record<string, any>>({});
 
 const columns = [
     {
-        title: '名称',
+        title: t('media.Cascade.index.5rg8qqd9wmk0'),
         dataIndex: 'name',
         key: 'name',
         width: 200,
@@ -182,28 +184,28 @@ const columns = [
         },
     },
     {
-        title: '上级SIP ID',
+        title: t('media.Cascade.index.SIPID'),
         dataIndex: 'sipId',
         key: 'sipId',
         scopedSlots: true,
         ellipsis: true,
     },
     {
-        title: '上级SIP 地址',
+        title: t('media.Cascade.index.SIPAddress'),
         dataIndex: 'publicHost',
         key: 'publicHost',
         scopedSlots: true,
         ellipsis: true,
     },
     {
-        title: '通道数量',
+        title: t('media.Cascade.index.5rg8qqd9wxw0'),
         dataIndex: 'count',
         key: 'count',
         scopedSlots: true,
         width: 100,
     },
     {
-        title: '状态',
+        title: t('media.Cascade.index.5rg8qqd9x6w0'),
         dataIndex: 'status',
         key: 'status',
         scopedSlots: true,
@@ -211,8 +213,8 @@ const columns = [
         search: {
             type: 'select',
             options: [
-                { label: '正常', value: 'enabled' },
-                { label: '禁用', value: 'disabled' },
+                { label: t('media.Cascade.index.5rg8qqd9xeo0'), value: 'enabled' },
+                { label: t('media.Cascade.index.5rg8qqd9xng0'), value: 'disabled' },
             ],
             handleValue: (v: any) => {
                 return v;
@@ -220,7 +222,7 @@ const columns = [
         },
     },
     {
-        title: '级联状态',
+        title: t('media.Cascade.index.5rg8qqd9xyo0'),
         dataIndex: 'onlineStatus',
         key: 'onlineStatus',
         scopedSlots: true,
@@ -228,8 +230,8 @@ const columns = [
         search: {
             type: 'select',
             options: [
-                { label: '已连接', value: 'online' },
-                { label: '未连接', value: 'offline' },
+                { label: t('media.Cascade.index.5rg8qqd9y540'), value: 'online' },
+                { label: t('media.Cascade.index.5rg8qqd9ycs0'), value: 'offline' },
             ],
             handleValue: (v: any) => {
                 return v;
@@ -237,7 +239,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('media.Cascade.index.5rg8qqd9yn80'),
         key: 'action',
         fixed: 'right',
         width: 200,
@@ -271,7 +273,7 @@ const lastValueFrom = (params: any) => {
 };
 
 /**
- * 新增
+ * {{t('media.Cascade.index.5rg8qqd9ts40')}}
  */
 const handleAdd = () => {
     menuStory.jumpPage('media/Cascade/Save');
@@ -292,9 +294,9 @@ const getActions = (
     const actions = [
         {
             key: 'update',
-            text: '编辑',
+            text: t('media.Cascade.index.5rg8qqd9ytg0'),
             tooltip: {
-                title: '编辑',
+                title: t('media.Cascade.index.5rg8qqd9ytg0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -309,9 +311,9 @@ const getActions = (
         },
         {
             key: 'channel',
-            text: '选择通道',
+            text: t('media.Cascade.index.5rg8qqd9yzs0'),
             tooltip: {
-                title: '选择通道',
+                title: t('media.Cascade.index.5rg8qqd9yzs0'),
             },
             icon: 'LinkOutlined',
             onClick: () => {
@@ -326,12 +328,12 @@ const getActions = (
         },
         {
             key: 'push',
-            text: '推送',
+            text: t('media.Cascade.index.5rg8qqd9z5k0'),
             tooltip: {
                 title:
                     data.status?.value === 'disabled'
-                        ? '禁用状态下不可推送'
-                        : '推送',
+                        ? t('media.Cascade.index.5rg8qqd9zbg0')
+                        : t('media.Cascade.index.5rg8qqd9z5k0'),
             },
             disabled: data.status?.value === 'disabled',
             icon: 'ShareAltOutlined',
@@ -342,9 +344,9 @@ const getActions = (
         },
         {
             key: 'action',
-            text: data.status?.value === 'enabled' ? '禁用' : '启用',
+            text: data.status?.value === 'enabled' ? t('media.Cascade.index.5rg8qqd9xng0') : t('media.Cascade.index.5rg8qqd9zhs0'),
             tooltip: {
-                title: data.status?.value === 'enabled' ? '禁用' : '启用',
+                title: data.status?.value === 'enabled' ? t('media.Cascade.index.5rg8qqd9xng0') : t('media.Cascade.index.5rg8qqd9zhs0'),
             },
             icon:
                 data.status?.value === 'enabled'
@@ -352,7 +354,7 @@ const getActions = (
                     : 'PlayCircleOutlined',
             popConfirm: {
                 title: `确认${
-                    data.status?.value === 'enabled' ? '禁用' : '启用'
+                    data.status?.value === 'enabled' ? t('media.Cascade.index.5rg8qqd9xng0') : t('media.Cascade.index.5rg8qqd9zhs0')
                 }?`,
                 onConfirm: async () => {
                     let res =
@@ -361,33 +363,33 @@ const getActions = (
                             : await CascadeApi.enabled(data.id);
 
                     if (res.success) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('media.Cascade.index.5rg8qqd9zns0'));
                         listRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('media.Cascade.index.5rg8qqd9zug0'), 'error');
                     }
                 },
             },
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('media.Cascade.index.5rg8qqda00c0'),
             tooltip: {
                 title:
                     data.status?.value === 'enabled'
-                        ? '请先禁用, 再删除'
-                        : '删除',
+                        ? t('media.Cascade.index.deleteTip')
+                        : t('media.Cascade.index.5rg8qqda00c0'),
             },
             disabled: data.status?.value === 'enabled',
             popConfirm: {
-                title: '确认删除?',
+                title: t('media.Cascade.index.5rg8qqda05s0'),
                 onConfirm: async () => {
                     const resp = await CascadeApi.del(data.id);
                     if (resp.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('media.Cascade.index.5rg8qqd9zns0'));
                         listRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('media.Cascade.index.5rg8qqd9zug0'), 'error');
                     }
                 },
             },

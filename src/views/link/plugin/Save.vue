@@ -2,7 +2,7 @@
   <j-modal
     :maskClosable='false'
     :visible='true'
-    :title="!!data?.id ? '编辑' : '新增'"
+    :title="!!data?.id ? t('link.plugin.Save.5rg3orwt8fs0') : t('link.plugin.Save.5rg3orwt9ow0')"
     :confirmLoading='loading'
     @ok='handleSave'
     @cancel='handleCancel'
@@ -16,9 +16,9 @@
         >
           <template #label>
             <span>
-                插件ID
+                {{t('link.plugin.Save.5rg3orwt9xg0')}}
                 <j-tooltip
-                  title='若不填写，系统将自动生成唯一ID'
+                  :title="t('link.plugin.Save.5rg3orwta6o0')"
                 >
                     <AIcon
                       type='QuestionCircleOutlined'
@@ -30,14 +30,14 @@
           <j-input placeholder="请输入插件ID" v-model:value='modelRef.id' :disabled='!!data.id' />
         </j-form-item>
         <j-form-item
-          label='插件名称'
+          :label="t('link.plugin.Save.5rg3orwtabk0')"
           name='name'
           :rules="nameRules"
         >
           <j-input placeholder="请输入插件名称" v-model:value='modelRef.name' />
         </j-form-item>
         <j-form-item
-          label='文件'
+          :label="t('link.plugin.Save.5rg3orwtakg0')"
           name='version'
           :rules='versionRule'
         >
@@ -45,11 +45,11 @@
         </j-form-item>
         <div v-if='modelRef.version' class='file-detail'>
           <div>
-            <span>插件类型：</span>
+            <span>{{t('link.plugin.Save.5rg3orwtavs0')}}</span>
             <span class='file-detail-item'>{{ TypeMap[modelRef.type] }}</span>
           </div>
           <div>
-            <span>版本：</span>
+            <span>{{t('link.plugin.Save.5rg3orwtb140')}}</span>
             <span class='file-detail-item'>{{ modelRef.version }}</span>
           </div>
         </div>
@@ -60,7 +60,7 @@
         >
           <j-textarea
             v-model:value='modelRef.description'
-            placeholder='请输入说明'
+            :placeholder="t('link.plugin.Save.5rg3orwtbb00')"
             showCount
             :maxlength='200'
           />
@@ -77,7 +77,9 @@ import { FileUploadResult } from '@/views/link/plugin/typings'
 import { add, update, vailIdFn } from '@/api/link/plugin'
 import { TypeMap } from './util'
 import { onlyMessage } from '@/utils/comm'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
   data: {
     type: Object,
@@ -95,14 +97,14 @@ const vailId = async (_: any, value: string) => {
   if (!props.data.id && value) { // 新增校验
     const resp = await vailIdFn(value)
     if (resp.success && resp.result && !resp.result.passed) {
-      return Promise.reject('ID重复');
+      return Promise.reject(t('link.plugin.Save.IDRepeat'));
     }
   }
   return Promise.resolve();
 }
 
 const nameRules = [
-  RequiredStringFn('插件名称'),
+  RequiredStringFn(t('link.plugin.Save.5rg3orwtabk0')),
   ...Max_Length_64
 ]
 
@@ -115,7 +117,7 @@ const IdRules = [
 ]
 
 const versionRule = [
-  { required: true, message: "请上传文件" },
+  { required: true, message: t('link.plugin.Save.5rg3orwtar00') },
   // {
   //   validator(_: any, value: any) {
   //     if (value) {
@@ -154,7 +156,7 @@ const handleSave = async () => {
     const resp = props.data.id ? await update(modelRef).catch(() => { success: false }) : await add(modelRef).catch(() => { success: false })
     loading.value = false
     if (resp.success) {
-      onlyMessage('操作成功！');
+      onlyMessage(t('link.plugin.Save.5rg3orwtbgs0'));
       if (route.query.save && (window as any).onTabSaveSuccess) {
         (window as any).onTabSaveSuccess(resp);
         setTimeout(() => window.close(), 300);

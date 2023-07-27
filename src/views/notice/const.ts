@@ -1,5 +1,6 @@
 import { getImage } from '@/utils/comm';
-
+import createI18n from "@/locales/index"
+const t = createI18n.global.t
 interface INoticeMethod {
     label: string;
     value: string;
@@ -8,23 +9,23 @@ interface INoticeMethod {
 // 通知方式
 export const NOTICE_METHOD: INoticeMethod[] = [
     {
-        label: '钉钉',
+        label: t('views.notice.const.dingding'),
         value: 'dingTalk',
     },
     {
-        label: '微信',
+        label:  t('views.notice.const.weixin'),
         value: 'weixin',
     },
     {
-        label: '邮件',
+        label: t('views.notice.const.email'),
         value: 'email',
     },
     {
-        label: '语音',
+        label:  t('views.notice.const.voice'),
         value: 'voice',
     },
     {
-        label: '短信',
+        label:  t('views.notice.const.sms'),
         value: 'sms',
     },
     {
@@ -37,19 +38,19 @@ export const NOTICE_METHOD: INoticeMethod[] = [
 export const MSG_TYPE = {
     dingTalk: [
         {
-            label: '钉钉消息',
+            label: t('views.notice.const.dingTalkMessage'),
             value: 'dingTalkMessage',
             logo: getImage('/notice/dingtalk.png'),
         },
         {
-            label: '群机器人消息',
+            label: t('views.notice.const.dingTalkRobotWebHook'),
             value: 'dingTalkRobotWebHook',
             logo: getImage('/notice/dingTalk-rebot.png'),
         },
     ],
     weixin: [
         {
-            label: '企业消息',
+            label: t('views.notice.const.corpMessage'),
             value: 'corpMessage',
             logo: getImage('/notice/weixin-corp.png'),
         },
@@ -61,14 +62,14 @@ export const MSG_TYPE = {
     ],
     voice: [
         {
-            label: '阿里云语音',
+            label: t('views.notice.const.aliyun'),
             value: 'aliyun',
             logo: getImage('/notice/voice.png'),
         },
     ],
     sms: [
         {
-            label: '阿里云短信',
+            label: t('views.notice.const.aliyunSms'),
             value: 'aliyunSms',
             logo: getImage('/notice/sms.png'),
         },
@@ -82,7 +83,7 @@ export const MSG_TYPE = {
     ],
     email: [
         {
-            label: '邮件',
+            label: t('views.notice.const.email'),
             value: 'embedded',
             logo: getImage('/notice/email.png'),
         },
@@ -220,6 +221,6 @@ export const ROBOT_MSG_TYPE = [
 ]
 // 语音通知类型
 export const VOICE_TYPE = [
-    { label: '语音通知', value: 'voice' },
-    { label: '语音验证码', value: 'tts' },
+    { label: t('views.notice.const.notification'), value: 'voice' },
+    { label: t('views.notice.const.tts'), value: 'tts' },
 ]

@@ -1,19 +1,21 @@
 import { isArray } from 'lodash-es'
 import type { OperationTimer } from "@/views/rule-engine/Scene/typings";
+import createI18n from '@/locales/index';
+const { t }  = createI18n.global
 export const numberToString = {
-  1: '星期一',
-  2: '星期二',
-  3: '星期三',
-  4: '星期四',
-  5: '星期五',
-  6: '星期六',
-  7: '星期日',
+  1: t('components.Timer.util.Monday'),
+  2: t('components.Timer.util.Tuesday'),
+  3: t('components.Timer.util.Wednesday'),
+  4: t('components.Timer.util.Thursday'),
+  5: t('components.Timer.util.Friday'),
+  6: t('components.Timer.util.Saturday'),
+  7: t('components.Timer.util.Sunday'),
 };
 
 export const timeUnitEnum = {
-  seconds: '秒',
-  minutes: '分',
-  hours: '小时',
+  seconds: t('components.Timer.util.seconds'),
+  minutes: t('components.Timer.util.minutes'),
+  hours: t('components.Timer.util.hours'),
 };
 
 type continuousValueFn = (data: (string | number)[], type: string) => (number | string)[];
@@ -59,7 +61,7 @@ type TimerOption = {
 }
 
 export const handleTimerOptions = (timer: OperationTimer):TimerOption => {
-  let when = '每天'
+  let when = t('components.Timer.util.everyday')
   let time = undefined
   let extraTime = undefined
 
@@ -69,18 +71,18 @@ export const handleTimerOptions = (timer: OperationTimer):TimerOption => {
   }
 
   if (timer.when?.length) {
-    when = timer!.trigger === 'week' ? '每周' : '每月';
+    when = timer!.trigger === 'week' ? t('components.Timer.util.weekly') : t('components.Timer.util.monthly') ;
     const whenStrArr = continuousValue(timer.when! || [], timer!.trigger);
     const whenStrArr3 = whenStrArr.splice(0, 3);
     when += whenStrArr3.join('、');
-    when += `...等${timer.when!.length}天`;
+    when += t('components.Timer.util.wait',{when:timer.when!.length});
   }
 
   if (timer.once) {
-    time = timer.once.time + ' 执行1次';
+    time = timer.once.time + t('components.Timer.util.execute');
   } else if (timer.period) {
     time = timer.period.from + '-' + timer.period.to;
-    extraTime = `每${timer.period.every}${timeUnitEnum[timer.period.unit]}执行1次`;
+    extraTime = t('components.Timer.util.executing',{every:timer.period.every,unit:timeUnitEnum[timer.period.unit]});
   }
 
   return {

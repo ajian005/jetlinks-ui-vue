@@ -31,24 +31,26 @@
                             type="primary"
                             @click="dialogs.addShow = true"
                         >
-                            <AIcon type="PlusOutlined" />资产分配
+                            <AIcon type="PlusOutlined" />
+                            {{t('Department.product.index.5rg95ejbqcs0')}}
                         </PermissionButton>
                         <j-dropdown trigger="hover">
-                            <j-button>批量操作</j-button>
+                            <j-button>{{t('Department.product.index.5rg94stwrfs0')}}</j-button>
                             <template #overlay>
                                 <j-menu>
                                     <j-menu-item>
                                         <PermissionButton
                                             :hasPermission="`${permission}:bind`"
                                             :popConfirm="{
-                                                title: `是否批量解除绑定`,
+                                                title: t('Department.product.index.untieTip'),
                                                 onConfirm: () =>
                                                     table.clickUnBind(),
                                             }"
                                         >
                                             <AIcon
                                                 type="DisconnectOutlined"
-                                            />批量解绑
+                                            />
+                                            {{t('Department.product.index.5rg95ejbrus0')}}
                                         </PermissionButton>
                                     </j-menu-item>
                                     <j-menu-item>
@@ -58,7 +60,8 @@
                                         >
                                             <AIcon
                                                 type="EditOutlined"
-                                            />批量编辑
+                                            />
+                                            {{t('Department.product.index.5rg95ejbs580')}}
                                         </PermissionButton>
                                     </j-menu-item>
                                 </j-menu>
@@ -109,7 +112,7 @@
                                 </j-col>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        资产权限
+                                        {{t('Department.product.index.5rg94stwsc80')}}
                                     </div>
                                     <Ellipsis style="width: calc(100% - 20px);">
                                     <div
@@ -257,6 +260,9 @@ import {
 } from '@/api/system/department';
 import { intersection } from 'lodash-es';
 import { useDepartmentStore } from '@/store/department';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const permission = 'system/Department';
 
 const departmentStore = useDepartmentStore();
@@ -277,7 +283,7 @@ const columns = [
         },
     },
     {
-        title: '名称',
+        title: t('Department.product.index.5rg94stwsik0'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -287,20 +293,20 @@ const columns = [
         },
     },
     {
-        title: '资产权限',
+        title: t('Department.product.index.5rg94stwsc80'),
         dataIndex: 'permission',
         key: 'permission',
         ellipsis: true,
         scopedSlots: true,
     },
     {
-        title: '说明',
+        title: t('Department.product.index.5rg94stwso00'),
         dataIndex: 'describe',
         key: 'describe',
         ellipsis: true,
     },
     {
-        title: '状态',
+        title: t('Department.product.index.5rg94stwsss0'),
         dataIndex: 'state',
         key: 'state',
         ellipsis: true,
@@ -309,11 +315,11 @@ const columns = [
             type: 'select',
             options: [
                 {
-                    label: '正常',
+                    label: t('Department.product.index.5rg94stwsxk0'),
                     value: 1,
                 },
                 {
-                    label: '禁用',
+                    label: t('Department.product.index.5rg94stwt1s0'),
                     value: 0,
                 },
             ],
@@ -322,7 +328,7 @@ const columns = [
     },
 
     {
-        title: '操作',
+        title: t('Department.product.index.5rg94stwt600'),
         dataIndex: 'action',
         key: 'action',
         fixed: 'right',
@@ -360,16 +366,16 @@ const table = {
                 {
                     permission: `${permission}:assert`,
                     key: 'edit',
-                    tooltip: { title: '编辑' },
+                    tooltip: { title: t('Department.product.index.5rg94stwtak0') },
                     icon: 'EditOutlined',
                     onClick: () => table.clickEdit(data),
                 },
                 {
                     permission: `${permission}:bind`,
                     key: 'unbind',
-                    tooltip: { title: '解除绑定' },
+                    tooltip: { title: t('Department.product.index.5rg94stwteg0') },
                     popConfirm: {
-                        title: `是否解除绑定`,
+                        title: t('Department.product.index.unbind'),
                         onConfirm: () => table.clickUnBind(data),
                     },
                     icon: 'DisconnectOutlined',
@@ -478,9 +484,9 @@ const table = {
                                         : '',
                                 text:
                                     item.state === 1
-                                        ? '正常'
+                                        ? t('Department.product.index.5rg94stwsxk0')
                                         : item.state === 0
-                                        ? '禁用'
+                                        ? t('Department.product.index.5rg94stwt1s0')
                                         : '',
                             };
                         });
@@ -553,7 +559,7 @@ const table = {
     },
     clickEdit: async (row?: any) => {
         const ids = row ? [row.id] : [...tableData._selectedRowKeys];
-        if (ids.length < 1) return onlyMessage('请勾选需要编辑的数据', 'warning');
+        if (ids.length < 1) return onlyMessage(t('Department.product.index.5rg94stwu6w0'), 'warning');
         tableData.defaultPermission = row ? row?.permission : intersection(...tableData.selectedRows.map(
             (item) => item.permission,
         )) as string[]
@@ -564,7 +570,7 @@ const table = {
     },
     clickUnBind: (row?: any) => {
         const ids = row ? [row.id] : [...tableData._selectedRowKeys];
-        if (ids.length < 1) return onlyMessage('请勾选需要解绑的数据', 'warning');
+        if (ids.length < 1) return onlyMessage(t('Department.product.index.5rg94stwubg0'), 'warning');
         const params = [
             {
                 targetType: 'org',
@@ -575,7 +581,7 @@ const table = {
         ];
         unBindDeviceOrProduct_api('product', params).then(() => {
             tableData._selectedRowKeys = [];
-            onlyMessage('操作成功');
+            onlyMessage(t('Department.product.index.5rg94stwufg0'));
             table.refresh();
         });
     },

@@ -46,13 +46,13 @@
           <j-row>
             <j-col :span="12">
               <div class="card-item-content-text">
-                设备类型
+                {{t('Save.Device.DeviceList.5rg54fb74vg0')}}
               </div>
               <div>{{ slotProps.deviceType?.text }}</div>
             </j-col>
             <j-col :span="12">
               <div class="card-item-content-text">
-                产品名称
+                {{t('Save.Device.DeviceList.5rg54fb762k0')}}
               </div>
               <div>{{ slotProps.productName }}</div>
             </j-col>
@@ -69,7 +69,9 @@ import { getImage } from '@/utils/comm'
 import { query } from '@/api/device/instance'
 import { cloneDeep } from 'lodash-es'
 import type { SelectorValuesItem } from '@/views/rule-engine/Scene/typings'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'update', data: SelectorValuesItem[]): void
 }
@@ -104,7 +106,7 @@ const columns = [
     }
   },
   {
-    title: '设备名称',
+    title: t('Save.Device.DeviceList.5rg54fb76ak0'),
     dataIndex: 'name',
     width: 200,
     ellipsis: true,
@@ -114,7 +116,7 @@ const columns = [
     }
   },
   {
-    title: '创建时间',
+    title: t('Save.Device.DeviceList.5rg54fb76es0'),
     dataIndex: 'createTime',
     width: 200,
     search: {
@@ -122,15 +124,15 @@ const columns = [
     }
   },
   {
-    title: '状态',
+    title: t('Save.Device.DeviceList.5rg54fb76j00'),
     dataIndex: 'state',
     width: 90,
     search: {
       type: 'select',
       options: [
-        { label: '禁用', value: 'notActive' },
-        { label: '离线', value: 'offline' },
-        { label: '在线', value: 'online' },
+        { label: t('Save.Device.DeviceList.5rg54fb76qs0'), value: 'notActive' },
+        { label: t('Save.Device.DeviceList.5rg54fb76uw0'), value: 'offline' },
+        { label: t('Save.Device.DeviceList.5rg54fb76yg0'), value: 'online' },
       ]
     }
   },

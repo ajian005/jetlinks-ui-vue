@@ -25,7 +25,9 @@
 import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper';
 import { fileUpload } from '@/api/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
   img: {
     type: String

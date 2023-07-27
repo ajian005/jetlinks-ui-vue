@@ -1,7 +1,7 @@
 <template>
     <FullPage>
         <j-card>
-            <TitleComponent data="基础信息"></TitleComponent>
+            <TitleComponent :data="t('License.component.Card.5rgb42m24g80')"></TitleComponent>
             <div>
                 <j-descriptions bordered :column="4">
                     <j-descriptions-item label="Host" :span="4">
@@ -25,7 +25,7 @@
                 <slot></slot>
             </div>
             <j-textarea
-                placeholder="请输入License"
+                :placeholder="t('License.component.Card.5rgb42m25l00')"
                 :rows="10"
                 v-model:value="license"
             >
@@ -35,13 +35,16 @@
                 key="save"
                 style="margin-top: 20px"
                 @click="saveData"
-                >保存</PermissionButton
+                >{{t('License.component.Card.5rgb42m25ts0')}}</PermissionButton
             >
         </j-card>
     </FullPage>
 </template>
 
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
   infoData: {
         type: Object,

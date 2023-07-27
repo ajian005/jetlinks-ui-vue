@@ -20,7 +20,7 @@
             hasPermission="link/plugin:add"
           >
             <template #icon><AIcon type="PlusOutlined" /></template>
-            新增
+            {{t('link.plugin.index.5rg3olbuesc0')}}
           </PermissionButton>
         </template>
 
@@ -56,7 +56,7 @@
               <j-row>
                 <j-col :span="12">
                   <div class="card-item-content-text">
-                    插件ID
+                    {{t('link.plugin.index.5rg3olbuioc0')}}
                   </div>
                   <Ellipsis style="width: 100%">
                     {{ slotProps.id }}
@@ -64,7 +64,7 @@
                 </j-col>
                 <j-col :span="12">
                   <div class="card-item-content-text">
-                    插件类型
+                    {{t('link.plugin.index.5rg3olbuixs0')}}
                   </div>
                   <Ellipsis style="width: 100%">
                     {{ TypeMap[slotProps.type] }}
@@ -137,7 +137,9 @@ import SaveModal from './Save.vue'
 import { getImage, onlyMessage } from '@/utils/comm'
 import { queryPage, removeFn, getTypes } from '@/api/link/plugin'
 import { TypeMap } from './util'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute()
 const visible = ref(false)
 const params = ref<any>()
@@ -146,7 +148,7 @@ const instanceRef = ref()
 
 const columns = [
   {
-    title: '插件ID',
+    title: t('link.plugin.index.5rg3olbuioc0'),
     dataIndex: 'id',
     key: 'type',
     fixed: 'left',
@@ -157,7 +159,7 @@ const columns = [
     },
   },
   {
-    title: '插件名称',
+    title: t('link.plugin.index.5rg3olbuj340'),
     dataIndex: 'name',
     key: 'type',
     fixed: 'left',
@@ -174,7 +176,7 @@ const columns = [
     ellipsis: true
   },
   {
-    title: '插件类型',
+    title: t('link.plugin.index.5rg3olbuixs0'),
     dataIndex: 'type',
     key: 'type',
     ellipsis: true,
@@ -206,7 +208,7 @@ const columns = [
     },
   },
   {
-    title: '操作',
+    title: t('link.plugin.index.5rg3olbujg80'),
     key: 'action',
     fixed: 'right',
     width: 120,
@@ -238,9 +240,9 @@ const getActions = (data: any) => {
   return [
     {
       key: 'update',
-      text: '编辑',
+      text: t('link.plugin.index.5rg3olbujks0'),
       tooltip: {
-        title: '编辑',
+        title: t('link.plugin.index.5rg3olbujks0'),
       },
       icon: 'EditOutlined',
       onClick: () => {
@@ -250,19 +252,19 @@ const getActions = (data: any) => {
     },
     {
       key: 'delete',
-      text: '删除',
+      text: t('link.plugin.index.5rg3olbujow0'),
       tooltip: {
-        title: '删除',
+        title: t('link.plugin.index.5rg3olbujow0'),
       },
       popConfirm: {
-        title: '确认删除?',
+        title: t('link.plugin.index.5rg3olbuk2s0'),
         onConfirm: async () => {
           const resp = await removeFn(data.id);
           if (resp.status === 200) {
-            onlyMessage('操作成功！');
+            onlyMessage(t('link.plugin.index.5rg3olbukp00'));
             instanceRef.value?.reload();
           } else {
-            onlyMessage(resp?.message || '操作失败！', 'error');
+            onlyMessage(resp?.message || t('link.plugin.index.5rg3olbuku40'), 'error');
           }
         },
       },

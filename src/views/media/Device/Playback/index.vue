@@ -57,23 +57,23 @@
                     <j-spin :spinning="loading">
                         <j-tooltip placement="topLeft">
                             <template #title>
-                                <div>云端：存储在服务器中</div>
-                                <div>本地：存储在设备本地</div>
+                                <div>{{t('Device.Playback.index.5rg8bx468jg0')}}</div>
+                                <div>{{t('Device.Playback.index.5rg8bx469sg0')}}</div>
                             </template>
                             <div>
-                                类型: <AIcon type="QuestionCircleOutlined" />
+                                {{ t('Device.Playback.index.type') }}<AIcon type="QuestionCircleOutlined" />
                             </div>
                         </j-tooltip>
                         <RadioCard
                             layout="horizontal"
                             :options="[
                                 {
-                                    label: '云端',
+                                    label: t('Device.Playback.index.5rg8bx469yc0'),
                                     value: 'cloud',
                                     logo: getImage('/media/cloud.png'),
                                 },
                                 {
-                                    label: '本地',
+                                    label: t('Device.Playback.index.5rg8bx46a4w0'),
                                     value: 'local',
                                     logo: getImage('/local.png'),
                                     disabled: deviceType === 'fixed-media',
@@ -98,7 +98,7 @@
                         >
                             <j-empty
                                 v-if="!historyList.length"
-                                description="暂无数据"
+                                :description="t('Device.Playback.index.5rg8bx46a9g0')"
                             />
                             <j-list
                                 v-else
@@ -116,8 +116,8 @@
                                                         item.mediaStartTime) ===
                                                         playNowTime &&
                                                     playStatus === 1
-                                                        ? '暂停'
-                                                        : '播放'
+                                                        ? t('Device.Playback.index.5rg8bx46ae40')
+                                                        : t('Device.Playback.index.5rg8bx46ai00')
                                                 "
                                             >
                                                 <a
@@ -144,10 +144,10 @@
                                                 key="download"
                                                 :title="
                                                     type !== 'local'
-                                                        ? '下载录像文件'
+                                                        ? t('Device.Playback.index.5rg8bx46anc0')
                                                         : item.isServer
-                                                        ? '查看'
-                                                        : '下载到云端'
+                                                        ? t('Device.Playback.index.5rg8bx46ark0')
+                                                        : t('Device.Playback.index.5rg8bx46auw0')
                                                 "
                                             >
                                                 <IconNode
@@ -198,7 +198,9 @@ import LivePlayer from '@/components/Player/index.vue';
 import { getImage } from '@/utils/comm';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute();
 
 const url = ref('');
@@ -311,7 +313,7 @@ const cloudView = (startTime: number, endTime: number) => {
 };
 
 /**
- * 下载到云端
+ * {{t('Device.Playback.index.5rg8bx46auw0')}}
  * @param item
  */
 const downloadClick = async (item: recordsItemType) => {

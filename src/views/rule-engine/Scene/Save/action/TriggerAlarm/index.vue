@@ -4,9 +4,9 @@
         @cancel="emit('close')"
         @ok="emit('close')"
         visible
-        title="关联此场景的告警"
+        :title="t('action.TriggerAlarm.index.5rg4wkndh9o0')"
     >
-        <div style="margin-bottom: 24px">关联告警数量：{{ count }}</div>
+        <div style="margin-bottom: 24px">{{ t('action.TriggerAlarm.index.relevance') + count }}</div>
         <JProTable
             :columns="columns"
             :request="queryAlarmList"
@@ -53,7 +53,9 @@ import {
     getAlarmLevel,
     getAlarmConfigCount,
 } from '@/api/rule-engine/dashboard';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     id: {
         type: String,
@@ -66,10 +68,10 @@ const count = ref<number>(0);
 const levelList = ref<any[]>([]);
 
 const map = {
-    product: '产品',
-    device: '设备',
-    org: '组织',
-    other: '其他',
+    product: t('action.TriggerAlarm.index.5rg4wkndi8g0'),
+    device: t('action.TriggerAlarm.index.5rg4wkndifs0'),
+    org: t('action.TriggerAlarm.index.5rg4wkndikg0'),
+    other: t('action.TriggerAlarm.index.5rg4wkndiqg0'),
 };
 
 const columns = [
@@ -77,26 +79,26 @@ const columns = [
         dataIndex: 'name',
         fixed: 'left',
         ellipsis: true,
-        title: '名称',
+        title: t('action.TriggerAlarm.index.5rg4wkndivc0'),
     },
     {
         dataIndex: 'targetType',
-        title: '类型',
+        title: t('action.TriggerAlarm.index.5rg4wkndiz40'),
         scopedSlots: true,
     },
     {
         dataIndex: 'level',
-        title: '告警级别',
+        title: t('action.TriggerAlarm.index.5rg4wkndj300'),
         scopedSlots: true,
     },
     {
         dataIndex: 'state',
-        title: '状态',
+        title: t('action.TriggerAlarm.index.5rg4wkndj740'),
         scopedSlots: true,
     },
     {
         dataIndex: 'description',
-        title: '说明',
+        title: t('action.TriggerAlarm.index.5rg4wkndjh40'),
         ellipsis: true,
     },
 ];

@@ -1,42 +1,24 @@
 <template>
     <j-drawer placement="right" :closable="false" :visible="true">
         <template #title>
-            <div
-                style="
+            <div style="
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                "
-            >
-                <span
-                    ><AIcon
-                        type="CloseOutlined"
-                        style="margin-right: 5px"
-                        @click="onClose"
-                    />编辑</span
-                >
-                <j-button type="primary" @click="saveBtn">保存</j-button>
+                ">
+                <span>
+                    <AIcon type="CloseOutlined" style="margin-right: 5px" @click="onClose" />
+                    {{ t('components.Relation.Save.5rcykfxkim80') }}
+                </span>
+                <j-button type="primary" @click="saveBtn">{{ t('components.Relation.Save.5rcykfxkkmo0') }}</j-button>
             </div>
         </template>
         <j-form layout="vertical" ref="formRef" :model="modelRef">
-            <j-form-item
-                :name="item.relation"
-                :label="item.relationName"
-                v-for="(item, index) in dataSource"
-                :key="index"
-            >
-                <j-select
-                    showSearch
-                    mode="multiple"
-                    v-model:value="modelRef[item.relation]"
-                    :placeholder="`请选择${item.relationName}`"
-                >
-                    <j-select-option
-                        :value="item.value"
-                        v-for="item in userList"
-                        :key="item.id"
-                        >{{ item.name }}</j-select-option
-                    >
+            <j-form-item :name="item.relation" :label="item.relationName" v-for="(item, index) in dataSource" :key="index">
+                <j-select showSearch mode="multiple" v-model:value="modelRef[item.relation]"
+                    :placeholder="`${t('components.Relation.Save.select') + item.relationName}`">
+                    <j-select-option :value="item.value" v-for="item in userList" :key="item.id">{{ item.name
+                    }}</j-select-option>
                 </j-select>
             </j-form-item>
         </j-form>
@@ -47,7 +29,9 @@
 import { queryUserListNoPaging, saveRelations } from '@/api/device/instance';
 import { useInstanceStore } from '@/store/instance';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close', 'save']);
 
 const formRef = ref();
@@ -111,10 +95,10 @@ const saveBtn = () => {
                     });
                 }
             });
-            if(param.length && instanceStore.current.id){
+            if (param.length && instanceStore.current.id) {
                 const resp = await saveRelations(instanceStore.current.id, param);
                 if (resp.status === 200) {
-                    onlyMessage('操作成功！');
+                    onlyMessage(t('components.Relation.Save.5rcykfxkkyo0'));
                     emit('save');
                     formRef.value.resetFields();
                 }

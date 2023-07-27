@@ -7,9 +7,9 @@
             </template>
         </j-input>
         <j-modal
-            title="地理位置"
-            ok-text="确认"
-            cancel-text="取消"
+            :title="t('components.GeoComponent.index.5rlcb96qjeo0')"
+            :ok-text="t('components.GeoComponent.index.5rlcb96ql8w0')"
+            :cancel-text="t('components.GeoComponent.index.5rlcb96qlqc0')"
             v-model:visible="modalVis"
             width="700px"
             @cancel="modalVis = false"
@@ -36,7 +36,9 @@
 import { initAMapApiLoader } from '@vuemap/vue-amap';
 import '@vuemap/vue-amap/dist/style.css';
 import { EnvironmentOutlined } from '@ant-design/icons-vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 initAMapApiLoader({
     // key: '95fa72137f4263f8e64ae01f766ad09c',
     key: 'a0415acfc35af15f10221bfa5a6850b4',

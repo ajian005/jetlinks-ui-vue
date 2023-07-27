@@ -60,7 +60,7 @@
                                 </j-col>
                                 <j-col :span="8">
                                     <div class="content-right-title">
-                                        最近告警时间
+                                        {{t('Log.TabComponent.indev.5rg464hagf80')}}
                                     </div>
                                     <Ellipsis
                                         ><div>
@@ -73,7 +73,7 @@
                                     >
                                 </j-col>
                                 <j-col :span="8">
-                                    <div class="content-right-title">状态</div>
+                                    <div class="content-right-title">{{t('Log.TabComponent.indev.5rg464hak780')}}</div>
                                     <BadgeStatus
                                         :status="slotProps.state.value"
                                         :statusName="{
@@ -144,6 +144,9 @@ import SolveComponent from '../SolveComponent/index.vue';
 import SolveLog from '../SolveLog/index.vue';
 import { useMenuStore } from '@/store/menu';
 import { usePermissionStore } from '@/store/permission';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const menuStory = useMenuStore();
 const tableRef = ref();
 const alarmStore = useAlarmStore();
@@ -169,10 +172,10 @@ imgMap.set('other', getImage('/alarm/other.png'));
 imgMap.set('org', getImage('/alarm/org.png'));
 
 const titleMap = new Map();
-titleMap.set('product', '产品');
-titleMap.set('device', '设备');
-titleMap.set('other', '其他');
-titleMap.set('org', '组织');
+titleMap.set('product', t('Log.TabComponent.indev.5rg464hakl00'));
+titleMap.set('device', t('Log.TabComponent.indev.5rg464hakrg0'));
+titleMap.set('other', t('Log.TabComponent.indev.5rg464hakxk0'));
+titleMap.set('org', t('Log.TabComponent.indev.5rg464hal5c0'));
 const columns = [
     {
         title: '告警级别',
@@ -195,7 +198,7 @@ const columns = [
         },
     },
     {
-        title: '最近告警时间',
+        title: t('Log.TabComponent.indev.5rg464hagf80'),
         dataIndex: 'alarmTime',
         key: 'alarmTime',
         search: {
@@ -203,18 +206,18 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('Log.TabComponent.indev.5rg464hak780'),
         dataIndex: 'state',
         key: 'state',
         search: {
             type: 'select',
             options: [
                 {
-                    label: '告警中',
+                    label: t('Log.TabComponent.indev.5rg464halps0'),
                     value: 'warning',
                 },
                 {
-                    label: '无告警',
+                    label: t('Log.TabComponent.indev.5rg464halws0'),
                     value: 'normal',
                 },
             ],
@@ -309,7 +312,7 @@ const handleSearch = async (params: any) => {
                         }
                         //targetName处理之后的
                         if (item.targetId === item.targetName) {
-                            item.targetName = '无';
+                            item.targetName = t('Log.TabComponent.indev.5rg464hamm00');
                         }
                     });
                 }
@@ -372,12 +375,12 @@ const getActions = (
     const actions = [
         {
             key: 'solve',
-            text: '告警处理',
+            text: t('Log.TabComponent.indev.5rg464hamqk0'),
             tooltip: {
                 title:
                     currentData.state?.value === 'normal'
-                        ? '无告警'
-                        : '告警处理',
+                        ? t('Log.TabComponent.indev.5rg464halws0')
+                        : t('Log.TabComponent.indev.5rg464hamqk0'),
             },
             icon: 'ToolOutlined',
             onClick: () => {
@@ -396,9 +399,9 @@ const getActions = (
         },
         {
             key: 'log',
-            text: '告警日志',
+            text: t('Log.TabComponent.indev.5rg464hamv40'),
             tooltip: {
-                title: '告警日志',
+                title: t('Log.TabComponent.indev.5rg464hamv40'),
             },
             icon: 'FileOutlined',
             onClick: () => {
@@ -409,9 +412,9 @@ const getActions = (
         },
         {
             key: 'detail',
-            text: '处理记录',
+            text: t('Log.TabComponent.indev.5rg464hamz80'),
             tooltip: {
-                title: '处理记录',
+                title: t('Log.TabComponent.indev.5rg464hamz80'),
             },
             icon: 'FileTextOutlined',
             onClick: () => {

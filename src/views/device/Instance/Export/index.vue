@@ -3,24 +3,24 @@
         :maskClosable="false"
         width="800px"
         :visible="true"
-        title="导出"
+        :title="t('Instance.Export.index.5rcyax8aor40')"
         @ok="handleOk"
         @cancel="handleCancel"
     >
         <div style="background-color: rgb(236, 237, 238)">
             <p style="padding: 10px">
                 <AIcon type="ExclamationCircleOutlined" />
-                选择单个产品时可导出其下属设备的详细数据,不选择产品时导出所有设备的基础数据。
+                {{t('Instance.Export.index.5rcyax8aqdk0')}}
             </p>
         </div>
         <div style="margin-top: 20px">
             <j-form :layout="'vertical'">
-                <j-form-item label="产品">
+                <j-form-item :label="t('Instance.Export.index.5rcyax8aqo80')">
                     <j-select
                         show-search
                         :filter-option="filterOption"
                         v-model:value="modelRef.product"
-                        placeholder="请选择产品"
+                        :placeholder="t('Instance.Export.index.5rcyax8aqxw0')"
                         allowClear
                     >
                         <j-select-option
@@ -32,11 +32,11 @@
                         >
                     </j-select>
                 </j-form-item>
-                <j-form-item label="文件格式">
+                <j-form-item :label="t('Instance.Export.index.5rcyax8ar780')">
                     <j-radio-group
                         button-style="solid"
                         v-model:value="modelRef.fileType"
-                        placeholder="请选择文件格式"
+                        :placeholder="t('Instance.Export.index.5rcyax8argw0')"
                     >
                         <j-radio-button value="xlsx">xlsx</j-radio-button>
                         <j-radio-button value="csv">csv</j-radio-button>
@@ -52,7 +52,9 @@ import { queryNoPagingPost } from '@/api/device/product';
 import { downloadFileByUrl } from '@/utils/utils';
 import encodeQuery from '@/utils/encodeQuery';
 import { deviceExport } from '@/api/device/instance';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close']);
 const props = defineProps({
     data: {

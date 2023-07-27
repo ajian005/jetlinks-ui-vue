@@ -3,126 +3,70 @@
         <j-row :gutter="24">
             <j-col :span="14">
                 <div class="alarmFlow-left">
-                    <j-card
-                        :head-style="{ borderBottom: 'none', height: '30px' }"
-                        :bordered="false"
-                    >
+                    <j-card :head-style="{ borderBottom: 'none', height: '30px' }" :bordered="false">
                         <template #title>
                             <div class="alarmTitle">
-                                <span>告警数据输出</span>
-                                <j-tooltip
-                                    title="将告警数据输出到其他第三方系统"
-                                >
-                                    <AIcon
-                                        type="QuestionCircleOutlined"
-                                        style="
+                                <span>{{ t('Config.Io.index.5rg40ihzqpo0') }}</span>
+                                <j-tooltip :title="t('Config.Io.index.5rg40ihzs5w0')">
+                                    <AIcon type="QuestionCircleOutlined" style="
                                             margin-left: 6px;
                                             line-height: 35px;
-                                        "
-                                    />
+                                        " />
                                 </j-tooltip>
 
-                                <PermissionButton
-                                    type="link"
-                                    @click="showOutput"
-                                    hasPermission="device/Instance:update"
-                                >
-                                    <template #icon
-                                        ><AIcon type="EditOutlined"
-                                    /></template>
+                                <PermissionButton type="link" @click="showOutput" hasPermission="device/Instance:update">
+                                    <template #icon>
+                                        <AIcon type="EditOutlined" />
+                                    </template>
                                 </PermissionButton>
                             </div>
                         </template>
-                        <j-descriptions
-                            bordered
-                            :labelStyle="{ width: 112 + 'px' }"
-                            :contentStyle="{ minWidth: 100 + 'px' }"
-                            :column="2"
-                        >
-                            <j-descriptions-item
-                                label="kafka地址"
-                                :content-style="{ minWidth: '200px' }"
-                                ><j-badge
-                                    :status="
-                                        output?.running ? 'success' : 'error'
-                                    "
-                                    :text="
-                                        output?.data?.config?.config?.address ||
-                                        ''
-                                    "
-                                ></j-badge
-                            ></j-descriptions-item>
+                        <j-descriptions bordered :labelStyle="{ width: 112 + 'px' }"
+                            :contentStyle="{ minWidth: 100 + 'px' }" :column="2">
+                            <j-descriptions-item :label="t('Config.Io.index.kafka')"
+                                :content-style="{ minWidth: '200px' }"><j-badge :status="output?.running ? 'success' : 'error'
+                                    " :text="output?.data?.config?.config?.address ||
+        ''
+        "></j-badge></j-descriptions-item>
                             <j-descriptions-item label="topic">{{
                                 output?.data?.config?.config?.topic || ''
                             }}</j-descriptions-item>
-                            <j-descriptions-item label="状态" :span="2"
-                                ><j-badge
-                                    :status="
-                                        output?.data?.state?.value === 'enabled'
-                                            ? 'success'
-                                            : 'error'
-                                    "
-                                    :text="output?.data?.state?.text || ''"
-                                ></j-badge
-                            ></j-descriptions-item>
+                            <j-descriptions-item :label="t('Config.Io.index.5rg40ihzsbw0')" :span="2"><j-badge :status="output?.data?.state?.value === 'enabled'
+                                    ? 'success'
+                                    : 'error'
+                                " :text="output?.data?.state?.text || ''"></j-badge></j-descriptions-item>
                         </j-descriptions>
                     </j-card>
-                    <j-card
-                        :head-style="{ borderBottom: 'none', height: '30px' }"
-                        :bordered="false"
-                    >
+                    <j-card :head-style="{ borderBottom: 'none', height: '30px' }" :bordered="false">
                         <template #title>
                             <div class="alarmTitle">
-                                <span>告警处理结果输入</span>
-                                <j-tooltip title="接收第三方系统处理的告警结果">
-                                    <AIcon
-                                        type="QuestionCircleOutlined"
-                                        style="
+                                <span>{{ t('Config.Io.index.5rg40ihzsg40') }}</span>
+                                <j-tooltip :title="t('Config.Io.index.5rg40ihzsk00')">
+                                    <AIcon type="QuestionCircleOutlined" style="
                                             margin-left: 6px;
                                             line-height: 35px;
-                                        "
-                                    />
+                                        " />
                                 </j-tooltip>
-                                <PermissionButton
-                                    type="link"
-                                    @click="showInput"
-                                    hasPermission="device/Instance:update"
-                                >
-                                    <template #icon
-                                        ><AIcon type="EditOutlined" /></template
-                                ></PermissionButton>
+                                <PermissionButton type="link" @click="showInput" hasPermission="device/Instance:update">
+                                    <template #icon>
+                                        <AIcon type="EditOutlined" />
+                                    </template>
+                                </PermissionButton>
                             </div>
                         </template>
-                        <j-descriptions
-                            bordered
-                            :labelStyle="{ width: 112 + 'px' }"
-                            :contentStyle="{ minWidth: 150 + 'px' }"
-                            :column="2"
-                        >
-                            <j-descriptions-item label="kafka地址"
-                                ><j-badge
-                                    :status="
-                                        input?.running ? 'success' : 'error'
-                                    "
-                                    :text="
-                                        input?.data?.config?.config?.address ||
-                                        ''
-                                    "
-                                ></j-badge
-                            ></j-descriptions-item>
+                        <j-descriptions bordered :labelStyle="{ width: 112 + 'px' }"
+                            :contentStyle="{ minWidth: 150 + 'px' }" :column="2">
+                            <j-descriptions-item :label="t('Config.Io.index.kafka')"><j-badge :status="input?.running ? 'success' : 'error'
+                                " :text="input?.data?.config?.config?.address ||
+        ''
+        "></j-badge></j-descriptions-item>
                             <j-descriptions-item label="topic">{{
                                 input?.data?.config?.config?.topic || ''
                             }}</j-descriptions-item>
-                            <j-descriptions-item label="状态" :span="2"
-                                ><j-badge
-                                    :status="
-                                        input?.data?.state?.value === 'enabled'
-                                            ? 'success'
-                                            : 'error'
-                                    "
-                                    :text="input?.data?.state?.text || ''"
-                                ></j-badge
-                            ></j-descriptions-item>
+                            <j-descriptions-item :label="t('Config.Io.index.5rg40ihzsbw0')" :span="2"><j-badge :status="input?.data?.state?.value === 'enabled'
+                                    ? 'success'
+                                    : 'error'
+                                " :text="input?.data?.state?.text || ''"></j-badge></j-descriptions-item>
                         </j-descriptions>
                     </j-card>
                 </div>
@@ -130,56 +74,35 @@
             <j-col :span="10">
                 <div class="alarmFlow-right">
                     <div class="doc">
-                        <h1>功能图示</h1>
+                        <h1>{{ t('Config.Io.index.5rg40ihzsr40') }}</h1>
                         <div class="image">
-                            <j-image
-                                width="100%"
-                                :src="getImage('/alarm/io.png')"
-                            ></j-image>
+                            <j-image width="100%" :src="getImage('/alarm/io.png')"></j-image>
                         </div>
-                        <h1>功能说明</h1>
+                        <h1>{{ t('Config.Io.index.5rg40ihzt0w0') }}</h1>
                         <div>
-                            1、平台支持将告警数据输出到kafka，第三方系统可订阅kafka中的告警数据，进行业务处理。
+                            {{ t('Config.Io.index.explain1') }}
                         </div>
-                        <h2>输出参数</h2>
+                        <h2>{{ t('Config.Io.index.5rg40ihzt500') }}</h2>
                         <div>
-                            <j-table
-                                :dataSource="outputData"
-                                :pagination="false"
-                                :columns="outputColumns"
-                            ></j-table>
+                            <j-table :dataSource="outputData" :pagination="false" :columns="outputColumns"></j-table>
                         </div>
-                        <h2>示例</h2>
+                        <h2>{{ t('Config.Io.index.5rg40ihzt8w0') }}</h2>
                         <div v-html="markdownOutputText" class="code"></div>
                         <div>
-                            2、平台支持订阅kafka中告警处理数据，并更新告警记录状态。
+                            {{ t('Config.Io.index.explain2') }}
                         </div>
-                        <h2>订阅参数</h2>
+                        <h2>{{ t('Config.Io.index.5rg40ihztcg0') }}</h2>
                         <div>
-                            <j-table
-                                :dataSource="subData"
-                                :pagination="false"
-                                :columns="subColumns"
-                            ></j-table>
+                            <j-table :dataSource="subData" :pagination="false" :columns="subColumns"></j-table>
                         </div>
-                        <h2>示例</h2>
+                        <h2>{{ t('Config.Io.index.5rg40ihzt8w0') }}</h2>
                         <div class="code" v-html="markdownSubText"></div>
                     </div>
                 </div>
             </j-col>
         </j-row>
-        <InputSave
-            :data="input"
-            v-if="inputVisible"
-            @closeModel="closeInput"
-            @saveSuc="saveInput"
-        />
-        <OutputSave
-            :data="output"
-            v-if="outputVisible"
-            @closeModel="closeOutput"
-            @saveSuc="saveOutput"
-        />
+        <InputSave :data="input" v-if="inputVisible" @closeModel="closeInput" @saveSuc="saveInput" />
+        <OutputSave :data="output" v-if="outputVisible" @closeModel="closeOutput" @saveSuc="saveOutput" />
     </div>
 </template>
 
@@ -189,187 +112,190 @@ import OutputSave from './Save/output.vue';
 import { getDataExchange } from '@/api/rule-engine/config';
 import { getImage } from '@/utils/comm';
 import { marked } from 'marked';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 let input = ref<any>();
 let output = ref<any>();
 const outputData = [
     {
         key: 'alarmConfigName',
-        name: '告警配置名称',
+        name: t('Config.Io.index.5rg40ihztgg0'),
         type: 'string',
-        desc: '推送的告警配置名称',
-        example: '烟感告警',
+        desc: t('Config.Io.index.5rg40ihztk00'),
+        example: t('Config.Io.index.5rg40ihztng0'),
     },
     {
         key: 'alarmConfigId',
-        name: '告警配置ID',
+        name: t('Config.Io.index.5rg40ihztr00'),
         type: 'string',
-        desc: '推送的告警配置ID',
+        desc: t('Config.Io.index.5rg40ihztv40'),
         example: '1605111722418597888',
     },
     {
         key: 'Id',
-        name: '告警数据ID',
+        name: t('Config.Io.index.5rg40ihztys0'),
         type: 'string',
-        desc: '告警唯一性标识',
+        desc: t('Config.Io.index.5rg40ihzu5s0'),
         example: '1515992841393119232',
     },
     {
         key: 'alarmRecordId',
-        name: '告警记录ID',
+        name: t('Config.Io.index.5rg40ihzu9k0'),
         type: 'string',
-        desc: '告警记录的唯一标识，可根据此ID处理告警',
+        desc: t('Config.Io.index.5rg40ihzud40'),
         example: 'ba33a59ca5ebe3dccfcd75fd0575be4e',
     },
     {
         key: 'targetType',
-        name: '告警目标类型',
+        name: t('Config.Io.index.5rg40ihzugs0'),
         type: 'string',
-        desc: '告警所属的业务类型，具体有产品、设备、部门、其他',
-        example: '产品',
+        desc: t('Config.Io.index.5rg40ihzuo00'),
+        example: t('Config.Io.index.5rg40ihzur00'),
     },
     {
         key: 'targetId',
-        name: '告警目标ID',
+        name: t('Config.Io.index.5rg40ihzuv40'),
         type: 'string',
-        desc: '告警目标唯一性标识',
+        desc: t('Config.Io.index.5rg40ihzuy40'),
         example: '1583300346713661440',
     },
     {
         key: 'targetName',
-        name: '告警目标名称',
+        name: t('Config.Io.index.5rg40ihzv1c0'),
         type: 'string',
-        desc: '告警目标实例名称',
-        example: '海康烟感',
+        desc: t('Config.Io.index.5rg40ihzv4c0'),
+        example: t('Config.Io.index.5rg40ihzv7g0'),
     },
     {
         key: 'alarmTime',
-        name: '告警时间',
+        name: t('Config.Io.index.5rg40ihzvao0'),
         type: 'long',
-        desc: '告警触发时间',
+        desc: t('Config.Io.index.5rg40ihzvf00'),
         example: '1651233650840',
     },
     {
         key: 'sourceType',
-        name: '告警源类型',
+        name: t('Config.Io.index.5rg40ihzvig0'),
         type: 'string',
-        desc: '触发告警的源类型。当前只有device',
+        desc: t('Config.Io.index.5rg40ihzvlc0'),
         example: 'device',
     },
     {
         key: 'sourceId',
-        name: '告警源ID',
+        name: t('Config.Io.index.5rg40ihzvo40'),
         type: 'string',
-        desc: '触发告警的源Id。如设备Id',
+        desc: t('Config.Io.index.5rg40ihzvr00'),
         example: '1605138218826821632',
     },
     {
         key: 'sourceName',
-        name: '告警源名称',
+        name: t('Config.Io.index.5rg40ihzx800'),
         type: 'string',
-        desc: '触发告警的源名称。如设备名称',
-        example: '1楼烟感S01',
+        desc: t('Config.Io.index.5rg40ihzxj40'),
+        example: t('Config.Io.index.deviceName'),
     },
     {
         key: 'level',
-        name: '告警级别',
+        name: t('Config.Io.index.5rg40ihzxrk0'),
         type: 'int',
-        desc: '告警严重程度指标',
+        desc: t('Config.Io.index.5rg40ihzxvw0'),
         example: 1,
     },
     {
         key: 'description',
-        name: '告警说明',
+        name: t('Config.Io.index.5rg40ihzxzk0'),
         type: 'string',
-        desc: '告警规则说明',
-        example: '1楼烟感统一告警规则设置',
+        desc: t('Config.Io.index.5rg40ihzynk0'),
+        example:  t('Config.Io.index.rule'),
     },
 ];
 const subData = [
     {
         key: 'alarmRecordId',
-        name: '告警记录ID',
+        name: t('Config.Io.index.5rg40ihzu9k0'),
         type: 'string',
-        require: '是',
-        desc: '告警记录的唯一标识，可根据此ID处理告警',
+        require: t('Config.Io.index.5rg40ihzz880'),
+        desc: t('Config.Io.index.5rg40ihzud40'),
         example: 'ba33a59ca5ebe3dccfcd75fd0575be4e',
     },
     {
         key: 'alarmConfigId',
-        name: '告警配置ID',
+        name: t('Config.Io.index.5rg40ihztr00'),
         type: 'string',
-        require: '是',
-        desc: '推送的告警配置ID',
+        require: t('Config.Io.index.5rg40ihzz880'),
+        desc: t('Config.Io.index.5rg40ihztv40'),
         example: '1605111722418597888',
     },
     {
         key: 'alarmTime',
-        name: '告警时间',
+        name: t('Config.Io.index.5rg40ihzvao0'),
         type: 'long',
-        require: '是',
-        desc: '告警触发时间',
+        require: t('Config.Io.index.5rg40ihzz880'),
+        desc: t('Config.Io.index.5rg40ihzvf00'),
         example: '1651233650840',
     },
     {
         key: 'handleTime',
-        name: '处理时间',
+        name: t('Config.Io.index.5rg40ihzzdk0'),
         type: 'long',
-        require: '是',
-        desc: '告警处理时间，不填是默认为消息处理时间',
+        require: t('Config.Io.index.5rg40ihzz880'),
+        desc: t('Config.Io.index.5rg40ihzzhg0'),
         example: '1651233650840',
     },
     {
         key: 'describe',
-        name: '处理说明',
+        name: t('Config.Io.index.5rg40ihzzmk0'),
         type: 'string',
-        require: '是',
-        desc: '告警处理内容详细描述说明',
-        example: '已联系第三方人员进行告警处理，现告警已恢复',
+        require: t('Config.Io.index.5rg40ihzz880'),
+        desc: t('Config.Io.index.5rg40ihzzq80'),
+        example: t('Config.Io.index.5rg40ihzzv00'),
     },
     {
         key: 'type',
-        name: '处理类型',
+        name: t('Config.Io.index.5rg40ihzzyo0'),
         type: 'enum',
-        require: '是',
-        desc: '支持system、user',
+        require: t('Config.Io.index.5rg40ihzz880'),
+        desc: t('Config.Io.index.5rg40ii00400'),
         example: 'user',
     },
     {
         key: 'state',
-        name: '处理后的状态',
+        name: t('Config.Io.index.5rg40ii00c00'),
         type: 'enum',
-        require: '是',
+        require: t('Config.Io.index.5rg40ihzz880'),
         desc: 'warning、normal',
         example: 'normal',
     },
 ];
 const outputColumns = [
     {
-        title: '名称',
+        title: t('Config.Io.index.5rg40ii00g80'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
     },
     {
-        title: '标识',
+        title: t('Config.Io.index.5rg40ii00k40'),
         dataIndex: 'key',
         key: 'key',
         ellipsis: true,
     },
     {
-        title: '类型',
+        title: t('Config.Io.index.5rg40ii00oc0'),
         dataIndex: 'type',
         key: 'type',
         ellipsis: true,
     },
     {
-        title: '说明',
+        title: t('Config.Io.index.5rg40ii00sw0'),
         dataIndex: 'desc',
         key: 'desc',
         width: 100,
         ellipsis: true,
     },
     {
-        title: '示例值',
+        title: t('Config.Io.index.5rg40ii00wk0'),
         dataIndex: 'example',
         key: 'example',
         width: 100,
@@ -378,7 +304,7 @@ const outputColumns = [
 ];
 const subColumns = [...outputColumns];
 subColumns.splice(3, 0, {
-    title: '必填',
+    title: t('Config.Io.index.5rg40ii012g0'),
     dataIndex: 'require',
     key: 'require',
     ellipsis: true,
@@ -474,6 +400,7 @@ const saveOutput = () => {
     margin-bottom: 16px;
     line-height: 30px;
 }
+
 .alarmTitle::before {
     position: absolute;
     top: 0;
@@ -484,15 +411,18 @@ const saveOutput = () => {
     border-radius: 0 3px 3px 0;
     content: ' ';
 }
+
 .alarmFlow-left,
 .alarmFlow-right {
     height: 780px;
     background-color: white;
 }
+
 .alarmFlow-right {
     margin-left: 20px;
     padding-bottom: 24px;
 }
+
 .doc {
     height: 100%;
     padding: 24px;

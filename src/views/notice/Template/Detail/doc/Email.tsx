@@ -1,27 +1,27 @@
 // import './index.less';
+import { useI18n } from 'vue-i18n'
 
 const Email = () => {
   const a = '{标题}';
   const b = '{name}';
+  const { t } = useI18n()
   return (
     <div class="doc">
-      <h1>1. 概述</h1>
+      <h1>1. {t('common.summarize')}</h1>
       <div>
-        通知模板结合通知配置为告警消息通知提供支撑。通知模板只能调用同一类型的通知配置服务。
-        服务器地址支持自定义输入。
+        {t('pages.iot.notice.template.summarize') + t('pages.iot.notice.template.emailSumm')}
       </div>
-      <h1>2.模板配置说明</h1>
+      <h1>2.{t('pages.iot.notice.template.temDisDes')}</h1>
       <div>
         {/* <h2> 1、服务器地址</h2>
         <div>服务器地址支持自定义输入</div> */}
-        <h2> 1、标题</h2>
-        <div>支持输入变量，变量格式${a}</div>
-        <h2> 2、收件人</h2>
-        <div> 支持录入多个邮箱地址，可填写变量参数。</div>
-        <h2> 3、模板内容</h2>
+        <h2> 1、 {t('pages.iot.notice.template.title')}</h2>
+        <div>{t('pages.iot.notice.template.emailTitle')}</div>
+        <h2> 2、{t('pages.iot.notice.template.addressee')}</h2>
+        <div> {t('pages.iot.notice.template.emailAddressee')}</div>
+        <h2> 3、{t('pages.iot.notice.template.temContent')}</h2>
         <div>
-          支持填写带变量的动态模板。变量填写规范示例：${b}
-          。填写动态参数后，可对变量的名称、类型、格式进行配置，以便告警通知时填写。
+          {t('pages.iot.notice.template.ddTemplateContent')}
         </div>
       </div>
     </div>

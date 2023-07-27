@@ -3,18 +3,18 @@
         :maskClosable="false"
         width="800px"
         :visible="true"
-        title="导入"
+        :title="t('Instance.Import.index.5rcy9v73m000')"
         @cancel="handleCancel"
     >
         <div style="margin-top: 10px">
             <j-form :layout="'vertical'">
                 <j-row>
                     <j-col span="24">
-                        <j-form-item label="产品" required>
+                        <j-form-item :label="t('Instance.Import.index.5rcy9v73n9w0')" required>
                             <j-select
                                 showSearch
                                 v-model:value="modelRef.product"
-                                placeholder="请选择产品"
+                                :placeholder="t('Instance.Import.index.5rcy9v73njg0')"
                             >
                                 <j-select-option
                                     :value="item.id"
@@ -27,12 +27,12 @@
                         </j-form-item>
                     </j-col>
                     <j-col span="24">
-                        <j-form-item label="文件格式" v-if="modelRef.product">
+                        <j-form-item :label="t('Instance.Import.index.5rcy9v73nqo0')" v-if="modelRef.product">
                             <FileFormat v-model="modelRef.file" />
                         </j-form-item>
                     </j-col>
                     <j-col span="12">
-                        <j-form-item label="文件上传" v-if="modelRef.product">
+                        <j-form-item :label="t('Instance.Import.index.5rcy9v73nx40')" v-if="modelRef.product">
                             <NormalUpload
                                 :product="modelRef.product"
                                 v-model="modelRef.upload"
@@ -44,14 +44,16 @@
             </j-form>
         </div>
         <template #footer>
-            <j-button type="primary" @click="handleSave">关闭</j-button>
+            <j-button type="primary" @click="handleSave">{{t('Instance.Import.index.5rcy9v73o440')}}</j-button>
         </template>
     </j-modal>
 </template>
 
 <script lang="ts" setup>
 import { queryNoPagingPost } from '@/api/device/product';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close', 'save']);
 const props = defineProps({
     data: {

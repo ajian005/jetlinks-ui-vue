@@ -2,10 +2,10 @@
 <template>
     <j-modal
         v-model:visible="_vis"
-        :title="!!formData.id ? '编辑' : '新增'"
+        :title="!!formData.id ? t('Device.Channel.Save.5rg8b3d7nhk0') : t('Device.Channel.Save.5rg8b3d7rtk0')"
         width="650px"
-        cancelText="取消"
-        okText="确定"
+        :cancelText="t('Device.Channel.Save.5rg8b3d7s9c0')"
+        :okText="t('Device.Channel.Save.5rg8b3d7shk0')"
         @ok="handleSubmit"
         @cancel="handleCancel"
         :confirmLoading="loading"
@@ -18,7 +18,7 @@
                         :rules="[
                             {
                                 max: 64,
-                                message: '最多可输入64个字符',
+                                message: t('Device.Channel.Save.5rg8b3d7sqk0'),
                             },
                             {
                                 validator: validateChannelId,
@@ -26,8 +26,8 @@
                         ]"
                     >
                         <template #label>
-                            通道ID
-                            <j-tooltip title="若不填写，系统将自动生成唯一ID">
+                            {{t('Device.Channel.Save.5rg8b3d7t4w0')}}
+                            <j-tooltip :title="t('Device.Channel.Save.5rg8b3d7te80')">
                                 <AIcon
                                     type="QuestionCircleOutlined"
                                     style="margin-left: 2px"
@@ -37,37 +37,37 @@
                         <j-input
                             v-model:value="formData.channelId"
                             :disabled="!!formData.id"
-                            placeholder="请输入通道ID"
+                            :placeholder="t('Device.Channel.Save.5rg8b3d7tr40')"
                         />
                     </j-form-item>
                 </j-col>
                 <j-col :span="12">
                     <j-form-item
                         name="name"
-                        label="通道名称"
+                        :label="t('Device.Channel.Save.5rg8b3d7u280')"
                         :rules="[
-                            { required: true, message: '请输入通道名称' },
-                            { max: 64, message: '最多可输入64个字符' },
+                            { required: true, message: t('Device.Channel.Save.5rg8b3d7ufs0') },
+                            { max: 64, message: t('Device.Channel.Save.5rg8b3d7sqk0') },
                         ]"
                     >
                         <j-input
                             v-model:value="formData.name"
-                            placeholder="请输入通道名称"
+                            :placeholder="t('Device.Channel.Save.5rg8b3d7ufs0')"
                         />
                     </j-form-item>
                 </j-col>
                 <j-col :span="24" v-if="route.query.type === 'gb28181-2016'">
                     <j-form-item
-                        label="厂商"
+                        :label="t('Device.Channel.Save.5rg8b3d7upc0')"
                         name="manufacturer"
                         :rules="[
                             { required: false, message: '' },
-                            { max: 64, message: '最多可输入64个字符' },
+                            { max: 64, message: t('Device.Channel.Save.5rg8b3d7sqk0') },
                         ]"
                     >
                         <j-input
                             v-model:value="formData.manufacturer"
-                            placeholder="请输入厂商名称"
+                            :placeholder="t('Device.Channel.Save.5rg8b3d7v140')"
                         />
                     </j-form-item>
                 </j-col>
@@ -75,17 +75,17 @@
                     <j-form-item
                         name="media_url"
                         :rules="[
-                            { required: true, message: '请输入视频地址' },
-                            { max: 128, message: '最多可输入128个字符' },
+                            { required: true, message: t('Device.Channel.Save.5rg8b3d7vl00') },
+                            { max: 128, message: t('Device.Channel.Save.5rg8b3d7vwo0') },
                             {
                                 validator: validateUrl,
                             },
                         ]"
                     >
                         <template #label>
-                            视频地址
+                            {{t('Device.Channel.Save.5rg8b3d7w9g0')}}
                             <j-tooltip
-                                title="不同厂家的RTSP固定地址规则不同，请按对应厂家的规则填写"
+                                :title="t('Device.Channel.Save.5rg8b3d7wkc0')"
                             >
                                 <AIcon
                                     type="QuestionCircleOutlined"
@@ -95,63 +95,63 @@
                         </template>
                         <j-input
                             v-model:value="formData.media_url"
-                            placeholder="请输入视频地址"
+                            :placeholder="t('Device.Channel.Save.5rg8b3d7vl00')"
                         />
                     </j-form-item>
                 </j-col>
                 <j-col :span="12">
                     <j-form-item
                         name="media_username"
-                        label="用户名"
-                        :rules="{ max: 64, message: '最多可输入64个字符' }"
+                        :label="t('Device.Channel.Save.5rg8b3d7ws00')"
+                        :rules="{ max: 64, message: t('Device.Channel.Save.5rg8b3d7sqk0') }"
                     >
                         <j-input
                             v-model:value="formData.media_username"
-                            placeholder="请输入用户名"
+                            :placeholder="t('Device.Channel.Save.5rg8b3d7wz00')"
                         />
                     </j-form-item>
                 </j-col>
                 <j-col :span="12">
                     <j-form-item
                         name="media_password"
-                        label="密码"
-                        :rules="{ max: 64, message: '最多可输入64个字符' }"
+                        :label="t('Device.Channel.Save.5rg8b3d7x6k0')"
+                        :rules="{ max: 64, message: t('Device.Channel.Save.5rg8b3d7sqk0') }"
                     >
                         <j-input-password
                             v-model:value="formData.media_password"
-                            placeholder="请输入密码"
+                            :placeholder="t('Device.Channel.Save.5rg8b3d7xfs0')"
                         />
                     </j-form-item>
                 </j-col>
                 <j-col :span="24">
                     <j-form-item
                         name="address"
-                        label="安装地址"
-                        :rules="{ max: 64, message: '最多可输入64个字符' }"
+                        :label="t('Device.Channel.Save.5rg8b3d7xns0')"
+                        :rules="{ max: 64, message: t('Device.Channel.Save.5rg8b3d7sqk0') }"
                     >
                         <j-input
                             v-model:value="formData.address"
-                            placeholder="请输入安装地址"
+                            :placeholder="t('Device.Channel.Save.5rg8b3d7xso0')"
                         />
                     </j-form-item>
                 </j-col>
                 <j-col :span="24" v-if="route.query.type === 'gb28181-2016'">
-                    <j-form-item label="云台类型" name="ptzType">
+                    <j-form-item :label="t('Device.Channel.Save.5rg8b3d7xzo0')" name="ptzType">
                         <j-select
                             v-model:value="formData.ptzType"
                             :options="[
-                                { label: '未知', value: 0 },
-                                { label: '球体', value: 1 },
-                                { label: '半球体', value: 2 },
-                                { label: '固定枪机', value: 3 },
-                                { label: '遥控枪机', value: 4 },
+                                { label: t('Device.Channel.Save.5rg8b3d7y3o0'), value: 0 },
+                                { label: t('Device.Channel.Save.5rg8b3d7y7g0'), value: 1 },
+                                { label: t('Device.Channel.Save.5rg8b3d7yc00'), value: 2 },
+                                { label: t('Device.Channel.Save.5rg8b3d7yg80'), value: 3 },
+                                { label: t('Device.Channel.Save.5rg8b3d7ynk0'), value: 4 },
                             ]"
-                            placeholder="请选择云台类型"
+                            :placeholder="t('Device.Channel.Save.5rg8b3d7ys00')"
                         />
                     </j-form-item>
                 </j-col>
                 <j-col :span="24">
-                    <j-form-item name="description" label="说明">
+                    <j-form-item name="description" :label="t('Device.Channel.Save.5rg8b3d7z180')">
                         <j-textarea
                             v-model:value="formData.description"
                             :rows="4"
@@ -170,7 +170,9 @@ import ChannelApi from '@/api/media/channel';
 import { PropType } from 'vue';
 import type { Rule } from 'ant-design-vue/es/form';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute();
 
 type Emits = {
@@ -257,7 +259,7 @@ const validateChannelId = async (_rule: Rule, value: string) => {
     });
 
     if (!result.passed) {
-        return Promise.reject('该ID已存在');
+        return Promise.reject(t('Device.Channel.Save.5rg8b3d7z5c0'));
     } else {
         return Promise.resolve();
     }
@@ -274,7 +276,7 @@ const validateUrl = async (_rule: Rule, value: string) => {
     return new Promise((resolve, reject) => {
         reg.test(value) || !value
             ? resolve('')
-            : reject('请输入正确的视频地址');
+            : reject(t('Device.Channel.Save.5rg8b3d7za00'));
     });
 };
 
@@ -305,13 +307,13 @@ const handleSubmit = () => {
                 ? await ChannelApi.update(formData.value.id, extraFormData).finally(() => {loading.value = false;})
                 : await ChannelApi.save(extraFormData).finally(() => {loading.value = false;});
             if (res.success) {
-                onlyMessage('操作成功');
+                onlyMessage(t('Device.Channel.Save.5rg8b3d7zes0'));
                 _vis.value = false;
                 loading.value = false;
                 emit('submit');
             } else {
                 loading.value = false;
-                onlyMessage('操作失败', 'error');
+                onlyMessage(t('Device.Channel.Save.5rg8b3d7zks0'), 'error');
             }
         })
         .catch((err: any) => {

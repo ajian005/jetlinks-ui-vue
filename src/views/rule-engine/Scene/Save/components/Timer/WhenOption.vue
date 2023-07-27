@@ -1,6 +1,6 @@
 <template>
   <div class='timer-when-warp'>
-    <div :class='["when-item-option", allActive ? "active" : ""]' @click='() => change(0)'>每天</div>
+    <div :class='["when-item-option", allActive ? "active" : ""]' @click='() => change(0)'>{{t('components.Timer.WhenOption.5rg52lvzw200')}}</div>
     <div
       v-for='item in timeOptions'
       :class='["when-item-option", rowKeys.includes(item.value) ? "active" : ""]'
@@ -14,7 +14,9 @@
 <script setup lang='ts' name='WhenOption'>
 import type { PropType } from 'vue'
 import { numberToString } from './util'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'update:value', data: Array<number>):void
   (e: 'change', data: Array<number>):void

@@ -39,7 +39,7 @@
           :value='slotProps'
           :active="rowKey === slotProps.id"
           :status="slotProps.state"
-          :statusText="slotProps.state === 1 ? '正常' : '禁用'"
+          :statusText="slotProps.state === 1 ? t('Instance.Import.product.5rcyag5mej00') : t('Instance.Import.product.5rcyag5mfv40')"
           :statusNames="{ 1: 'processing', 0: 'error',  }"
           @click="handleClick"
         >
@@ -59,7 +59,7 @@
             <j-row>
               <j-col :span="12">
                 <div class="card-item-content-text">
-                  设备类型
+                  {{t('Instance.Import.product.5rcyag5mg5k0')}}
                 </div>
                 <div>{{ slotProps?.deviceType?.text }}</div>
               </j-col>
@@ -77,7 +77,9 @@ import { queryTree } from '@/api/device/category'
 import { getTreeData_api } from '@/api/system/department'
 import { getImage } from '@/utils/comm'
 import { accessConfigTypeFilter } from '@/utils/setting'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'update:rowKey', data: string): void
   (e: 'change', data: string): void
@@ -106,7 +108,7 @@ const columns = [
     },
   },
   {
-    title: '名称',
+    title: t('Instance.Import.product.5rcyag5mgdw0'),
     dataIndex: 'name',
     width: 200,
     ellipsis: true,
@@ -116,7 +118,7 @@ const columns = [
     }
   },
   {
-    title: '网关类型',
+    title: t('Instance.Import.product.5rcyag5mglk0'),
     dataIndex: 'accessProvider',
     width: 150,
     ellipsis: true,
@@ -129,7 +131,7 @@ const columns = [
     }
   },
   {
-    title: '设备类型',
+    title: t('Instance.Import.product.5rcyag5mg5k0'),
     dataIndex: 'deviceType',
     width: 150,
     // search: {
@@ -142,19 +144,19 @@ const columns = [
     // }
   },
   {
-    title: '状态',
+    title: t('Instance.Import.product.5rcyag5mgu80'),
     dataIndex: 'state',
     width: '90px',
     search: {
       type: 'select',
       options: [
-        { label: '禁用', value: 0 },
-        { label: '正常', value: 1 },
+        { label: t('Instance.Import.product.5rcyag5mfv40'), value: 0 },
+        { label: t('Instance.Import.product.5rcyag5mej00'), value: 1 },
       ]
     }
   },
   {
-    title: '说明',
+    title: t('Instance.Import.product.5rcyag5mh1k0'),
     dataIndex: 'describe',
     ellipsis: true,
     width: 300,

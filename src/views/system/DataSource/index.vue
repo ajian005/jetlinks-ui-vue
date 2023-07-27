@@ -18,23 +18,16 @@
                     }"
                 >
                     <template #headerTitle>
-                        <PermissionButton
-                            type="primary"
-                            :hasPermission="`${permission}:add`"
-                            @click="table.openDialog({})"
-                        >
-                            <AIcon type="PlusOutlined" />新增
+                        <PermissionButton type="primary" :hasPermission="`${permission}:add`" @click="table.openDialog({})">
+                            <AIcon type="PlusOutlined" />
+                            {{ t('system.DataSource.index.5rkk8mo8z800') }}
                         </PermissionButton>
                     </template>
                     <template #state="slotProps">
-                        <BadgeStatus
-                            :status="slotProps.state?.value"
-                            :text="slotProps.state?.text"
-                            :statusNames="{
-                                enabled: 'processing',
-                                disabled: 'error',
-                            }"
-                        >
+                        <BadgeStatus :status="slotProps.state?.value" :text="slotProps.state?.text" :statusNames="{
+                            enabled: 'processing',
+                            disabled: 'error',
+                        }">
                         </BadgeStatus>
                     </template>
                     <template #typeId="slotProps">
@@ -46,83 +39,55 @@
                     </template>
                     <template #action="slotProps">
                         <j-space :size="16">
-                            <PermissionButton
-                                :hasPermission="`${permission}:update`"
-                                type="link"
-                                :tooltip="{
-                                    title: '编辑',
-                                }"
-                                @click="table.openDialog(slotProps)"
-                            >
+                            <PermissionButton :hasPermission="`${permission}:update`" type="link" :tooltip="{
+                                title: t('system.DataSource.index.5rg9zyk73i40'),
+                            }" @click="table.openDialog(slotProps)">
                                 <AIcon type="EditOutlined" />
                             </PermissionButton>
-                            <PermissionButton
-                                :hasPermission="`${permission}:manage`"
-                                type="link"
-                                :tooltip="{
-                                    title:
-                                        slotProps?.typeId === 'rabbitmq'
-                                            ? '暂不支持管理功能'
-                                            : table.getRowStatus(slotProps)
-                                            ? '管理'
-                                            : '请先启用数据源',
-                                }"
-                                @click="
-                                    () =>
-                                        router.push(
-                                            `/system/DataSource/Management?id=${slotProps.id}`,
-                                        )
-                                "
-                                :disabled="
-                                    slotProps?.typeId === 'rabbitmq' ||
-                                    !table.getRowStatus(slotProps)
-                                "
-                            >
+                            <PermissionButton :hasPermission="`${permission}:manage`" type="link" :tooltip="{
+                                title:
+                                    slotProps?.typeId === 'rabbitmq'
+                                        ? t('system.DataSource.index.5rg9zyk74gc0')
+                                        : table.getRowStatus(slotProps)
+                                            ? t('system.DataSource.index.5rg9zyk74nk0')
+                                            : t('system.DataSource.index.5rg9zyk74t80'),
+                            }" @click="() =>
+    router.push(
+        `/system/DataSource/Management?id=${slotProps.id}`,
+    )
+    " :disabled="slotProps?.typeId === 'rabbitmq' ||
+        !table.getRowStatus(slotProps)
+        ">
                                 <AIcon type="icon-ziyuankuguanli" />
                             </PermissionButton>
-                            <PermissionButton
-                                :hasPermission="`${permission}:action`"
-                                type="link"
-                                :popConfirm="{
-                                    title: `确定要${
-                                        table.getRowStatus(slotProps)
-                                            ? '禁用'
-                                            : '启用'
-                                    }吗？`,
-                                    onConfirm: () =>
-                                        table.clickChangeStatus(slotProps),
-                                }"
-                                :tooltip="{
-                                    title: table.getRowStatus(slotProps)
-                                        ? '禁用'
-                                        : '启用',
-                                }"
-                            >
-                                <AIcon
-                                    :type="
-                                        table.getRowStatus(slotProps)
-                                            ? 'StopOutlined'
-                                            : 'PlayCircleOutlined'
-                                    "
-                                />
+                            <PermissionButton :hasPermission="`${permission}:action`" type="link" :popConfirm="{
+                                title: t('system.DataSource.index.tip', {
+                                    action: table.getRowStatus(slotProps)
+                                        ? t('system.DataSource.index.5rg9zyk74yo0')
+                                        : t('system.DataSource.index.5rg9zyk75780')
+                                }),
+                                onConfirm: () =>
+                                    table.clickChangeStatus(slotProps),
+                            }" :tooltip="{
+    title: table.getRowStatus(slotProps)
+        ? t('system.DataSource.index.5rg9zyk74yo0')
+        : t('system.DataSource.index.5rg9zyk75780'),
+}">
+                                <AIcon :type="table.getRowStatus(slotProps)
+                                    ? 'StopOutlined'
+                                    : 'PlayCircleOutlined'
+                                    " />
                                 <!-- <AIcon type="PlayCircleOutlined" /> -->
                             </PermissionButton>
 
-                            <PermissionButton
-                                :hasPermission="`${permission}:delete`"
-                                type="link"
-                                :tooltip="{
-                                    title: table.getRowStatus(slotProps)
-                                        ? '请先禁用，再删除'
-                                        : '删除',
-                                }"
-                                :danger="true"
-                                :popConfirm="{
-                                    title: `确认删除`,
-                                    onConfirm: () => table.clickDel(slotProps),
-                                }"
-                                :disabled="table.getRowStatus(slotProps)"
-                            >
+                            <PermissionButton :hasPermission="`${permission}:delete`" type="link" :tooltip="{
+                                title: table.getRowStatus(slotProps)
+                                    ? t('system.DataSource.index.5rg9zyk75cs0')
+                                    : t('system.DataSource.index.5rg9zyk75i40'),
+                            }" :danger="true" :popConfirm="{
+    title: t('system.DataSource.index.deleteTip'),
+    onConfirm: () => table.clickDel(slotProps),
+}" :disabled="table.getRowStatus(slotProps)">
                                 <AIcon type="DeleteOutlined" />
                             </PermissionButton>
                         </j-space>
@@ -130,12 +95,7 @@
                 </j-pro-table>
             </FullPage>
 
-            <EditDialog
-                v-if="dialog.visible"
-                @cancel="table.cancel"
-                :data="dialog.selectItem"
-                @confirm="table.refresh"
-            />
+            <EditDialog v-if="dialog.visible" @cancel="table.cancel" :data="dialog.selectItem" @confirm="table.refresh" />
         </div>
     </page-container>
 </template>
@@ -154,14 +114,15 @@ import {
     delDataSource_api,
 } from '@/api/system/dataSource';
 import { onlyMessage } from '@/utils/comm';
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n();
 const permission = 'system/DataSource';
 
 const router = useRouter();
 
 const columns = [
     {
-        title: '名称',
+        title: t('system.DataSource.index.5rg9zyk75nc0'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -170,7 +131,7 @@ const columns = [
         width: '250px',
     },
     {
-        title: '类型',
+        title: t('system.DataSource.index.5rg9zyk75ss0'),
         dataIndex: 'typeId',
         key: 'typeId',
         search: {
@@ -193,7 +154,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '说明',
+        title: t('system.DataSource.index.5rg9zyk75xk0'),
         dataIndex: 'description',
         key: 'description',
         search: {
@@ -202,18 +163,18 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: '状态',
+        title: t('system.DataSource.index.5rg9zyk76340'),
         dataIndex: 'state',
         key: 'state',
         search: {
             type: 'select',
             options: [
                 {
-                    label: '正常',
+                    label: t('system.DataSource.index.5rg9zyk76880'),
                     value: 'enabled',
                 },
                 {
-                    label: '禁用',
+                    label: t('system.DataSource.index.5rg9zyk74yo0'),
                     value: 'disabled',
                 },
             ],
@@ -222,7 +183,7 @@ const columns = [
         width: '120px',
     },
     {
-        title: '操作',
+        title: t('system.DataSource.index.5rg9zyk76d80'),
         dataIndex: 'action',
         key: 'action',
         scopedSlots: true,
@@ -264,7 +225,7 @@ const table = {
         delDataSource_api(row.id as string).then((resp: any) => {
             if (resp.status === 200) {
                 tableRef.value?.reload();
-                onlyMessage('操作成功!');
+                onlyMessage(t('system.DataSource.index.5rg9zyk76i40'));
             }
         });
     },
@@ -272,7 +233,7 @@ const table = {
         const status = row.state.value === 'enabled' ? '_disable' : '_enable';
 
         changeStatus_api(row.id as string, status).then(() => {
-            onlyMessage('操作成功');
+            onlyMessage(t('system.DataSource.index.5rg9zyk76mo0'));
             table.refresh();
         });
     },

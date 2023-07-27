@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const DingTalkRebot = () => {
+    const { t } = useI18n()
     const groupSetting = getImage(
         '/notice/doc/config/dingTalk-rebot/01-group-setting.jpg',
     );

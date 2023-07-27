@@ -18,8 +18,8 @@
                                     message:
                                         record.type === 'enum' ||
                                         record.type === 'boolean'
-                                            ? '请选择'
-                                            : '请输入',
+                                            ? t('Detail.command.EditTable.5rg4emwqf2c0')
+                                            : t('Detail.command.EditTable.5rg4emwqg700'),
                                 },
                             ]"
                         >
@@ -38,8 +38,8 @@
                                           })
                                         : record.type === 'boolean'
                                         ? [
-                                              { label: '是', value: true },
-                                              { label: '否', value: false },
+                                              { label: t('Detail.command.EditTable.5rg4emwqgh80'), value: true },
+                                              { label: t('Detail.command.EditTable.5rg4emwqh0g0'), value: false },
                                           ]
                                         : undefined
                                 "
@@ -66,7 +66,9 @@
 
 <script lang="ts" setup>
 import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:modelValue', data: Record<string, any>[]): void;
 };
@@ -85,17 +87,17 @@ const columns = [
     //     with: '33%',
     // },
     {
-        title: '参数名称',
+        title: t('Detail.command.EditTable.5rg4emwqh9c0'),
         dataIndex: 'name',
         with: '33%',
     },
     {
-        title: '类型',
+        title: t('Detail.command.EditTable.5rg4emwqhi80'),
         dataIndex: 'valueType',
         with: '33%',
     },
     {
-        title: '值',
+        title: t('Detail.command.EditTable.5rg4emwqhqw0'),
         dataIndex: 'value',
         with: '34%',
     },

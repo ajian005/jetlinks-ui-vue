@@ -9,20 +9,20 @@
                     button-style="solid"
                     @change="handleScreenChange"
                 >
-                    <j-radio-button :value="1">单屏</j-radio-button>
-                    <j-radio-button :value="4">四分屏</j-radio-button>
-                    <j-radio-button :value="9">九分屏</j-radio-button>
-                    <j-radio-button :value="0">全屏</j-radio-button>
+                    <j-radio-button :value="1">{{t('components.Player.ScreenPlayer.5rlckv19qic0')}}</j-radio-button>
+                    <j-radio-button :value="4">{{t('components.Player.ScreenPlayer.5rlckv19rx40')}}</j-radio-button>
+                    <j-radio-button :value="9">{{t('components.Player.ScreenPlayer.5rlckv19s7o0')}}</j-radio-button>
+                    <j-radio-button :value="0">{{t('components.Player.ScreenPlayer.5rlckv19sf40')}}</j-radio-button>
                 </j-radio-group>
                 <div class="screen-tool-save">
                     <j-space>
-                        <j-tooltip title="可保存分屏配置记录">
+                        <j-tooltip :title="t('components.Player.ScreenPlayer.5rlckv19smk0')">
                             <AIcon type="QuestionCircleOutlined" />
                         </j-tooltip>
                         <j-popover
                             v-model:visible="visible"
                             trigger="click"
-                            title="分屏名称"
+                            :title="t('components.Player.ScreenPlayer.5rlckv19sug0')"
                         >
                             <template #content>
                                 <j-form
@@ -35,11 +35,11 @@
                                         :rules="[
                                             {
                                                 required: true,
-                                                message: '请输入名称',
+                                                message: t('components.Player.ScreenPlayer.5rlckv19to40'),
                                             },
                                             {
                                                 max: 64,
-                                                message: '最多可输入64个字符',
+                                                message: t('components.Player.ScreenPlayer.5rlckv19u5s0'),
                                             },
                                         ]"
                                     >
@@ -53,7 +53,7 @@
                                         :loading="loading"
                                         style="width: 100%; margin-top: 16px"
                                     >
-                                        保存
+                                        {{t('components.Player.ScreenPlayer.5rlckv19uek0')}}
                                     </j-button>
                                 </j-form>
                             </template>
@@ -61,12 +61,12 @@
                                 type="primary"
                                 @click="visible = true"
                             >
-                                保存
+                                {{t('components.Player.ScreenPlayer.5rlckv19uek0')}}
                                 <template #overlay>
                                     <j-menu>
                                         <j-empty
                                             v-if="!historyList.length"
-                                            description="暂无数据"
+                                            :description="t('components.Player.ScreenPlayer.5rlckv19ujo0')"
                                         />
                                         <j-menu-item
                                             v-for="(item, index) in historyList"
@@ -76,9 +76,9 @@
                                             <j-space>
                                                 <span>{{ item.name }}</span>
                                                 <j-popconfirm
-                                                    title="确认删除?"
-                                                    ok-text="确认"
-                                                    cancel-text="取消"
+                                                    :title="t('components.Player.ScreenPlayer.5rlckv19uok0')"
+                                                    :ok-text="t('components.Player.ScreenPlayer.5rlckv19uv80')"
+                                                    :cancel-text="t('components.Player.ScreenPlayer.5rlckv19v100')"
                                                     @confirm="(e: any) => {
                                                         e?.stopPropagation();
                                                         deleteHistory(item.key);
@@ -129,7 +129,7 @@
                                 }"
                                 @click="handleRefresh($event, item, index)"
                             >
-                                刷新
+                                {{t('components.Player.ScreenPlayer.5rlckv19v8c0')}}
                             </div>
                             <LivePlayer :live="true" :url="item.url" autoplay />
                         </div>
@@ -152,7 +152,9 @@ import {
 import LivePlayer from '@/components/Player/index.vue';
 import MediaTool from '@/components/Player/mediaTool.vue';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Player = {
     id?: string;
     url?: string;
@@ -406,7 +408,7 @@ const screenChange = (index: number) => {
 };
 
 /**
- * 刷新
+ * {{t('components.Player.ScreenPlayer.5rlckv19v8c0')}}
  * @param e
  * @param item
  * @param index

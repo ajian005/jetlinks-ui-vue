@@ -50,6 +50,7 @@ getData();
     background-color: #fff;
     padding: 24px 14px;
     position: relative;
+
     .title {
         position: relative;
         z-index: 2;
@@ -72,6 +73,7 @@ getData();
             content: ' ';
         }
     }
+
     .detail {
         color: #1d39c4;
         cursor: pointer;
@@ -90,17 +92,16 @@ getData();
         .box-item {
             position: relative;
             padding: 16px;
-            background: linear-gradient(
-                135.62deg,
-                #f6f7fd 22.27%,
-                hsla(0, 0%, 100%, 0.86) 91.82%
-            );
+            background: linear-gradient(135.62deg,
+                    #f6f7fd 22.27%,
+                    hsla(0, 0%, 100%, 0.86) 91.82%);
             border-radius: 2px;
             box-shadow: 0 4px 18px #efefef;
 
             .label {
                 color: #4f4f4f;
             }
+
             .value {
                 margin: 20px 0;
                 color: rgba(0, 0, 0, 0.85);

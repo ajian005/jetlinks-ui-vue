@@ -282,113 +282,83 @@
                               }}
                             </Ellipsis>
 
-                          </div>
-                      </template>
-                      <template v-else-if="data?.device?.selector === 'tag'">
-                          <div>
-                              <AIcon
-                                  :type="
-                                      typeIconMap[
-                                          data?.device?.message?.messageType ||
-                                              'INVOKE_FUNCTION'
-                                      ]
-                                  "
-                              />
-                              {{ data?.options?.type }}
-                              <span>{{ data?.options?.tagName }}</span>
-                              的{{ data?.options?.productName }}
-                              {{ data?.options?.propertiesName }}
-                          </div>
-                      </template>
-                      <template v-else-if="data?.device?.selector === 'relation'">
-                          <div>
-                              <AIcon
-                                  :type="
-                                      typeIconMap[
-                                          data?.device?.message?.messageType ||
-                                              'INVOKE_FUNCTION'
-                                      ]
-                                  "
-                              />
-                              {{ data?.options?.type }}与<span>{{
-                                  data?.options?.triggerName
-                              }}</span
-                              >具有相同 {{ data?.options?.relationName }}的{{
-                                  data?.options?.productName
-                              }}设备的
-                              {{ data?.options?.propertiesName }}
-                          </div>
-                      </template>
-                  </div>
-                  <j-button v-else @click="onAdd">点击配置执行动作</j-button>
-              </div>
-              <div class="item-number">{{ name + 1 }}</div>
-              <j-popconfirm title="确认删除？" @confirm="onDelete" placement="topRight" :overlayStyle='{minWidth: "190px"}'>
-                  <div class="item-delete">
-                      <AIcon type="DeleteOutlined" />
-                  </div>
-              </j-popconfirm>
-            </CheckItem>
-        </div>
-      </j-form-item>
+                                </div>
+                            </template>
+                            <template v-else-if="data?.device?.selector === 'tag'">
+                                <div>
+                                    <AIcon :type="typeIconMap[
+                                        data?.device?.message?.messageType ||
+                                        'INVOKE_FUNCTION'
+                                        ]
+                                        " />
+                                    {{ data?.options?.type }}
+                                    <span>{{ data?.options?.tagName }}</span>
+                                    的{{ data?.options?.productName }}
+                                    {{ data?.options?.propertiesName }}
+                                </div>
+                            </template>
+                            <template v-else-if="data?.device?.selector === 'relation'">
+                                <div>
+                                    <AIcon :type="typeIconMap[
+                                        data?.device?.message?.messageType ||
+                                        'INVOKE_FUNCTION'
+                                        ]
+                                        " />
+                                    {{ data?.options?.type }}与<span>{{
+                                        data?.options?.triggerName
+                                    }}</span>{{ t('action.ListItem.Item.5rg4saoj7yc0', {
+    relationName: data?.options?.relationName, productName:
+        data?.options?.productName, propertiesName: data?.options?.propertiesName
+}) }}
+                                </div>
+                            </template>
+                        </div>
+                        <j-button v-else @click="onAdd">{{ t('action.ListItem.Item.5rg4saoj8580') }}</j-button>
+                    </div>
+                    <div class="item-number">{{ name + 1 }}</div>
+                    <j-popconfirm :title="t('action.ListItem.Item.5rg4saoj89w0')" @confirm="onDelete" placement="topRight"
+                        :overlayStyle='{ minWidth: "190px" }'>
+                        <div class="item-delete">
+                            <AIcon type="DeleteOutlined" />
+                        </div>
+                    </j-popconfirm>
+                </CheckItem>
+            </div>
+        </j-form-item>
         <template v-if="!isLast && type === 'serial'">
-            <div
-                :class="[
-                    'actions-item-filter-warp',
-                    termsOptions.length ? 'filter-border' : '',
-                ]"
-            >
+            <div :class="[
+                'actions-item-filter-warp',
+                termsOptions.length ? 'filter-border' : '',
+            ]">
                 <template v-if="termsOptions.length">
                     <div class="actions-item-filter-warp-tip">
-                        满足此条件后执行后续动作
+                        {{ t('action.ListItem.Item.5rg4saoj8hs0') }}
                     </div>
                     <div class="actions-item-filter-overflow">
-                        <FilterGroup
-                            v-for="(item, index) in termsOptions"
-                            :key="item.key"
-                            :branchName="branchesName"
-                            :thenName="thenName"
-                            :actionName="name"
-                            :name="index"
-                            :isLast="index === termsOptions.length - 1"
-                            :isFirst="index === 0"
-                        />
+                        <FilterGroup v-for="(item, index) in termsOptions" :key="item.key" :branchName="branchesName"
+                            :thenName="thenName" :actionName="name" :name="index"
+                            :isLast="index === termsOptions.length - 1" :isFirst="index === 0" />
                     </div>
                 </template>
                 <div v-else class="filter-add-button" @click='addFilterParams'>
                     <AIcon type="PlusOutlined" style="padding-right: 4px" />
-                    <span>添加过滤条件</span>
+                    <span>{{ t('action.ListItem.Item.5rg4saoj8mo0') }}</span>
                 </div>
             </div>
         </template>
 
         <template v-if="visible">
-            <Modal
-                :name="name"
-                :branchGroup="thenName"
-                :branchesName="branchesName"
-                :data="data"
-                :options='_data.branches[branchesName].then[thenName].actions[name].options'
-                @cancel="onClose"
-                @save="onSave"
-            />
+            <Modal :name="name" :branchGroup="thenName" :branchesName="branchesName" :data="data"
+                :options='_data.branches[branchesName].then[thenName].actions[name].options' @cancel="onClose"
+                @save="onSave" />
         </template>
         <!-- 编辑 -->
         <template>
-            <ActionTypeComponent
-                v-bind="props"
-                v-if="!!actionType"
-                :actionType="actionType"
-                :options='_data.branches[branchesName].then[thenName].actions[name].options'
-                @save="onPropsOk"
-                @cancel="onPropsCancel"
-            />
+            <ActionTypeComponent v-bind="props" v-if="!!actionType" :actionType="actionType"
+                :options='_data.branches[branchesName].then[thenName].actions[name].options' @save="onPropsOk"
+                @cancel="onPropsCancel" />
         </template>
-        <TriggerAlarm
-            :id="_data.id"
-            v-if="triggerVisible"
-            @close="triggerVisible = false"
-        />
+        <TriggerAlarm :id="_data.id" v-if="triggerVisible" @close="triggerVisible = false" />
     </div>
 </template>
 
@@ -406,7 +376,9 @@ import FilterGroup from './FilterGroup.vue';
 import { randomString } from '@/utils/utils'
 import { EventEmitter, EventEmitterKeys } from '@/views/rule-engine/Scene/Save/util'
 import CheckItem from './CheckItem.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore();
 const { data: _data } = storeToRefs(sceneStore);
 
@@ -446,9 +418,9 @@ const visible = ref<boolean>(false);
 const triggerVisible = ref<boolean>(false);
 const actionType = ref('');
 const eventEmitterKey = ref(EventEmitterKeys({
-  branch: props.branchesName,
-  branchGroup: props.thenName,
-  action: props.name
+    branch: props.branchesName,
+    branchGroup: props.thenName,
+    action: props.name
 }))
 const termsOptions = computed(() => {
     if (!props.parallel) {
@@ -465,9 +437,9 @@ const onDelete = () => {
     const key = _data.value.branches![props.branchesName].then[props.thenName].actions[props.name].key
     EventEmitter.emit(key!, { isDelete: true }) // 发布消息
     if (props.name !== 0 && !props.parallel) { // 清空上一个串行执行动作中的options.termsColumns和terms
-      _data.value.branches![props.branchesName].then[props.thenName].actions[props.name - 1].options!.termsColumns = []
-      _data.value.branches![props.branchesName].then[props.thenName].actions[props.name - 1].options!.terms = []
-      _data.value.branches![props.branchesName].then[props.thenName].actions[props.name - 1].terms = []
+        _data.value.branches![props.branchesName].then[props.thenName].actions[props.name - 1].options!.termsColumns = []
+        _data.value.branches![props.branchesName].then[props.thenName].actions[props.name - 1].options!.terms = []
+        _data.value.branches![props.branchesName].then[props.thenName].actions[props.name - 1].terms = []
     }
 
     emit('delete');
@@ -478,34 +450,34 @@ const onClose = () => {
 };
 
 /**
- * 添加过滤条件
+ * {{t('action.ListItem.Item.5rg4saoj8mo0')}}
  */
 const addFilterParams = () => {
-  const item: any = {
-    type: 'and',
-    key: randomString(),
-    terms: [
-      {
-        column: undefined,
-        value: {
-          type: 'fixed',
-          value: undefined
-        },
-        termType: undefined,
+    const item: any = {
         type: 'and',
-        key: randomString()
-      }
-    ]
-  }
-  if (_data.value.branches![props.branchesName].then[props.thenName].actions[props.name].terms) {
-    _data.value.branches![props.branchesName].then[props.thenName].actions[props.name].terms!.push(item)
-  } else {
-    _data.value.branches![props.branchesName].then[props.thenName].actions[props.name].terms = [item]
-  }
-  _data.value.branches![props.branchesName].then[props.thenName].actions[props.name].options!.terms = [{
-    terms: [['','eq','','and']],
-    termType: '并且'
-  }]
+        key: randomString(),
+        terms: [
+            {
+                column: undefined,
+                value: {
+                    type: 'fixed',
+                    value: undefined
+                },
+                termType: undefined,
+                type: 'and',
+                key: randomString()
+            }
+        ]
+    }
+    if (_data.value.branches![props.branchesName].then[props.thenName].actions[props.name].terms) {
+        _data.value.branches![props.branchesName].then[props.thenName].actions[props.name].terms!.push(item)
+    } else {
+        _data.value.branches![props.branchesName].then[props.thenName].actions[props.name].terms = [item]
+    }
+    _data.value.branches![props.branchesName].then[props.thenName].actions[props.name].options!.terms = [{
+        terms: [['', 'eq', '', 'and']],
+        termType: t('action.ListItem.Item.5rg4saoj8r80')
+    }]
 }
 
 const onAdd = () => {
@@ -522,16 +494,16 @@ const onType = (_type: string) => {
  * @param options
  */
 const onSave = (data: ActionsType, options: any) => {
-  const { key, terms } = _data.value.branches![props.branchesName].then?.[props.thenName].actions?.[props.name]
+    const { key, terms } = _data.value.branches![props.branchesName].then?.[props.thenName].actions?.[props.name]
 
   const columns = new Set([...(props.options?.termsColumns || []), ...(options?.otherColumns?.filter?.((item?: string) => item) || [])])
 
-  const actionItem: ActionsType = {
-    ...data,
-    options: {...props.options, ...options, columns: [...columns.values()]},
-    key,
-    terms
-  }
+    const actionItem: ActionsType = {
+        ...data,
+        options: { ...props.options, ...options, columns: [...columns.values()] },
+        key,
+        terms
+    }
 
   _data.value.branches![props.branchesName].then[props.thenName].actions.splice(props.name, 1, actionItem)
   checkItemRef.value?.formTouchOff?.()
@@ -545,8 +517,8 @@ const onSave = (data: ActionsType, options: any) => {
  * @param options
  */
 const onPropsOk = (data: ActionsType, options?: any) => {
-  onSave(data, options);
-  actionType.value = '';
+    onSave(data, options);
+    actionType.value = '';
 };
 
 const onPropsCancel = () => {

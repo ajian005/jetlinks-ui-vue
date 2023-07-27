@@ -1,5 +1,6 @@
 import { isNoCommunity } from '@/utils/utils';
-
+import createI18n from "@/locales/index"
+const t = createI18n.global.t
 export const DataTypeList: { label: string; value: string }[] = [
   {
     value: 'int',
@@ -59,25 +60,25 @@ export const PropertySource: { label: string; value: string }[] = isNoCommunity
   ? [
       {
         value: 'device',
-        label: '设备',
+        label: t('views.device.data.device'),
       },
       {
         value: 'manual',
-        label: '手动',
+        label: t('views.device.data.manual'),
       },
       {
         value: 'rule',
-        label: '规则',
+        label: t('views.device.data.rule'),
       },
     ]
   : [
       {
         value: 'device',
-        label: '设备',
+        label: t('views.device.data.device'),
       },
       {
         value: 'manual',
-        label: '手动',
+        label: t('views.device.data.manual'),
       },
     ];
 
@@ -98,16 +99,16 @@ export const FileTypeList: { label: string; value: string }[] = [
 
 export const EventLevel: { label: string; value: string }[] = [
   {
-    label: '普通',
+    label: t('views.device.data.ordinary'),
     value: 'ordinary',
   },
   {
-    label: '警告',
+    label: t('views.device.data.warn'),
     value: 'warn',
   },
   {
     value: 'urgent',
-    label: '紧急',
+    label: t('views.device.data.urgent'),
   },
 ];
 
@@ -136,15 +137,15 @@ export const DateTypeList = [
 
 export const ExpandsTypeList = [
   {
-    label: '读',
+    label: t('views.device.data.read'),
     value: 'read',
   },
   {
-    label: '写',
+    label: t('views.device.data.write'),
     value: 'write',
   },
   {
-    label: '上报',
+    label: t('views.device.data.report'),
     value: 'report',
   },
 ]

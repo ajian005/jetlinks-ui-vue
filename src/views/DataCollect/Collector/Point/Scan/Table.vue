@@ -24,7 +24,7 @@
                         :rules="[
                             {
                                 required: true,
-                                message: '请输入',
+                                message: t('Point.Scan.Table.5rg7vqi4t1w0'),
                             },
                             {
                                 validator: checkLength,
@@ -34,7 +34,7 @@
                     >
                         <j-input
                             v-model:value="record[dataIndex]"
-                            placeholder="请输入"
+                            :placeholder="t('Point.Scan.Table.5rg7vqi4t1w0')"
                             allowClear
                         ></j-input>
                     </j-form-item>
@@ -71,21 +71,21 @@
                         :rules="[
                             {
                                 required: true,
-                                message: '请选择',
+                                message: t('Point.Scan.Table.5rg7vqi4u500'),
                             },
                         ]"
                     >
                         <j-select
                             style="width: 75%"
                             v-model:value="record[dataIndex].value"
-                            placeholder="请选择"
+                            :placeholder="t('Point.Scan.Table.5rg7vqi4u500')"
                             allowClear
                             mode="multiple"
                             :filter-option="filterOption"
                             :options="[
-                                { label: '读', value: 'read' },
-                                { label: '写', value: 'write' },
-                                { label: '订阅', value: 'subscribe' },
+                                { label: t('Point.Scan.Table.5rg7vqi4uc00'), value: 'read' },
+                                { label: t('Point.Scan.Table.5rg7vqi4ui40'), value: 'write' },
+                                { label: t('Point.Scan.Table.5rg7vqi4uns0'), value: 'subscribe' },
                             ]"
                             :disabled="index !== 0 && record[dataIndex].check"
                             @change="changeValue(index, dataIndex)"
@@ -96,7 +96,7 @@
                             v-if="index !== 0"
                             v-model:checked="record[dataIndex].check"
                             @click="changeCheckbox(index, dataIndex)"
-                            >同上</j-checkbox
+                            >{{t('Point.Scan.Table.5rg7vqi4uv80')}}</j-checkbox
                         >
                     </j-form-item>
                 </template>
@@ -117,7 +117,7 @@
                             },
                             {
                                 pattern: regOnlyNumber,
-                                message: '请输入0或者正整数',
+                                message: t('Point.Scan.Table.5rg7vqi4v8o0'),
                             },
                         ]"
                     >
@@ -126,7 +126,7 @@
                             v-model:value="
                                 record.configuration[dataIndex].value
                             "
-                            placeholder="请输入"
+                            :placeholder="t('Point.Scan.Table.5rg7vqi4t1w0')"
                             allowClear
                             addon-after="ms"
                             :max="2147483647"
@@ -144,7 +144,7 @@
                                 record.configuration[dataIndex].check
                             "
                             @click="changeCheckbox(index, dataIndex)"
-                            >同上</j-checkbox
+                            >{{t('Point.Scan.Table.5rg7vqi4uv80')}}</j-checkbox
                         >
                     </j-form-item>
                 </template>
@@ -155,23 +155,23 @@
                         :rules="[
                             {
                                 required: true,
-                                message: '请选择',
+                                message: t('Point.Scan.Table.5rg7vqi4u500'),
                             },
                         ]"
                     >
                         <j-select
                             style="width: 40%"
                             v-model:value="record[dataIndex].value"
-                            placeholder="请选择"
+                            :placeholder="t('Point.Scan.Table.5rg7vqi4u500')"
                             allowClear
                             :filter-option="filterOption"
                             :options="[
                                 {
-                                    label: '是',
+                                    label: t('Point.Scan.Table.5rg7vqi4wqc0'),
                                     value: true,
                                 },
                                 {
-                                    label: '否',
+                                    label: t('Point.Scan.Table.5rg7vqi4x2k0'),
                                     value: false,
                                 },
                             ]"
@@ -185,15 +185,15 @@
                             v-show="index !== 0"
                             v-model:checked="record[dataIndex].check"
                             @click="changeCheckbox(index, dataIndex)"
-                            >同上</j-checkbox
+                            >{{t('Point.Scan.Table.5rg7vqi4uv80')}}</j-checkbox
                         >
                     </j-form-item>
                 </template>
 
                 <template v-if="dataIndex === 'action'">
-                    <j-tooltip title="删除">
+                    <j-tooltip :title="t('Point.Scan.Table.5rg7vqi4zwg0')">
                         <j-popconfirm
-                            title="确认删除"
+                            :title="t('Point.Scan.Table.5rg7vqi52hk0')"
                             @confirm="clickDelete(record.id)"
                         >
                             <a style="color: red"
@@ -211,7 +211,9 @@
 <script lang="ts" setup>
 import { FormTableColumns, regOnlyNumber } from '../../data';
 import { Rule } from 'ant-design-vue/lib/form';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Array,
@@ -230,7 +232,7 @@ const checkLength = (_rule: Rule, value: string): Promise<any> =>
     new Promise(async (resolve, reject) => {
         if (value) {
             return String(value).length > 64
-                ? reject('最多可输入64个字符')
+                ? reject(t('Point.Scan.Table.5rg7vqi53480'))
                 : resolve('');
         } else {
             resolve('')

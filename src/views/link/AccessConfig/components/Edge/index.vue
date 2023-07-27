@@ -11,12 +11,12 @@
             <div class="steps-box" v-if="current === 0">
                 <div class="alert">
                     <AIcon type="InfoCircleOutlined" />
-                    选择与设备通信的网络组件
+                    {{t('components.Edge.index.5rg35yn3cq40')}}
                 </div>
                 <div class="search">
                     <j-input-search
                         allowClear
-                        placeholder="请输入"
+                        :placeholder="t('components.Edge.index.5rg35yn3e6o0')"
                         style="width: 300px"
                         @search="networkSearch"
                     />
@@ -26,7 +26,7 @@
                         hasPermission="link/Type:add"
                     >
                         <template #icon><AIcon type="PlusOutlined" /></template>
-                        新增
+                        {{t('components.Edge.index.5rg35yn3ef80')}}
                     </PermissionButton>
                 </div>
                 <j-scrollbar height="480">
@@ -98,7 +98,7 @@
                     <j-empty
                         style="margin-top: 10%"
                         v-else
-                        description="暂无数据"
+                        :description="t('components.Edge.index.5rg35yn3em80')"
                     />
                 </j-scrollbar>
             </div>
@@ -109,7 +109,7 @@
         >
             <j-row :gutter="[24, 24]">
                 <j-col :span="12">
-                    <title-component data="基本信息" />
+                    <title-component :data="t('components.Edge.index.5rg35yn3ex80')" />
                     <j-form
                         :model="formState"
                         name="basic"
@@ -119,29 +119,29 @@
                         ref="formRef"
                     >
                         <j-form-item
-                            label="名称"
+                            :label="t('components.Edge.index.5rg35yn3f5k0')"
                             name="name"
                             :rules="[
                                 {
                                     required: true,
-                                    message: '请输入名称',
+                                    message: t('components.Edge.index.5rg35yn3fbo0'),
                                     trigger: 'blur',
                                 },
                                 {
                                     max: 64,
-                                    message: '最多可输入64个字符',
+                                    message: t('components.Edge.index.5rg35yn3flk0'),
                                     trigger: 'blur',
                                 },
                             ]"
                         >
                             <j-input
-                                placeholder="请输入名称"
+                                :placeholder="t('components.Edge.index.5rg35yn3fbo0')"
                                 v-model:value="formState.name"
                             />
                         </j-form-item>
-                        <j-form-item label="说明" name="description">
+                        <j-form-item :label="t('components.Edge.index.5rg35yn3frw0')" name="description">
                             <j-textarea
-                                placeholder="请输入说明"
+                                :placeholder="t('components.Edge.index.5rg35yn3fy80')"
                                 :rows="4"
                                 v-model:value="formState.description"
                                 show-count
@@ -157,19 +157,19 @@
                                     id === ':id' ? 'add' : 'update'
                                 }`"
                             >
-                                保存
+                                {{t('components.Edge.index.5rg35yn3g3o0')}}
                             </PermissionButton>
                         </j-form-item>
                     </j-form>
                 </j-col>
                 <j-col :span="12">
                     <div class="doc" style="height: 600px">
-                        <TitleComponent data="配置概览" />
-                        <p>接入方式：{{ provider.name }}</p>
+                        <TitleComponent :data="t('components.Edge.index.5rg35yn3ga00')" />
+                        <p>{{ t('components.Edge.index.accessMode') + provider.name }}</p>
                         <p>
                             {{ provider.description }}
                         </p>
-                        <p>消息协议：{{ provider.id }}</p>
+                        <p>{{t('components.Edge.index.agreement') + provider.id }}</p>
                     </div>
                 </j-col>
             </j-row>
@@ -178,7 +178,7 @@
             v-if="channel !== 'edge-child-device'"
             :class="current !== 1 ? 'steps-action' : 'steps-action-save'"
         >
-            <j-button v-if="current > 0" @click="prev" style="margin-right: 8px"> 上一步 </j-button>
+            <j-button v-if="current > 0" @click="prev" style="margin-right: 8px"> {{t('components.Edge.index.5rg35yn3gfk0')}} </j-button>
             <PermissionButton
                 v-if="current === 1 && view === 'false'"
                 type="primary"
@@ -188,14 +188,14 @@
                     id === ':id' ? 'add' : 'update'
                 }`"
             >
-                保存
+                {{t('components.Edge.index.5rg35yn3g3o0')}}
             </PermissionButton>
             <j-button
               v-if="[0].includes(current)"
 
               @click="next"
             >
-              下一步
+              {{t('components.Edge.index.5rg35yn3gnk0')}}
             </j-button>
         </div>
     </div>
@@ -212,7 +212,9 @@ import {
 } from '../../data';
 import AccessCard from '../AccessCard/index.vue';
 import { useMenuStore } from 'store/menu';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 
 interface FormState {
@@ -246,7 +248,7 @@ const formRef = ref<FormInstance>();
 
 const current = ref(0);
 const stepCurrent = ref(0);
-const steps = ref(['网络组件', '完成']);
+const steps = ref([t('components.Edge.index.5rg35yn3gvo0'), t('components.Edge.index.5rg35yn3h180')]);
 const networkCurrent: any = ref('');
 const networkList: any = ref([]);
 const allNetworkList: any = ref([]);
@@ -263,7 +265,7 @@ const onFinish = async (values: any) => {
     const resp =
         id === ':id' ? await save(params) : await update({ ...params, id });
     if (resp.status === 200) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('components.Edge.index.5rg35yn3h600'), 'success');
         history.back();        
         if ((window as any).onTabSaveSuccess) {            
             (window as any).onTabSaveSuccess(resp);
@@ -323,7 +325,7 @@ const addNetwork = () => {
 
 const next = async () => {
     if (!networkCurrent.value) {
-        onlyMessage('请选择网络组件！', 'error');
+        onlyMessage(t('components.Edge.index.5rg35yn3hd40'), 'error');
     } else {
         current.value = current.value + 1;
     }

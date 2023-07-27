@@ -6,36 +6,36 @@
                 <j-col :span="12">
                     <j-form ref="formRef" layout="vertical" :model="formData">
                         <j-row :gutter="24">
-                            <TitleComponent data="基本信息" />
+                            <TitleComponent :data="t('Cascade.Save.index.5rg8oqlcefk0')" />
                             <j-col :span="12">
                                 <j-form-item
-                                    label="名称"
+                                    :label="t('Cascade.Save.index.5rg8oqlcfhs0')"
                                     name="cascadeName"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入名称',
+                                            message: t('Cascade.Save.index.5rg8oqlcfng0'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.cascadeName"
-                                        placeholder="请输入名称"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlcfng0')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="代理视频流"
+                                    :label="t('Cascade.Save.index.5rg8oqlcfws0')"
                                     name="proxyStream"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请选择代理视频流',
+                                            message: t('Cascade.Save.index.5rg8oqlcg0o0'),
                                         },
                                     ]"
                                 >
@@ -44,31 +44,31 @@
                                         v-model:value="formData.proxyStream"
                                     >
                                         <j-radio-button :value="true">
-                                            启用
+                                            {{t('Cascade.Save.index.5rg8oqlcg440')}}
                                         </j-radio-button>
                                         <j-radio-button :value="false">
-                                            禁用
+                                            {{t('Cascade.Save.index.5rg8oqlcg9g0')}}
                                         </j-radio-button>
                                     </j-radio-group>
                                 </j-form-item>
                             </j-col>
 
-                            <TitleComponent data="信令服务配置" />
+                            <TitleComponent :data="t('Cascade.Save.index.5rg8oqlcgd40')" />
                             <j-col :span="12">
                                 <j-form-item
                                     name="clusterNodeId"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请选择集群节点',
+                                            message: t('Cascade.Save.index.5rg8oqlcggk0'),
                                         },
                                     ]"
                                 >
                                     <template #label>
                                         <span>
-                                            集群节点
+                                            {{t('Cascade.Save.index.5rg8oqlcgkg0')}}
                                             <j-tooltip
-                                                title="使用此集群节点级联到上级平台"
+                                                :title="t('Cascade.Save.index.5rg8oqlcgpc0')"
                                             >
                                                 <AIcon
                                                     type="QuestionCircleOutlined"
@@ -79,82 +79,82 @@
                                     </template>
                                     <j-select
                                         v-model:value="formData.clusterNodeId"
-                                        placeholder="请选择集群节点"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlcggk0')"
                                         :options="clustersList"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="信令名称"
+                                    :label="t('Cascade.Save.index.5rg8oqlcgsg0')"
                                     name="name"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入信令名称',
+                                            message: t('Cascade.Save.index.5rg8oqlcgx80'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.name"
-                                        placeholder="请输入信令名称"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlcgx80')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="24">
                                 <j-form-item
-                                    label="上级SIP ID"
+                                    :label="t('Cascade.Save.index.ID')"
                                     name="sipId"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入上级SIP ID',
+                                            message: t('Cascade.Save.index.IDTip'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.sipId"
-                                        placeholder="请输入上级SIP ID"
+                                        :placeholder="t('Cascade.Save.index.IDTip')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="上级SIP域"
+                                    :label="t('Cascade.Save.index.5rg8oqlch0w0')"
                                     name="domain"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入上级平台SIP域',
+                                            message: t('Cascade.Save.index.5rg8oqlch400'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.domain"
-                                        placeholder="请输入上级平台SIP域"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlch400')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="上级SIP 地址"
+                                    :label="t('Cascade.Save.index.5rg8oqlch7c0')"
                                     name="remoteAddress"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入上级SIP 地址',
+                                            message: t('Cascade.Save.index.5rg8oqlchaw0')
                                         },
                                         {
                                             validator: checkSIP,
@@ -167,7 +167,7 @@
                                                 v-model:value="
                                                     formData.remoteAddress
                                                 "
-                                                placeholder="请输入IP地址"
+                                                :placeholder="t('Cascade.Save.index.5rg8oqlche00')"
                                             />
                                         </j-col>
                                         <j-col :span="10">
@@ -177,7 +177,7 @@
                                                 v-model:value="
                                                     formData.remotePort
                                                 "
-                                                placeholder="请输入端口"
+                                                :placeholder="t('Cascade.Save.index.5rg8oqlchhk0')"
                                                 style="width: 100%"
                                                 :precision="0"
                                             />
@@ -188,22 +188,22 @@
 
                             <j-col :span="24">
                                 <j-form-item
-                                    label="本地SIP ID"
+                                    :label="t('Cascade.Save.index.gatewayID')"
                                     name="localSipId"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入网关侧的SIP ID',
+                                            message: t('Cascade.Save.index.gatewayIDRules'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.localSipId"
-                                        placeholder="网关侧的SIP ID"
+                                        :placeholder="t('Cascade.Save.index.gatewayIDTip')"
                                     />
                                 </j-form-item>
                             </j-col>
@@ -213,7 +213,7 @@
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请选择SIP本地地址',
+                                            message: t('Cascade.Save.index.5rg8oqlchmg0'),
                                         },
                                         {
                                             validator: checkLocalSIP,
@@ -222,9 +222,9 @@
                                 >
                                     <template #label>
                                         <span>
-                                            SIP本地地址
+                                            {{ t('Cascade.Save.index.SIPAddress') }}
                                             <j-tooltip
-                                                title="使用指定的网卡和端口进行请求"
+                                                :title="t('Cascade.Save.index.5rg8oqlchq00')"
                                             >
                                                 <AIcon
                                                     type="QuestionCircleOutlined"
@@ -237,7 +237,7 @@
                                         <j-col :span="14">
                                             <j-select
                                                 v-model:value="formData.host"
-                                                placeholder="请选择IP地址"
+                                                :placeholder="t('Cascade.Save.index.5rg8oqlchuo0')"
                                                 :options="allList"
                                                 @change="setPorts"
                                                 showSearch
@@ -246,7 +246,7 @@
                                         <j-col :span="10">
                                             <j-select
                                                 v-model:value="formData.port"
-                                                placeholder="请选择端口"
+                                                :placeholder="t('Cascade.Save.index.5rg8oqlchxc0')"
                                                 :options="allListPorts"
                                             />
                                         </j-col>
@@ -255,12 +255,12 @@
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="SIP远程地址"
+                                    :label="t('Cascade.Save.index.longRange')"
                                     name="publicHost"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入SIP远程地址',
+                                            message: t('Cascade.Save.index.5rg8oqlci000'),
                                         },
                                         {
                                             validator: checkPublicSIP,
@@ -273,7 +273,7 @@
                                                 v-model:value="
                                                     formData.publicHost
                                                 "
-                                                placeholder="请输入IP地址"
+                                                :placeholder="t('Cascade.Save.index.5rg8oqlche00')"
                                             />
                                         </j-col>
                                         <j-col :span="10">
@@ -283,7 +283,7 @@
                                                 v-model:value="
                                                     formData.publicPort
                                                 "
-                                                placeholder="请输入端口"
+                                                :placeholder="t('Cascade.Save.index.5rg8oqlchhk0')"
                                                 style="width: 100%"
                                                 :precision="0"
                                             />
@@ -293,12 +293,12 @@
                             </j-col>
                             <j-col :span="24">
                                 <j-form-item
-                                    label="传输协议"
+                                    :label="t('Cascade.Save.index.5rg8oqlci2k0')"
                                     name="transport"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请选择传输协议',
+                                            message: t('Cascade.Save.index.5rg8oqlci5c0'),
                                         },
                                     ]"
                                 >
@@ -318,117 +318,117 @@
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="用户"
+                                    :label="t('Cascade.Save.index.5rg8oqlci800')"
                                     name="user"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入用户',
+                                            message: t('Cascade.Save.index.5rg8oqlciag0'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.user"
-                                        placeholder="请输入用户"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlciag0')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="接入密码"
+                                    :label="t('Cascade.Save.index.5rg8oqlcidc0')"
                                     name="password"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入接入密码',
+                                            message: t('Cascade.Save.index.5rg8oqlcig40'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input-password
                                         v-model:value="formData.password"
-                                        placeholder="请输入接入密码"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlcig40')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="厂商"
+                                    :label="t('Cascade.Save.index.5rg8oqlciio0')"
                                     name="manufacturer"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入厂商',
+                                            message: t('Cascade.Save.index.5rg8oqlcil40'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.manufacturer"
-                                        placeholder="请输入厂商"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlcil40')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="型号"
+                                    :label="t('Cascade.Save.index.5rg8oqlcins0')"
                                     name="model"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入型号',
+                                            message: t('Cascade.Save.index.5rg8oqlciqk0'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.model"
-                                        placeholder="请输入型号"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlciqk0')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="版本号"
+                                    :label="t('Cascade.Save.index.5rg8oqlciuk0')"
                                     name="firmware"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入版本号',
+                                            message: t('Cascade.Save.index.5rg8oqlcix40'),
                                         },
                                         {
                                             max: 64,
-                                            message: '最多可输入64个字符',
+                                            message: t('Cascade.Save.index.5rg8oqlcfsw0'),
                                         },
                                     ]"
                                 >
                                     <j-input
                                         v-model:value="formData.firmware"
-                                        placeholder="请输入版本号"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlcix40')"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="心跳周期（秒）"
+                                    :label="t('Cascade.Save.index.5rg8oqlcizg0')"
                                     name="keepaliveInterval"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入心跳周期',
+                                            message: t('Cascade.Save.index.5rg8oqlcj200'),
                                         },
                                         {
                                             pattern: /^[1-9]\d*$/,
@@ -442,19 +442,19 @@
                                         v-model:value="
                                             formData.keepaliveInterval
                                         "
-                                        placeholder="请输入心跳周期"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlcj200')"
                                         style="width: 100%"
                                     />
                                 </j-form-item>
                             </j-col>
                             <j-col :span="12">
                                 <j-form-item
-                                    label="注册间隔（秒）"
+                                    :label="t('Cascade.Save.index.5rg8oqlcj4o0')"
                                     name="registerInterval"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入注册间隔',
+                                            message: t('Cascade.Save.index.5rg8oqlcj7c0'),
                                         },
                                         {
                                             pattern: /^[1-9]\d*$/,
@@ -468,7 +468,7 @@
                                         v-model:value="
                                             formData.registerInterval
                                         "
-                                        placeholder="请输入注册间隔"
+                                        :placeholder="t('Cascade.Save.index.5rg8oqlcj7c0')"
                                         style="width: 100%"
                                     />
                                 </j-form-item>
@@ -481,84 +481,83 @@
                                 @click="handleSubmit"
                                 :loading="btnLoading"
                             >
-                                保存
+                                {{t('Cascade.Save.index.5rg8oqlcjak0')}}
                             </j-button>
                         </j-form-item>
                     </j-form>
                 </j-col>
                 <j-col :span="12">
                     <div class="doc">
-                        <h1>1.概述</h1>
+                        <h1>1.{{t('Cascade.Save.index.summarize')}}</h1>
                         <div>
-                            配置国标级联，平台可以将已经接入到自身的摄像头共享给第三方调用播放。
+                            {{t('Cascade.Save.index.5rg8oqlcjd80')}}
                         </div>
                         <div>
                             <j-alert
-                                message="注：该配置只用于将本平台向上级联至第三方平台，如需第三方平台向上级联至本平台，请在“视频设备”页面新增设备时选择“GB/T28181”接入方式。"
+                                :message="t('Cascade.Save.index.5rg8oqlcjfo0')"
                                 type="info"
                                 show-icon
                             />
                         </div>
-                        <h1>2.配置说明</h1>
+                        <h1>2.{{t('Cascade.Save.index.explain')}}</h1>
                         <div>
-                            以下配置说明以将本平台数据级联到LiveGBS平台为例。
+                            {{t('Cascade.Save.index.5rg8oqlcjkc0')}}
                         </div>
-                        <h2>1、上级SIP ID</h2>
-                        <div>请填写第三方平台中配置的<b>SIP ID</b>。</div>
+                        <h2>1、{{t('Cascade.Save.index.ID')}}</h2>
+                        <div>{{t('Cascade.Save.index.5rg8oqlcjnc0')}}<b>SIP ID</b>。</div>
                         <div class="image">
                             <j-image
                                 width="100%"
                                 :src="getImage('/northbound/doc2.png')"
                             />
                         </div>
-                        <h2>2、上级SIP 域</h2>
-                        <div>请填写第三方平台中配置的<b>SIP ID域</b>。</div>
+                        <h2>2、{{t('Cascade.Save.index.SIP') + t('Cascade.Save.index.5rg8oqlcjpw0')}}</h2>
+                        <div>{{t('Cascade.Save.index.5rg8oqlcjnc0')}}<b>{{ t('Cascade.Save.index.domain') }}</b>。</div>
                         <div class="image">
                             <j-image
                                 width="100%"
                                 :src="getImage('/northbound/doc1.png')"
                             />
                         </div>
-                        <h2>3、上级SIP 地址</h2>
-                        <div>请填写第三方平台中配置的<b>SIP ID地址</b>。</div>
+                        <h2>3、{{t('Cascade.Save.index.SIP') + t('Cascade.Save.index.5rg8oqlcjso0')}}</h2>
+                        <div>{{t('Cascade.Save.index.5rg8oqlcjnc0')}}<b>{{t('Cascade.Save.index.IDAddress')}}</b>。</div>
                         <div class="image">
                             <j-image
                                 width="100%"
                                 :src="getImage('/northbound/doc3.png')"
                             />
                         </div>
-                        <h2>4、本地SIP ID</h2>
+                        <h2>4、{{t('Cascade.Save.index.gatewayID')}}</h2>
                         <div>
-                            请填写本地的<b>SIP ID地址</b>。
-                            地址由中心编码(8位)、行业编码(2位)、类型编码(3位)和序号(7位)四个码段共20位十
-                            进制数字字符构成。详细规则请参见《GB/T28181-2016》中附录D部分。
+                            {{t('Cascade.Save.index.5rg8oqlcjvo0')}}<b>{{t('Cascade.Save.index.IDAddress')}}</b>。
+                            {{t('Cascade.Save.index.5rg8oqlcjy40')}}
+                            {{t('Cascade.Save.index.5rg8oqlck0o0')}}
                         </div>
-                        <h2>5、SIP本地地址</h2>
+                        <h2>5、{{t('Cascade.Save.index.localAddress')}}</h2>
                         <div>
-                            请选择<b>指定的网卡和端口</b>，如有疑问请联系系统运维人员。
+                            {{t('Cascade.Save.index.5rg8oqlck3c0')}}<b>{{t('Cascade.Save.index.5rg8oqlck7c0')}}</b>，{{t('Cascade.Save.index.connection')}}
                         </div>
-                        <h2>6、用户</h2>
+                        <h2>6、{{t('Cascade.Save.index.user')}}</h2>
                         <div>
-                            部分平台有基于用户和接入密码的特殊认证。通常情况下,请填写<b
-                                >本地SIP ID</b
-                            >值。
+                            {{t('Cascade.Save.index.5rg8oqlck9s0')}}<b
+                                >{{t('Cascade.Save.index.5rg8oqlckck0')}} ID</b
+                            >{{t('Cascade.Save.index.5rg8oqlckck0')}}。
                         </div>
-                        <h2>7、接入密码</h2>
+                        <h2>7、{{t('Cascade.Save.index.5rg8oqlcidc0')}}</h2>
                         <div>
-                            需与上级平台设置的接入密码一致，用于身份认证。
+                            {{t('Cascade.Save.index.5rg8oqlckfg0')}}
                         </div>
-                        <h2>8、厂商/型号/版本号</h2>
+                        <h2>8、 {{t('Cascade.Save.index.versions')}}</h2>
                         <div>
-                            本平台将以“设备”的身份级联到上级平台，请设置本平台在上级平台中显示的厂商、型号、版本号。
+                            {{t('Cascade.Save.index.5rg8oqlckhw0')}}
                         </div>
-                        <h2>9、心跳周期</h2>
+                        <h2>9、 {{t('Cascade.Save.index.heartbeat')}}</h2>
                         <div>
-                            需与上级平台设置的心跳周期保持一致，通常默认60秒。
+                            {{t('Cascade.Save.index.5rg8oqlckls0')}}
                         </div>
-                        <h2>10、注册间隔</h2>
+                        <h2>10、 {{t('Cascade.Save.index.interval')}}</h2>
                         <div>
-                            若SIP代理通过注册方式校时,其注册间隔时间宜设置为小于
-                            SIP代理与 SIP服务器出现1s误 差所经过的运行时间。
+                            {{t('Cascade.Save.index.5rg8oqlckoc0') + t('Cascade.Save.index.intervalContent') + t('Cascade.Save.index.5rg8oqlckqw0')}}
                         </div>
                     </div>
                 </j-col>
@@ -570,7 +569,9 @@
 <script setup lang="ts">
 import { getImage, onlyMessage } from '@/utils/comm';
 import CascadeApi from '@/api/media/cascade';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter();
 const route = useRoute();
 
@@ -700,13 +701,13 @@ const checkHost = (host: string, port: string | number | undefined) => {
     if (!host) {
         return Promise.resolve();
     } else if (!host) {
-        return Promise.reject(new Error('请输入IP 地址'));
+        return Promise.reject(new Error(t('Cascade.Save.index.IPAddress')));
     } else if (host && !regDomain.test(host)) {
         return Promise.reject(new Error('请输入0.0.0.0~255.255.255.255的IP地址'));
     } else if (!port) {
-        return Promise.reject(new Error('请输入端口'));
+        return Promise.reject(new Error(t('Cascade.Save.index.5rg8oqlchhk0')));
     } else if ((port && Number(port) < 1) || Number(port) > 65535) {
-        return Promise.reject(new Error('端口请输入1~65535之间的正整数'));
+        return Promise.reject(new Error(t('Cascade.Save.index.5rg8oqlckw00')));
     }
     return Promise.resolve();
 };
@@ -720,9 +721,9 @@ const checkLocalSIP = (_: any, value: string) => {
     if (!value) {
         return Promise.resolve();
     } else if (!value) {
-        return Promise.reject(new Error('请选择IP地址'));
+        return Promise.reject(new Error(t('Cascade.Save.index.5rg8oqlchuo0')));
     } else if (!formData.value.port) {
-        return Promise.reject(new Error('请选择端口'));
+        return Promise.reject(new Error(t('Cascade.Save.index.5rg8oqlchxc0')));
     }
     return Promise.resolve();
 };
@@ -762,7 +763,7 @@ const handleSubmit = () => {
             btnLoading.value = true;
             CascadeApi[id ? 'update' : 'save'](params)
                 .then(() => {
-                    onlyMessage('操作成功');
+                    onlyMessage(t('Cascade.Save.index.5rg8oqlckyk0'));
                     router.back();
                 })
                 .finally(() => {

@@ -27,7 +27,9 @@ import {
     getTreeTwo_api,
 } from '@/api/system/apiPage';
 import type { modeType, treeNodeTpye } from '../typing';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emits = defineEmits(['select']);
 const props = defineProps<{
     mode: modeType;
@@ -69,7 +71,7 @@ const getTreeData = () => {
                 if (props.hasHome) {
                     tree.unshift({
                         key: 'home',
-                        name: '首页',
+                        name: t('Api.components.LeftTree.5rga4bzkg8w0'),
                         schemas: {},
                         children: [],
                     });

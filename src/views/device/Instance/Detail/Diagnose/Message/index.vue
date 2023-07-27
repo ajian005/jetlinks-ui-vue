@@ -88,6 +88,7 @@ const messageArr = computed(() => {
 });
 
 const subscribeLog = () => {
+    
     const id = `device-debug-${instanceStore.current?.id}`;
     const topic = `/debug/device/${instanceStore.current?.id}/trace`;
     diagnoseRef.value = getWebSocket(id, topic, {})

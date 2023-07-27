@@ -1,188 +1,114 @@
 <template>
-    <j-modal
-        class="edit-dialog-container"
-        width="1050px"
-        visible
-        :title="dialogTitle"
-        :confirmLoading="loading"
-        @ok="confirm"
-        @cancel="emits('cancel')"
-    >
+    <j-modal class="edit-dialog-container" width="1050px" visible :title="dialogTitle" :confirmLoading="loading"
+        @ok="confirm" @cancel="emits('cancel')">
         <j-form ref="formRef" :model="form.data" layout="vertical">
             <j-row :gutter="24">
                 <j-col :span="12">
-                    <j-form-item
-                        name="name"
-                        label="名称"
-                        :rules="[
-                            { required: true, message: '请输入名称' },
-                            { max: 64, message: '最多可输入64个字符' },
-                        ]"
-                    >
-                        <j-input
-                            v-model:value="form.data.name"
-                            placeholder="请输入名称"
-                        />
+                    <j-form-item name="name" :label="t('DataSource.components.EditDialog.5rg9yza8ygg0')" :rules="[
+                        { required: true, message: t('DataSource.components.EditDialog.5rg9yza8zw00') },
+                        { max: 64, message: t('DataSource.components.EditDialog.5rg9yza90800') },
+                    ]">
+                        <j-input v-model:value="form.data.name" :placeholder="t('DataSource.components.EditDialog.5rg9yza8zw00')" />
                     </j-form-item>
                 </j-col>
                 <j-col :span="12">
-                    <j-form-item
-                        name="typeId"
-                        label="类型"
-                        :rules="[{ required: true, message: '请选择类型' }]"
-                    >
-                        <j-select
-                            v-model:value="form.data.typeId"
-                            :options="form.typeOptions"
-                            placeholder="请选择类型"
-                            :disabled="!!form.data.id"
-                        />
+                    <j-form-item name="typeId" :label="t('DataSource.components.EditDialog.5rg9yza90fk0')" :rules="[{ required: true, message: t('DataSource.components.EditDialog.5rg9yza90mo0') }]">
+                        <j-select v-model:value="form.data.typeId" :options="form.typeOptions" :placeholder="t('DataSource.components.EditDialog.5rg9yza90mo0')"
+                            :disabled="!!form.data.id" />
                     </j-form-item>
                 </j-col>
             </j-row>
             <j-row :gutter="24" v-if="form.data.typeId === 'rdb'">
                 <j-col :span="24">
-                    <j-form-item
-                        :name="['shareConfig', 'url']"
-                        label="URL"
-                        :rules="[
-                            {
-                                required: true,
-                                message: '请输入URL',
-                                trigger: 'change',
-                            },
-                            { validator: checkUrl, trigger: 'blur' },
-                        ]"
-                    >
-                        <j-input
-                            v-model:value="form.data.shareConfig.url"
-                            placeholder="请输入r2bdc或者jdbc连接地址，示例：r2dbc:mysql://127.0.0.1:3306/test"
-                        />
+                    <j-form-item :name="['shareConfig', 'url']" label="URL" :rules="[
+                        {
+                            required: true,
+                            message: t('DataSource.components.EditDialog.5rg9yza90u00'),
+                            trigger: 'change',
+                        },
+                        { validator: checkUrl, trigger: 'blur' },
+                    ]">
+                        <j-input v-model:value="form.data.shareConfig.url"
+                            :placeholder="t('DataSource.components.EditDialog.joinAddress')" />
                     </j-form-item>
                 </j-col>
             </j-row>
             <j-row :gutter="24" v-if="form.data.typeId === 'rabbitmq'">
                 <j-col :span="24">
-                    <j-form-item
-                        :name="['shareConfig', 'adminUrl']"
-                        label="管理地址"
-                        :rules="[
-                            { required: true, message: '请输入管理地址' },
-                            { validator: validateAdminUrl },
-                        ]"
-                    >
-                        <j-input
-                            v-model:value="form.data.shareConfig.adminUrl"
-                            placeholder="请输入管理地址，示例：http://localhost:15672"
-                        />
+                    <j-form-item :name="['shareConfig', 'adminUrl']" :label="t('DataSource.components.EditDialog.5rg9yza90zg0')" :rules="[
+                        { required: true, message: t('DataSource.components.EditDialog.5rg9yza915k0') },
+                        { validator: validateAdminUrl },
+                    ]">
+                        <j-input v-model:value="form.data.shareConfig.adminUrl"
+                            :placeholder="t('DataSource.components.EditDialog.manageAddress')" />
                     </j-form-item>
                 </j-col>
             </j-row>
             <j-row :gutter="24" v-if="form.data.typeId === 'rabbitmq'">
                 <j-col :span="24">
-                    <j-form-item
-                        :name="['shareConfig', 'addresses']"
-                        label="链接地址"
-                        :rules="[
-                            { required: true, message: '请输入链接地址' },
-                            { validator: validateAddress },
-                        ]"
-                    >
-                        <j-input
-                            v-model:value="form.data.shareConfig.addresses"
-                            placeholder="请输入链接地址，示例：localhost:5672"
-                        />
+                    <j-form-item :name="['shareConfig', 'addresses']" :label="t('DataSource.components.EditDialog.5rg9yza91bw0')" :rules="[
+                        { required: true, message: t('DataSource.components.EditDialog.5rg9yza91ho0') },
+                        { validator: validateAddress },
+                    ]">
+                        <j-input v-model:value="form.data.shareConfig.addresses" :placeholder="t('DataSource.components.EditDialog.linkAddress')" />
                     </j-form-item>
                 </j-col>
             </j-row>
             <j-row :gutter="24" v-show="form.data.typeId">
                 <j-col :span="12">
-                    <j-form-item
-                        :name="['shareConfig', 'username']"
-                        label="用户名"
-                        :rules="[
-                            { required: true, message: '请输入用户名' },
-                            {
-                                max: 64,
-                                message: '最多可输入64个字符',
-                            },
-                        ]"
-                    >
-                        <j-input
-                            v-model:value="form.data.shareConfig.username"
-                            placeholder="请输入用户名"
-                        />
+                    <j-form-item :name="['shareConfig', 'username']" :label="t('DataSource.components.EditDialog.5rg9yza91ms0')" :rules="[
+                        { required: true, message: t('DataSource.components.EditDialog.5rg9yza91vo0') },
+                        {
+                            max: 64,
+                            message: t('DataSource.components.EditDialog.5rg9yza90800'),
+                        },
+                    ]">
+                        <j-input v-model:value="form.data.shareConfig.username" :placeholder="t('DataSource.components.EditDialog.5rg9yza91vo0')" />
                     </j-form-item>
                 </j-col>
                 <j-col :span="12">
-                    <j-form-item
-                        :name="['shareConfig', 'password']"
-                        label="密码"
-                        :rules="[
-                            { required: true, message: '请输入密码' },
-                            {
-                                max: 64,
-                                message: '最多可输入64个字符',
-                            },
-                        ]"
-                    >
-                        <j-input-password
-                            v-model:value="form.data.shareConfig.password"
-                            placeholder="请输入密码"
-                        />
+                    <j-form-item :name="['shareConfig', 'password']" :label="t('DataSource.components.EditDialog.5rg9yza921c0')" :rules="[
+                        { required: true, message: t('DataSource.components.EditDialog.5rg9yza926w0') },
+                        {
+                            max: 64,
+                            message: t('DataSource.components.EditDialog.5rg9yza90800'),
+                        },
+                    ]">
+                        <j-input-password v-model:value="form.data.shareConfig.password" :placeholder="t('DataSource.components.EditDialog.5rg9yza926w0')" />
                     </j-form-item>
                 </j-col>
             </j-row>
             <j-row :gutter="24" v-if="form.data.typeId === 'rabbitmq'">
                 <j-col :span="24">
-                    <j-form-item
-                        :name="['shareConfig', 'virtualHost']"
-                        label="虚拟域"
-                        :rules="[
-                            { required: true, message: '请输入虚拟域' },
-                            {
-                                max: 64,
-                                message: '最多可输入64个字符',
-                            },
-                        ]"
-                    >
-                        <j-input
-                            v-model:value="form.data.shareConfig.virtualHost"
-                            placeholder="请输入虚拟域"
-                        />
+                    <j-form-item :name="['shareConfig', 'virtualHost']" :label="t('DataSource.components.EditDialog.5rg9yza92c40')" :rules="[
+                        { required: true, message: t('DataSource.components.EditDialog.5rg9yza92hg0') },
+                        {
+                            max: 64,
+                            message: t('DataSource.components.EditDialog.5rg9yza90800'),
+                        },
+                    ]">
+                        <j-input v-model:value="form.data.shareConfig.virtualHost" :placeholder="t('DataSource.components.EditDialog.5rg9yza92hg0')" />
                     </j-form-item>
                 </j-col>
             </j-row>
             <j-row :gutter="24" v-if="form.data.typeId === 'rdb'">
                 <j-col :span="24">
-                    <j-form-item
-                        :name="['shareConfig', 'schema']"
-                        label="schema"
-                        :rules="[
-                            { required: true, message: '请输入schema' },
-                            {
-                                max: 64,
-                                message: '最多可输入64个字符',
-                            },
-                        ]"
-                    >
-                        <j-input
-                            v-model:value="form.data.shareConfig.schema"
-                            placeholder="请输入schema"
-                        />
+                    <j-form-item :name="['shareConfig', 'schema']" label="schema" :rules="[
+                        { required: true, message: t('DataSource.components.EditDialog.5rg9yza92n40') },
+                        {
+                            max: 64,
+                            message: t('DataSource.components.EditDialog.5rg9yza90800'),
+                        },
+                    ]">
+                        <j-input v-model:value="form.data.shareConfig.schema" :placeholder="t('DataSource.components.EditDialog.5rg9yza92n40')" />
                     </j-form-item>
                 </j-col>
             </j-row>
             <j-row :gutter="24">
                 <j-col :span="24">
-                    <j-form-item name="description" label="说明">
-                        <j-textarea
-                            v-model:value="form.data.description"
-                            placeholder="请输入说明"
-                            :rows="3"
-                            showCount
-                            :maxlength="200"
-                        />
+                    <j-form-item name="description" :label="t('DataSource.components.EditDialog.5rg9yza92tc0')">
+                        <j-textarea v-model:value="form.data.description" :placeholder="t('DataSource.components.EditDialog.5rg9yza92z00')" :rows="3" showCount
+                            :maxlength="200" />
                     </j-form-item>
                 </j-col>
             </j-row>
@@ -199,14 +125,16 @@ import { FormInstance } from 'ant-design-vue';
 import { Rule } from 'ant-design-vue/lib/form';
 import type { dictItemType, optionItemType, sourceItemType } from '../typing';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emits = defineEmits(['confirm', 'cancel']);
 const props = defineProps<{
     data: sourceItemType;
 }>();
 // 弹窗相关
 const dialogTitle = computed(() =>
-    props.data.id ? '编辑数据源' : '新增数据源',
+    props.data.id ? t('DataSource.components.EditDialog.5rg9yza93500') : t('DataSource.components.EditDialog.5rg9yza93ds0'),
 );
 const loading = ref(false);
 
@@ -216,7 +144,7 @@ const checkUrl = (_rule: Rule, value: string): Promise<any> => {
     if (arr?.[0] === 'jdbc' || arr?.[0] === 'r2dbc') {
         return Promise.resolve();
     } else {
-        return Promise.reject('请输入正确的URL');
+        return Promise.reject(t('DataSource.components.EditDialog.5rg9yza93l80'));
     }
 };
 
@@ -232,7 +160,7 @@ const validateAdminUrl = (_rule: Rule, value: string): Promise<any> => {
             if (arr[0] === 'http' || arr[0] === 'https') {
                 resolve('');
             } else {
-                reject('请输入正确的管理地址');
+                reject(t('DataSource.components.EditDialog.5rg9yza93rw0'));
             }
         }
     });
@@ -252,7 +180,7 @@ const validateAddress = (_rule: Rule, value: string): Promise<any> => {
             if (reg.test(value)) {
                 resolve('');
             } else {
-                reject('请输入正确的链接地址');
+                reject(t('DataSource.components.EditDialog.5rg9yza93wk0'));
             }
         }
     });
@@ -304,7 +232,7 @@ const confirm = () => {
         .then(async (_data: any) => {
             const resp = await saveDataSource_api({ ...props.data, ..._data });
             if (resp.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('DataSource.components.EditDialog.5rg9yza941g0'));
                 emits('confirm');
                 formRef.value?.resetFields();
             }

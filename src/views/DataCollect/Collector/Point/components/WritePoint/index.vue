@@ -1,5 +1,5 @@
 <template lang="">
-    <j-modal title="写入" :visible="true" width="500px" @cancel="handleCancel">
+    <j-modal :title="t('components.WritePoint.index.5rg7tjif9dw0')" :visible="true" width="500px" @cancel="handleCancel">
         <j-form
             class="form"
             layout="vertical"
@@ -14,7 +14,7 @@
                 :rules="[
                     {
                         required: true,
-                        message: `请输入${data.name}`,
+                        message: `${t('components.WritePoint.index.5rg7tjifav40') + data.name}`,
                     },
                 ]"
                 v-if="
@@ -23,7 +23,7 @@
                 "
             >
                 <j-textarea
-                    placeholder="请输入"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifav40')"
                     v-model:value="formData.value"
                     :maxlength="200"
                     :rows="3"
@@ -36,7 +36,7 @@
                 :rules="[
                     {
                         required: true,
-                        message: `请输入${data.name}`,
+                        message: `${t('components.WritePoint.index.5rg7tjifav40') + data.name}`,
                     },
                 ]"
                 v-else-if="data.provider === 'OPC_UA'"
@@ -44,7 +44,7 @@
                 <j-input-number
                     v-if="['double', 'float', 'llong', 'long', 'integer', 'short'].includes(valueType)"
                     style="width: 100%"
-                    placeholder="请输入"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifav40')"
                     v-model:value="formData.value"
                 />
                 <j-select
@@ -53,15 +53,15 @@
                     v-model:value="formData.value"
                     :options="[
                         {
-                            label: '是',
+                            label: t('components.WritePoint.index.5rg7tjifb5w0'),
                             value: true,
                         },
                         {
-                            label: '否',
+                            label: t('components.WritePoint.index.5rg7tjifbn40'),
                             value: false,
                         },
                     ]"
-                    placeholder="请选择"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifbu80')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
@@ -71,13 +71,13 @@
                     style="width: 100%"
                     format="YYYY-MM-DD HH:mm:ss"
                     show-time
-                    placeholder="请选择"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifbu80')"
                     @change="onChange"
                 />
 
                 <j-input
                     v-else
-                    placeholder="请输入"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifav40')"
                     v-model:value="formData.value"
                 />
             </j-form-item>
@@ -87,7 +87,7 @@
                 :rules="[
                     {
                         required: true,
-                        message: `请输入${data.name}`,
+                        message: `${t('components.WritePoint.index.5rg7tjifav40') + data.name}`,
                     },
                 ]"
                 v-else
@@ -95,7 +95,7 @@
                 <j-input-number
                     v-if="valueTypeArray.includes(valueType)"
                     style="width: 100%"
-                    placeholder="请输入"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifav40')"
                     v-model:value="formData.value"
                 />
                 <j-select
@@ -104,15 +104,15 @@
                     v-model:value="formData.value"
                     :options="[
                         {
-                            label: '是',
+                            label: t('components.WritePoint.index.5rg7tjifb5w0'),
                             value: true,
                         },
                         {
-                            label: '否',
+                            label: t('components.WritePoint.index.5rg7tjifbn40'),
                             value: false,
                         },
                     ]"
-                    placeholder="请选择"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifbu80')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
@@ -122,19 +122,19 @@
                     style="width: 100%"
                     format="YYYY-MM-DD HH:mm:ss"
                     show-time
-                    placeholder="请选择"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifbu80')"
                     @change="onChange"
                 />
 
                 <j-input
                     v-else
-                    placeholder="请输入"
+                    :placeholder="t('components.WritePoint.index.5rg7tjifav40')"
                     v-model:value="formData.value"
                 />
             </j-form-item>
         </j-form>
         <template #footer>
-            <j-button key="back" @click="handleCancel">取消</j-button>
+            <j-button key="back" @click="handleCancel">{{t('components.WritePoint.index.5rg7tjifbyw0')}}</j-button>
             <PermissionButton
                 key="submit"
                 type="primary"
@@ -143,7 +143,7 @@
                 style="margin-left: 8px"
                 :hasPermission="`DataCollect/Collector:update`"
             >
-                确认
+                {{t('components.WritePoint.index.5rg7tjifc7g0')}}
             </PermissionButton>
         </template>
     </j-modal>
@@ -152,7 +152,9 @@
 import type { FormInstance } from 'ant-design-vue';
 import type { Dayjs } from 'dayjs';
 import { writePoint } from '@/api/data-collect/collector';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Object,

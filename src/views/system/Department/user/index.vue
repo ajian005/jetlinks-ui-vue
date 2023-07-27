@@ -32,7 +32,8 @@
                         style="margin-right: 15px"
                         :disabled='!parentId'
                     >
-                        <AIcon type="PlusOutlined" />绑定用户
+                        <AIcon type="PlusOutlined" />
+                        {{t('Department.user.index.5rg96l7e8ts0')}}
                     </PermissionButton>
                     <div
                         style="display: inline-block; width: 12px; height: 1px"
@@ -40,17 +41,18 @@
                     <PermissionButton
                         :hasPermission="`${permission}:bind`"
                         :popConfirm="{
-                            title: `是否解除绑定`,
+                            title: t('Department.user.index.untieTip'),
                             onConfirm: () => table.unBind(),
                         }"
                     >
-                        <AIcon type="DisconnectOutlined" />批量解绑
+                        <AIcon type="DisconnectOutlined" />
+                        {{t('Department.user.index.5rg96l7ebi00')}}
                     </PermissionButton>
                 </template>
                 <template #status="slotProps">
                     <BadgeStatus
                         :status="slotProps.status"
-                        :text="slotProps.status ? '正常' : '禁用'"
+                        :text="slotProps.status ? t('Department.user.index.5rg967xq3vs0') : t('Department.user.index.5rg967xq4to0')"
                         :statusNames="{
                             1: 'success',
                             0: 'error',
@@ -63,7 +65,7 @@
                             type="link"
                             :hasPermission="`${permission}:bind`"
                             :popConfirm="{
-                                title: `是否解除绑定`,
+                                title: t('Department.user.index.untieTip'),
                                 onConfirm: () => table.unBind(slotProps),
                             }"
                         >
@@ -90,7 +92,9 @@ import PermissionButton from '@/components/PermissionButton/index.vue';
 import AddBindUserDialog from './components/AddBindUserDialog.vue';
 import { getBindUserList_api, unBindUser_api } from '@/api/system/department';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const permission = 'system/Department';
 
 const props = defineProps<{
@@ -99,7 +103,7 @@ const props = defineProps<{
 
 const columns = [
     {
-        title: '姓名',
+        title: t('Department.user.index.5rg967xq4z40'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -109,7 +113,7 @@ const columns = [
         },
     },
     {
-        title: '用户名',
+        title: t('Department.user.index.5rg967xq53k0'),
         dataIndex: 'username',
         key: 'username',
         ellipsis: true,
@@ -120,7 +124,7 @@ const columns = [
     },
 
     {
-        title: '状态',
+        title: t('Department.user.index.5rg967xq5980'),
         dataIndex: 'status',
         key: 'status',
         ellipsis: true,
@@ -129,11 +133,11 @@ const columns = [
             type: 'select',
             options: [
                 {
-                    label: '正常',
+                    label: t('Department.user.index.5rg967xq3vs0'),
                     value: 1,
                 },
                 {
-                    label: '禁用',
+                    label: t('Department.user.index.5rg967xq4to0'),
                     value: 0,
                 },
             ],
@@ -141,7 +145,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '操作',
+        title: t('Department.user.index.5rg967xq5m80'),
         dataIndex: 'action',
         key: 'action',
         scopedSlots: true,
@@ -200,10 +204,10 @@ const table = reactive({
     },
     unBind: (row?: any) => {
         const ids = row ? [row.id] : table._selectedRowKeys;
-        if (ids.length < 1) return onlyMessage('请勾选需要解绑的数据', 'warning');
+        if (ids.length < 1) return onlyMessage(t('Department.user.index.5rg967xq5qs0'), 'warning');
 
         unBindUser_api(props.parentId, ids).then(() => {
-            onlyMessage('操作成功');
+            onlyMessage(t('Department.user.index.5rg967xq5u80'));
             table._selectedRowKeys = []
             table.refresh();
         });

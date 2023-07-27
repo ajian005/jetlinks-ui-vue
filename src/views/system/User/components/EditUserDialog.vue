@@ -8,33 +8,33 @@
         @cancel="emits('update:visible', false)"
         class="edit-dialog-container"
         :confirmLoading="loading"
-        cancelText="取消"
-        okText="确定"
+        :cancelText="t('User.components.EditUserDialog.5rg8t2bn4ps0')"
+        :okText="t('User.components.EditUserDialog.5rg8t2bn5t00')"
     >
         <j-form ref="formRef" :model="form.data" layout="vertical">
             <j-row :gutter="24" v-if="form.IsShow('add', 'edit')">
                 <j-col :span="12">
                     <j-form-item
                         name="name"
-                        label="姓名"
+                        :label="t('User.components.EditUserDialog.5rg8t2bn5yo0')"
                         :rules="[
-                            { required: true, message: '请输入姓名' },
+                            { required: true, message: t('User.components.EditUserDialog.5rg8t2bn62w0') },
                             {
                                 max: 64,
-                                message: '最多可输入64个字符',
+                                message: t('User.components.EditUserDialog.5rg8t2bn67c0'),
                             },
                         ]"
                     >
                         <j-input
                             v-model:value="form.data.name"
-                            placeholder="请输入姓名"
+                            :placeholder="t('User.components.EditUserDialog.5rg8t2bn62w0')"
                         />
                     </j-form-item>
                 </j-col>
                 <j-col :span="12">
                     <j-form-item
                         name="username"
-                        label="用户名"
+                        :label="t('User.components.EditUserDialog.5rg8t2bn6b80')"
                         :rules="[
                             { required: true, message: '' },
                             {
@@ -45,7 +45,7 @@
                     >
                         <j-input
                             v-model:value="form.data.username"
-                            placeholder="请输入用户名"
+                            :placeholder="t('User.components.EditUserDialog.5rg8t2bn6ek0')"
                             :disabled="props.type === 'edit'"
                         />
                     </j-form-item>
@@ -55,7 +55,7 @@
                 <j-col :span="24">
                     <j-form-item
                         name="password"
-                        label="密码"
+                        :label="t('User.components.EditUserDialog.5rg8t2bn6i40')"
                         :rules="[
                             { required: true, message: '' },
                             {
@@ -66,7 +66,7 @@
                     >
                         <j-input-password
                             v-model:value="form.data.password"
-                            placeholder="请输入密码"
+                            :placeholder="t('User.components.EditUserDialog.5rg8t2bn6lk0')"
                         />
                     </j-form-item>
                 </j-col>
@@ -75,7 +75,7 @@
                 <j-col :span="24">
                     <j-form-item
                         name="confirmPassword"
-                        label="确认密码"
+                        :label="t('User.components.EditUserDialog.5rg8t2bn6p40')"
                         :rules="[
                             { required: true, message: '' },
                             {
@@ -86,7 +86,7 @@
                     >
                         <j-input-password
                             v-model:value="form.data.confirmPassword"
-                            placeholder="请再次输入密码"
+                            :placeholder="t('User.components.EditUserDialog.5rg8t2bn6so0')"
                             :maxlength="64"
                         />
                     </j-form-item>
@@ -94,16 +94,16 @@
             </j-row>
             <j-row :gutter="24" v-if="form.IsShow('add', 'edit')">
                 <j-col :span="12">
-                    <j-form-item name="roleIdList" label="角色" class="flex" 
+                    <j-form-item name="roleIdList" :label="t('User.components.EditUserDialog.5rg8t2bn6w80')" class="flex" 
                         :rules="[
-                            { required: form.data.username !== 'admin', message: '请选择角色' },
+                            { required: form.data.username !== 'admin', message: t('User.components.EditUserDialog.5rg8t2bn7100') },
                         ]"
                     >
                         <j-select
                             v-model:value="form.data.roleIdList"
                             mode="multiple"
                             style="width: calc(100% - 40px)"
-                            placeholder="请选择角色"
+                            :placeholder="t('User.components.EditUserDialog.5rg8t2bn7100')"
                             :options="_roleOptions"
                             :disabled="form.data.username === 'admin'"
                         ></j-select>
@@ -117,12 +117,12 @@
                     </j-form-item>
                 </j-col>
                 <j-col :span="12">
-                    <j-form-item name="orgIdList" label="组织" class="flex">
+                    <j-form-item name="orgIdList" :label="t('User.components.EditUserDialog.5rg8t2bn74c0')" class="flex">
                         <j-tree-select
                             v-model:value="form.data.orgIdList"
                             show-search
                             style="width: calc(100% - 40px)"
-                            placeholder="请选择组织"
+                            :placeholder="t('User.components.EditUserDialog.5rg8t2bn77s0')"
                             :tree-data="_departmentOptions"
                             :fieldNames="{ label: 'name', value: 'id' }"
                             multiple
@@ -149,17 +149,17 @@
                 <j-col :span="12">
                     <j-form-item
                         name="telephone"
-                        label="手机号"
+                        :label="t('User.components.EditUserDialog.5rg8t2bn7bw0')"
                         :rules="[
                             {
                                 pattern: /^1[3456789]\d{9}$/,
-                                message: '请输入正确的手机号',
+                                message: t('User.components.EditUserDialog.5rg8t2bn7f40'),
                             },
                         ]"
                     >
                         <j-input
                             v-model:value="form.data.telephone"
-                            placeholder="请输入手机号"
+                            :placeholder="t('User.components.EditUserDialog.5rg8t2bn7ig0')"
                             :maxlength="64"
                         />
                     </j-form-item>
@@ -167,18 +167,18 @@
                 <j-col :span="12">
                     <j-form-item
                         name="email"
-                        label="邮箱"
+                        :label="t('User.components.EditUserDialog.5rg8t2bn7ls0')"
                         :rules="[
                             {
                                 pattern:
                                     /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-                                message: '请输入正确的邮箱',
+                                message: t('User.components.EditUserDialog.5rg8t2bn7pg0'),
                             },
                         ]"
                     >
                         <j-input
                             v-model:value="form.data.email"
-                            placeholder="请输入邮箱"
+                            :placeholder="t('User.components.EditUserDialog.5rg8t2bn7v00')"
                             :maxlength="64"
                         />
                     </j-form-item>
@@ -206,7 +206,9 @@ import { AxiosResponse } from 'axios';
 import { passwordRegEx } from '@/utils/validate';
 import { filterSelectNode, onlyMessage } from '@/utils/comm';
 import { uniqBy } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const deptPermission = 'system/Department';
 const rolePermission = 'system/Role';
 
@@ -219,9 +221,9 @@ const props = defineProps<{
 // 弹窗相关
 const loading = ref(false);
 const dialogTitle = computed(() => {
-    if (props.type === 'add') return '新增';
-    else if (props.type === 'edit') return '编辑';
-    else if (props.type === 'reset') return '重置密码';
+    if (props.type === 'add') return t('User.components.EditUserDialog.5rg8t2bn7xo0');
+    else if (props.type === 'edit') return t('User.components.EditUserDialog.5rg8t2bn8280');
+    else if (props.type === 'reset') return t('User.components.EditUserDialog.5rg8t2bn84w0');
     else return '';
 });
 const confirm = () => {
@@ -231,7 +233,7 @@ const confirm = () => {
         .then(() => form.submit())
         .then((resp: any) => {
             if (resp.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('User.components.EditUserDialog.5rg8t2bn87o0'));
                 emits('confirm');
                 emits('update:visible', false);
             }
@@ -248,8 +250,8 @@ const form = reactive({
             new Promise((resolve, reject) => {
                 if (props.type === 'edit') return resolve('');
 
-                if (!value) return reject('请输入用户名');
-                else if (value.length > 64) return reject('最多可输入64个字符');
+                if (!value) return reject(t('User.components.EditUserDialog.5rg8t2bn6ek0'));
+                else if (value.length > 64) return reject(t('User.components.EditUserDialog.5rg8t2bn67c0'));
                 validateField_api('username', value).then((resp: any): any => {
                     resp.result.passed
                         ? resolve('')
@@ -258,11 +260,11 @@ const form = reactive({
             }),
         checkPassword: (_rule: Rule, value: string): Promise<any> =>
             new Promise((resolve, reject) => {
-                if (!value) return reject('请输入密码');
-                else if (value.length > 64) return reject('最多可输入64个字符');
-                else if (value.length < 8) return reject('密码不能少于8位');
+                if (!value) return reject(t('User.components.EditUserDialog.5rg8t2bn6lk0'));
+                else if (value.length > 64) return reject(t('User.components.EditUserDialog.5rg8t2bn67c0'));
+                else if (value.length < 8) return reject(t('User.components.EditUserDialog.5rg8t2bn8a80'));
                 else if (!passwordRegEx(value))
-                    return reject('密码必须包含大小写英文和数字');
+                    return reject(t('User.components.EditUserDialog.5rg8t2bn8d40'));
                 validateField_api('password', value).then((resp: any) => {
                     resp.result.passed
                         ? resolve('')
@@ -270,10 +272,10 @@ const form = reactive({
                 });
             }),
         checkAgainPassword: (_rule: Rule, value: string): Promise<any> => {
-            if (!value) return Promise.reject('请输入8~64位的密码');
+            if (!value) return Promise.reject(t('User.components.EditUserDialog.5rg8t2bn8g00'));
             return value === form.data.password
                 ? Promise.resolve()
-                : Promise.reject('两次密码输入不一致');
+                : Promise.reject(t('User.components.EditUserDialog.5rg8t2bn8ik0'));
         },
     },
 

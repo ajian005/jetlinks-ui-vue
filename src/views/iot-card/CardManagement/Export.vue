@@ -3,18 +3,18 @@
     <j-modal
         :maskClosable="false"
         :visible="true"
-        title="导出"
-        okText="确定"
-        cancelText="取消"
+        :title="t('iot-card.CardManagement.Export.5rgbfti06ss0')"
+        :okText="t('iot-card.CardManagement.Export.5rgbfti08hg0')"
+        :cancelText="t('iot-card.CardManagement.Export.5rgbfti08rg0')"
         @ok="handleOk"
         @cancel="handleCancel"
     >
         <div style="margin-top: 10px">
             <j-space>
-                <span>文件格式：</span>
+                <span>{{t('iot-card.CardManagement.Export.5rgbfti08xg0')}}</span>
                 <j-radio-group
                     v-model:value="type"
-                    placeholder="请选择文件格式"
+                    :placeholder="t('iot-card.CardManagement.Export.5rgbfti096s0')"
                     button-style="solid"
                 >
                     <j-radio-button value="xlsx">xlsx</j-radio-button>
@@ -29,7 +29,9 @@
 import moment from 'moment';
 import { _export } from '@/api/iot-card/cardManagement';
 import { downloadFileByUrl } from '@/utils/utils';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close']);
 
 const props = defineProps({

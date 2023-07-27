@@ -4,11 +4,11 @@
         <div class="card-dashboard-container">
             <j-card style="margin-bottom: 24px">
                 <j-row :gutter="24">
-                    <j-col :span="24"><Guide title="数据统计" /></j-col>
+                    <j-col :span="24"><Guide :title="t('iot-card.Dashboard.index.5rgbbh6841g0')" /></j-col>
                     <j-col :span="8">
                         <div class="data-statistics-item">
                             <div class="flow-info" style="width: 100%">
-                                <div class="label">昨日流量消耗</div>
+                                <div class="label">{{t('iot-card.Dashboard.index.5rgbbh685380')}}</div>
                                 <j-tooltip placement="bottomLeft">
                                     <template #title>
                                         <span>{{ dayTotal }} M</span>
@@ -28,7 +28,7 @@
                     <j-col :span="8">
                         <div class="data-statistics-item">
                             <div class="flow-info" style="width: 100%">
-                                <div class="label">当月流量消耗</div>
+                                <div class="label">{{t('iot-card.Dashboard.index.5rgbbh6859k0')}}</div>
                                 <j-tooltip placement="bottomLeft">
                                     <template #title>
                                         <span>{{ monthTotal }} M</span>
@@ -45,7 +45,7 @@
                     <j-col :span="8">
                         <div class="data-statistics-item">
                             <div class="flow-info" style="width: 100%">
-                                <div class="label">本年流量消耗</div>
+                                <div class="label">{{t('iot-card.Dashboard.index.5rgbbh685ek0')}}</div>
                                 <j-tooltip placement="bottomLeft">
                                     <template #title>
                                         <span>{{ yearTotal }} M</span>
@@ -67,7 +67,7 @@
             <j-row :gutter="24">
                 <j-col :span="16">
                     <div class="static-card">
-                        <Guide title="流量统计">
+                        <Guide :title="t('iot-card.Dashboard.index.5rgbbh685iw0')">
                             <template #extra>
                                 <TimeSelect
                                     key="flow-static"
@@ -92,7 +92,7 @@
                 </j-col>
                 <j-col :span="8">
                     <div class="static-card">
-                        <Guide title="流量使用TOP10">
+                        <Guide :title="t('iot-card.Dashboard.index.5rgbbh685o00')">
                             <template #extra>
                                 <TimeSelect
                                     key="flow-top10"
@@ -155,7 +155,9 @@ import dayjs from 'dayjs';
 import { queryFlow } from '@/api/iot-card/home';
 import TimeSelect from '@/views/iot-card/components/TimeSelect.vue';
 import { Empty } from 'ant-design-vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const dayTotal = ref(0);
 const monthTotal = ref(0);
 const yearTotal = ref(0);
@@ -168,10 +170,10 @@ const topList = ref<any[]>([]);
 const topTotal = ref(0);
 
 const quickBtnList = [
-    { label: '昨日', value: 'yesterday' },
-    { label: '近一周', value: 'week' },
-    { label: '近一月', value: 'month' },
-    { label: '近一年', value: 'year' },
+    { label: t('iot-card.Dashboard.index.5rgbbh685s80'), value: 'yesterday' },
+    { label: t('iot-card.Dashboard.index.5rgbbh685w40'), value: 'week' },
+    { label: t('iot-card.Dashboard.index.5rgbbh6860k0'), value: 'month' },
+    { label: t('iot-card.Dashboard.index.5rgbbh6864k0'), value: 'year' },
 ];
 
 const getData = (
@@ -235,7 +237,7 @@ const getDataTotal = () => {
 };
 
 /**
- * 流量统计
+ * {{t('iot-card.Dashboard.index.5rgbbh685iw0')}}
  * @param data
  */
 const getEcharts = (data: any) => {
@@ -252,7 +254,7 @@ const getEcharts = (data: any) => {
 };
 
 /**
- * 流量使用TOP10
+ * {{t('iot-card.Dashboard.index.5rgbbh685o00')}}
  * @param star 开始时间
  * @param end 结束时间
  */

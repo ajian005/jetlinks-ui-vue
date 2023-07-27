@@ -66,14 +66,14 @@
                         <j-row>
                             <j-col :span="12">
                                 <div class="card-item-content-text">
-                                    通知方式
+                                    {{t('Save.components.NotifyConfig.5rga9hme45o0')}}
                                 </div>
                                 <div>
                                     {{ getMethodTxt(slotProps.type) }}
                                 </div>
                             </j-col>
                             <j-col :span="12">
-                                <div class="card-item-content-text">说明</div>
+                                <div class="card-item-content-text">{{t('Save.components.NotifyConfig.5rga9hme5lk0')}}</div>
                                 <Ellipsis>
                                     {{ slotProps.description }}
                                 </Ellipsis>
@@ -90,6 +90,9 @@
 import ConfigApi from '@/api/notice/config';
 import { MSG_TYPE, NOTICE_METHOD } from '@/views/notice/const';
 import { noticeType } from '../../../data';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
     notifyType: {
         type: String,
@@ -117,7 +120,7 @@ const tableRef = ref<any>();
 
 const columns = [
     {
-        title: '名称',
+        title: t('Save.components.NotifyConfig.5rga9hme5uo0'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -133,7 +136,7 @@ const columns = [
         },
     },
     {
-        title: '说明',
+        title: t('Save.components.NotifyConfig.5rga9hme5lk0'),
         dataIndex: 'description',
         key: 'description',
         search: {

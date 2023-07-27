@@ -41,7 +41,9 @@ import { getIsBindThird } from '@/api/account/notificationSubscription';
 import { useUserInfo } from '@/store/userInfo';
 import EditInfo from '../../EditInfo/index.vue';
 import Bind from './Bind.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const user = useUserInfo();
 const emit = defineEmits(['save', 'unsubscribe', 'close']);
 const info = ref<any>(null);

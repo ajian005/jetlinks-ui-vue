@@ -17,12 +17,12 @@
         >
             <j-button>
                 <template #icon><AIcon type="UploadOutlined" /></template>
-                文件上传
+                {{t('components.NormalUpload.index.5rlcirxqb500')}}
             </j-button>
         </j-upload>
         <div style="margin-left: 20px">
             <j-space>
-                下载模板
+                {{t('components.NormalUpload.index.5rlcirxqcmo0')}}
                 <a @click="downFile('xlsx')">.xlsx</a>
                 <a @click="downFile('csv')">.csv</a>
             </j-space>
@@ -58,7 +58,9 @@ import {
     templateDownload,
 } from '@/api/device/instance';
 import { EventSourcePolyfill } from 'event-source-polyfill';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:modelValue', data: string[]): void;
 };
@@ -115,10 +117,10 @@ const beforeUpload = (_file: any) => {
     const isCsv = _file.type === 'text/csv';
     const isXlsx = _file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     if (!isCsv && fileType !== 'xlsx') {
-        onlyMessage('请上传.csv格式文件', 'warning');
+        onlyMessage(t('components.NormalUpload.index.5rlcirxqd400'), 'warning');
     }
     if (!isXlsx && fileType !== 'csv') {
-        onlyMessage('请上传.xlsx格式文件', 'warning');
+        onlyMessage(t('components.NormalUpload.index.5rlcirxqd9k0'), 'warning');
     }
     return (isCsv && fileType !== 'xlsx') || (isXlsx && fileType !== 'csv');
 };
@@ -149,7 +151,7 @@ const submitData = async (fileUrl: string) => {
             }
         };
         source.onerror = (e: { status: number }) => {
-            if (e.status === 403) errMessage.value = '暂无权限，请联系管理员';
+            if (e.status === 403) errMessage.value = t('components.NormalUpload.index.5rlcirxqdkg0');
             flag.value = false;
             source.close();
         };

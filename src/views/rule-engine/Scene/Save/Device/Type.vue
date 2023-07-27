@@ -3,7 +3,7 @@
     <j-form ref='typeForm' :model='formModel' layout='vertical' :colon='false'>
       <j-form-item
         required
-        label='触发类型'
+        :label="t('Save.Device.Type.5rg5643j7xs0')"
       >
         <TopCard
           :label-bottom='true'
@@ -30,13 +30,13 @@
       <j-form-item
         v-if='showReportEvent'
         name='eventId'
-        :rules="[{ required: true, message: '请选择事件' }]"
+        :rules="[{ required: true, message: t('Save.Device.Type.5rg5643jadc0') }]"
       >
         <j-select
           v-model:value='formModel.eventId'
           :filter-option='filterSelectNode'
           :options='eventOptions'
-          placeholder='请选择事件'
+          :placeholder="t('Save.Device.Type.5rg5643jadc0')"
           style='width: 100%'
           @select='eventSelect'
         />
@@ -65,7 +65,9 @@ import WriteProperty from './WriteProperty.vue'
 import InvokeFunction from './InvokeFunction.vue'
 import { defineExpose } from 'vue'
 import { cloneDeep, omit } from 'lodash-es'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
   metadata: {
     type: Object as PropType<metadataType>,
@@ -106,12 +108,12 @@ const invokeRef = ref()
 const topOptions = computed(() => {
   const baseOptions = [
     {
-      label: '设备上线',
+      label: t('Save.Device.Type.5rg5643japc0'),
       value: 'online',
       img: getImage('/scene/online.png')
     },
     {
-      label: '设备离线',
+      label: t('Save.Device.Type.5rg5643jaxs0'),
       value: 'offline',
       img: getImage('/scene/offline.png')
     }
@@ -186,7 +188,7 @@ const showTimer = computed(() => {
 })
 
 const eventSelect = (_: string, eventItem: any) => {
-  optionCache.action = `${eventItem.name}上报`
+  optionCache.action = `${eventItem.name + t('Save.Device.Type.report')}`
 }
 
 defineExpose({

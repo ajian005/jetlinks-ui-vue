@@ -1,11 +1,11 @@
 <template>
-  <j-modal :mask-closable="false" title="导入物模型" destroy-on-close v-model:visible="_visible" @cancel="close"
+  <j-modal :mask-closable="false" :title="t('Metadata.Import.index.5rr9yun0mrs0')" destroy-on-close v-model:visible="_visible" @cancel="close"
     @ok="handleImport" :confirm-loading="loading">
     <div class="import-content">
       <p class="import-tip">
         <AIcon type="ExclamationCircleOutlined" style="margin-right: 5px" />
         <template v-if="type === 'product'">
-          导入的物模型会覆盖原来的属性、功能、事件、标签，请谨慎操作。
+          {{t('Metadata.Import.index.5rr9yun0omg0')}}
         </template>
         <template v-else>
           导入时会根据标识跳过继承自产品物模型的属性、功能、事件、标签。
@@ -13,29 +13,29 @@
       </p>
     </div>
     <j-form layout="vertical" v-model="formModel">
-      <j-form-item v-if="type === 'product'" label="导入方式" v-bind="validateInfos.type">
+      <j-form-item v-if="type === 'product'" :label="t('Metadata.Import.index.5rr9yun0p240')" v-bind="validateInfos.type">
         <j-select v-model:value="formModel.type">
-          <j-select-option value="copy">拷贝产品</j-select-option>
-          <j-select-option value="import">导入物模型</j-select-option>
+          <j-select-option value="copy">{{t('Metadata.Import.index.5rr9yun0pb40')}}</j-select-option>
+          <j-select-option value="import">{{t('Metadata.Import.index.5rr9yun0mrs0')}}</j-select-option>
         </j-select>
       </j-form-item>
-      <j-form-item label="选择产品" v-bind="validateInfos.copy" v-if="formModel.type === 'copy'">
+      <j-form-item :label="t('Metadata.Import.index.5rr9yun0pkg0')" v-bind="validateInfos.copy" v-if="formModel.type === 'copy'">
         <j-select :options="productList" v-model:value="formModel.copy" option-filter-prop="label" showSearch></j-select>
       </j-form-item>
-      <j-form-item label="物模型类型" v-bind="validateInfos.metadata" v-if="type === 'device' || formModel.type === 'import'">
+      <j-form-item :label="t('Metadata.Import.index.5rr9yun0ptk0')" v-bind="validateInfos.metadata" v-if="type === 'device' || formModel.type === 'import'">
         <j-select v-model:value="formModel.metadata">
-          <j-select-option value="jetlinks">Jetlinks物模型</j-select-option>
-          <j-select-option value="alink">阿里云物模型TSL</j-select-option>
+          <j-select-option value="jetlinks">{{ t('Metadata.Import.index.objectModel') }}</j-select-option>
+          <j-select-option value="alink">{{t('Metadata.Import.index.5rr9yun0q2s0')}}</j-select-option>
         </j-select>
       </j-form-item>
-      <j-form-item label="导入类型" v-bind="validateInfos.metadataType"
+      <j-form-item :label="t('Metadata.Import.index.5rr9yun0qag0')" v-bind="validateInfos.metadataType"
         v-if="type === 'device' || formModel.type === 'import'">
         <j-select v-model:value="formModel.metadataType">
-          <j-select-option value="file">文件上传</j-select-option>
-          <j-select-option value="script">脚本</j-select-option>
+          <j-select-option value="file">{{t('Metadata.Import.index.5rr9yun0qiw0')}}</j-select-option>
+          <j-select-option value="script">{{t('Metadata.Import.index.5rr9yun0r1w0')}}</j-select-option>
         </j-select>
       </j-form-item>
-      <j-form-item v-if="formModel.type === 'import' && formModel.metadataType === 'file'" label="文件上传" v-bind="validateInfos.upload">
+      <j-form-item v-if="formModel.type === 'import' && formModel.metadataType === 'file'" :label="t('Metadata.Import.index.5rr9yun0qiw0')" v-bind="validateInfos.upload">
         <j-input v-model:value="formModel.upload">
           <template #addonAfter>
             <j-upload v-model:file-list="fileList" :before-upload="beforeUpload" accept=".json" :show-upload-list="false"
@@ -48,8 +48,8 @@
       <j-form-item v-bind="validateInfos.import" v-if="(type === 'device' || formModel.type === 'import') && formModel.metadataType === 'script'">
         <template #label>
           <j-space>
-            物模型
-            <j-tooltip title="在线编辑器中编写物模型脚本">
+            {{t('Metadata.Import.index.5rr9yun0r9g0')}}
+            <j-tooltip :title="t('Metadata.Import.index.5rr9yun0ri40')">
               <AIcon type="QuestionCircleOutlined" style="color: rgb(136, 136, 136);"/>
             </j-tooltip>
           </j-space>
@@ -73,7 +73,9 @@ import { getToken, onlyMessage } from '@/utils/comm';
 import { useMetadataStore } from '@/store/metadata';
 import {omit} from "lodash-es";
 import { Modal } from 'jetlinks-ui-components'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute()
 const instanceStore = useInstanceStore()
 const productStore = useProductStore()
@@ -113,37 +115,37 @@ const rules = reactive({
   type: [
     {
       required: true,
-      message: '请选择导入方式',
+      message: t('Metadata.Import.index.5rr9yun0rpk0'),
     },
   ],
   copy: [
     {
       required: true,
-      message: '请选择产品',
+      message: t('Metadata.Import.index.5rr9yun0ryo0'),
     },
   ],
   metadata: [
     {
       required: true,
-      message: '请选择物模型类型',
+      message: t('Metadata.Import.index.5rr9yun0s5w0'),
     },
   ],
   metadataType: [
     {
       required: true,
-      message: '请选择导入类型',
+      message: t('Metadata.Import.index.5rr9yun0sdk0'),
     },
   ],
   upload: [
     {
       required: true,
-      message: '请上传文件',
+      message: t('Metadata.Import.index.5rr9yun0spw0'),
     },
   ],
   import: [
     {
       required: true,
-      message: '请输入物模型',
+      message: t('Metadata.Import.index.5rr9yun0t180'),
     },
   ],
 })
@@ -229,7 +231,7 @@ const handleImport = async () => {
           result = await modify(id as string, { id, metadata: JSON.stringify(metadata) }).catch(err => err)
         }
         if (result.success) {
-          onlyMessage('导入成功')
+          onlyMessage(t('Metadata.Import.index.5rr9yun0t940'))
         }
         loading.value = false
       } else {
@@ -252,7 +254,7 @@ const handleImport = async () => {
         if (
           !(!!_object?.properties || !!_object?.events || !!_object?.functions || !!_object?.tags)
         ) {
-          onlyMessage('物模型数据不正确', 'error')
+          onlyMessage(t('Metadata.Import.index.5rr9yun0ths0'), 'error')
           loading.value = false;
           return;
         }
@@ -273,7 +275,7 @@ const handleImport = async () => {
         }
         loading.value = false
         if (resp.success) {
-          onlyMessage('导入成功')
+          onlyMessage(t('Metadata.Import.index.5rr9yun0t940'))
           if (hasVirtualRule.value) {
             setTimeout(() => {
               Modal.info({
@@ -292,7 +294,7 @@ const handleImport = async () => {
         close();
       } catch (e) {
         loading.value = false
-        onlyMessage(e === 'error' ? '物模型数据不正确' : '上传json格式的物模型文件', 'error')
+        onlyMessage(e === 'error' ? t('Metadata.Import.index.5rr9yun0ths0') : t('Metadata.Import.index.5rr9yun0tu40'), 'error')
       }
     }
   })

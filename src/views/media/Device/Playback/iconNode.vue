@@ -9,7 +9,9 @@
 import type { recordsItemType } from './typings';
 import playBackApi from '@/api/media/playback';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface Props {
     type: string;
     item: recordsItemType;
@@ -47,7 +49,7 @@ const downLoadCloud = (item: recordsItemType) => {
         .then((res) => {
             if (res.status === 200) {
                 onlyMessage(
-                    '操作成功。上传云端需要一定时间，请稍后查看云端数据',
+                    t('Device.Playback.iconNode.5rg8bmizq180'),
                 );
             }
             status.value = res.status === 200 ? 2 : 0;

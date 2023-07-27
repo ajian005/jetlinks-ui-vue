@@ -1,11 +1,11 @@
 <template>
   <div :class='WarpClass'>
     <div class='actions-terms-title'>
-      {{ isFirst ? '当' : '否则' }}
+      {{ isFirst ? t('components.Terms.Branches.5rg4y4mv6ts0') : t('components.Terms.Branches.5rg4y4mv97k0') }}
     </div>
     <div :class='optionsClass'>
         <j-popconfirm
-          title='确认删除？'
+          :title="t('components.Terms.Branches.5rg4y4mv9jo0')"
           @confirm='onDelete'
           :overlayStyle='{minWidth: "180px"}'
         >
@@ -19,7 +19,7 @@
         @mouseout='mouseout'
       >
         <j-popconfirm
-          title='该操作将清空其它所有否则条件，确认删除？'
+          :title="t('components.Terms.Branches.5rg4y4mv9ps0')"
           placement="topRight"
           @confirm='onDeleteAll'
         >
@@ -49,7 +49,7 @@
           <div v-else style="display: flex; padding-top: 10px;">
             <span class='when-add' @click='addWhen' :style='{ padding: isFirst ? "16px 0" : 0 }'>
               <AIcon type='PlusCircleOutlined' style='padding: 4px' />
-              添加过滤条件
+              {{t('components.Terms.Branches.5rg4y4mv9yk0')}}
             </span>
           </div>
         </div>
@@ -78,7 +78,9 @@ import { storeToRefs } from 'pinia';
 import { useSceneStore } from 'store/scene'
 import Action from '../../action/index.vue'
 import { randomString } from '@/utils/utils'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data: FormModel } = storeToRefs(sceneStore)
 
@@ -170,7 +172,7 @@ const addWhen = () => {
   }
   FormModel.value.branches?.[props.name].when?.push(terms)
   FormModel.value.branches?.push(null as any)
-  FormModel.value.options!.when[props.name]?.terms.push({ termType: '并且', terms: [['','eq','','and']]})
+  FormModel.value.options!.when[props.name]?.terms.push({ termType: t('components.Terms.Branches.5rg4y4mva500'), terms: [['','eq','','and']]})
 }
 
 const optionsClass = computed(() => {
@@ -184,10 +186,10 @@ const optionsClass = computed(() => {
 const rules = [{
   validator(_: string, value: any) {
     if (!value || (value && !value.length)) {
-      return Promise.reject('至少配置一个执行动作')
+      return Promise.reject(t('components.Terms.Branches.5rg4y4mvab00'))
     } else {
       const isActions = value.some((item: any) => item.actions && item.actions.length)
-      return isActions ? Promise.resolve() : Promise.reject('至少配置一个执行动作');
+      return isActions ? Promise.resolve() : Promise.reject(t('components.Terms.Branches.5rg4y4mvab00'));
     }
     return Promise.resolve();
   }

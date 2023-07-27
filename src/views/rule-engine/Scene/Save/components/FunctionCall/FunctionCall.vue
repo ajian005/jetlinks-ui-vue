@@ -18,7 +18,7 @@
           v-if="record.type === 'object'"
         >
           <template slot="title">
-            请按照json格式输入
+            {{t('components.FunctionCall.FunctionCall.5rg4xj8bbzg0')}}
           </template>
 
           <AIcon
@@ -46,7 +46,9 @@
 
 <script setup lang='ts' name='FunctionCall'>
 import type { PropType } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'change', data: Array<{ name: string, value: any}>): void
   (e: 'update:value', data: Array<{ name: string, value: any}>): void
@@ -71,16 +73,16 @@ const dataSource = reactive<{value: any[]}>({
 
 const columns = [
   {
-    title: '参数名称',
+    title: t('components.FunctionCall.FunctionCall.5rg4xj8bdus0'),
     dataIndex: 'name',
     width: 300
   },
   {
-    title: '类型',
+    title: t('components.FunctionCall.FunctionCall.5rg4xj8be400'),
     dataIndex: 'type'
   },
   {
-    title: '值',
+    title: t('components.FunctionCall.FunctionCall.5rg4xj8beb00'),
     dataIndex: 'value',
     align: 'center',
     width: 260

@@ -4,56 +4,28 @@
             <slot name="top" />
         </div>
         <j-row :gutter="24" class="content">
-            <j-col
-                :span="24"
-                v-if="props.showTitle"
-                style="font-size: 16px; margin-bottom: 48px"
-            >
-                API文档
+            <j-col :span="24" v-if="props.showTitle" style="font-size: 16px; margin-bottom: 48px">
+                {{ t('Platforms.Api.index.API') }}
             </j-col>
             <j-col :span="5" class="tree-content">
-                <LeftTree
-                    @select="treeSelect"
-                    :mode="props.mode"
-                    :has-home="props.hasHome"
-                    :code="props.code"
-                />
+                <LeftTree @select="treeSelect" :mode="props.mode" :has-home="props.hasHome" :code="props.code" />
             </j-col>
             <j-col :span="19">
                 <HomePage v-show="showHome" />
                 <div class="url-page" v-show="!showHome">
-                    <ChooseApi
-                        v-show="!selectedApi.url"
-                        v-model:click-api="selectedApi"
-                        v-model:selectedRowKeys="selectedKeys"
-                        v-model:changedApis="changedApis"
-                        :table-data="tableData"
-                        :source-keys="selectSourceKeys"
-                        :mode="props.mode"
-                        @refresh="getSelectKeys"
-                    />
+                    <ChooseApi v-show="!selectedApi.url" v-model:click-api="selectedApi"
+                        v-model:selectedRowKeys="selectedKeys" v-model:changedApis="changedApis" :table-data="tableData"
+                        :source-keys="selectSourceKeys" :mode="props.mode" @refresh="getSelectKeys" />
 
-                    <div
-                        class="api-details"
-                        v-if="selectedApi.url && tableData.length > 0"
-                    >
-                        <j-button
-                            @click="selectedApi = initSelectedApi"
-                            style="margin-bottom: 24px"
-                            >返回</j-button
-                        >
+                    <div class="api-details" v-if="selectedApi.url && tableData.length > 0">
+                        <j-button @click="selectedApi = initSelectedApi"
+                            style="margin-bottom: 24px">{{ t('Platforms.Api.index.5rga4ixze680') }}</j-button>
                         <j-tabs v-model:activeKey="activeKey" type="card">
-                            <j-tab-pane key="does" tab="文档">
-                                <ApiDoes
-                                    :select-api="selectedApi"
-                                    :schemas="schemas"
-                                />
+                            <j-tab-pane key="does" :tab="t('Platforms.Api.index.5rga4ixzftc0')">
+                                <ApiDoes :select-api="selectedApi" :schemas="schemas" />
                             </j-tab-pane>
-                            <j-tab-pane key="test" tab="调试">
-                                <ApiTest
-                                    :select-api="selectedApi"
-                                    :schemas="schemas"
-                                />
+                            <j-tab-pane key="test" :tab="t('Platforms.Api.index.5rga4ixzg340')">
+                                <ApiTest :select-api="selectedApi" :schemas="schemas" />
                             </j-tab-pane>
                         </j-tabs>
                     </div>
@@ -77,7 +49,9 @@ import ChooseApi from './components/ChooseApi.vue';
 import ApiDoes from './components/ApiDoes.vue';
 import ApiTest from './components/ApiTest.vue';
 import { useDepartmentStore } from '@/store/department';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const department = useDepartmentStore();
 
 const props = defineProps<{
@@ -182,6 +156,7 @@ watch(
         background-color: #fff;
         padding: 24px;
         margin: 0 !important;
+
         .tree-content {
             padding-bottom: 30px;
             height: calc(100vh - 230px);

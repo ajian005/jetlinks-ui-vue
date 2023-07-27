@@ -1,7 +1,7 @@
 <template>
     <div class="role-permiss-container">
         <section class="card">
-            <h5>基本信息</h5>
+            <h5>{{t('Detail.Permiss.index.5rkjrj4xs2s0')}}</h5>
             <j-form
                 ref="formRef"
                 class="basic-form"
@@ -10,21 +10,21 @@
             >
                 <j-form-item
                     name="name"
-                    label="名称"
+                    :label="t('Detail.Permiss.index.5rkjrj4xtio0')"
                     :rules="[
-                        { required: true, message: '请输入名称' },
-                        { max: 64, message: '最多可输入64个字符' },
+                        { required: true, message: t('Detail.Permiss.index.5rkjrj4xtpw0') },
+                        { max: 64, message: t('Detail.Permiss.index.5rkjrj4xtv40') },
                     ]"
                 >
                     <j-input
                         v-model:value="form.data.name"
-                        placeholder="请输入角色名称"
+                        :placeholder="t('Detail.Permiss.index.5rkjrj4xu080')"
                     />
                 </j-form-item>
-                <j-form-item label="说明">
+                <j-form-item :label="t('Detail.Permiss.index.5rkjrj4xu5k0')">
                     <j-textarea
                         v-model:value="form.data.description"
-                        placeholder="请输入说明"
+                        :placeholder="t('Detail.Permiss.index.5rkjrj4xuac0')"
                         :maxlength="200"
                         show-count
                     />
@@ -33,7 +33,7 @@
         </section>
 
         <section class="card">
-            <h5>权限分配</h5>
+            <h5>{{t('Detail.Permiss.index.5rkjrj4xufc0')}}</h5>
             <PermissTree v-model:select-items="form.menus" />
 
             <j-button
@@ -41,7 +41,7 @@
                 :disabled="form.loading"
                 @click="form.clickSave"
                 style="margin-top: 24px"
-                >保存</j-button
+                >{{t('Detail.Permiss.index.5rkjrj4xukc0')}}</j-button
             >
         </section>
     </div>
@@ -60,7 +60,9 @@ import {
     updatePrimissTree_api,
 } from '@/api/system/role';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n() 
 const { jumpPage } = useMenuStore();
 const route = useRoute();
 const router = useRouter();
@@ -89,7 +91,7 @@ const form = reactive({
                 menus: form.menus,
             });
             Promise.all([updateRole, updateTree]).then((resp) => {
-                onlyMessage('操作成功');
+                onlyMessage(t('Detail.Permiss.index.5rkjrj4xuro0'));
                 // jumpPage(`system/Role`);
             });
         });

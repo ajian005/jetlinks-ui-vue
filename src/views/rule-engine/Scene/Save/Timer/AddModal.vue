@@ -1,6 +1,6 @@
 <template>
   <j-modal
-      title='触发规则'
+      :title="t('Save.Timer.AddModal.5rg57wk2ce40')"
       visible
       :width='820'
       @ok='save'
@@ -17,7 +17,9 @@ import Timer from '../components/Timer'
 import type { OperationTimer } from '@/views/rule-engine/Scene/typings'
 import { PropType} from "vue";
 import {handleTimerOptions} from "@/views/rule-engine/Scene/Save/components/Timer/util";
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'cancel'): void
   (e: 'save', data: OperationTimer, options: Record<string, any>): void

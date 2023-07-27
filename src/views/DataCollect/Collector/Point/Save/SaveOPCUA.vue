@@ -1,5 +1,5 @@
 <template lang="">
-    <j-modal title="编辑" :visible="true" width="700px" @cancel="handleCancel">
+    <j-modal :title="t('Point.Save.SaveOPCUA.5rg7v9xg3d40')" :visible="true" width="700px" @cancel="handleCancel">
         <j-form
             class="form"
             layout="vertical"
@@ -9,13 +9,13 @@
             :rules="OPCUARules"
             ref="formRef"
         >
-            <j-form-item label="点位名称" name="name">
+            <j-form-item :label="t('Point.Save.SaveOPCUA.5rg7v9xg4es0')" name="name">
                 <j-input
-                    placeholder="请输入点位名称"
+                    :placeholder="t('Point.Save.SaveOPCUA.5rg7v9xg4mc0')"
                     v-model:value="formData.name"
                 />
             </j-form-item>
-            <j-form-item label="数据类型" :name="['configuration', 'type']">
+            <j-form-item :label="t('Point.Save.SaveOPCUA.5rg7v9xg4sk0')" :name="['configuration', 'type']">
                 <j-select
                     style="width: 100%"
                     v-model:value="formData.configuration.type"
@@ -28,34 +28,34 @@
                         // { value: 'Boolean', label: '布尔' },
                     // ]
                     "
-                    placeholder="请选择数据类型"
+                    :placeholder="t('Point.Save.SaveOPCUA.5rg7v9xg4y80')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
                 />
             </j-form-item>
 
-            <j-form-item label="访问类型" name="accessModes">
+            <j-form-item :label="t('Point.Save.SaveOPCUA.5rg7v9xg5900')" name="accessModes">
                 <j-card-select
                     multiple
                     :showImage="false"
                     v-model:value="formData.accessModes"
                     :options="[
-                        { label: '读', value: 'read' },
-                        { label: '写', value: 'write' },
-                        { label: '订阅', value: 'subscribe' },
+                        { label: t('Point.Save.SaveOPCUA.5rg7v9xg5g00'), value: 'read' },
+                        { label: t('Point.Save.SaveOPCUA.5rg7v9xg5ow0'), value: 'write' },
+                        { label: t('Point.Save.SaveOPCUA.5rg7v9xg5uo0'), value: 'subscribe' },
                     ]"
                     :column="3"
                 />
             </j-form-item>
             <j-form-item
-                label="采集频率"
+                :label="t('Point.Save.SaveOPCUA.5rg7v9xg5z40')"
                 :name="['configuration', 'interval']"
                 :rules="[...OPCUARules.interval]"
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入采集频率"
+                    :placeholder="t('Point.Save.SaveOPCUA.5rg7v9xg63g0')"
                     v-model:value="formData.configuration.interval"
                     addon-after="ms"
                     :max="2147483648"
@@ -65,13 +65,13 @@
             <j-form-item label="" :name="['features']">
                 <j-checkbox-group v-model:value="formData.features">
                     <j-checkbox value="changedOnly" name="type"
-                        >只推送变化的数据</j-checkbox
+                        >{{t('Point.Save.SaveOPCUA.5rg7v9xg68g0')}}</j-checkbox
                     >
                 </j-checkbox-group>
             </j-form-item>
-            <j-form-item label="说明" :name="['description']">
+            <j-form-item :label="t('Point.Save.SaveOPCUA.5rg7v9xg6co0')" :name="['description']">
                 <j-textarea
-                    placeholder="请输入说明"
+                    :placeholder="t('Point.Save.SaveOPCUA.5rg7v9xg6h00')"
                     v-model:value="formData.description"
                     :maxlength="200"
                     :rows="3"
@@ -80,7 +80,7 @@
             </j-form-item>
         </j-form>
         <template #footer>
-            <j-button key="back" @click="handleCancel">取消</j-button>
+            <j-button key="back" @click="handleCancel">{{t('Point.Save.SaveOPCUA.5rg7v9xg6lc0')}}</j-button>
             <PermissionButton
                 key="submit"
                 type="primary"
@@ -91,7 +91,7 @@
                     id ? 'update' : 'add'
                 }`"
             >
-                确认
+                {{t('Point.Save.SaveOPCUA.5rg7v9xg6ps0')}}
             </PermissionButton>
         </template>
     </j-modal>
@@ -107,7 +107,9 @@ import { OPCUARules } from '../../data.ts';
 import type { FormInstance } from 'ant-design-vue';
 import { Rule } from 'ant-design-vue/lib/form';
 import { cloneDeep } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Object,

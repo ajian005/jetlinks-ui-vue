@@ -1,13 +1,9 @@
 <!-- 通知记录 -->
 <template>
-    <j-modal v-model:visible="_vis" title="通知记录" :footer="null" width="70%">
+    <j-modal v-model:visible="_vis" :title="t('pages.iot.notice.common.Records')" :footer="null" width="70%">
         <pro-search type="simple" :columns="columns" @search="handleSearch" />
 
-        <JProTable
-            ref="logRef"
-            model="table"
-            :columns="columns"
-            :request="(e:any) => templateApi.getHistory(e, data.id)"
+        <JProTable ref="logRef" model="table" :columns="columns" :request="(e: any) => templateApi.getHistory(e, data.id)"
             :defaultParams="{
                 sorts: [{ name: 'notifyTime', order: 'desc' }],
                 terms: [{ column: 'notifyType$IN', value: data.type }],
@@ -19,16 +15,9 @@
             </template>
             <template #state="slotProps">
                 <j-space>
-                    <j-badge
-                        :status="slotProps.state.value"
-                        :text="slotProps.state.text"
-                    ></j-badge>
-                    <AIcon
-                        v-if="slotProps.state.value === 'error'"
-                        type="ExclamationCircleOutlined"
-                        style="color: #1d39c4; cursor: pointer"
-                        @click="handleError(slotProps.errorStack)"
-                    />
+                    <j-badge :status="slotProps.state.value" :text="slotProps.state.text"></j-badge>
+                    <AIcon v-if="slotProps.state.value === 'error'" type="ExclamationCircleOutlined"
+                        style="color: #1d39c4; cursor: pointer" @click="handleError(slotProps.errorStack)" />
                 </j-space>
             </template>
             <template #action="slotProps">
@@ -48,6 +37,9 @@ import { PropType } from 'vue';
 import moment from 'moment';
 import { Modal } from 'jetlinks-ui-components';
 import Record from './components/Record.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 type Emits = {
     (e: 'update:visible', data: boolean): void;
 };
@@ -83,7 +75,7 @@ const columns = [
         },
     },
     {
-        title: '发送时间',
+        title: t('pages.iot.notice.common.sendTime'),
         dataIndex: 'notifyTime',
         key: 'notifyTime',
         scopedSlots: true,
@@ -95,15 +87,15 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('common.state'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '成功', value: 'success' },
-                { label: '失败', value: 'error' },
+                { label: t('common.suc'), value: 'success' },
+                { label: t('common.err'), value: 'error' },
             ],
             handleValue: (v: any) => {
                 return v;
@@ -111,7 +103,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('common.action'),
         key: 'action',
         scopedSlots: true,
     },
@@ -132,7 +124,7 @@ const handleSearch = (e: any) => {
  */
 const handleError = (e: any) => {
     Modal.info({
-        title: '错误信息',
+        title: t('pages.iot.notice.common.errMess'),
         content: h(
             'p',
             {

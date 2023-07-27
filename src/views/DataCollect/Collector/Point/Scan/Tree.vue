@@ -1,8 +1,8 @@
 <template>
     <div class="tree-content">
         <div class="tree-header">
-            <div>数据源</div>
-            <j-checkbox v-model:checked="isSelected">隐藏已有节点</j-checkbox>
+            <div>{{t('Point.Scan.Tree.5rg7vz8ksh40')}}</div>
+            <j-checkbox v-model:checked="isSelected">{{t('Point.Scan.Tree.5rg7vz8ku780')}}</j-checkbox>
         </div>
         <j-spin :spinning="spinning">
             <j-tree
@@ -40,7 +40,9 @@ import {
     queryPointNoPaging,
 } from '@/api/data-collect/collector';
 import { cloneDeep } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Array,

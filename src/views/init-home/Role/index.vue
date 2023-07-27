@@ -12,11 +12,11 @@
                 >
                     <div class="role-item-title">
                         <j-checkbox :value="ROLEKEYS.device"></j-checkbox>
-                        <div class="role-title">设备接入岗</div>
+                        <div class="role-title">{{t('init-home.Role.index.5rlc4uc3p0c0')}}</div>
                     </div>
                     <div class="role-item-content"></div>
                     <div class="role-item-footer">
-                        该角色负责设备接入模块的维护管理
+                        {{t('init-home.Role.index.5rlc4uc3q1k0')}}
                     </div>
                 </div>
                 <div
@@ -29,11 +29,11 @@
                 >
                     <div class="role-item-title">
                         <j-checkbox :value="ROLEKEYS.link"></j-checkbox>
-                        <div class="role-title">运维管理岗</div>
+                        <div class="role-title">{{t('init-home.Role.index.5rlc4uc3q880')}}</div>
                     </div>
                     <div class="role-item-content"></div>
                     <div class="role-item-footer">
-                        该角色负责系统运维模块的维护管理
+                        {{t('init-home.Role.index.5rlc4uc3qdw0')}}
                     </div>
                 </div>
                 <div
@@ -46,11 +46,11 @@
                 >
                     <div class="role-item-title">
                         <j-checkbox :value="ROLEKEYS.complex"></j-checkbox>
-                        <div class="role-title">综合管理岗</div>
+                        <div class="role-title">{{t('init-home.Role.index.5rlc4uc3qj00')}}</div>
                     </div>
                     <div class="role-item-content"></div>
                     <div class="role-item-footer">
-                        该角色负责系统运维和设备接入模块的维护管理
+                        {{t('init-home.Role.index.5rlc4uc3qss0')}}
                     </div>
                 </div>
             </div>
@@ -61,6 +61,9 @@
 <script lang="ts" setup>
 import RoleMenuData, { ROLEKEYS, RoleData } from '../data/RoleData';
 import { updateRoleMenu, addRole, getRoleMenu } from '@/api/initHome';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 /**
  * 角色勾选数据
  */

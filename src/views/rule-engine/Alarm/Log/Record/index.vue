@@ -17,7 +17,7 @@
                 :params="params"
             >
                 <template #headerTitle>
-                    <h3>记录列表</h3>
+                    <h3>{{t('Log.Record.index.5rg453slguw0')}}</h3>
                 </template>
                 <template #handleTime="slotsProps">
                     <span>
@@ -49,6 +49,9 @@
 import { queryHandleHistory } from '@/api/rule-engine/log';
 import dayjs from 'dayjs';
 import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const route = useRoute();
 const id = route.query?.id;
 const terms = [
@@ -61,7 +64,7 @@ const terms = [
 ];
 const columns = [
     {
-        title: '处理时间',
+        title: t('Log.Record.index.5rg453slje00'),
         dataIndex: 'handleTime',
         key: 'handleTime',
         scopedSlots: true,
@@ -72,7 +75,7 @@ const columns = [
     },
     {
         dataIndex: 'handleType',
-        title: '处理类型',
+        title: t('Log.Record.index.5rg453sljow0'),
         key: 'handleType',
         scopedSlots: true,
         width: 120,
@@ -80,18 +83,18 @@ const columns = [
             type: 'select',
             options: [
                 {
-                    label: '系统',
+                    label: t('Log.Record.index.5rg453sljt00'),
                     value: 'system',
                 },
                 {
-                    label: '人工',
+                    label: t('Log.Record.index.5rg453sljy00'),
                     value: 'user',
                 },
             ],
         },
     },
     {
-        title: '告警时间',
+        title: t('Log.Record.index.5rg453slk4w0'),
         dataIndex: 'alarmTime',
         key: 'alarmTime',
         scopedSlots: true,
@@ -101,7 +104,7 @@ const columns = [
         width:180,
     },
     {
-        title: '告警处理',
+        title: t('Log.Record.index.5rg453slk8o0'),
         dataIndex: 'description',
         key: 'description',
         ellipsis: true,

@@ -3,7 +3,7 @@
         <j-card>
             <j-row :gutter="24">
                 <j-col :span="14">
-                    <TitleComponent data="详情" />
+                    <TitleComponent :data="t('Platform.Detail.index.5rgbk1o74h00')" />
                     <j-form
                         :layout="'vertical'"
                         ref="formRef"
@@ -11,7 +11,7 @@
                         :model="form"
                     >
                         <j-form-item
-                            label="平台类型"
+                            :label="t('Platform.Detail.index.5rgbk1o77rs0')"
                             name="operatorName"
                             required
                         >
@@ -29,10 +29,10 @@
                                 @change="typeChange"
                             ></PlatformType
                         ></j-form-item>
-                        <j-form-item label="名称" name="name">
+                        <j-form-item :label="t('Platform.Detail.index.5rgbk1o781k0')" name="name">
                             <j-input
                                 v-model:value="form.name"
-                                placeholder="请输入名称"
+                                :placeholder="t('Platform.Detail.index.5rgbk1o78940')"
                             />
                         </j-form-item>
 
@@ -49,38 +49,38 @@
                                 <j-input-password
                                     v-model:value="form.passWord"
                                     :disabled="showDisabled"
-                                    placeholder="请输入密码"
+                                    :placeholder="t('Platform.Detail.index.5rgbk1o78rk0')"
                                 />
                             </j-form-item>
-                            <j-form-item label="接口地址" name="apiAddr">
+                            <j-form-item :label="t('Platform.Detail.index.5rgbk1o792s0')" name="apiAddr">
                                 <j-input
                                     v-model:value="form.apiAddr"
                                     :disabled="showDisabled"
-                                    placeholder="请输入接口地址"
+                                    :placeholder="t('Platform.Detail.index.5rgbk1o797c0')"
                                 />
                             </j-form-item>
                         </div>
                         <!-- ctwing -->
                         <div v-if="form.operatorName === 'ctwing'">
-                            <j-form-item label="用户id" name="userId">
+                            <j-form-item :label="t('Platform.Detail.index.5rgbk1o79co0')" name="userId">
                                 <j-input
                                     v-model:value="form.userId"
                                     :disabled="showDisabled"
-                                    placeholder="请输入用户id"
+                                    :placeholder="t('Platform.Detail.index.5rgbk1o79i00')"
                                 />
                             </j-form-item>
-                            <j-form-item label="密码" name="passWord">
+                            <j-form-item :label="t('Platform.Detail.index.5rgbk1o79mk0')" name="passWord">
                                 <j-input-password
                                     v-model:value="form.passWord"
                                     :disabled="showDisabled"
-                                    placeholder="请输入密码"
+                                    :placeholder="t('Platform.Detail.index.5rgbk1o78rk0')"
                                 />
                             </j-form-item>
                             <j-form-item label="secretKey" name="secretKey">
                                 <j-input
                                     v-model:value="form.secretKey"
                                     :disabled="showDisabled"
-                                    placeholder="请输入secretKey"
+                                    :placeholder="t('Platform.Detail.index.5rgbk1o79qo0')"
                                 />
                             </j-form-item>
                         </div>
@@ -100,19 +100,19 @@
                                     placeholder="请输入App Secret"
                                 />
                             </j-form-item>
-                            <j-form-item label="创建者ID" name="openId">
+                            <j-form-item :label="t('Platform.Detail.index.5rgbk1o79vs0')" name="openId">
                                 <j-input
                                     v-model:value="form.openId"
                                     :disabled="showDisabled"
-                                    placeholder="请输入创建者ID"
+                                    :placeholder="t('Platform.Detail.index.5rgbk1o79zs0')"
                                 />
                             </j-form-item>
                         </div>
 
-                        <j-form-item label="说明" name="explain">
+                        <j-form-item :label="t('Platform.Detail.index.5rgbk1o7a4c0')" name="explain">
                             <j-textarea
                                 v-model:value="form.explain"
-                                placeholder="请输入说明"
+                                :placeholder="t('Platform.Detail.index.5rgbk1o7a8w0')"
                                 showCount
                                 :rows="3"
                                 :maxlength="200"
@@ -125,7 +125,7 @@
                                 type="primary"
                                 @click="handleSave"
                             >
-                                保存
+                                {{t('Platform.Detail.index.5rgbk1o7ad40')}}
                             </j-button>
                         </j-form-item>
                     </j-form>
@@ -144,7 +144,9 @@ import { queryById, save, update } from '@/api/iot-card/platform';
 import Doc from '../doc/index.vue';
 import { platformTypeList } from '../../data'
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter();
 const route = useRoute();
 
@@ -169,26 +171,26 @@ const form = reactive({
 
 const rules = {
     name: [
-        { required: true, message: '请输入名称' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Platform.Detail.index.5rgbk1o78940') },
+        { max: 64, message: t('Platform.Detail.index.5rgbk1o7ahw0') },
     ],
     appId: [
-        { required: true, message: '请输入App ID' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Platform.Detail.index.IDTip') },
+        { max: 64, message: t('Platform.Detail.index.5rgbk1o7ahw0') },
     ],
     passWord: [
-        { required: true, message: '请输入密码' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Platform.Detail.index.5rgbk1o78rk0') },
+        { max: 64, message: t('Platform.Detail.index.5rgbk1o7ahw0') },
     ],
-    apiAddr: [{ required: true, message: '请输入接口地址' }],
+    apiAddr: [{ required: true, message: t('Platform.Detail.index.5rgbk1o797c0') }],
     userId: [
-        { required: true, message: '请输入用户 ID' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('Platform.Detail.index.userID') },
+        { max: 64, message: t('Platform.Detail.index.5rgbk1o7ahw0') },
     ],
-    secretKey: [{ required: true, message: '请输入secretKey' }, { max: 64, message: '最多可输入64个字符' },],
-    appSecret: [{ required: true, message: '请输入App Secret' }, { max: 64, message: '最多可输入64个字符' },],
-    openId: [{ required: true, message: '请输入创建者ID' }, { max: 64, message: '最多可输入64个字符' },],
-    explain: [{ required: false, max: 200, message: '最多可输入200个字符' }],
+    secretKey: [{ required: true, message: t('Platform.Detail.index.5rgbk1o79qo0') }, { max: 64, message: t('Platform.Detail.index.5rgbk1o7ahw0') },],
+    appSecret: [{ required: true, message: t('Platform.Detail.index.Secret') }, { max: 64, message: t('Platform.Detail.index.5rgbk1o7ahw0') },],
+    openId: [{ required: true, message: t('Platform.Detail.index.5rgbk1o79zs0') }, { max: 64, message: t('Platform.Detail.index.5rgbk1o7ahw0') },],
+    explain: [{ required: false, max: 200, message: t('Platform.Detail.index.5rgbk1o7amc0') }],
 };
 
 const showDisabled = computed(() => {
@@ -232,7 +234,7 @@ const handleSave = async () => {
             ? await save(formData)
             : await update({ id: route.params.id, ...formData });
     if (res.status === 200) {
-        onlyMessage('保存成功！');
+        onlyMessage(t('Platform.Detail.index.5rgbk1o7av80'));
         router.back();
     }
     saveBtnLoading.value = false;

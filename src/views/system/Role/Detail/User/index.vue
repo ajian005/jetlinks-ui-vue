@@ -21,15 +21,17 @@
             <template #headerTitle>
                 <j-space>
                     <j-button type="primary" @click="dialogVisible = true">
-                        <AIcon type="PlusOutlined" />新增
+                        <AIcon type="PlusOutlined" />
+                        {{t('Detail.User.index.5rkjscuv3cs0')}}
                     </j-button>
                     <PermissionButton
                         :popConfirm="{
-                            title: `是否批量解除绑定`,
+                            title: t('Detail.User.index.batchUntieTip'),
                             onConfirm: () => table.unbind(),
                         }"
                     >
-                        <AIcon type="DisconnectOutlined" />批量解绑
+                        <AIcon type="DisconnectOutlined" />
+                        {{t('Detail.User.index.5rkjscuv4po0')}}
                     </PermissionButton>
                 </j-space>
             </template>
@@ -37,7 +39,7 @@
             <template #status="slotProps">
                 <BadgeStatus
                     :status="slotProps.status"
-                    :text="slotProps.status ? '正常' : '禁用'"
+                    :text="slotProps.status ? t('Detail.User.index.5rkjrwlp1mw0') : t('Detail.User.index.5rkjrwlp3es0')"
                     :statusNames="{
                         1: 'success',
                         0: 'error',
@@ -52,9 +54,9 @@
                 <j-space :size="16">
                     <PermissionButton
                         type="link"
-                        :tooltip="{ title: '解绑' }"
+                        :tooltip="{ title: t('Detail.User.index.5rkjrwlp3v80') }"
                         :pop-confirm="{
-                            title: `确认解绑`,
+                            title: t('Detail.User.index.untieTip'),
                             onConfirm: () => table.unbind([slotProps.id]),
                         }"
                     >
@@ -79,12 +81,14 @@ import AddUserDialog from '../components/AddUserDialog.vue';
 import { getUserByRole_api, unbindUser_api } from '@/api/system/role';
 import dayjs from 'dayjs';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n() 
 const roleId = useRoute().params.id as string;
 
 const columns = [
     {
-        title: '姓名',
+        title: t('Detail.User.index.5rkjrwlp4300'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -92,7 +96,7 @@ const columns = [
         },
     },
     {
-        title: '用户名',
+        title: t('Detail.User.index.5rkjrwlp4ac0'),
         dataIndex: 'username',
         key: 'username',
         search: {
@@ -100,7 +104,7 @@ const columns = [
         },
     },
     {
-        title: '创建时间',
+        title: t('Detail.User.index.5rkjrwlp4i80'),
         dataIndex: 'createTime',
         key: 'createTime',
         search: {
@@ -109,18 +113,18 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '状态',
+        title: t('Detail.User.index.5rkjrwlp4po0'),
         dataIndex: 'status',
         key: 'status',
         search: {
             type: 'select',
             options: [
                 {
-                    label: '正常',
+                    label: t('Detail.User.index.5rkjrwlp1mw0'),
                     value: 1,
                 },
                 {
-                    label: '禁用',
+                    label: t('Detail.User.index.5rkjrwlp3es0'),
                     value: 0,
                 },
             ],
@@ -128,7 +132,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '操作',
+        title: t('Detail.User.index.5rkjrwlp4ws0'),
         dataIndex: 'action',
         key: 'action',
         width: '200px',
@@ -164,12 +168,12 @@ const table = {
     unbind: (ids?: string[]) => {
         const data = ids ? ids : selectedRowKeys.value;
         if (!data.length) {
-            onlyMessage('请勾选数据', 'warning');
+            onlyMessage(t('Detail.User.index.5rkjrwlp54g0'), 'warning');
             return;
         }
         unbindUser_api(roleId, data).then((resp) => {
             if (resp.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('Detail.User.index.5rkjrwlp5b00'));
                 table.refresh();
             }
         });

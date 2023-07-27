@@ -3,7 +3,7 @@
         <div style="padding: 0 10px">
             <div class="alert">
                 <AIcon type="InfoCircleOutlined" />
-                你可以在该页面选择需要订阅的主题及接收通知的方式。
+                {{t('components.Subscribe.index.5rmxv2t58vw0')}}
             </div>
             <div class="content-collapse">
                 <template v-if="dataSource.length">
@@ -55,7 +55,9 @@ import { getAllNotice } from '@/api/account/center';
 import { getNoticeList_api } from '@/api/account/notificationSubscription';
 import { initData } from '../data';
 import Item from './components/Item.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const subscribe = ref<any[]>([]);
 const dataSource = ref<any[]>([]);
 const activeKey = ref<string[]>(['alarm', 'system-monitor', 'system-business']);

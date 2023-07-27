@@ -19,7 +19,7 @@
                             :rules="[
                                 {
                                     required: !!record.label && !!record.value,
-                                    message: '该字段为必填字段',
+                                    message: t('Save.components.RequestTable.5rgb30d4w4g0'),
                                     trigger: 'change',
                                 },
                             ]"
@@ -37,7 +37,7 @@
                             :rules="[
                                 {
                                     required: !!record.value && !!record.label,
-                                    message: '该字段为必填字段',
+                                    message: t('Save.components.RequestTable.5rgb30d4w4g0'),
                                     trigger: 'change',
                                 },
                             ]"
@@ -85,14 +85,17 @@
         />
 
         <j-button type="dashed" @click="addRow" class="add-btn">
-            <AIcon type="PlusOutlined" />新增
+            <AIcon type="PlusOutlined" />
+            {{t('Save.components.RequestTable.5rl7i5k9yvw0')}}
         </j-button>
     </div>
 </template>
 
 <script setup lang="ts">
 import type { optionsType } from '../typing';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emits = defineEmits(['update:value', 'update:valid']);
 const props = withDefaults(
     defineProps<{

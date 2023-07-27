@@ -3,10 +3,10 @@
     <div class='terms-params-warp'>
       <div v-if='!isFirst' class='term-type-warp'>
         <DropdownButton
-          :options='[
-              { label: "并且", value: "and" },
-              { label: "或者", value: "or" },
-            ]'
+          :options="[
+              { label: t('action.ListItem.FilterGroup.5rg4r3wra740'), value: 'and' },
+              { label: t('action.ListItem.FilterGroup.5rg4r3wrcrw0'), value: 'or' },
+            ]"
           type='type'
           v-model:value='formModel.branches[branchName].then[thenName].actions[actionName].terms[name].type'
           @select='typeChange'
@@ -18,7 +18,7 @@
         @mouseout='mouseout'
       >
         <j-popconfirm
-          title='确认删除？'
+          :title="t('action.ListItem.FilterGroup.5rg4r3wrd3c0')"
           @confirm='onDelete'
         >
           <div v-show='showDelete' class='terms-params-delete'>
@@ -47,7 +47,7 @@
       <div v-if='isLast' class='terms-group-add' @click='addTerms'>
         <div class='terms-content'>
           <AIcon type='PlusOutlined' style='font-size: 12px;padding-right: 4px;' />
-          <span>分组</span>
+          <span>{{t('action.ListItem.FilterGroup.5rg4r3wrd980')}}</span>
         </div>
       </div>
     </div>
@@ -64,7 +64,9 @@ import { provide } from 'vue'
 import { randomString } from '@/utils/utils'
 import { getParams, EventEmitter, EventSubscribeKeys } from '@/views/rule-engine/Scene/Save/util'
 import { handleParamsData } from '@/views/rule-engine/Scene/Save/components/Terms/util'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data: formModel } = storeToRefs(sceneStore)
 
@@ -179,7 +181,7 @@ const addTerms = () => {
 
   formModel.value.branches![props.branchName].then[props.thenName].actions[props.actionName].options!.terms.push({
     terms: [['','eq','','and']],
-    termType: '并且'
+    termType: t('action.ListItem.FilterGroup.5rg4r3wra740')
   })
 }
 
@@ -209,33 +211,33 @@ const rules = [
     validator(_: any, v?: Record<string, any>) {
       if (v !== undefined && !v.error) {
         if (!Object.keys(v).length) {
-          return Promise.reject(new Error('该数据已发生变更，请重新配置'))
+          return Promise.reject(new Error(t('action.ListItem.FilterGroup.5rg4r3wrddo0')))
         }
         if (!v.column) {
-          return Promise.reject(new Error('请选择参数'))
+          return Promise.reject(new Error(t('action.ListItem.FilterGroup.5rg4r3wrdk40')))
         }
 
         if (!v.termType) {
-          return Promise.reject(new Error('请选择操作符'))
+          return Promise.reject(new Error(t('action.ListItem.FilterGroup.5rg4r3wre0k0')))
         }
 
         if (v.value.value === undefined) {
-          return Promise.reject(new Error('请选择或输入参数值'))
+          return Promise.reject(new Error(t('action.ListItem.FilterGroup.5rg4r3wrea40')))
         } else {
           if (
             isArray(v.value.value) &&
             v.value.value.some((_v: any) => _v === undefined)
           ) {
-            return Promise.reject(new Error('请选择或输入参数值'))
+            return Promise.reject(new Error(t('action.ListItem.FilterGroup.5rg4r3wrea40')))
           } else if (v.value.value === undefined) {
-            return Promise.reject(new Error('请选择或输入参数值'))
+            return Promise.reject(new Error(t('action.ListItem.FilterGroup.5rg4r3wrea40')))
           }
         }
       } else {
         if (v?.error) { // 数据发生变化
-          return Promise.reject(new Error('该数据已发生变更，请重新配置'))
+          return Promise.reject(new Error(t('action.ListItem.FilterGroup.5rg4r3wrddo0')))
         }
-        return Promise.reject(new Error('请选择参数'))
+        return Promise.reject(new Error(t('action.ListItem.FilterGroup.5rg4r3wrdk40')))
       }
       return Promise.resolve()
     }

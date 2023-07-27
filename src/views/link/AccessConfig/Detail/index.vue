@@ -11,7 +11,7 @@
                 <j-card :bordered="false">
                     <div>
                         <div class="go-back" v-if="id === ':id'">
-                            <a @click="goBack">返回</a>
+                            <a @click="goBack">{{t('AccessConfig.Detail.index.5rg38tlqhw80')}}</a>
                         </div>
                       <template v-if="showType === 'network'">
                         <Network
@@ -70,7 +70,9 @@ import Plugin from '../components/Plugin/index.vue'
 import { getProviders, detail } from '@/api/link/accessConfig';
 import { accessConfigTypeFilter } from '@/utils/setting';
 import { queryProductList } from '@/api/device/product';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute();
 const id = route.params.id as string;
 
@@ -107,15 +109,15 @@ const TypeMap = new Map([
 ]);
 // DataMap后期优化
 const DataMap = new Map();
-DataMap.set('fixed-media', { type: 'media', title: '视频类设备接入' });
-DataMap.set('gb28181-2016', { type: 'media', title: '视频类设备接入' });
-DataMap.set('OneNet', { type: 'cloud', title: '云平台接入' });
-DataMap.set('Ctwing', { type: 'cloud', title: '云平台接入' });
-DataMap.set('modbus-tcp', { type: 'channel', title: '通道类设备接入' });
-DataMap.set('opc-ua', { type: 'channel', title: '通道类设备接入' });
-DataMap.set('official-edge-gateway', { type: 'edge', title: '官方接入' });
-DataMap.set('edge-child-device', { type: 'edge', title: '官方接入' });
-DataMap.set('network', { type: 'network', title: '自定义设备接入' });
+DataMap.set('fixed-media', { type: 'media', title: t('AccessConfig.Detail.index.5rg38tlqiyk0') });
+DataMap.set('gb28181-2016', { type: 'media', title: t('AccessConfig.Detail.index.5rg38tlqiyk0') });
+DataMap.set('OneNet', { type: 'cloud', title: t('AccessConfig.Detail.index.5rg38tlqj680') });
+DataMap.set('Ctwing', { type: 'cloud', title: t('AccessConfig.Detail.index.5rg38tlqj680') });
+DataMap.set('modbus-tcp', { type: 'channel', title: t('AccessConfig.Detail.index.5rg38tlqjc80') });
+DataMap.set('opc-ua', { type: 'channel', title: t('AccessConfig.Detail.index.5rg38tlqjc80') });
+DataMap.set('official-edge-gateway', { type: 'edge', title: t('AccessConfig.Detail.index.5rg38tlqjg00') });
+DataMap.set('edge-child-device', { type: 'edge', title: t('AccessConfig.Detail.index.5rg38tlqjg00') });
+DataMap.set('network', { type: 'network', title: t('AccessConfig.Detail.index.5rg38tlqjk00') });
 
 const getTypeList = (result: Record<string, any>) => {
     const list = [];
@@ -149,27 +151,27 @@ const getTypeList = (result: Record<string, any>) => {
     network.length &&
         list.push({
             list: [...network],
-            title: '自定义设备接入',
+            title: t('AccessConfig.Detail.index.5rg38tlqjk00'),
         });
     media.length &&
         list.push({
             list: [...media],
-            title: '视频类设备接入',
+            title: t('AccessConfig.Detail.index.5rg38tlqiyk0'),
         });
     cloud.length &&
         list.push({
             list: [...cloud],
-            title: '云平台接入',
+            title: t('AccessConfig.Detail.index.5rg38tlqj680'),
         });
     channel.length &&
         list.push({
             list: [...channel],
-            title: '通道类设备接入',
+            title: t('AccessConfig.Detail.index.5rg38tlqjc80'),
         });
     edge.length &&
         list.push({
             list: [...edge],
-            title: '官方接入',
+            title: t('AccessConfig.Detail.index.5rg38tlqjg00'),
         });
 
     return list;

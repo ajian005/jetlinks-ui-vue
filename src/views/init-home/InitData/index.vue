@@ -13,21 +13,21 @@
     <!-- 初始数据提交表单 -->
     <j-modal
         v-model:visible="visible"
-        title="初始数据"
+        :title="t('init-home.InitData.index.5rlbndz7cn40')"
         width="52vw"
         :maskClosable="false"
         @cancel="cancel"
         @ok="handelSave"
-        okText="确定"
-        cancelText="取消"
+        :okText="t('init-home.InitData.index.5rlbndz7dpk0')"
+        :cancelText="t('init-home.InitData.index.5rlbndz7dxo0')"
         class="modal-style"
         v-bind="layout"
     >
         <div class="data-content">
             <p class="data-p-style">
                 <ExclamationCircleOutlined style="margin: 0 0 0 5px" />
-                初始化数据包括MQTT产品、MQTT设备、MQTT类型设备接入网关、MQTT网络组件、Jetlinks
-                官方协议
+                {{t('init-home.InitData.index.5rlbndz7e4w0')}}
+                {{t('init-home.InitData.index.5rlbndz7eg40')}}
             </p>
         </div>
         <div style="margin-top: 20px">
@@ -41,9 +41,9 @@
                     <j-col :span="12">
                         <j-form-item name="host">
                             <template #label>
-                                <span>本地地址 </span>
+                                <span>{{t('init-home.InitData.index.5rlbndz7en40')}} </span>
                                 <j-tooltip
-                                    title="绑定到服务器上的网卡地址,绑定到所有网卡:0.0.0.0"
+                                    :title="t('init-home.InitData.index.localAddress')"
                                 >
                                     <img
                                         class="img-style"
@@ -58,9 +58,9 @@
                         </j-form-item>
                         <j-form-item name="publicHost">
                             <template #label>
-                                <span>公网地址 </span>
+                                <span>{{t('init-home.InitData.index.5rlbndz7esk0')}} </span>
                                 <j-tooltip
-                                    title="对外提供访问的地址内网环境时填写服务器的内网IP地址"
+                                    :title="t('init-home.InitData.index.5rlbndz7ey40')"
                                 >
                                     <img
                                         class="img-style"
@@ -68,22 +68,22 @@
                                     />
                                 </j-tooltip>
                             </template>
-                            <j-input v-model:value="modalForm.publicHost" placeholder="请输入公网地址">
+                            <j-input v-model:value="modalForm.publicHost" :placeholder="t('init-home.InitData.index.5rlbndz7f4s0')">
                             </j-input>
                         </j-form-item>
                     </j-col>
                     <j-col :span="12">
                         <j-form-item name="port">
                             <template #label>
-                                <span>本地端口 </span>
-                                <j-tooltip title="监听指定端口的请求">
+                                <span>{{t('init-home.InitData.index.5rlbndz7fb00')}} </span>
+                                <j-tooltip :title="t('init-home.InitData.index.5rlbndz7fgc0')">
                                     <img
                                         class="img-style"
                                         :src="getImage('/init-home/mark.png')"
                                     />
                                 </j-tooltip>
                             </template>
-                            <j-select v-model:value="modalForm.port" placeholder="请选择本地端口" show-search>
+                            <j-select v-model:value="modalForm.port" :placeholder="t('init-home.InitData.index.5rlbndz7fm40')" show-search>
                                 <j-select-option
                                     v-for="item in optionPorts"
                                     :key="item"
@@ -95,8 +95,8 @@
                         </j-form-item>
                         <j-form-item name="publicPort">
                             <template #label>
-                                <span>公网端口 </span>
-                                <j-tooltip title="对外提供访问的端口">
+                                <span>{{t('init-home.InitData.index.5rlbndz7fy00')}} </span>
+                                <j-tooltip :title="t('init-home.InitData.index.5rlbndz7g400')">
                                     <img
                                         class="img-style"
                                         :src="getImage('/init-home/mark.png')"
@@ -105,7 +105,7 @@
                             </template>
                             <j-input-number
                                 v-model:value="modalForm.publicPort"
-                                placeholder="请输入公网端口"
+                                :placeholder="t('init-home.InitData.index.5rlbndz7g9w0')"
                                 style="width: 100%"
                             />
                         </j-form-item>
@@ -131,6 +131,9 @@ import {
 } from '@/api/initHome';
 import { modalState } from '../data/interface';
 import type { Rule } from 'ant-design-vue/es/form';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const formRef = ref();
 /**
  * 初始化数据状态
@@ -148,13 +151,13 @@ const modalForm = reactive<modalState>({
  */
 const validateUrl = async (_rule: Rule, value: string) => {
     if (!value) {
-        return Promise.reject('请输入公网地址');
+        return Promise.reject(t('init-home.InitData.index.5rlbndz7f4s0'));
     } else {
         var reg = new RegExp(
             /^(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}$/,
         );
         if (!reg.test(value)) {
-            return Promise.reject('请输入正确的公网地址');
+            return Promise.reject(t('init-home.InitData.index.5rlbndz7gfw0'));
         }
         return Promise.resolve();
     }
@@ -164,10 +167,10 @@ const validateUrl = async (_rule: Rule, value: string) => {
  */
 const validateNumber = async (_rule: Rule, value: string) => {
     if (!value) {
-        return Promise.reject('请输入公网端口');
+        return Promise.reject(t('init-home.InitData.index.5rlbndz7g9w0'));
     } else {
         if (Number(value) < 1 || Number(value) > 65535) {
-            return Promise.reject('请输入1~65535的正整数');
+            return Promise.reject(t('init-home.InitData.index.5rlbndz7glo0'));
         }
         return Promise.resolve();
     }
@@ -176,13 +179,13 @@ const rulesModle = ref({
     host: [
         {
             required: true,
-            message: '请选择本地地址',
+            message: t('init-home.InitData.index.5rlbndz7gw40'),
         },
     ],
     port: [
         {
             required: true,
-            message: '请选择本地端口',
+            message: t('init-home.InitData.index.5rlbndz7fm40'),
         },
     ],
     publicHost: [

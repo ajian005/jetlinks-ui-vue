@@ -1,9 +1,12 @@
 <template>
-  <j-select v-model:value="_value" mode="tags" :options="options" :size="size" @change="change" placeholder="请选择单位"></j-select>
+  <j-select v-model:value="_value" mode="tags" :options="options" :size="size" @change="change" :placeholder="t('components.InputSelect.index.5rlcbk16jhc0')"></j-select>
 </template>
 <script setup lang="ts" name="InputSelect">
 import { DefaultOptionType, SelectValue } from 'ant-design-vue/es/select';
 import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 type valueType = string | number
 type Emits = {
   (e: 'update:value', data: valueType | undefined): void;

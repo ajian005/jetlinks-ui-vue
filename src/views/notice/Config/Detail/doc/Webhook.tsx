@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const Webhook = () => {
+    const { t } = useI18n()
     return (
         <div class={'doc'}>
             <h1>1. {t('common.summarize')}</h1>

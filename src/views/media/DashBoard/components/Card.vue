@@ -8,10 +8,10 @@
                         v-model:value="dimension"
                         button-style="solid"
                     >
-                        <j-radio-button value="today">今日</j-radio-button>
-                        <j-radio-button value="week">近一周</j-radio-button>
-                        <j-radio-button value="month">近一月</j-radio-button>
-                        <j-radio-button value="year">近一年</j-radio-button>
+                        <j-radio-button value="today">{{t('DashBoard.components.Card.5rg87vjfe3s0')}}</j-radio-button>
+                        <j-radio-button value="week">{{t('DashBoard.components.Card.5rg87vjfjg80')}}</j-radio-button>
+                        <j-radio-button value="month">{{t('DashBoard.components.Card.5rg87vjfjwk0')}}</j-radio-button>
+                        <j-radio-button value="year">{{t('DashBoard.components.Card.5rg87vjfk340')}}</j-radio-button>
                     </j-radio-group>
                     <j-range-picker
                         format="YYYY-MM-DD HH:mm:ss"
@@ -22,14 +22,16 @@
             </div>
         </div>
         <div v-if="chartData.length" class="chart" ref="chartRef"></div>
-        <j-empty v-else class="no-data" description="暂无数据"></j-empty>
+        <j-empty v-else class="no-data" :description="t('DashBoard.components.Card.5rg87vjfk9k0')"></j-empty>
     </div>
 </template>
 
 <script setup lang="ts">
 import * as echarts from 'echarts';
 import moment from 'moment';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 // const { proxy } = <any>getCurrentInstance();
 type Emits = {
     (e: 'change', data: any): void;
@@ -101,7 +103,7 @@ const createChart = () => {
                 //     data: sData,
                 // },
                 {
-                    name: '播放数量(人次)',
+                    name: t('DashBoard.components.Card.5rg87vjfkg00'),
                     data: sData,
                     type: 'line',
                     smooth: true,

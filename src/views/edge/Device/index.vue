@@ -24,7 +24,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('edge.Device.index.5rg5czh0vu00')}}
                         </PermissionButton>
                         <PermissionButton
                             @click="importVisible = true"
@@ -33,7 +33,7 @@
                             <template #icon
                                 ><AIcon type="ImportOutlined"
                             /></template>
-                            导入
+                            {{t('edge.Device.index.5rg5czh0x2g0')}}
                         </PermissionButton>
                     </j-space>
                 </template>
@@ -71,13 +71,13 @@
                             <j-row style="margin-top: 18px">
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        设备类型
+                                        {{t('edge.Device.index.5rg5czh0xec0')}}
                                     </div>
                                     <div>{{ slotProps.deviceType?.text }}</div>
                                 </j-col>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        产品名称
+                                        {{t('edge.Device.index.5rg5czh0xmg0')}}
                                     </div>
                                     <Ellipsis style="width: 100%">
                                         {{ slotProps.productName }}
@@ -217,7 +217,9 @@ import { restPassword } from '@/api/edge/device';
 import Save from './Save/index.vue';
 import Import from '@/views/device/Instance/Import/index.vue';
 import BadgeStatus from '@/components/BadgeStatus/index.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 
 const defaultParams = {
@@ -271,7 +273,7 @@ const columns = [
         },
     },
     {
-        title: '设备名称',
+        title: t('edge.Device.index.5rg5czh0xs40'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -280,7 +282,7 @@ const columns = [
         },
     },
     {
-        title: '产品名称',
+        title: t('edge.Device.index.5rg5czh0xmg0'),
         dataIndex: 'productName',
         key: 'productName',
         search: {
@@ -300,7 +302,7 @@ const columns = [
         },
     },
     {
-        title: '注册时间',
+        title: t('edge.Device.index.5rg5czh0xxg0'),
         dataIndex: 'registryTime',
         key: 'registryTime',
         scopedSlots: true,
@@ -309,23 +311,23 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('edge.Device.index.5rg5czh0y1o0'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '禁用', value: 'notActive' },
-                { label: '离线', value: 'offline' },
-                { label: '在线', value: 'online' },
+                { label: t('edge.Device.index.5rg5czh0y580'), value: 'notActive' },
+                { label: t('edge.Device.index.5rg5czh0ybk0'), value: 'offline' },
+                { label: t('edge.Device.index.5rg5czh0yfo0'), value: 'online' },
             ],
         },
     },
     {
         key: 'productId$product-info',
         dataIndex: 'productId$product-info',
-        title: '产品分类',
+        title: t('edge.Device.index.5rg5czh0yjk0'),
         hideInTable: true,
         search: {
             type: 'treeSelect',
@@ -359,20 +361,20 @@ const columns = [
     // },
     {
         dataIndex: 'deviceType',
-        title: '设备类型',
+        title: t('edge.Device.index.5rg5czh0xec0'),
         valueType: 'select',
         hideInTable: true,
         search: {
             type: 'select',
             options: [
-                { label: '直连设备', value: 'device' },
-                { label: '网关子设备', value: 'childrenDevice' },
-                { label: '网关设备', value: 'gateway' },
+                { label: t('edge.Device.index.5rg5czh0ync0'), value: 'device' },
+                { label: t('edge.Device.index.5rg5czh0yqs0'), value: 'childrenDevice' },
+                { label: t('edge.Device.index.5rg5czh0yuk0'), value: 'gateway' },
             ],
         },
     },
     {
-        title: '说明',
+        title: t('edge.Device.index.5rg5czh0yy00'),
         dataIndex: 'describe',
         key: 'describe',
         search: {
@@ -380,7 +382,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('edge.Device.index.5rg5czh0z1g0'),
         key: 'action',
         fixed: 'right',
         width: 250,
@@ -396,9 +398,9 @@ const getActions = (
     const actions = [
         {
             key: 'view',
-            text: '查看',
+            text: t('edge.Device.index.5rg5czh0z540'),
             tooltip: {
-                title: '查看',
+                title: t('edge.Device.index.5rg5czh0z540'),
             },
             icon: 'EyeOutlined',
             onClick: () => {
@@ -407,9 +409,9 @@ const getActions = (
         },
         {
             key: 'update',
-            text: '编辑',
+            text: t('edge.Device.index.5rg5czh0z8c0'),
             tooltip: {
-                title: '编辑',
+                title: t('edge.Device.index.5rg5czh0z8c0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -419,17 +421,17 @@ const getActions = (
         },
         {
             key: 'action',
-            text: data.state?.value !== 'notActive' ? '禁用' : '启用',
+            text: data.state?.value !== 'notActive' ? t('edge.Device.index.5rg5czh0y580') : t('edge.Device.index.5rg5czh0zbo0'),
             tooltip: {
-                title: data.state?.value !== 'notActive' ? '禁用' : '启用',
+                title: data.state?.value !== 'notActive' ? t('edge.Device.index.5rg5czh0y580') : t('edge.Device.index.5rg5czh0zbo0'),
             },
             icon:
                 data.state.value !== 'notActive'
                     ? 'StopOutlined'
                     : 'CheckCircleOutlined',
             popConfirm: {
-                title: `确认${
-                    data.state.value !== 'notActive' ? '禁用' : '启用'
+                title: `${ t('edge.Device.index.verify') + 
+                    (data.state.value !== 'notActive' ? t('edge.Device.index.5rg5czh0y580') : t('edge.Device.index.5rg5czh0zbo0'))
                 }?`,
                 onConfirm: async () => {
                     let response = undefined;
@@ -439,10 +441,10 @@ const getActions = (
                         response = await _deploy(data.id);
                     }
                     if (response && response.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('edge.Device.index.5rg5czh0zh40'));
                         edgeDeviceRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('edge.Device.index.5rg5czh0zm40'), 'error');
                     }
                 },
             },
@@ -451,9 +453,9 @@ const getActions = (
     const others = [
         {
             key: 'setting',
-            text: '远程控制',
+            text: t('edge.Device.index.5rg5czh0zpc0'),
             tooltip: {
-                title: '远程控制',
+                title: t('edge.Device.index.5rg5czh0zpc0'),
             },
             icon: 'ControlOutlined',
             onClick: () => {
@@ -464,17 +466,17 @@ const getActions = (
         },
         {
             key: 'password',
-            text: '重置密码',
+            text: t('edge.Device.index.5rg5czh0zv40'),
             tooltip: {
-                title: '重置密码',
+                title: t('edge.Device.index.5rg5czh0zv40'),
             },
             icon: 'RedoOutlined',
             popConfirm: {
-                title: '确认重置密码为P@ssw0rd？',
+                title: t('edge.Device.index.5rg5czh0zyg0'),
                 onConfirm: async () => {
                     restPassword(data.id).then((resp: any) => {
                         if (resp.status === 200) {
-                            onlyMessage('操作成功！');
+                            onlyMessage(t('edge.Device.index.5rg5czh0zh40'));
                             edgeDeviceRef.value?.reload();
                         }
                     });
@@ -485,23 +487,23 @@ const getActions = (
 
     const deleteItem = {
         key: 'delete',
-        text: '删除',
+        text: t('edge.Device.index.5rg5czh101g0'),
         disabled: data.state?.value !== 'notActive',
         tooltip: {
             title:
                 data.state.value !== 'notActive'
-                    ? '已启用的设备不能删除'
-                    : '删除',
+                    ? t('edge.Device.index.5rg5czh10480')
+                    : t('edge.Device.index.5rg5czh101g0'),
         },
         popConfirm: {
-            title: '确认删除?',
+            title: t('edge.Device.index.5rg5czh107g0'),
             onConfirm: async () => {
                 const resp = await _delete(data.id);
                 if (resp.status === 200) {
-                    onlyMessage('操作成功！');
+                    onlyMessage(t('edge.Device.index.5rg5czh0zh40'));
                     edgeDeviceRef.value?.reload();
                 } else {
-                    onlyMessage('操作失败！', 'error');
+                    onlyMessage(t('edge.Device.index.5rg5czh0zm40'), 'error');
                 }
             },
         },
@@ -514,7 +516,7 @@ const getActions = (
             ...arr,
             {
                 key: 'others',
-                text: '其他',
+                text: t('edge.Device.index.5rg5czh10a40'),
                 icon: 'EllipsisOutlined',
                 children: [...others],
             },

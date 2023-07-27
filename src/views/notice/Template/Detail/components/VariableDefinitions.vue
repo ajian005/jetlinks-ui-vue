@@ -64,7 +64,7 @@
                     >
                         <template #suffix>
                             <j-tooltip
-                                title="格式为：%.xf x代表数字保留的小数位数。当x=0时,代表格式为整数"
+                                :title="t('pages.iot.notice.template.formatTip')"
                             >
                                 <AIcon type="QuestionCircleOutlined" />
                             </j-tooltip>

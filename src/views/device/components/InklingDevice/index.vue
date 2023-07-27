@@ -89,7 +89,7 @@
             :show-total="() => {
               const minSize = pageData.pageIndex *  pageData.pageSize + 1;
               const MaxSize = (pageData.pageIndex + 1) * pageData.pageSize;
-              return `${t('components.InklingDevice.index.5rnqdm6qk640',{position:minSize-MaxSize>pageData.total ? pageData.total:MaxSize,total:pageData.total})}`;
+              return `${t('components.InklingDevice.index.5rnqdm6qk640',{position:minSize-(MaxSize > pageData.total ? pageData.total : MaxSize),total:pageData.total})}`
             }"
             @change='pageChange'
           />

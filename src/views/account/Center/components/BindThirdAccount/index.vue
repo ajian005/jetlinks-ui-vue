@@ -20,8 +20,8 @@
                             item?.name
                         }}</Ellipsis>
                         <div>
-                            <span v-if="item.bound" style="color: #2BA245">已绑定</span>
-                            <span v-else style="color: #999">未绑定</span>
+                            <span v-if="item.bound" style="color: #2BA245">{{t('components.BindThirdAccount.index.5rmxjyjan2k0')}}</span>
+                            <span v-else style="color: #999">{{t('components.BindThirdAccount.index.5rmxjyjaoag0')}}</span>
                         </div>
                         <div v-if="item.others?.name" style="color: #666666">
                             {{ item.others?.name }}（已绑定的用户名）
@@ -30,17 +30,17 @@
                     <div class="content-item-right">
                         <j-popconfirm
                             v-if="item.bound"
-                            title="确认解除绑定嘛?"
+                            :title="t('components.BindThirdAccount.index.5rmxjyjaohc0')"
                             @confirm="() => unBind(item.id)"
                         >
-                            <j-button>解除绑定</j-button>
+                            <j-button>{{t('components.BindThirdAccount.index.5rmxjyjaomo0')}}</j-button>
                         </j-popconfirm>
                         <j-button
                             v-else
                             ghost
                             type="primary"
                             @click="clickBind(item.id)"
-                            >立即绑定</j-button
+                            >{{t('components.BindThirdAccount.index.5rmxjyjaos80')}}</j-button
                         >
                     </div>
                 </div>
@@ -55,7 +55,9 @@ import { BASE_API_PATH } from '@/utils/variable';
 import { getSsoBinds_api } from '@/api/account/center';
 import { unBind_api } from '@/api/account/center';
 import { onlyMessage, getImage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const bindList = ref<any[]>([]);
 const bindIcon = {
     'dingtalk-ent-app': '/notice/dingtalk.png',
@@ -66,7 +68,7 @@ const bindIcon = {
 const unBind = (id: string) => {
     unBind_api(id).then((resp) => {
         if (resp.status === 200) {
-            onlyMessage('解绑成功', 'success');
+            onlyMessage(t('components.BindThirdAccount.index.5rmxjyjap5s0'), 'success');
             getSsoBinds();
         }
     });

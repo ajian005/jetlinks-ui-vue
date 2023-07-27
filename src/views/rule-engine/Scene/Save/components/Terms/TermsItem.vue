@@ -23,7 +23,9 @@ import { useSceneStore } from 'store/scene'
 import ParamsItem from './ParamsItem.vue'
 import { isArray } from 'lodash-es'
 import { randomString } from '@/utils/utils'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data: formModel } = storeToRefs(sceneStore)
 
@@ -71,28 +73,28 @@ const rules = [
     validator: async (_: any, v: any) => {
       if (v !== undefined && !v.error) {
         if (!Object.keys(v).length) {
-          return Promise.reject(new Error('该数据已发生变更，请重新配置'));
+          return Promise.reject(new Error(t('components.Terms.TermsItem.5rg4ytrts500')));
         }
         if (!v.column) {
-          return Promise.reject(new Error('请选择参数'));
+          return Promise.reject(new Error(t('components.Terms.TermsItem.5rg4ytrtt1s0')));
         }
         if (!v.termType) {
-          return Promise.reject(new Error('请选择操作符'));
+          return Promise.reject(new Error(t('components.Terms.TermsItem.5rg4ytrtt7k0')));
         }
         if (v.value?.value === undefined) {
-          return Promise.reject(new Error('请选择或输入参数值'));
+          return Promise.reject(new Error(t('components.Terms.TermsItem.5rg4ytrttbs0')));
         }
         if (
           isArray(v.value.value) &&
           v.value.value.some((_v: any) => _v === undefined)
         ) {
-          return Promise.reject(new Error('请选择或输入参数值'));
+          return Promise.reject(new Error(t('components.Terms.TermsItem.5rg4ytrttbs0')));
         }
       } else {
         if (v?.error) { // 数据发生变化
-          return Promise.reject(new Error('该数据已发生变更，请重新配置'))
+          return Promise.reject(new Error(t('components.Terms.TermsItem.5rg4ytrts500')))
         }
-        return Promise.reject(new Error('请选择参数'));
+        return Promise.reject(new Error(t('components.Terms.TermsItem.5rg4ytrtt1s0')));
       }
       return Promise.resolve();
     },

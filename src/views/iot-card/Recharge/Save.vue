@@ -3,9 +3,9 @@
         :maskClosable="false"
         width="600px"
         :visible="true"
-        title="充值"
-        okText="确定"
-        cancelText="取消"
+        :title="t('iot-card.Recharge.Save.5rgbjmnhygo0')"
+        :okText="t('iot-card.Recharge.Save.5rgbjmni02k0')"
+        :cancelText="t('iot-card.Recharge.Save.5rgbjmni0aw0')"
         @ok="handleOk"
         @cancel="handleCancel"
         :confirmLoading="btnLoading"
@@ -15,7 +15,8 @@
                 <AIcon
                     type="ExclamationCircleOutlined"
                     style="margin-right: 6px"
-                />暂只支持移动OneLink平台
+                />
+                {{t('iot-card.Recharge.Save.5rgbjmni0lo0')}}
             </div>
             <j-form
                 layout="vertical"
@@ -23,24 +24,24 @@
                 :rules="rules"
                 :model="modelRef"
             >
-                <j-form-item label="平台对接" name="configId">
+                <j-form-item :label="t('iot-card.Recharge.Save.5rgbjmni0s00')" name="configId">
                     <j-select
                         v-model:value="modelRef.configId"
                         :options="configList"
                         allowClear
                         show-search
                         style="width: 100%"
-                        placeholder="请选择平台对接"
+                        :placeholder="t('iot-card.Recharge.Save.5rgbjmni0z40')"
                     >
                     </j-select>
                 </j-form-item>
-                <j-form-item label="账户id" name="rechargeId">
+                <j-form-item :label="t('iot-card.Recharge.Save.5rgbjmni1540')" name="rechargeId">
                     <j-input
                         v-model:value="modelRef.rechargeId"
-                        placeholder="请输入账户id"
+                        :placeholder="t('iot-card.Recharge.Save.5rgbjmni1aw0')"
                     />
                 </j-form-item>
-                <j-form-item label="充值金额" name="chargeMoney">
+                <j-form-item :label="t('iot-card.Recharge.Save.5rgbjmni1g40')" name="chargeMoney">
                     <j-input-number
                         allowClear
                         :precision="2"
@@ -48,16 +49,16 @@
                         v-model:value="modelRef.chargeMoney"
                         :min="1"
                         :max="500"
-                        placeholder="请输入1~500之间的金额"
+                        :placeholder="t('iot-card.Recharge.Save.5rgbjmni1mk0')"
                     />
                 </j-form-item>
 
-                <j-form-item label="支付方式" name="paymentType">
+                <j-form-item :label="t('iot-card.Recharge.Save.5rgbjmni1s80')" name="paymentType">
                     <j-select
                         allowClear
                         :options="PaymentMethod"
                         v-model:value="modelRef.paymentType"
-                        placeholder="请选择支付方式"
+                        :placeholder="t('iot-card.Recharge.Save.5rgbjmni1z00')"
                     >
                     </j-select>
                 </j-form-item>
@@ -70,7 +71,9 @@
 import { queryPlatformNoPage, recharge } from '@/api/iot-card/cardManagement';
 import { PaymentMethod } from '@/views/iot-card/data';
 import { onlyMessage } from '@/utils/comm'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['change', 'save']);
 
 const btnLoading = ref<boolean>(false);
@@ -89,27 +92,27 @@ const rules = {
     configId: [
         {
             required: true,
-            message: '请选择平台对接',
+            message: t('iot-card.Recharge.Save.5rgbjmni0z40'),
         },
         {
             max: 64,
-            message: '最多输入64个字符',
+            message: t('iot-card.Recharge.Save.5rgbjmni24c0'),
         },
     ],
     rechargeId: [
         {
             required: true,
-            message: '请输入账户id',
+            message: t('iot-card.Recharge.Save.5rgbjmni1aw0'),
         },
         {
             max: 64,
-            message: '最多输入64个字符',
+            message: t('iot-card.Recharge.Save.5rgbjmni24c0'),
         },
     ],
     chargeMoney: [
         {
             required: true,
-            message: '请输入充值金额',
+            message: t('iot-card.Recharge.Save.5rgbjmni2a80'),
         },
         // {
         //     min: 1,
@@ -120,7 +123,7 @@ const rules = {
     paymentType: [
         {
             required: true,
-            message: '请选择支付方式',
+            message: t('iot-card.Recharge.Save.5rgbjmni1z00'),
         },
     ],
 };
@@ -167,9 +170,9 @@ const handleOk = () => {
             btnLoading.value = false;
             if (resp.status === 200) {
                 if (resp.result === '失败') {
-                    onlyMessage('缴费失败', 'error')
+                    onlyMessage(t('iot-card.Recharge.Save.5rgbjmni2lw0'), 'error')
                 } else if(!resp.result) {
-                  onlyMessage('操作过于频繁，请稍后再试！', 'warning')
+                  onlyMessage(t('iot-card.Recharge.Save.5rgbjmni2ro0'), 'warning')
                 } else {
                     window.open(resp.result);
                 }

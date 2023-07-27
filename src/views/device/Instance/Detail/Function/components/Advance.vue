@@ -32,19 +32,19 @@
                                 :loading="loading"
                                 @click="handleExecute(current)"
                             >
-                                执行
+                                {{t('Function.components.Advance.5rcyi6s5j7s0')}}
                             </j-button>
                             <j-button
                                 type="default"
                                 @click="handleClear()"
                             >
-                                清空
+                                {{t('Function.components.Advance.5rcyi6s5n3c0')}}
                             </j-button>
                         </j-space>
                     </div>
                 </j-col>
                 <j-col :span="9">
-                    <h6>执行结果：</h6>
+                    <h6>{{t('Function.components.Advance.5rcyi6s5nxo0')}}</h6>
                     <span class="execute-result">
                         {{ executeResult }}
                     </span>
@@ -58,7 +58,9 @@
 import { useInstanceStore } from '@/store/instance';
 import { execute } from '@/api/device/instance';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const instanceStore = useInstanceStore();
 const route = useRoute();
 
@@ -132,7 +134,7 @@ const onTabChange = (_key: string) => {
 };
 
 /**
- * 执行
+ * {{t('Function.components.Advance.5rcyi6s5j7s0')}}
  */
 const handleExecute = async (func: any) => {
     loading.value = true;
@@ -149,11 +151,11 @@ const handleExecute = async (func: any) => {
         });
     if (resp.success) {
         executeResult.value = resp?.result instanceof Array ? resp?.result?.[0] : resp.result;
-        onlyMessage('操作成功');
+        onlyMessage(t('Function.components.Advance.5rcyi6s5o700'));
     }
 };
 /**
- * 清空
+ * {{t('Function.components.Advance.5rcyi6s5n3c0')}}
  */
 const handleClear = () => {
     current.json = '';

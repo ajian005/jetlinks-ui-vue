@@ -3,9 +3,9 @@
     <j-modal
         :maskClosable="false"
         :visible="true"
-        title="导入"
-        okText="确定"
-        cancelText="取消"
+        :title="t('iot-card.CardManagement.Import.5rgbg3fk6740')"
+        :okText="t('iot-card.CardManagement.Import.5rgbg3fk7ho0')"
+        :cancelText="t('iot-card.CardManagement.Import.5rgbg3fk7mw0')"
         @cancel="handleCancel"
     >
         <div style="margin-top: 10px">
@@ -15,28 +15,28 @@
                 ref="formRef"
                 :rules="rules"
             >
-                <j-form-item label="平台对接" required name="configId">
+                <j-form-item :label="t('iot-card.CardManagement.Import.5rgbg3fk7pg0')" required name="configId">
                     <j-select
                         showSearch
                         v-model:value="modelRef.configId"
                         :options="configList"
-                        placeholder="请选择平台对接"
+                        :placeholder="t('iot-card.CardManagement.Import.5rgbg3fk7s80')"
                     >
                     </j-select>
                 </j-form-item>
 
-                <j-form-item v-if="modelRef.configId" label="文件格式">
+                <j-form-item v-if="modelRef.configId" :label="t('iot-card.CardManagement.Import.5rgbg3fk7vk0')">
                     <j-radio-group
                         button-style="solid"
                         v-model:value="modelRef.fileType"
-                        placeholder="请选择文件格式"
+                        :placeholder="t('iot-card.CardManagement.Import.5rgbg3fk7y80')"
                     >
                         <j-radio-button value="xlsx">xlsx</j-radio-button>
                         <j-radio-button value="csv">csv</j-radio-button>
                     </j-radio-group>
                 </j-form-item>
 
-                <j-form-item label="文件上传" v-if="modelRef.configId">
+                <j-form-item :label="t('iot-card.CardManagement.Import.5rgbg3fk80o0')" v-if="modelRef.configId">
                     <UploadFile
                         :product="modelRef.configId"
                         v-model="modelRef.upload"
@@ -60,11 +60,11 @@
                             <template #icon>
                                 <AIcon type="UploadOutlined" />
                             </template>
-                            文件上传
+                            {{t('iot-card.CardManagement.Import.5rgbg3fk80o0')}}
                         </j-button>
                     </j-upload>
                 </j-form-item>
-                <j-form-item v-if="modelRef.configId" label="下载模板">
+                <j-form-item v-if="modelRef.configId" :label="t('iot-card.CardManagement.Import.5rgbg3fk83k0')">
                     <j-space>
                         <j-button icon="file" @click="downFileFn('xlsx')">
                             .xlsx
@@ -75,17 +75,17 @@
                     </j-space>
                 </j-form-item>
                 <div v-if="totalCount">
-                    <a-icon class="check-num" type="check" /> 已完成 总数量
+                    <a-icon class="check-num" type="check" /> {{t('iot-card.CardManagement.Import.5rgbg3fk85w0')}} {{t('iot-card.CardManagement.Import.5rgbg3fk8b40')}}
                     <span class="check-num">{{ totalCount }}</span>
                 </div>
                 <div v-if="errCount">
                     <a-icon class="check-num" style="color: red" type="close" />
-                    失败 总数量
+                    {{t('iot-card.CardManagement.Import.5rgbg3fk8ds0')}} {{t('iot-card.CardManagement.Import.5rgbg3fk8b40')}}
                     <span class="check-num">{{ errCount }}</span>
                 </div> -->
         </div>
         <template #footer>
-            <j-button type="primary" @click="handleOk">关闭</j-button>
+            <j-button type="primary" @click="handleOk">{{t('iot-card.CardManagement.Import.5rgbg3fk8g80')}}</j-button>
         </template>
     </j-modal>
 </template>
@@ -97,7 +97,9 @@ import {
     _import,
 } from '@/api/iot-card/cardManagement';
 import UploadFile from './UploadFile.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close', 'save']);
 
 const configList = ref<Record<string, any>[]>([]);
@@ -113,7 +115,7 @@ const modelRef = reactive({
 });
 
 const rules = {
-    configId: [{ required: true, message: '请选择平台对接' }],
+    configId: [{ required: true, message: t('iot-card.CardManagement.Import.5rgbg3fk7s80') }],
 };
 
 const getConfig = async () => {

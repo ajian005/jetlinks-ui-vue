@@ -33,12 +33,12 @@ import type { bootConfig, recommendList } from '../../typing';
 const opsBootConfig: bootConfig[] = [
     {
         english: 'STEP1',
-        label: t('page.iot.home.op.step1'),
+        label: t('pages.iot.home.op.step1'),
         link: 'link/AccessConfig',
     },
     {
         english: 'STEP2',
-        label: t('page.iot.home.op.step2'),
+        label: t('pages.iot.home.op.step2'),
         link: 'Log',
         params: {
             tab: 'system',
@@ -46,39 +46,39 @@ const opsBootConfig: bootConfig[] = [
     },
     {
         english: 'STEP3',
-        label: t('page.iot.home.op.step3'),
+        label: t('pages.iot.home.op.step3'),
         link: 'link/DashBoard',
     },
 ];
 const opsStepDetails: recommendList[] = [
     {
-        title: t('page.iot.home.opTips.step1'),
+        title: t('pages.iot.home.opTips.step1'),
         details:
-        t('page.iot.home.opTips.step1Content'),
+            t('pages.iot.home.opTips.step1Content'),
         iconUrl: '/images/home/Frame4528.png',
         linkUrl: 'link/Protocol',
     },
     {
-        title: t('page.iot.home.opTips.step2'),
-        details: t('page.iot.home.opTips.step2Content'),
+        title: t('pages.iot.home.opTips.step2'),
+        details: t('pages.iot.home.opTips.step2Content'),
         iconUrl: '/images/home/Frame4528.png',
         linkUrl: 'link/Certificate',
     },
     {
-        title: t('page.iot.home.opTips.step3'),
-        details: t('page.iot.home.opTips.step3Content'),
+        title: t('pages.iot.home.opTips.step3'),
+        details: t('pages.iot.home.opTips.step3Content'),
         iconUrl: '/images/home/Frame4528.png',
         linkUrl: 'link/Type',
     },
     {
-        title: t('page.iot.home.opTips.step4'),
-        details: t('page.iot.home.opTips.step4Content'),
+        title: t('pages.iot.home.opTips.step4'),
+        details: t('pages.iot.home.opTips.step4Content'),
         iconUrl: '/images/home/Frame4528(1).png',
         linkUrl: 'link/AccessConfig',
     },
     {
-        title: t('page.iot.home.opTips.step5'),
-        details: t('page.iot.home.opTips.step5Content'),
+        title: t('pages.iot.home.opTips.step5'),
+        details:  t('pages.iot.home.opTips.step5Content'),
         iconUrl: '/images/home/Frame4528.png',
         linkUrl: 'Log',
         params: {

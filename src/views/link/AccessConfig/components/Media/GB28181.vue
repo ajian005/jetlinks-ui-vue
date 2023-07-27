@@ -7,7 +7,7 @@
             <div class="steps-box" v-if="current === 0">
                 <div class="alert">
                     <AIcon type="InfoCircleOutlined" />
-                    配置设备信令参数
+                    {{t('components.Media.GB28181.5rg371r676s0')}}
                 </div>
 
                 <j-form
@@ -20,23 +20,23 @@
                     <j-row :gutter="[24, 24]">
                         <j-col :span="12">
                             <j-form-item
-                                label="SIP 域"
+                                :label="t('components.Media.GB28181.SIP')"
                                 name="domain"
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入SIP 域',
+                                        message: t('components.Media.GB28181.5rg371r685s0'),
                                     },
                                     {
                                         max: 64,
-                                        message: '最多可输入64个字符',
+                                        message: t('components.Media.GB28181.5rg371r68bk0'),
                                         trigger: 'blur',
                                     },
                                 ]"
                             >
                                 <j-input
                                     v-model:value="formState.domain"
-                                    placeholder="请输入SIP 域"
+                                    :placeholder="t('components.Media.GB28181.5rg371r685s0')"
                                 />
                             </j-form-item>
                         </j-col>
@@ -47,18 +47,18 @@
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入SIP ID',
+                                        message: t('components.Media.GB28181.5rg371r68hk0'),
                                     },
                                     {
                                         max: 64,
-                                        message: '最多可输入64个字符',
+                                        message: t('components.Media.GB28181.5rg371r68bk0'),
                                         trigger: 'blur',
                                     },
                                 ]"
                             >
                                 <j-input
                                     v-model:value="formState.sipId"
-                                    placeholder="请输入SIP ID"
+                                    :placeholder="t('components.Media.GB28181.5rg371r68hk0')"
                                 />
                             </j-form-item>
                         </j-col>
@@ -69,14 +69,14 @@
                         :rules="[
                             {
                                 required: true,
-                                message: '请选择集群',
+                                message: t('components.Media.GB28181.5rg371r68lg0'),
                             },
                         ]"
                     >
                         <template #label>
-                            集群
+                            {{t('components.Media.GB28181.5rg371r68po0')}}
                             <j-tooltip
-                                title="共享配置:集群下所有节点共用同一配置,独立配置:集群下不同节点使用不同配置"
+                                :title="t('components.Media.GB28181.clusterTip')"
                             >
                                 <AIcon
                                     type="QuestionCircleOutlined"
@@ -85,20 +85,20 @@
                             </j-tooltip>
                         </template>
                         <j-radio-group v-model:value="formState.shareCluster">
-                            <j-radio :value="true">共享配置</j-radio>
-                            <j-radio :value="false">独立配置</j-radio>
+                            <j-radio :value="true">{{t('components.Media.GB28181.5rg371r68to0')}}</j-radio>
+                            <j-radio :value="false">{{t('components.Media.GB28181.5rg371r68x80')}}</j-radio>
                         </j-radio-group>
                     </j-form-item>
                     <div v-if="formState.shareCluster" class="form-item1">
                         <j-row :gutter="[24, 24]">
                             <j-col :span="6">
                                 <j-form-item
-                                    label="SIP 地址"
+                                    :label="t('components.Media.GB28181.SIPAddress')"
                                     :name="['hostPort', 'host']"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请选择SIP地址',
+                                            message: t('components.Media.GB28181.5rg371r69100'),
                                         },
                                     ]"
                                 >
@@ -121,7 +121,7 @@
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请选择端口',
+                                            message: t('components.Media.GB28181.5rg371r694s0'),
                                         },
                                     ]"
                                 >
@@ -130,7 +130,7 @@
                                     <j-select
                                         v-model:value="formState.hostPort.port"
                                         :options="sipList"
-                                        placeholder="请选择端口"
+                                        :placeholder="t('components.Media.GB28181.5rg371r694s0')"
                                         allowClear
                                         show-search
                                         :filter-option="filterOption"
@@ -139,17 +139,17 @@
                             </j-col>
                             <j-col :span="6">
                                 <j-form-item
-                                    label="公网 Host"
+                                    :label="t('components.Media.GB28181.5rg371r698g0')"
                                     :name="['hostPort', 'publicHost']"
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '请输入IP地址',
+                                            message: t('components.Media.GB28181.5rg371r69cc0'),
                                         },
                                         {
                                             pattern:
                                                 /^([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$/,
-                                            message: '请输入正确的IP地址',
+                                            message: t('components.Media.GB28181.5rg371r69fw0'),
                                         },
                                         {
                                           max: 65535,
@@ -179,7 +179,7 @@
                                     :rules="[
                                         {
                                             required: true,
-                                            message: '输入端口',
+                                            message: t('components.Media.GB28181.5rg371r69l00'),
                                         },
                                     ]"
                                 >
@@ -187,7 +187,7 @@
 
                                     <j-input-number
                                         style="width: 100%"
-                                        placeholder="请输入端口"
+                                        :placeholder="t('components.Media.GB28181.5rg371r69oo0')"
                                         v-model:value="
                                             formState.hostPort.publicPort
                                         "
@@ -219,20 +219,20 @@
                                     :header="
                                         cluster.clusterNodeId
                                             ? cluster.clusterNodeId
-                                            : `#${index + 1}.配置信息`
+                                            : `#${index + 1 + '.'+ t('components.Media.GB28181.disposition')}`
                                     "
                                 >
                                     <template #extra>
                                         <span
                                             @click="removeCluster(cluster)"
                                             class="delete-btn"
-                                            >删除</span
+                                            >{{t('components.Media.GB28181.5rg371r69s80')}}</span
                                         >
                                     </template>
                                     <j-row :gutter="[24, 24]">
                                         <j-col :span="8">
                                             <j-form-item
-                                                label="节点名称"
+                                                :label="t('components.Media.GB28181.5rg371r69wc0')"
                                                 :name="[
                                                     'cluster',
                                                     index,
@@ -240,7 +240,7 @@
                                                 ]"
                                                 :rules="{
                                                     required: true,
-                                                    message: '请选择节点名称',
+                                                    message: t('components.Media.GB28181.5rg371r6a0c0'),
                                                 }"
                                             >
                                                 <j-select
@@ -269,13 +269,13 @@
                                                 ]"
                                                 :rules="{
                                                     required: true,
-                                                    message: '请选择SIP 地址',
+                                                    message: t('components.Media.GB28181.5rg371r69100'),
                                                 }"
                                             >
                                                 <template #label>
-                                                    SIP 地址
+                                                    SIP {{t('components.Media.GB28181.5rg371r6a3s0')}}
                                                     <j-tooltip
-                                                        title="到服务器上的网卡地址,绑定到所有网卡:0.0.0.0"
+                                                        :title="t('components.Media.GB28181.SIPTip')"
                                                     >
                                                         <AIcon
                                                             type="QuestionCircleOutlined"
@@ -289,7 +289,7 @@
                                                 <j-select
                                                     v-model:value="cluster.host"
                                                     :options="sipListOption"
-                                                    placeholder="请选择IP地址"
+                                                    :placeholder="t('components.Media.GB28181.5rg371r6a7k0')"
                                                     allowClear
                                                     show-search
                                                     :filter-option="
@@ -314,7 +314,7 @@
                                                 ]"
                                                 :rules="{
                                                     required: true,
-                                                    message: '请选择端口',
+                                                    message: t('components.Media.GB28181.5rg371r694s0'),
                                                 }"
                                             >
                                                 <div class="form-label"></div>
@@ -347,20 +347,20 @@
                                                     {
                                                         required: true,
                                                         message:
-                                                            '请输入公网 Host',
+                                                            t('components.Media.GB28181.5rg371r6ac80'),
                                                     },
                                                     {
                                                         pattern:
                                                             /^([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$/,
                                                         message:
-                                                            '请输入正确的IP地址',
+                                                            t('components.Media.GB28181.5rg371r69fw0'),
                                                     },
                                                 ]"
                                             >
                                                 <template #label>
-                                                    公网 Host
+                                                    {{t('components.Media.GB28181.5rg371r6af80')}} Host
                                                     <j-tooltip
-                                                        title="监听指定端口的请求"
+                                                        :title="t('components.Media.GB28181.5rg371r6aks0')"
                                                     >
                                                         <AIcon
                                                             type="QuestionCircleOutlined"
@@ -375,7 +375,7 @@
                                                     v-model:value="
                                                         cluster.publicHost
                                                     "
-                                                    placeholder="请输入IP地址"
+                                                    :placeholder="t('components.Media.GB28181.5rg371r69cc0')"
                                                     allowClear
                                                 />
                                             </j-form-item>
@@ -390,7 +390,7 @@
                                                 :rules="[
                                                     {
                                                         required: true,
-                                                        message: '请输入端口',
+                                                        message: t('components.Media.GB28181.5rg371r69oo0'),
                                                     },
                                                 ]"
                                             >
@@ -398,7 +398,7 @@
 
                                                 <j-input-number
                                                     style="width: 100%"
-                                                    placeholder="请输入端口"
+                                                    :placeholder="t('components.Media.GB28181.5rg371r69oo0')"
                                                     v-model:value="
                                                         cluster.publicPort
                                                     "
@@ -421,7 +421,7 @@
                                 @click="addCluster"
                             >
                                 <AIcon type="PlusOutlined" />
-                                新增
+                                {{t('components.Media.GB28181.5rg371r6ano0')}}
                             </j-button>
                         </j-form-item>
                     </j-form>
@@ -436,26 +436,26 @@
                 >
                     <j-row :gutter="[24, 24]">
                         <j-col :span="12">
-                            <title-component data="基本信息" />
+                            <title-component :data="t('components.Media.GB28181.5rg371r6aqs0')" />
                             <div>
                                 <j-form :model="formData" layout="vertical">
                                     <j-form-item
-                                        label="名称"
+                                        :label="t('components.Media.GB28181.5rg371r6ato0')"
                                         v-bind="validateInfos.name"
                                     >
                                         <j-input
                                             v-model:value="formData.name"
                                             allowClear
-                                            placeholder="请输入名称"
+                                            :placeholder="t('components.Media.GB28181.5rg371r6awo0')"
                                         />
                                     </j-form-item>
 
                                     <j-form-item
-                                        label="说明"
+                                        :label="t('components.Media.GB28181.5rg371r6azk0')"
                                         v-bind="validateInfos.description"
                                     >
                                         <j-textarea
-                                            placeholder="请输入说明"
+                                            :placeholder="t('components.Media.GB28181.5rg371r6b3s0')"
                                             :rows="4"
                                             v-model:value="formData.description"
                                             show-count
@@ -497,7 +497,7 @@
                 style="margin-right: 8px"
                 @click="next"
             >
-                下一步
+                {{t('components.Media.GB28181.5rg371r6bd00')}}
             </j-button>
             <PermissionButton
                 v-if="current === 1 && view === 'false'"
@@ -509,9 +509,9 @@
                     id === ':id' ? 'add' : 'update'
                 }`"
             >
-                保存
+                {{t('components.Media.GB28181.5rg371r6bfs0')}}
             </PermissionButton>
-            <j-button v-if="current > 0" @click="prev"> 上一步 </j-button>
+            <j-button v-if="current > 0" @click="prev"> {{t('components.Media.GB28181.5rg371r6bio0')}} </j-button>
         </div>
     </div>
 </template>
@@ -523,7 +523,9 @@ import { getResourcesCurrent, getClusters } from '@/api/link/accessConfig';
 import { update, save } from '@/api/link/accessConfig';
 import { onlyMessage } from '@/utils/comm';
 import { isNumber } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface Form2 {
     clusterNodeId: string | undefined;
     port: string | undefined;
@@ -568,7 +570,7 @@ const useForm = Form.useForm;
 
 const current = ref(0);
 const stepCurrent = ref(0);
-const steps = ref(['信令配置', '完成']);
+const steps = ref([t('components.Media.GB28181.5rg371r6bls0'), t('components.Media.GB28181.5rg371r6bqw0')]);
 const formData = ref({
     name: '',
     description: '',
@@ -642,14 +644,14 @@ const { resetFields, validate, validateInfos } = useForm(
     formData,
     reactive({
         name: [
-            { required: true, message: '请输入名称', trigger: 'blur' },
+            { required: true, message: t('components.Media.GB28181.5rg371r6awo0'), trigger: 'blur' },
             {
                 max: 64,
-                message: '最多可输入64个字符',
+                message: t('components.Media.GB28181.5rg371r68bk0'),
                 trigger: 'blur',
             },
         ],
-        description: [{ max: 200, message: '最多可输入200个字符' }],
+        description: [{ max: 200, message: t('components.Media.GB28181.5rg371r6bts0') }],
     }),
 );
 
@@ -673,7 +675,7 @@ const saveData = () => {
                   });
 
         if (resp?.status === 200) {
-            onlyMessage('操作成功', 'success');
+            onlyMessage(t('components.Media.GB28181.5rg371r6bwo0'), 'success');
             if (route.query.save) {
                 // @ts-ignore
                 window?.onTabSaveSuccess(resp);
@@ -707,7 +709,7 @@ const next = async () => {
                         ...data2,
                     };
                 } else {
-                    return onlyMessage('请新增或完善配置', 'error');
+                    return onlyMessage(t('components.Media.GB28181.5rg371r6bzk0'), 'error');
                 }
                 current.value = current.value + 1;
                 params.configuration = data1;

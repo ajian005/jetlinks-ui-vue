@@ -1,7 +1,7 @@
 <template>
     <j-modal
         class="add-bind-user-dialog-container"
-        title="绑定"
+        :title="t('user.components.AddBindUserDialog.5rg97rye06g0')"
         width="1440px"
         visible
         centered
@@ -40,7 +40,9 @@
 import { bindUser_api, getBindUserList_api } from '@/api/system/department';
 import { useDepartmentStore } from '@/store/department';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const department = useDepartmentStore();
 
 const emits = defineEmits(['confirm', 'update:visible']);
@@ -56,7 +58,7 @@ const confirm = () => {
         loading.value = true;
         bindUser_api(props.parentId,table._selectedRowKeys)
             .then(() => {
-                onlyMessage('操作成功');
+                onlyMessage(t('user.components.AddBindUserDialog.5rg97rye11s0'));
                 emits('confirm');
                 emits('update:visible', false);
                 // table._selectedRowKeys = [];
@@ -65,7 +67,7 @@ const confirm = () => {
             .finally(() => (loading.value = false));
     } else {
         // emits('update:visible', false);
-        onlyMessage('请选择要绑定的用户', 'warning');
+        onlyMessage(t('user.components.AddBindUserDialog.5rg97rye18w0'), 'warning');
     }
 };
 
@@ -76,7 +78,7 @@ const cancel = () => {
 
 const columns = [
     {
-        title: '姓名',
+        title: t('user.components.AddBindUserDialog.5rg97rye1d40'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -85,7 +87,7 @@ const columns = [
         },
     },
     {
-        title: '用户名',
+        title: t('user.components.AddBindUserDialog.5rg97rye1ig0'),
         dataIndex: 'username',
         key: 'username',
         ellipsis: true,

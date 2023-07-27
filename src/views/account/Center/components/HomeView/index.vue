@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="btn">
-            <j-button type="primary" @click="confirm">保存修改</j-button>
+            <j-button type="primary" @click="confirm">{{t('components.HomeView.index.5sbl1zs8izg0')}}</j-button>
         </div>
     </div>
 </template>
@@ -32,7 +32,9 @@
 <script lang="ts" setup>
 import { getMe_api, getView_api, setView_api } from '@/api/home';
 import { getImage, onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const currentView = ref<string>('');
 const isApiUser = ref<boolean>();
 
@@ -63,7 +65,7 @@ const confirm = () => {
     setView_api({
         name: 'view',
         content: currentView.value,
-    }).then(() => onlyMessage('保存成功', 'success'));
+    }).then(() => onlyMessage(t('components.HomeView.index.5rmxndjechc0'), 'success'));
 };
 
 onMounted(() => {

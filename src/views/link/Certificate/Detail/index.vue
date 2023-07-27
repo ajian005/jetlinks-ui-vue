@@ -14,7 +14,7 @@
                             autocomplete="off"
                         >
                             <j-form-item
-                                label="证书标准"
+                                :label="t('Certificate.Detail.index.5rg3hg3xaeo0')"
                                 v-bind="validateInfos.type"
                             >
                                 <j-radio-group v-model:value="formData.type">
@@ -29,37 +29,37 @@
                                 </j-radio-group>
                             </j-form-item>
                             <j-form-item
-                                label="证书名称"
+                                :label="t('Certificate.Detail.index.5rg3hg3xc9g0')"
                                 v-bind="validateInfos.name"
                             >
                                 <j-input
-                                    placeholder="请输入证书名称"
+                                    :placeholder="t('Certificate.Detail.index.5rg3hg3xco40')"
                                     v-model:value="formData.name"
                                 />
                             </j-form-item>
                             <j-form-item
-                                label="证书文件"
+                                :label="t('Certificate.Detail.index.5rg3hg3xcvk0')"
                                 v-bind="validateInfos['configs.cert']"
                             >
                                 <CertificateFile
                                     name="cert"
                                     v-model:modelValue="formData.configs.cert"
-                                    placeholder="请输入证书文件"
+                                    :placeholder="t('Certificate.Detail.index.5rg3hg3xdbk0')"
                                 />
                             </j-form-item>
                             <j-form-item
-                                label="证书私钥"
+                                :label="t('Certificate.Detail.index.5rg3hg3xdjs0')"
                                 v-bind="validateInfos['configs.key']"
                             >
                                 <CertificateFile
                                     name="key"
                                     v-model:modelValue="formData.configs.key"
-                                    placeholder="请输入证书私钥"
+                                    :placeholder="t('Certificate.Detail.index.5rg3hg3xe000')"
                                 />
                             </j-form-item>
-                            <j-form-item label="说明" name="description">
+                            <j-form-item :label="t('Certificate.Detail.index.5rg3hg3xe6k0')" name="description">
                                 <j-textarea
-                                    placeholder="请输入说明"
+                                    :placeholder="t('Certificate.Detail.index.5rg3hg3xedg0')"
                                     v-model:value="formData.description"
                                     :maxlength="200"
                                     :rows="3"
@@ -75,26 +75,26 @@
                                     type="primary"
                                     @click.prevent="onSubmit"
                                     :loading="loading"
-                                    >保存</j-button
+                                    >{{t('Certificate.Detail.index.5rg3hg3xek00')}}</j-button
                                 >
                             </j-form-item>
                         </j-form>
                     </j-col>
                     <j-col :span="12">
                         <div class="doc">
-                            <h1>1. 概述</h1>
+                            <h1>1. {{t('Certificate.Detail.index.5rg3hg3xeoc0')}}</h1>
                             <div>
-                                证书由受信任的数字证书颁发机构CA，在验证服务器身份后颁发，具有服务器身份验证和数据传输加密功能，保障设备与平台间的数据传输安全。配置后可被网络组件引用。
+                                {{t('Certificate.Detail.index.5rg3hg3xes00')}}
                             </div>
-                            <h1>2. 配置说明</h1>
-                            <h2>1、证书文件</h2>
+                            <h1>2. {{t('Certificate.Detail.index.5rg3hg3xevk0')}}</h1>
+                            <h2>1、{{$t('Certificate.Detail.index.5rg3hg3xcvk0')}}</h2>
                             <div>
-                                您可以使用文本编辑工具打开PEM格式的证书文件，复制其中的内容并粘贴到该文本框，或者单击该文本框下的上传，并选择存储在本地计算机的证书文件，将文件内容上传到文本框。
+                                {{t('Certificate.Detail.index.5rg3hg3xezg0')}}
                             </div>
-                            <h2>2、证书私钥</h2>
+                            <h2>2、{{$t('Certificate.Detail.index.5rg3hg3xdjs0')}}</h2>
                             <div>
-                                填写证书私钥内容的PEM编码。
-                                您可以使用文本编辑工具打开KEY格式的证书私钥文件，复制其中的内容并粘贴到该文本框，或者单击该文本框下的上传并选择存储在本地计算机的证书私钥文件，将文件内容上传到文本框。
+                                {{t('Certificate.Detail.index.5rg3hg3xf4s0')}}
+                                {{t('Certificate.Detail.index.5rg3hg3xf8o0')}}
                             </div>
                         </div>
                     </j-col>
@@ -112,7 +112,9 @@ import type { UploadChangeParam } from 'ant-design-vue';
 import { save, update, queryDetail } from '@/api/link/certificate';
 import { FormDataType, TypeObjType } from '../type';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter();
 const route = useRoute();
 const view = route.query.view as string;
@@ -136,18 +138,18 @@ const formData = ref<FormDataType>({
 const { resetFields, validate, validateInfos } = useForm(
     formData,
     reactive({
-        type: [{ required: true, message: '请选择证书标准', trigger: 'blur' }],
+        type: [{ required: true, message: t('Certificate.Detail.index.5rg3hg3xfc80'), trigger: 'blur' }],
         name: [
-            { required: true, message: '请输入证书名称', trigger: 'blur' },
-            { max: 64, message: '最多可输入64个字符' },
+            { required: true, message: t('Certificate.Detail.index.5rg3hg3xco40'), trigger: 'blur' },
+            { max: 64, message: t('Certificate.Detail.index.5rg3hg3xffs0') },
         ],
         'configs.cert': [
-            { required: true, message: '请输入或上传文件', trigger: 'blur' },
+            { required: true, message: t('Certificate.Detail.index.5rg3hg3xfjw0'), trigger: 'blur' },
         ],
         'configs.key': [
-            { required: true, message: '请输入或上传文件', trigger: 'blur' },
+            { required: true, message: t('Certificate.Detail.index.5rg3hg3xfjw0'), trigger: 'blur' },
         ],
-        description: [{ max: 200, message: '最多可输入200个字符' }],
+        description: [{ max: 200, message: t('Certificate.Detail.index.5rg3hg3xfns0') }],
     }),
 );
 
@@ -161,7 +163,7 @@ const onSubmit = () => {
                     ? await save(params).catch(() => {})
                     : await update({ ...params, id }).catch(() => {});
             if (response?.status === 200) {
-                onlyMessage('操作成功', 'success');
+                onlyMessage(t('Certificate.Detail.index.5rg3hg3xfyo0'), 'success');
                 router.push('/iot/link/certificate');
             }
             loading.value = false;
@@ -174,7 +176,7 @@ const onSubmit = () => {
 const handleChange = (info: UploadChangeParam) => {
     fileLoading.value = true;
     if (info.file.status === 'done') {
-        onlyMessage('上传成功！', 'success');
+        onlyMessage(t('Certificate.Detail.index.5rg3hg3xg1s0'), 'success');
         const result = info.file.response?.result;
         formData.value.configs.cert = result;
         fileLoading.value = false;

@@ -1,75 +1,38 @@
 <!-- 通知模板 -->
 <template>
     <page-container>
-        <pro-search
-            :columns="columns"
-            target="notice-config"
-            @search="handleSearch"
-        />
+        <pro-search :columns="columns" target="notice-config" @search="handleSearch" />
         <FullPage>
-            <JProTable
-                ref="configRef"
-                :columns="columns"
-                :request="TemplateApi.list"
-                :defaultParams="{
-                    sorts: [{ name: 'createTime', order: 'desc' }],
-                }"
-                :params="params"
-                :gridColumn="3"
-            >
+            <JProTable ref="configRef" :columns="columns" :request="TemplateApi.list" :defaultParams="{
+                sorts: [{ name: 'createTime', order: 'desc' }],
+            }" :params="params" :gridColumn="3">
                 <template #headerTitle>
                     <j-space>
-                        <PermissionButton
-                            type="primary"
-                            @click="handleAdd"
-                            hasPermission="notice/Template:add"
-                        >
-                            新增
+                        <PermissionButton type="primary" @click="handleAdd" hasPermission="notice/Template:add">
+                            {{ t('common.add') }}
                         </PermissionButton>
-                        <j-upload
-                            name="file"
-                            accept=".json"
-                            :showUploadList="false"
-                            :before-upload="beforeUpload"
-                        >
-                            <PermissionButton
-                                hasPermission="notice/Template:import"
-                            >
-                                导入
+                        <j-upload name="file" accept=".json" :showUploadList="false" :before-upload="beforeUpload">
+                            <PermissionButton hasPermission="notice/Template:import">
+                                {{ t('common.import') }}
                             </PermissionButton>
                         </j-upload>
-                        <j-popconfirm
-                            title="确认导出？"
-                            ok-text="确定"
-                            cancel-text="取消"
-                            @confirm="handleExport"
-                        >
-                            <PermissionButton
-                                hasPermission="notice/Template:export"
-                            >
-                                导出
+                        <j-popconfirm :title="t('common.tips.export')" :ok-text="t('common.ok')" :cancel-text="t('common.cancel')" @confirm="handleExport">
+                            <PermissionButton hasPermission="notice/Template:export">
+                                {{ t('common.export') }}
                             </PermissionButton>
                         </j-popconfirm>
                     </j-space>
                 </template>
                 <template #card="slotProps">
-                    <CardBox
-                        :showStatus="false"
-                        :value="slotProps"
-                        :actions="getActions(slotProps, 'card')"
-                        :statusNames="{}"
-                    >
+                    <CardBox :showStatus="false" :value="slotProps" :actions="getActions(slotProps, 'card')"
+                        :statusNames="{}">
                         <template #img>
                             <slot name="img">
-                                <img
-                                    :src="
-                                        getLogo(
-                                            slotProps.type,
-                                            slotProps.provider,
-                                        )
-                                    "
-                                    class="logo"
-                                />
+                                <img :src="getLogo(
+                                    slotProps.type,
+                                    slotProps.provider,
+                                )
+                                    " class="logo" />
                             </slot>
                         </template>
                         <template #content>
@@ -79,7 +42,7 @@
                             <j-row>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        通知方式
+                                        {{ t('common.notiMode') }}
                                     </div>
                                     <div>
                                         {{ getMethodTxt(slotProps.type) }}
@@ -87,7 +50,7 @@
                                 </j-col>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        说明
+                                        {{ t('common.descri') }}
                                     </div>
                                     <Ellipsis>
                                         {{ slotProps.description }}
@@ -96,29 +59,17 @@
                             </j-row>
                         </template>
                         <template #actions="item">
-                            <j-tooltip
-                                v-bind="item.tooltip"
-                                :title="item.disabled && item.tooltip.title"
-                            >
-                                <j-dropdown
-                                    placement="bottomRight"
-                                    v-if="item.key === 'others'"
-                                >
+                            <j-tooltip v-bind="item.tooltip" :title="item.disabled && item.tooltip.title">
+                                <j-dropdown placement="bottomRight" v-if="item.key === 'others'">
                                     <j-button>
                                         <AIcon :type="item.icon" />
                                         <span>{{ item.text }}</span>
                                     </j-button>
                                     <template #overlay>
                                         <j-menu>
-                                            <j-menu-item
-                                                v-for="(o, i) in item.children"
-                                                :key="i"
-                                            >
-                                                <PermissionButton
-                                                    type="link"
-                                                    @click="o.onClick"
-                                                    :hasPermission="`notice/Template:${o.key}`"
-                                                >
+                                            <j-menu-item v-for="(o, i) in item.children" :key="i">
+                                                <PermissionButton type="link" @click="o.onClick"
+                                                    :hasPermission="`notice/Template:${o.key}`">
                                                     <template #icon>
                                                         <AIcon :type="o.icon" />
                                                     </template>
@@ -128,26 +79,18 @@
                                         </j-menu>
                                     </template>
                                 </j-dropdown>
-                                <j-popconfirm
-                                    v-else-if="item.key === 'delete'"
-                                    v-bind="item.popConfirm"
-                                    :disabled="item.disabled"
-                                >
-                                    <PermissionButton
-                                        :disabled="item.disabled"
-                                        :hasPermission="`notice/Template:${item.key}`"
-                                    >
+                                <j-popconfirm v-else-if="item.key === 'delete'" v-bind="item.popConfirm"
+                                    :disabled="item.disabled">
+                                    <PermissionButton :disabled="item.disabled"
+                                        :hasPermission="`notice/Template:${item.key}`">
                                         <template #icon>
                                             <AIcon type="DeleteOutlined" />
                                         </template>
                                     </PermissionButton>
                                 </j-popconfirm>
                                 <template v-else>
-                                    <PermissionButton
-                                        :disabled="item.disabled"
-                                        @click="item.onClick"
-                                        :hasPermission="`notice/Template:${item.key}`"
-                                    >
+                                    <PermissionButton :disabled="item.disabled" @click="item.onClick"
+                                        :hasPermission="`notice/Template:${item.key}`">
                                         <template #icon>
                                             <AIcon :type="item.icon" />
                                         </template>
@@ -173,25 +116,15 @@
                 </template>
                 <template #action="slotProps">
                     <j-space :size="16">
-                        <template
-                            v-for="i in getActions(slotProps, 'table')"
-                            :key="i.key"
-                        >
-                            <PermissionButton
-                                :danger="i.key === 'delete'"
-                                :disabled="i.disabled"
-                                :popConfirm="i.popConfirm"
+                        <template v-for="i in getActions(slotProps, 'table')" :key="i.key">
+                            <PermissionButton :danger="i.key === 'delete'" :disabled="i.disabled" :popConfirm="i.popConfirm"
                                 :tooltip="{
                                     ...i.tooltip,
-                                }"
-                                @click="i.onClick"
-                                type="link"
-                                style="padding: 0px"
-                                :hasPermission="'notice/Template:' + i.key"
-                            >
-                                <template #icon
-                                    ><AIcon :type="i.icon"
-                                /></template>
+                                }" @click="i.onClick" type="link" style="padding: 0px"
+                                :hasPermission="'notice/Template:' + i.key">
+                                <template #icon>
+                                    <AIcon :type="i.icon" />
+                                </template>
                             </PermissionButton>
                         </template>
                     </j-space>
@@ -213,7 +146,9 @@ import Log from './Log/index.vue';
 import { downloadObject } from '@/utils/utils';
 import { useMenuStore } from 'store/menu';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 
 let providerList: any = [];
@@ -226,7 +161,7 @@ const params = ref<Record<string, any>>({});
 
 const columns = [
     {
-        title: '模板名称',
+        title: t('pages.iot.notice.template.templateName'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -235,7 +170,7 @@ const columns = [
         },
     },
     {
-        title: '通知方式',
+        title: t('common.notiMode'),
         dataIndex: 'type',
         key: 'type',
         scopedSlots: true,
@@ -248,7 +183,7 @@ const columns = [
         },
     },
     {
-        title: '类型',
+        title: t('common.type'),
         dataIndex: 'provider',
         key: 'provider',
         scopedSlots: true,
@@ -261,7 +196,7 @@ const columns = [
         },
     },
     {
-        title: '说明',
+        title: t('common.descri'),
         dataIndex: 'description',
         key: 'description',
         scopedSlots: true,
@@ -271,7 +206,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('common.action'),
         key: 'action',
         fixed: 'right',
         width: 200,
@@ -368,9 +303,9 @@ const getActions = (
     const actions = [
         {
             key: 'update',
-            text: '编辑',
+            text: t('common.redact'),
             tooltip: {
-                title: '编辑',
+                title: t('common.redact'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -381,9 +316,9 @@ const getActions = (
         },
         {
             key: 'debug',
-            text: '调试',
+            text: t('common.debug'),
             tooltip: {
-                title: '调试',
+                title: t('common.debug'),
             },
             icon: 'BugOutlined',
             onClick: () => {
@@ -393,9 +328,9 @@ const getActions = (
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('common.delete'),
             popConfirm: {
-                title: '确认删除?',
+                title:  t('common.tips.delete'),
                 onConfirm: async () => {
                     const resp = await TemplateApi.del(data.id);
                     if (resp.status === 200) {
@@ -412,14 +347,14 @@ const getActions = (
 
     const others: ActionsType = {
         key: 'others',
-        text: '其他',
+        text: t('common.others'),
         icon: 'EllipsisOutlined',
         children: [
             {
                 key: 'export',
-                text: '导出',
+                text:  t('common.export'),
                 tooltip: {
-                    title: '导出',
+                    title: t('common.export'),
                 },
                 icon: 'ArrowDownOutlined',
                 onClick: () => {
@@ -428,9 +363,9 @@ const getActions = (
             },
             {
                 key: 'log',
-                text: '通知记录',
+                text: t('pages.iot.notice.template.noticeRecord'),
                 tooltip: {
-                    title: '通知记录',
+                    title: t('pages.iot.notice.template.noticeRecord'),
                 },
                 icon: 'BarsOutlined',
                 onClick: () => {

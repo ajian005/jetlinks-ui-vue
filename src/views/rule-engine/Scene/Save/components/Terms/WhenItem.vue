@@ -3,10 +3,10 @@
     <div class='terms-params-warp'>
       <div v-if='!isFirst' class='term-type-warp'>
         <DropdownButton
-          :options='[
-              { label: "并且", value: "and" },
-              { label: "或者", value: "or" },
-            ]'
+          :options="[
+              { label: t('components.Terms.WhenItem.5rg4yz2khok0'), value: 'and' },
+              { label: t('components.Terms.WhenItem.5rg4yz2kj1c0'), value: 'or' },
+            ]"
           type='type'
           v-model:value='formModel.branches[branchName].when[name].type'
           @select='typeChange'
@@ -18,7 +18,7 @@
           @mouseout='mouseout'
       >
         <j-popconfirm
-            title='确认删除？'
+            :title="t('components.Terms.WhenItem.5rg4yz2kjbo0')"
             :overlayStyle='{minWidth: "180px"}'
             @confirm='onDelete'
         >
@@ -41,7 +41,7 @@
       <div class='terms-group-add' @click='addWhen' v-if='isLast'>
         <div class='terms-content'>
           <AIcon type='PlusOutlined' />
-          <span>分组</span>
+          <span>{{t('components.Terms.WhenItem.5rg4yz2kjhg0')}}</span>
         </div>
       </div>
     </div>
@@ -56,7 +56,9 @@ import { useSceneStore } from 'store/scene'
 import DropdownButton from '../DropdownButton'
 import { storeToRefs } from 'pinia';
 import { randomString } from '@/utils/utils'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data: formModel } = storeToRefs(sceneStore)
 
@@ -140,7 +142,7 @@ const addWhen = () => {
     key: `terms_${randomString()}`
   }
   formModel.value.branches?.[props.branchName]?.when?.push(terms)
-  formModel.value.options?.when?.[props.branchName]?.terms.push({ termType: '并且', terms: [['','eq','','and']]})
+  formModel.value.options?.when?.[props.branchName]?.terms.push({ termType: t('components.Terms.WhenItem.5rg4yz2khok0'), terms: [['','eq','','and']]})
 }
 
 </script>

@@ -2,9 +2,9 @@
 <template>
     <j-modal
         v-model:visible="_vis"
-        title="播放"
-        cancelText="取消"
-        okText="确定"
+        :title="t('Channel.Live.index.5rg8a90dcq80')"
+        :cancelText="t('Channel.Live.index.5rg8a90ddmg0')"
+        :okText="t('Channel.Live.index.5rg8a90ddrs0')"
         width="800px"
         :maskClosable="false"
         @ok="_vis = false"
@@ -17,19 +17,19 @@
                     <template v-if='isRecord === 0'>
                       <j-dropdown trigger='click' @visibleChange='visibleChange' @click='showToolLock = true'>
                         <div>
-                          开始录像
+                          {{t('Channel.Live.index.5rg8a90ddwg0')}}
                         </div>
                         <template #overlay>
                           <j-menu @click="recordStart">
                             <j-menu-item key='true' v-if='route.query.type !== "fixed-media"'>
-                              <span style='padding-right: 12px;'>本地存储</span>
-                              <j-tooltip title='存储在设备本地'>
+                              <span style='padding-right: 12px;'>{{t('Channel.Live.index.5rg8a90de0g0')}}</span>
+                              <j-tooltip :title="t('Channel.Live.index.5rg8a90de4s0')">
                                 <a-icon type='QuestionCircleOutlined' />
                               </j-tooltip>
                             </j-menu-item>
                             <j-menu-item key='false'>
-                              <span style='padding-right: 12px;'>云端存储</span>
-                              <j-tooltip title='存储在服务器中'>
+                              <span style='padding-right: 12px;'>{{t('Channel.Live.index.5rg8a90de8g0')}}</span>
+                              <j-tooltip :title="t('Channel.Live.index.5rg8a90dec00')">
                                 <a-icon type='QuestionCircleOutlined' />
                               </j-tooltip>
                             </j-menu-item>
@@ -38,24 +38,24 @@
                       </j-dropdown>
                     </template>
                     <div v-else-if='isRecord === 1'>
-                      请求录像中
+                      {{t('Channel.Live.index.5rg8a90dehc0')}}
                     </div>
                     <div v-else-if='isRecord === 2' @click.stop="recordStop">
-                      停止录像
+                      {{t('Channel.Live.index.5rg8a90deks0')}}
                     </div>
                   </div>
 
 
 
                     <div class="tool-item" @click.stop="handleRefresh">
-                        刷新
+                        {{t('Channel.Live.index.5rg8a90deoc0')}}
                     </div>
                     <div class="tool-item">
                         <j-popconfirm
-                            title="重置将断开直播, 可能会影响其他播放者"
+                            :title="t('Channel.Live.index.5rg8a90des00')"
                             @confirm="handleReset"
                         >
-                            重置
+                            {{t('Channel.Live.index.5rg8a90dev80')}}
                         </j-popconfirm>
                     </div>
                 </div>
@@ -91,7 +91,9 @@ import { PropType } from 'vue';
 import LivePlayer from '@/components/Player/index.vue';
 import MediaTool from '@/components/Player/mediaTool.vue';
 import channelApi from '@/api/media/channel';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:visible', data: boolean): void;
 };
@@ -167,7 +169,7 @@ const getIsRecord = async () => {
 };
 
 /**
- * 开始录像
+ * {{t('Channel.Live.index.5rg8a90ddwg0')}}
  */
 const recordStart = async ({ key }: { key: string}) => {
   showToolLock.value = false
@@ -187,7 +189,7 @@ const recordStart = async ({ key }: { key: string}) => {
 }
 
 /**
- * 停止录像
+ * {{t('Channel.Live.index.5rg8a90deks0')}}
  */
 const recordStop = async () => {
   const res = await channelApi.recordStop(
@@ -201,7 +203,7 @@ const recordStop = async () => {
 
 
 /**
- * 刷新
+ * {{t('Channel.Live.index.5rg8a90deoc0')}}
  */
 const handleRefresh = () => {
     // player.value.play();
@@ -212,7 +214,7 @@ const handleRefresh = () => {
 };
 
 /**
- * 重置
+ * {{t('Channel.Live.index.5rg8a90dev80')}}
  */
 const handleReset = async () => {
     channelApi.mediaStop(props.data.deviceId, props.data.channelId);

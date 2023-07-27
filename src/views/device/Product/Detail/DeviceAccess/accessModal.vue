@@ -1,10 +1,10 @@
 <template>
   <j-modal
-    title="设备接入配置"
+    :title="t('Detail.DeviceAccess.accessModal.5rcy2s0lyho0')"
     visible
     width="1200px"
-    okText="确定"
-    cancelText="取消"
+    :okText="t('Detail.DeviceAccess.accessModal.5rcy2s0m04g0')"
+    :cancelText="t('Detail.DeviceAccess.accessModal.5rcy2s0m0g00')"
     :confirmLoading='loading'
     :maskClosable="false"
     @ok="submitData"
@@ -37,7 +37,7 @@
           type="primary"
           @click="add"
           hasPermission="link/AccessConfig:add"
-        >新增</PermissionButton
+        >{{t('Detail.DeviceAccess.accessModal.5rcy2s0m0p80')}}</PermissionButton
         >
       </template>
       <template #deviceType="slotProps">
@@ -85,7 +85,7 @@
                   </Ellipsis>
                 </j-col>
                 <j-col :span="12">
-                  <div class="card-item-content-text">协议</div>
+                  <div class="card-item-content-text">{{t('Detail.DeviceAccess.accessModal.5rcy2s0m0xk0')}}</div>
                   <Ellipsis style="width:calc(100%-20px)"><div>{{ slotProps.protocolDetail?.name }}</div></Ellipsis>
                 </j-col>
               </j-row>
@@ -130,7 +130,9 @@ import { queryList, getAccessConfig } from '@/api/device/product'
 import { useMenuStore } from '@/store/menu';
 import { getProductByPluginId } from '@/api/link/plugin'
 import { getProviders } from '@/api/link/accessConfig'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'submit', data: any): void
   (e: 'cancel'): void
@@ -212,7 +214,7 @@ const handleQuery = async (q: any) => {
 
 const columns = [
   {
-    title: '名称',
+    title: t('Detail.DeviceAccess.accessModal.5rcy2s0m16k0'),
     dataIndex: 'name',
     key: 'name',
     search: {
@@ -220,7 +222,7 @@ const columns = [
     },
   },
   {
-    title: '网关类型',
+    title: t('Detail.DeviceAccess.accessModal.5rcy2s0m1ek0'),
     dataIndex: 'provider',
     key: 'provider',
     search: {
@@ -235,25 +237,25 @@ const columns = [
     },
   },
   {
-    title: '状态',
+    title: t('Detail.DeviceAccess.accessModal.5rcy2s0m1ro0'),
     dataIndex: 'state',
     key: 'state',
     search: {
       type: 'select',
       options: [
         {
-          label: '正常',
+          label: t('Detail.DeviceAccess.accessModal.5rcy2s0m2000'),
           value: 'started',
         },
         {
-          label: '禁用',
+          label: t('Detail.DeviceAccess.accessModal.5rcy2s0m28c0'),
           value: 'disable',
         },
       ],
     },
   },
   {
-    title: '说明',
+    title: t('Detail.DeviceAccess.accessModal.5rcy2s0m2fg0'),
     key: 'description',
     dataIndex: 'description',
     search: {
@@ -296,7 +298,7 @@ const submitData = async () => {
       }
     }
   } else {
-    onlyMessage('请选择接入方式', 'error');
+    onlyMessage(t('Detail.DeviceAccess.accessModal.5rcy2s0m2no0'), 'error');
   }
 }
 

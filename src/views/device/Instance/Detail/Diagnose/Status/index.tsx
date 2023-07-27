@@ -2,7 +2,7 @@ import { Badge, Button, Popconfirm, Space } from "jetlinks-ui-components"
 import TitleComponent from '@/components/TitleComponent/index.vue'
 import styles from './index.module.less'
 import type { ListProps } from './util'
-import { networkInitList, childInitList, cloudInitList, mediaInitList, TextColorMap, StatusMap, modifyArrayList, isExit, gatewayList, urlMap } from './util'
+import { getNetworkInitList, getChildInitList, getCloudInitList, getMediaInitList, TextColorMap, StatusMap, modifyArrayList, isExit, gatewayList, urlMap } from './util'
 import { useInstanceStore } from "@/store/instance"
 import { startNetwork, startGateway, getGatewayDetail, queryGatewayState, queryProtocolDetail, detail, queryProductState, queryProductConfig, queryDeviceConfig, _deploy } from '@/api/device/instance'
 import { PropType, VNode } from "vue"
@@ -363,7 +363,7 @@ const Status = defineComponent({
                                                                         key: `gateway`,
                                                                         name: t('Instance.tsx.index.gateway'),
                                                                         desc: desc,
-                                                                        data: { name: `${unref(device)?.accessProvider}配置` },
+                                                                        data: { name: `${unref(device)?.accessProvider}${t('Instance.tsx.index.disposition')}` },
                                                                         configuration: { ...config.result },
                                                                     });
                                                                 }
@@ -1484,7 +1484,7 @@ const Status = defineComponent({
             const { providerType } = props
             let arr: any[] = [];
             if (providerType === 'network') {
-                list.value = [...networkInitList];
+                list.value = [...(getNetworkInitList(t))];
                 arr = [
                     diagnoseNetwork,
                     diagnoseGateway,
@@ -1494,7 +1494,7 @@ const Status = defineComponent({
                     diagnoseDeviceAuthConfig,
                 ];
             } else if (providerType === 'child-device') {
-                list.value = [...childInitList];
+                list.value = [...(getChildInitList(t))];
                 arr = [
                     diagnoseGateway,
                     diagnoseParentDevice,
@@ -1504,10 +1504,10 @@ const Status = defineComponent({
                     diagnoseDeviceAuthConfig,
                 ];
             } else if (providerType === 'media') {
-                list.value = [...mediaInitList];
+                list.value = [...(getMediaInitList(t))];
                 arr = [diagnoseGateway, diagnoseProduct, diagnoseDevice];
             } else if (providerType === 'cloud') {
-                list.value = [...cloudInitList];
+                list.value = [...(getCloudInitList(t))];
                 arr = [diagnoseGateway, diagnoseProduct, diagnoseDevice, diagnoseCTWing, diagnoseOnenet];
             } else if (providerType === 'channel') {
                 onlyMessage(t('Instance.tsx.index.underdevelopment'), 'error');

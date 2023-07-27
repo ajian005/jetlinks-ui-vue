@@ -1,22 +1,11 @@
 <!-- 通知配置 -->
 <template>
     <page-container>
-        <pro-search
-            :columns="columns"
-            target="notice-config"
-            @search="handleSearch"
-        />
+        <pro-search :columns="columns" target="notice-config" @search="handleSearch" />
         <FullPage>
-            <JProTable
-                ref="configRef"
-                :columns="columns"
-                :request="ConfigApi.list"
-                :defaultParams="{
-                    sorts: [{ name: 'createTime', order: 'desc' }],
-                }"
-                :params="params"
-                :gridColumn="3"
-            >
+            <JProTable ref="configRef" :columns="columns" :request="ConfigApi.list" :defaultParams="{
+                sorts: [{ name: 'createTime', order: 'desc' }],
+            }" :params="params" :gridColumn="3">
                 <template #headerTitle>
                     <j-space>
                         <PermissionButton
@@ -53,23 +42,15 @@
                     </j-space>
                 </template>
                 <template #card="slotProps">
-                    <CardBox
-                        :showStatus="false"
-                        :statusNames="{}"
-                        :value="slotProps"
-                        :actions="getActions(slotProps, 'card')"
-                    >
+                    <CardBox :showStatus="false" :statusNames="{}" :value="slotProps"
+                        :actions="getActions(slotProps, 'card')">
                         <template #img>
                             <slot name="img">
-                                <img
-                                    :src="
-                                        getLogo(
-                                            slotProps.type,
-                                            slotProps.provider,
-                                        )
-                                    "
-                                    class="logo"
-                                />
+                                <img :src="getLogo(
+                                    slotProps.type,
+                                    slotProps.provider,
+                                )
+                                    " class="logo" />
                             </slot>
                         </template>
                         <template #content>
@@ -96,29 +77,17 @@
                             </j-row>
                         </template>
                         <template #actions="item">
-                            <j-tooltip
-                                v-bind="item.tooltip"
-                                :title="item.disabled && item.tooltip.title"
-                            >
-                                <j-dropdown
-                                    placement="bottomRight"
-                                    v-if="item.key === 'others'"
-                                >
+                            <j-tooltip v-bind="item.tooltip" :title="item.disabled && item.tooltip.title">
+                                <j-dropdown placement="bottomRight" v-if="item.key === 'others'">
                                     <j-button>
                                         <AIcon :type="item.icon" />
                                         <span>{{ item.text }}</span>
                                     </j-button>
                                     <template #overlay>
                                         <j-menu>
-                                            <j-menu-item
-                                                v-for="(o, i) in item.children"
-                                                :key="i"
-                                            >
-                                                <PermissionButton
-                                                    type="link"
-                                                    @click="o.onClick"
-                                                    :hasPermission="`notice/Config:${o.key}`"
-                                                >
+                                            <j-menu-item v-for="(o, i) in item.children" :key="i">
+                                                <PermissionButton type="link" @click="o.onClick"
+                                                    :hasPermission="`notice/Config:${o.key}`">
                                                     <template #icon>
                                                         <AIcon :type="o.icon" />
                                                     </template>
@@ -128,26 +97,18 @@
                                         </j-menu>
                                     </template>
                                 </j-dropdown>
-                                <j-popconfirm
-                                    v-else-if="item.key === 'delete'"
-                                    v-bind="item.popConfirm"
-                                    :disabled="item.disabled"
-                                >
-                                    <PermissionButton
-                                        :disabled="item.disabled"
-                                        :hasPermission="`notice/Config:${item.key}`"
-                                    >
+                                <j-popconfirm v-else-if="item.key === 'delete'" v-bind="item.popConfirm"
+                                    :disabled="item.disabled">
+                                    <PermissionButton :disabled="item.disabled"
+                                        :hasPermission="`notice/Config:${item.key}`">
                                         <template #icon>
                                             <AIcon type="DeleteOutlined" />
                                         </template>
                                     </PermissionButton>
                                 </j-popconfirm>
                                 <template v-else>
-                                    <PermissionButton
-                                        :disabled="item.disabled"
-                                        @click="item.onClick"
-                                        :hasPermission="`notice/Config:${item.key}`"
-                                    >
+                                    <PermissionButton :disabled="item.disabled" @click="item.onClick"
+                                        :hasPermission="`notice/Config:${item.key}`">
                                         <template #icon>
                                             <AIcon :type="item.icon" />
                                         </template>
@@ -173,25 +134,15 @@
                 </template>
                 <template #action="slotProps">
                     <j-space :size="16">
-                        <template
-                            v-for="i in getActions(slotProps, 'table')"
-                            :key="i.key"
-                        >
-                            <PermissionButton
-                                :danger="i.key === 'delete'"
-                                :disabled="i.disabled"
-                                :popConfirm="i.popConfirm"
+                        <template v-for="i in getActions(slotProps, 'table')" :key="i.key">
+                            <PermissionButton :danger="i.key === 'delete'" :disabled="i.disabled" :popConfirm="i.popConfirm"
                                 :tooltip="{
                                     ...i.tooltip,
-                                }"
-                                @click="i.onClick"
-                                type="link"
-                                style="padding: 0px"
-                                :hasPermission="'notice/Config:' + i.key"
-                            >
-                                <template #icon
-                                    ><AIcon :type="i.icon"
-                                /></template>
+                                }" @click="i.onClick" type="link" style="padding: 0px"
+                                :hasPermission="'notice/Config:' + i.key">
+                                <template #icon>
+                                    <AIcon :type="i.icon" />
+                                </template>
                             </PermissionButton>
                         </template>
                     </j-space>

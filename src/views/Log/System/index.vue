@@ -66,7 +66,7 @@
             </template>
         </j-pro-table>
     </div>
-    <j-modal :width="1100" v-model:visible="visible" title="详情">
+    <j-modal :width="1100" v-model:visible="visible" :title="t('Log.System.index.5rg3dimnkg00')">
         <div>
             <span class="mr-10">[{{ descriptionsData?.threadName }}]</span>
             <span class="mr-10">{{
@@ -94,11 +94,11 @@
         </div>
         <j-textarea
             v-model:value="descriptionsData.exceptionStack"
-            placeholder="暂无数据"
+            :placeholder="t('Log.System.index.5rg3dimnlr00')"
             :auto-size="{ minRows: 24, maxRows: 28 }"
         />
         <template #footer>
-            <j-button type="primary" @click="handleOk">关闭</j-button>
+            <j-button type="primary" @click="handleOk">{{t('Log.System.index.5rg3dimnlzg0')}}</j-button>
         </template>
     </j-modal>
 </template>
@@ -109,13 +109,15 @@ import { querySystem } from '@/api/link/log';
 import moment from 'moment';
 
 import { modifySearchColumnValue } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const tableRef = ref<Record<string, any>>({});
 const params = ref<Record<string, any>>({});
 
 const columns = [
     {
-        title: '名称',
+        title: t('Log.System.index.5rg3dimnm5o0'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -127,7 +129,7 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: '日志级别',
+        title: t('Log.System.index.5rg3dimnme80'),
         dataIndex: 'level',
         key: 'level',
         search: {
@@ -155,7 +157,7 @@ const columns = [
         width: 100,
     },
     {
-        title: '日志内容',
+        title: t('Log.System.index.5rg3dimnmkg0'),
         dataIndex: 'message',
         key: 'message',
         search: {
@@ -165,7 +167,7 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: '服务名',
+        title: t('Log.System.index.5rg3dimnmpg0'),
         dataIndex: 'server',
         key: 'server',
         scopedSlots: true,
@@ -176,7 +178,7 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: '创建时间',
+        title: t('Log.System.index.5rg3dimnmuk0'),
         dataIndex: 'createTime',
         key: 'createTime',
         search: {
@@ -186,7 +188,7 @@ const columns = [
         width: 200,
     },
     {
-        title: '操作',
+        title: t('Log.System.index.5rg3dimnn000'),
         key: 'action',
         fixed: 'right',
         width: 60,
@@ -221,9 +223,9 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
     return [
         {
             key: 'eye',
-            text: '查看',
+            text: t('Log.System.index.5rg3dimnn580'),
             tooltip: {
-                title: '查看',
+                title: t('Log.System.index.5rg3dimnn580'),
             },
             icon: 'EyeOutlined',
             onClick: (data: SystemLogItem) => {

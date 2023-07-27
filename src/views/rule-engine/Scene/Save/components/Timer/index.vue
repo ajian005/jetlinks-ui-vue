@@ -8,18 +8,18 @@
     <j-form-item name='trigger'>
       <j-radio-group
         v-model:value='formModel.trigger'
-        :options='[
-          { label: "按周", value: "week" },
-          { label: "按月", value: "month" },
-          { label: "cron表达式", value: "cron" },
-        ]'
+        :options="[
+          { label: t('components.Timer.index.5rg4zm6w1mk0'), value: 'week' },
+          { label: t('components.Timer.index.5rg4zm6w2pk0'), value: 'month' },
+          { label: t('components.Timer.index.expression'), value: 'cron' },
+        ]"
         option-type='button'
         button-style='solid'
         @change='triggerChange'
       />
     </j-form-item>
     <j-form-item v-if='showCron' name='cron' :rules="cronRules">
-      <j-input placeholder='corn表达式' v-model:value='formModel.cron' @change='updateValue' />
+      <j-input :placeholder="t('components.Timer.index.expression')" v-model:value='formModel.cron' @change='updateValue' />
     </j-form-item>
     <template v-else>
       <j-form-item name='when'>
@@ -28,10 +28,10 @@
       <j-form-item name='mod'>
         <j-radio-group
           v-model:value='formModel.mod'
-          :options='[
-          { label: "周期执行", value: "period" },
-          { label: "执行一次", value: "once" },
-        ]'
+          :options="[
+          { label: t('components.Timer.index.5rg4zm6w2vk0'), value: 'period' },
+          { label: t('components.Timer.index.5rg4zm6w2zw0'), value: 'once' },
+        ]"
           option-type='button'
           button-style='solid'
           @change='updateValue'
@@ -48,7 +48,7 @@
           @change='updateValue'
         />
       </j-form-item>
-      <j-form-item> 执行一次</j-form-item>
+      <j-form-item> {{t('components.Timer.index.5rg4zm6w2zw0')}}</j-form-item>
     </j-space>
     <j-space v-if='showPeriod' style='display: flex;gap: 24px'>
       <j-form-item>
@@ -65,13 +65,13 @@
               }'
         />
       </j-form-item>
-      <j-form-item>每</j-form-item>
+      <j-form-item>{{t('components.Timer.index.5rg4zm6w33s0')}}</j-form-item>
       <j-form-item
         :name='["period", "every"]'
-        :rules='[{ required: true, message: "请输入时间" }]'
+        :rules="[{ required: true, message: t('components.Timer.index.5rg4zm6w38g0') }]"
       >
         <j-input-number
-          placeholder='请输入时间'
+          :placeholder="t('components.Timer.index.5rg4zm6w38g0')"
           style='max-width: 170px'
           :precision='0'
           :min='1'
@@ -82,17 +82,17 @@
           <template #addonAfter>
             <j-select
               v-model:value='formModel.period.unit'
-              :options='[
-                { label: "秒", value: "seconds" },
-                { label: "分", value: "minutes" },
-                { label: "小时", value: "hours" },
-              ]'
+              :options="[
+                { label: t('components.Timer.index.5rg4zm6w3c80'), value: 'seconds' },
+                { label: t('components.Timer.index.5rg4zm6w3fw0'), value: 'minutes' },
+                { label: t('components.Timer.index.5rg4zm6w3jo0'), value: 'hours' },
+              ]"
               @select='periodUnitChange'
             />
           </template>
         </j-input-number>
       </j-form-item>
-      <j-form-item>执行一次</j-form-item>
+      <j-form-item>{{t('components.Timer.index.5rg4zm6w2zw0')}}</j-form-item>
     </j-space>
   </j-form>
 </template>
@@ -105,7 +105,9 @@ import {cloneDeep, pick} from 'lodash-es'
 import type { OperationTimer } from '../../../typings'
 import { isCron } from '@/utils/regular'
 import { defineExpose } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type NameType = string[] | string
 
 type Emit = {
@@ -127,15 +129,15 @@ const emit = defineEmits<Emit>()
 const unitMax = ref<number>(99)
 
 const cronRules = [
-  { max: 64, message: '最多可输入64个字符' },
+  { max: 64, message: t('components.Timer.index.5rg4zm6w3ow0') },
   {
     validator: async (_: any, v: string) => {
       if (v) {
         if (!isCron(v)) {
-          return Promise.reject(new Error('请输入正确的cron表达式'));
+          return Promise.reject(new Error(t('components.Timer.index.5rg4zm6w3sc0')));
         }
       } else {
-        return Promise.reject(new Error('请输入cron表达式'));
+        return Promise.reject(new Error(t('components.Timer.index.5rg4zm6w3wk0')));
       }
       return Promise.resolve();
     }

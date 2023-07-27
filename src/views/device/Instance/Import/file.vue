@@ -4,7 +4,7 @@
             <j-form-item>
                 <template #label>
                     <div>
-                        文件上传
+                        {{t('Instance.Import.file.5rcy9hmpxjo0')}}
                         <div class="alert"><AIcon style="margin-right: 5px;" type="InfoCircleOutlined" />导入系统已存在的设备数据，不会更改已存在设备的所属产品信息</div>
                     </div>
                 </template>
@@ -61,7 +61,7 @@
                     >
                 </div>
             </div>
-            <j-form-item label="下载模板">
+            <j-form-item :label="t('Instance.Import.file.5rcy9hmpy480')">
                 <div class="file-download">
                     <j-button class="btn" @click="downFile('xlsx')">模板格式.xlsx</j-button>
                     <j-button class="btn" @click="downFile('csv')">模板格式.csv</j-button>
@@ -78,7 +78,9 @@ import { LocalStore, onlyMessage } from '@/utils/comm';
 import { downloadFileByUrl } from '@/utils/utils';
 import { deviceImport, templateDownload } from '@/api/device/instance';
 import { EventSourcePolyfill } from 'event-source-polyfill';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     product: {
         type: String,
@@ -162,14 +164,14 @@ const submitData = async (fileUrl: string) => {
             disabled.value = false;
         };
         source.onerror = (e: { status: number }) => {
-            if (e.status === 403) errMessage.value = '暂无权限，请联系管理员';
+            if (e.status === 403) errMessage.value = t('Instance.Import.file.5rcy9hmpzsg0');
             flag.value = false;
             disabled.value = false;
             source.close();
         };
         source.onopen = () => {};
     } else {
-        onlyMessage('请先上传文件', 'error');
+        onlyMessage(t('Instance.Import.file.5rcy9hmq07s0'), 'error');
     }
 };
 

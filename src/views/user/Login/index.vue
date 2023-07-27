@@ -21,11 +21,7 @@
                         <div class="top">
                             <div class="header">
                                 <!-- <link to="/"> -->
-                                <img
-                                    alt="logo"
-                                    class="logo"
-                                    :src="basis.logo || getImage('/logo.png')"
-                                />
+                                <img alt="logo" class="logo" :src="basis.logo || getImage('/logo.png')" />
                                 <!-- </link> -->
                             </div>
                             <div class="desc">
@@ -73,10 +69,7 @@
                                         >
                                             <template #addonAfter>
                                                 <div>
-                                                    <img
-                                                        :src="codeUrl"
-                                                        @click="getCode()"
-                                                    />
+                                                    <img :src="codeUrl" @click="getCode()" />
                                                 </div>
                                             </template>
                                         </j-input>
@@ -113,24 +106,16 @@
                                     <j-divider plain>
                                         <div class="other-text">
                                             {{ t('login.otherLogin') }}
+                                            {{ t('login.otherLogin') }}
                                         </div>
                                     </j-divider>
                                     <div class="other-button">
-                                        <div
-                                          class='other-button-item'
-                                          v-for="(item, index) in bindings"
-                                          :key="index"
-                                          @click="handleClickOther(item)"
-                                        >
-                                          <img
-                                            style="width: 32px; height: 32px"
-                                            :alt="item.name"
-                                            :src="
-                                                    item.logoUrl || iconMap.get(
-                                                        item.provider,
-                                                    ) || defaultImg
-                                                "
-                                          />
+                                        <div class='other-button-item' v-for="(item, index) in bindings" :key="index"
+                                            @click="handleClickOther(item)">
+                                            <img style="width: 32px; height: 32px" :alt="item.name" :src="item.logoUrl || iconMap.get(
+                                                item.provider,
+                                            ) || defaultImg
+                                                " />
                                         </div>
                                     </div>
                                 </div>
@@ -270,16 +255,16 @@ const onFinish = async () => {
         const res: any = await authLogin(data);
         loading.value = false;
         if (res.success) {
-          LocalStore.set(TOKEN_KEY, res?.result.token);
-          const userResp = await userDetail()
-          if (userResp.success) {
-            store.$patch({
-              userInfos: {
-                ...userResp.result,
-                token: res?.result.token,
-              },
-              isAdmin: userResp.username === "admin",
-            });
+            LocalStore.set(TOKEN_KEY, res?.result.token);
+            const userResp = await userDetail()
+            if (userResp.success) {
+                store.$patch({
+                    userInfos: {
+                        ...userResp.result,
+                        token: res?.result.token,
+                    },
+                    isAdmin: userResp.username === "admin",
+                });
 
             if (userResp.result?.username === 'admin') {
               const resp: any = await getInitSet();
@@ -510,8 +495,8 @@ onMounted(()=>{
                             flex-wrap: wrap;
 
                             .other-button-item {
-                              cursor: pointer;
-                              padding: 4px;
+                                cursor: pointer;
+                                padding: 4px;
                             }
 
                         }
@@ -535,9 +520,9 @@ onMounted(()=>{
                         }
                     }
 
-                  .login-form-button {
-                    width: 100%;
-                  }
+                    .login-form-button {
+                        width: 100%;
+                    }
                 }
             }
         }

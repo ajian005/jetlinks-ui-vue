@@ -8,7 +8,7 @@
         :confirm-loading="loading"
         @cancel="handleCancel"
         @ok="handleOk"
-    >
+    > 
         <j-form
             class="form"
             layout="vertical"
@@ -149,7 +149,7 @@
                                     />
                                 </j-form-item>
                                 <j-form-item
-                                    :label="index === 0 && t('Firmware.Save.index.5rg3ke3x3gw0')
+                                    :label="index === 0 && t('Firmware.Save.index.5rg3ke3x3gw0')"
                                     class="formRef-form-item"
                                     style="width: 10%"
                                 >

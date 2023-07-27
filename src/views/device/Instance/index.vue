@@ -33,7 +33,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('device.Instance.index.5rcy7qt1ljg0')}}
                         </PermissionButton>
                         <BatchDropdown
                             v-model:isCheck="isCheck"
@@ -42,7 +42,7 @@
                         />
                         <!-- <j-dropdown>
                         <j-button
-                            >批量操作 <AIcon type="DownOutlined"
+                            >{{t('device.Instance.index.5rcy7qt1mw80')}} <AIcon type="DownOutlined"
                         /></j-button>
                         <template #overlay>
                             <j-menu>
@@ -54,7 +54,7 @@
                                         <template #icon
                                             ><AIcon type="ExportOutlined"
                                         /></template>
-                                        批量导出设备
+                                        {{t('device.Instance.index.5rcy7qt1n740')}}
                                     </PermissionButton>
                                 </j-menu-item>
                                 <j-menu-item>
@@ -65,7 +65,7 @@
                                         <template #icon
                                             ><AIcon type="ImportOutlined"
                                         /></template>
-                                        批量导入设备
+                                        {{t('device.Instance.index.5rcy7qt1nhg0')}}
                                     </PermissionButton>
                                 </j-menu-item>
                                 <j-menu-item>
@@ -73,7 +73,7 @@
                                         ghost
                                         type="primary"
                                         :popConfirm="{
-                                            title: '确认激活全部设备？',
+                                            title: t('device.Instance.index.5rcy7qt1nwg0'),
                                             onConfirm: activeAllDevice,
                                         }"
                                         hasPermission="device/Instance:action"
@@ -81,7 +81,7 @@
                                         <template #icon
                                             ><AIcon type="CheckCircleOutlined"
                                         /></template>
-                                        激活全部设备
+                                        {{t('device.Instance.index.5rcy7qt1o5s0')}}
                                     </PermissionButton>
                                 </j-menu-item>
                                 <j-menu-item>
@@ -93,7 +93,7 @@
                                         <template #icon
                                             ><AIcon type="SyncOutlined"
                                         /></template>
-                                        同步设备状态
+                                        {{t('device.Instance.index.5rcy7qt1odw0')}}
                                     </PermissionButton>
                                 </j-menu-item>
                                 <j-menu-item v-if="_selectedRowKeys.length">
@@ -101,7 +101,7 @@
                                         type="primary"
                                         danger
                                         :popConfirm="{
-                                            title: '已启用的设备无法删除，确认删除选中的禁用状态设备？',
+                                            title: t('device.Instance.index.5rcy7qt1olk0'),
                                             onConfirm: delSelectedDevice,
                                         }"
                                         hasPermission="device/Instance:delete"
@@ -109,14 +109,14 @@
                                         <template #icon
                                             ><AIcon type="DeleteOutlined"
                                         /></template>
-                                        删除选中设备
+                                        {{t('device.Instance.index.5rcy7qt1otw0')}}
                                     </PermissionButton>
                                 </j-menu-item>
                                 <j-menu-item v-if="_selectedRowKeys.length">
                                     <PermissionButton
                                         type="primary"
                                         :popConfirm="{
-                                            title: '确认激活选中设备',
+                                            title: t('device.Instance.index.5rcy7qt1p240'),
                                             onConfirm: activeSelectedDevice,
                                         }"
                                         hasPermission="device/Instance:action"
@@ -124,7 +124,7 @@
                                         <template #icon
                                             ><AIcon type="CheckOutlined"
                                         /></template>
-                                        激活选中设备
+                                        {{t('device.Instance.index.5rcy7qt1p9s0')}}
                                     </PermissionButton>
                                 </j-menu-item>
                                 <j-menu-item v-if="_selectedRowKeys.length">
@@ -132,7 +132,7 @@
                                         type="primary"
                                         danger
                                         :popConfirm="{
-                                            title: '确认禁用选中设备?',
+                                            title: t('device.Instance.index.5rcy7qt1pi80'),
                                             onConfirm: disabledSelectedDevice,
                                         }"
                                         hasPermission="device/Instance:action"
@@ -140,7 +140,7 @@
                                         <template #icon
                                             ><AIcon type="StopOutlined"
                                         /></template>
-                                        禁用选中设备
+                                        {{t('device.Instance.index.5rcy7qt1pq80')}}
                                     </PermissionButton>
                                 </j-menu-item>
                             </j-menu>
@@ -181,13 +181,13 @@
                             <j-row>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        设备类型
+                                        {{t('device.Instance.index.5rcy7qt1pxo0')}}
                                     </div>
                                     <div>{{ slotProps.deviceType?.text }}</div>
                                 </j-col>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        产品名称
+                                        {{t('device.Instance.index.5rcy7qt1qeo0')}}
                                     </div>
                                     <Ellipsis style="width: 100%">
                                         {{ slotProps.productName }}
@@ -327,7 +327,9 @@ import BatchDropdown from '@/components/BatchDropdown/index.vue';
 import { BatchActionsType } from '@/components/BatchDropdown/types';
 import { useRouterParams } from '@/utils/hooks/useParams';
 import { accessConfigTypeFilter } from '@/utils/setting';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const instanceRef = ref<Record<string, any>>({});
 const params = ref<Record<string, any>>({});
 const _selectedRowKeys = ref<string[]>([]);
@@ -368,7 +370,7 @@ const columns = [
         },
     },
     {
-        title: '设备名称',
+        title: t('device.Instance.index.5rcy7qt1qmg0'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -378,7 +380,7 @@ const columns = [
         },
     },
     {
-        title: '产品名称',
+        title: t('device.Instance.index.5rcy7qt1qeo0'),
         dataIndex: 'productName',
         key: 'productName',
         ellipsis: true,
@@ -399,7 +401,7 @@ const columns = [
         },
     },
     {
-        title: '创建时间',
+        title: t('device.Instance.index.5rcy7qt1qu00'),
         dataIndex: 'createTime',
         key: 'createTime',
         scopedSlots: true,
@@ -409,23 +411,23 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('device.Instance.index.5rcy7qt1r1g0'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '禁用', value: 'notActive' },
-                { label: '离线', value: 'offline' },
-                { label: '在线', value: 'online' },
+                { label: t('device.Instance.index.5rcy7qt1r8k0'), value: 'notActive' },
+                { label: t('device.Instance.index.5rcy7qt1rgc0'), value: 'offline' },
+                { label: t('device.Instance.index.5rcy7qt1rr00'), value: 'online' },
             ],
         },
     },
     {
         key: 'classifiedId',
         dataIndex: 'classifiedId',
-        title: '产品分类',
+        title: t('device.Instance.index.5rcy7qt1rx80'),
         hideInTable: true,
         search: {
             type: 'treeSelect',
@@ -440,7 +442,7 @@ const columns = [
     },
     {
         key: 'accessProvider',
-        title: '网关类型',
+        title: t('device.Instance.index.5rcy7qt1s6s0'),
         dataIndex: 'accessProvider',
         valueType: 'select',
         hideInTable: true,
@@ -464,7 +466,7 @@ const columns = [
     {
         key: 'accessId',
         dataIndex: 'accessId',
-        title: '接入方式',
+        title: t('device.Instance.index.5rcy7qt1sdk0'),
         hideInTable: true,
         search: {
             type: 'select',
@@ -483,21 +485,21 @@ const columns = [
     },
     {
         dataIndex: 'deviceType',
-        title: '设备类型',
+        title: t('device.Instance.index.5rcy7qt1pxo0'),
         valueType: 'select',
         hideInTable: true,
         search: {
             type: 'select',
             options: [
-                { label: '直连设备', value: 'device' },
-                { label: '网关子设备', value: 'childrenDevice' },
-                { label: '网关设备', value: 'gateway' },
+                { label: t('device.Instance.index.5rcy7qt1sj40'), value: 'device' },
+                { label: t('device.Instance.index.5rcy7qt1spc0'), value: 'childrenDevice' },
+                { label: t('device.Instance.index.5rcy7qt1svs0'), value: 'gateway' },
             ],
         },
     },
     {
         dataIndex: 'id$dim-assets',
-        title: '所属组织',
+        title: t('device.Instance.index.5rcy7qt1t1s0'),
         hideInTable: true,
         search: {
             type: 'treeSelect',
@@ -531,7 +533,7 @@ const columns = [
         },
     },
     {
-        title: '说明',
+        title: t('device.Instance.index.5rcy7qt1t7g0'),
         dataIndex: 'describe',
         key: 'describe',
         ellipsis: true,
@@ -540,7 +542,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('device.Instance.index.5rcy7qt1tcw0'),
         key: 'action',
         fixed: 'right',
         width: 200,
@@ -605,7 +607,7 @@ const handleParams = (config: Record<string, any>) => {
 };
 
 /**
- * 新增
+ * {{t('device.Instance.index.5rcy7qt1ljg0')}}
  */
 const handleAdd = () => {
     visible.value = true;
@@ -613,7 +615,7 @@ const handleAdd = () => {
 };
 
 /**
- * 查看
+ * {{t('device.Instance.index.5rcy7qt1tio0')}}
  */
 const handleView = (id: string) => {
     menuStory.jumpPage('device/Instance/Detail', { id });
@@ -627,9 +629,9 @@ const getActions = (
     const actions = [
         {
             key: 'view',
-            text: '查看',
+            text: t('device.Instance.index.5rcy7qt1tio0'),
             tooltip: {
-                title: '查看',
+                title: t('device.Instance.index.5rcy7qt1tio0'),
             },
             icon: 'EyeOutlined',
             onClick: () => {
@@ -638,9 +640,9 @@ const getActions = (
         },
         {
             key: 'update',
-            text: '编辑',
+            text: t('device.Instance.index.5rcy7qt1tow0'),
             tooltip: {
-                title: '编辑',
+                title: t('device.Instance.index.5rcy7qt1tow0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -650,17 +652,16 @@ const getActions = (
         },
         {
             key: 'action',
-            text: data.state?.value !== 'notActive' ? '禁用' : '启用',
+            text: data.state?.value !== 'notActive' ? t('device.Instance.index.5rcy7qt1r8k0') : t('device.Instance.index.5rcy7qt1tuw0'),
             tooltip: {
-                title: data.state?.value !== 'notActive' ? '禁用' : '启用',
+                title: data.state?.value !== 'notActive' ? t('device.Instance.index.5rcy7qt1r8k0') : t('device.Instance.index.5rcy7qt1tuw0'),
             },
             icon:
                 data.state.value !== 'notActive'
                     ? 'StopOutlined'
                     : 'CheckCircleOutlined',
             popConfirm: {
-                title: `确认${
-                    data.state.value !== 'notActive' ? '禁用' : '启用'
+                title: `${t('device.Instance.index.verify') + (data.state.value !== 'notActive' ? t('device.Instance.index.5rcy7qt1r8k0') : t('device.Instance.index.5rcy7qt1tuw0'))
                 }?`,
                 onConfirm: async () => {
                     let response = undefined;
@@ -670,33 +671,33 @@ const getActions = (
                         response = await _deploy(data.id);
                     }
                     if (response && response.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('device.Instance.index.5rcy7qt1u240'));
                         instanceRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('device.Instance.index.5rcy7qt1u8c0'), 'error');
                     }
                 },
             },
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('device.Instance.index.5rcy7qt1ue00'),
             disabled: data.state?.value !== 'notActive',
             tooltip: {
                 title:
                     data.state.value !== 'notActive'
-                        ? '已启用的设备不能删除'
-                        : '删除',
+                        ? t('device.Instance.index.5rcy7qt1uno0')
+                        : t('device.Instance.index.5rcy7qt1ue00'),
             },
             popConfirm: {
-                title: '确认删除?',
+                title: t('device.Instance.index.5rcy7qt1uts0'),
                 onConfirm: async () => {
                     const resp = await _delete(data.id);
                     if (resp.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('device.Instance.index.5rcy7qt1u240'));
                         instanceRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('device.Instance.index.5rcy7qt1u8c0'), 'error');
                     }
                 },
             },
@@ -762,12 +763,12 @@ const syncDeviceStatus = () => {
 
 const delSelectedDevice = async () => {
     if (!_selectedRowKeys.value.length) {
-        onlyMessage('请选择设备', 'error');
+        onlyMessage(t('device.Instance.index.5rcy7qt1v0s0'), 'error');
         return;
     }
     const resp = await batchDeleteDevice(_selectedRowKeys.value);
     if (resp.status === 200) {
-        onlyMessage('操作成功！');
+        onlyMessage(t('device.Instance.index.5rcy7qt1u240'));
         _selectedRowKeys.value = [];
         instanceRef.value?.reload();
     }
@@ -788,12 +789,12 @@ const delSelectedDevice = async () => {
 
 const disabledSelectedDevice = async () => {
     if (!_selectedRowKeys.value.length) {
-        onlyMessage('请选择设备', 'error');
+        onlyMessage(t('device.Instance.index.5rcy7qt1v0s0'), 'error');
         return;
     }
     const resp = await batchUndeployDevice(_selectedRowKeys.value);
     if (resp.status === 200) {
-        onlyMessage('操作成功！');
+        onlyMessage(t('device.Instance.index.5rcy7qt1u240'));
         _selectedRowKeys.value = [];
         instanceRef.value?.reload();
     }
@@ -802,7 +803,7 @@ const disabledSelectedDevice = async () => {
 const batchActions: BatchActionsType[] = [
     {
         key: 'export',
-        text: '批量导出设备',
+        text: t('device.Instance.index.5rcy7qt1n740'),
         permission: 'device/Instance:export',
         icon: 'ExportOutlined',
         onClick: () => {
@@ -811,7 +812,7 @@ const batchActions: BatchActionsType[] = [
     },
     {
         key: 'import',
-        text: '批量导入设备',
+        text: t('device.Instance.index.5rcy7qt1nhg0'),
         permission: 'device/Instance:import',
         icon: 'ImportOutlined',
         onClick: () => {
@@ -820,19 +821,19 @@ const batchActions: BatchActionsType[] = [
     },
     {
         key: 'activeAll',
-        text: '启用全部设备',
+        text: t('device.Instance.index.5rcy7qt1v7w0'),
         ghost: true,
         type: 'primary',
         permission: 'device/Instance:action',
         icon: 'CheckCircleOutlined',
         popConfirm: {
-            title: '确认启用全部设备？',
+            title: t('device.Instance.index.5rcy7qt1vgg0'),
             onConfirm: activeAllDevice,
         },
     },
     {
         key: 'sync',
-        text: '同步设备状态',
+        text: t('device.Instance.index.5rcy7qt1odw0'),
         type: 'primary',
         ghost: true,
         icon: 'SyncOutlined',
@@ -840,13 +841,13 @@ const batchActions: BatchActionsType[] = [
     },
     {
         key: 'delete',
-        text: '批量删除设备',
+        text: t('device.Instance.index.5rcy7qt1vmw0'),
         danger: true,
         permission: 'device/Instance:delete',
         icon: 'DeleteOutlined',
         selected: {
             popConfirm: {
-                title: '已启用的设备无法删除，确认删除选中的禁用状态设备？',
+                title: t('device.Instance.index.5rcy7qt1olk0'),
                 onConfirm: delSelectedDevice,
             },
         },
@@ -867,13 +868,13 @@ const batchActions: BatchActionsType[] = [
     // },
     {
         key: 'disable',
-        text: '批量禁用设备',
+        text: t('device.Instance.index.5rcy7qt1vso0'),
         danger: true,
         icon: 'StopOutlined',
         permission: 'device/Instance:action',
         selected: {
             popConfirm: {
-                title: '确认禁用选中设备?',
+                title: t('device.Instance.index.5rcy7qt1pi80'),
                 onConfirm: disabledSelectedDevice,
             },
         },

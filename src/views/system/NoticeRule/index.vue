@@ -54,19 +54,21 @@
 <script lang="ts" setup>
 import { queryChannelConfig } from '@/api/system/noticeRule';
 import Item from './components/Item/index.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const dataSource = [
     {
         provider: 'alarm',
-        name: '告警',
+        name: t('system.NoticeRule.index.5rgaaeoqkn80'),
         children: [
             {
                 provider: 'alarm-product',
-                name: '产品告警',
+                name: t('system.NoticeRule.index.5rgaaeoqkrg0'),
             },
             {
                 provider: 'alarm-device',
-                name: '设备告警',
+                name: t('system.NoticeRule.index.5rgaaeoqlek0'),
             },
             {
                 provider: 'alarm-org',
@@ -80,7 +82,7 @@ const dataSource = [
     },
     {
         provider: 'system-monitor',
-        name: '系统监控',
+        name: t('system.NoticeRule.index.5rgaaeoqlmg0'),
         children: [
             {
                 provider: 'system-event',
@@ -90,11 +92,11 @@ const dataSource = [
     },
     {
         provider: 'system-business',
-        name: '业务监控',
+        name: t('system.NoticeRule.index.5rgaaeoqly80'),
         children: [
             {
                 provider: 'device-transparent-codec',
-                name: '透传消息解析异常',
+                name: t('system.NoticeRule.index.5rgaaeoqm2c0'),
             },
         ],
     },

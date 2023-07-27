@@ -4,12 +4,12 @@
       <j-col :span='10'>
         <j-form-item
           name='reportKey'
-          :rules="[{ required: true, message: '请输入修改值' }]"
+          :rules="[{ required: true, message: t('Save.Device.WriteProperty.5rg56e7y9z80') }]"
         >
           <j-select
             showSearch
             style='width: 100%'
-            placeholder='请选择属性'
+            :placeholder="t('Save.Device.WriteProperty.5rg56e7ybpo0')"
             v-model:value='formModel.reportKey'
             :options='properties'
             :filter-option='filterSelectNode'
@@ -19,7 +19,7 @@
       </j-col>
       <j-col :span='14'>
         <span style='line-height: 32px;padding-left: 24px'>
-          定时调用所选属性
+          {{t('Save.Device.WriteProperty.5rg56e7ycc40')}}
         </span>
       </j-col>
       <j-col :span='24' v-if='showTable'>
@@ -43,7 +43,9 @@ import { filterSelectNode } from '@/utils/comm'
 import { FunctionCall } from '../components'
 import type { PropType } from 'vue'
 import { defineExpose } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'update:value', data: Record<string, any>): void
   (e: 'update:action', data: string): void
@@ -131,7 +133,7 @@ const change = (v: string, option: any) => {
   }
   callData.value = [{ id: v, value: undefined }]
   emit('update:value', _data)
-  emit('update:action', `修改${option.name}`)
+  emit('update:action', `${t('Save.Device.WriteProperty.edit') + option.name}`)
 }
 
 const callDataChange = (v: any[]) => {
@@ -144,13 +146,13 @@ const rules = [{
   validator(_: string, value: any) {
     console.log(value, callDataOptions.value)
     if (!value?.length && callDataOptions.value.length) {
-      return Promise.reject('请选择属性值')
+      return Promise.reject(t('Save.Device.WriteProperty.5rg56e7ydlc0'))
     } else {
       let hasValue = value.find((item: { name: string, value: any}) => !item.value)
       if (hasValue) {
         const item = callDataOptions.value.find((item: any) => item.id === hasValue.name)
         console.log()
-        return Promise.reject(item?.name ? `请输入${item?.name}值` : '请输入属性值')
+        return Promise.reject(item?.name ?  t('Save.Device.WriteProperty.inputTip',{name:item?.name}) : t('Save.Device.WriteProperty.5rg56e7ygj40'))
       }
     }
     return Promise.resolve();

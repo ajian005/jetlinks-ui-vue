@@ -4,15 +4,15 @@
             v-model:value="searchValue"
             style="width: 300px"
             allowClear
-            placeholder="请输入权限名称"
+            :placeholder="t('Menu.components.PermissChoose.5rg9p24ql6k0')"
             @input="search.search"
             :disabled="props.disabled"
         />
 
         <div class="permission-table">
             <j-row :gutter="24" class="table-head">
-                <j-col :span="props.firstWidth">权限名称</j-col
-                ><j-col :span="24 - props.firstWidth">权限操作</j-col>
+                <j-col :span="props.firstWidth">{{t('Menu.components.PermissChoose.5rg9p24qm8k0')}}</j-col
+                ><j-col :span="24 - props.firstWidth">{{t('Menu.components.PermissChoose.5rg9p24qmdo0')}}</j-col>
             </j-row>
             <div class="table-body" :style="{ 'max-height': props.maxHeight }">
                 <j-row
@@ -47,6 +47,9 @@
 <script setup lang="ts">
 import { exportPermission_api } from '@/api/system/permission';
 import { Form } from 'jetlinks-ui-components';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 Form.useInjectFormItemContext();
 
 const props = defineProps<{

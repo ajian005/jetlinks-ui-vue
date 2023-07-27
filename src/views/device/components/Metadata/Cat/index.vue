@@ -1,18 +1,16 @@
 <template>
-  <j-drawer :mask-closable="false" title="查看物模型" width="700" v-model:visible="_visible" destroy-on-close @close="close">
+  <j-drawer :mask-closable="false" :title="t('Metadata.Cat.index.5rr7te0yv840')" width="700" v-model:visible="_visible" destroy-on-close @close="close">
     <template #extra>
       <j-space>
         <j-button type="primary" @click="handleExport">
-          导出
+          {{t('Metadata.Cat.index.5rr7te0ywhw0')}}
         </j-button>
       </j-space>
     </template>
     <j-spin :spinning="loading">
       <div class="cat-content">
         <p class="cat-tip">
-          物模型是对设备在云端的功能描述，包括设备的属性、服务和事件。物联网平台通过定义一种物的描述语言来描述物模型，称之为
-          TSL（即 Thing Specification Language），采用 JSON 格式，您可以根据 TSL
-          组装上报设备的数据。您可以导出完整物模型，用于云端应用开发。
+          {{t('Metadata.Cat.index.5rr7te0ywq80')}}
         </p>
       </div>
       <j-tabs @change="handleConvertMetadata" destroy-inactive-tab-pane>
@@ -35,7 +33,9 @@ import { detail } from '@/api/device/instance'
 import { onlyMessage } from '@/utils/comm';
 import {cloneDeep} from "lodash";
 import {omit} from "lodash-es";
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface Props {
   visible: boolean;
   type: 'product' | 'device';
@@ -85,7 +85,7 @@ const handleExport = async () => {
       'YYYY/MM/DD',
     );
   } catch (e) {
-    onlyMessage('请先配置物模型', 'error');
+    onlyMessage(t('Metadata.Cat.index.5rr7te0yx600'), 'error');
   }
 }
 

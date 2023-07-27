@@ -3,13 +3,13 @@
     <j-col :span='10'>
       <j-form-item
         name='readProperties'
-        :rules="[{ required: true, message: '请选择属性' }]"
+        :rules="[{ required: true, message: t('Save.Device.ReadProperties.5rg55xpch2s0') }]"
       >
         <j-select
           show-search
           mode='multiple'
           max-tag-count='responsive'
-          placeholder='请选择属性'
+          :placeholder="t('Save.Device.ReadProperties.5rg55xpch2s0')"
           style='width: 100%'
           v-model:value='readProperties'
           :options='properties'
@@ -19,7 +19,7 @@
       </j-form-item>
     </j-col>
     <j-col :span='14'>
-      <j-form-item>定时读取所选属性值</j-form-item>
+      <j-form-item>{{t('Save.Device.ReadProperties.5rg55xpcjjc0')}}</j-form-item>
     </j-col>
   </j-row>
 </template>
@@ -27,7 +27,9 @@
 <script setup lang='ts' name='ReadProperties'>
 import { filterSelectNode } from '@/utils/comm'
 import type { PropType } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'update:value', data: Array<string>): void
   (e: 'update:action', data: string): void
@@ -68,10 +70,10 @@ const change = (values: string[], optionItems: any[]) => {
   }, '');
 
   if (isLimit && names.length - 1 > indexOf) {
-    extraStr += `等${optionItems.length}个属性`;
+    extraStr += t('Save.Device.ReadProperties.stats',{length:optionItems.length});
   }
   emit('update:value', values)
-  emit('update:action', `读取 ${extraStr}`)
+  emit('update:action', `${t('Save.Device.ReadProperties.stats') + extraStr}`)
 }
 
 </script>

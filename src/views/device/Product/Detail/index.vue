@@ -18,31 +18,31 @@
                     </a-tooltip>
                     <div style="margin: -5px 0 0 20px">
                         <j-popconfirm
-                            title="确认禁用"
+                            :title="t('Product.Detail.index.5rcy2a8o53o0')"
                             @confirm="handleUndeploy"
                             v-if="productStore.current.state === 1"
-                            okText="确定"
-                            cancelText="取消"
+                            :okText="t('Product.Detail.index.5rcy2a8o6o40')"
+                            :cancelText="t('Product.Detail.index.5rcy2a8o70k0')"
                         >
                             <j-switch
                                 :checked="productStore.current.state === 1"
-                                checked-children="正常"
-                                un-checked-children="禁用"
+                                :checked-children="t('Product.Detail.index.5rcy2a8o79w0')"
+                                :un-checked-children="t('Product.Detail.index.5rcy2a8o7i80')"
                             />
                         </j-popconfirm>
                         <j-popconfirm
-                            title="确认启用"
+                            :title="t('Product.Detail.index.5rcy2a8o87k0')"
                             @confirm="handleDeploy"
                             v-if="productStore.current.state === 0"
-                            okText="确定"
-                            cancelText="取消"
+                            :okText="t('Product.Detail.index.5rcy2a8o6o40')"
+                            :cancelText="t('Product.Detail.index.5rcy2a8o70k0')"
                         >
                             <j-switch
                                 :unCheckedValue="
                                     productStore.current.state === 0
                                 "
-                                checked-children="正常"
-                                un-checked-children="禁用"
+                                :checked-children="t('Product.Detail.index.5rcy2a8o79w0')"
+                                :un-checked-children="t('Product.Detail.index.5rcy2a8o7i80')"
                             />
                         </j-popconfirm>
                     </div>
@@ -53,7 +53,7 @@
             <div style="padding-top: 10px">
                 <j-descriptions size="small" :column="4">
                     <j-descriptions-item
-                        label="设备数量"
+                        :label="t('Product.Detail.index.5rcy2a8o8gk0')"
                         :labelStyle="{
                             fontSize: '14px',
                             opacity: 0.55,
@@ -76,18 +76,18 @@
             <PermissionButton
                 type="primary"
                 :popConfirm="{
-                    title: `确定应用配置?`,
+                    title:t('Product.Detail.index.tip'),
                     placement: 'bottomRight',
                     onConfirm: handleDeploy,
                 }"
                 :disabled="productStore.current?.state === 0"
                 :tooltip="
                     productStore.current?.state === 0
-                        ? { title: '请先启用产品' }
+                        ? { title: t('Product.Detail.index.5rcy2a8o8os0') }
                         : undefined
                 "
                 hasPermission="device/Product:update"
-                >应用配置</PermissionButton
+                >{{t('Product.Detail.index.5rcy2a8o8xc0')}}</PermissionButton
             >
         </template>
         <FullPage>
@@ -124,7 +124,9 @@ import { getImage, handleParamsToString, onlyMessage } from '@/utils/comm';
 import { useMenuStore } from '@/store/menu';
 import { useRouterParams } from '@/utils/hooks/useParams';
 import {EventEmitter} from "@/utils/utils";
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 const route = useRoute();
 const checked = ref<boolean>(true);
@@ -145,16 +147,16 @@ const searchParams = ref({
 const list = ref([
     {
         key: 'Info',
-        tab: '配置信息',
+        tab: t('Product.Detail.index.5rcy2a8o95c0'),
     },
     {
         key: 'Metadata',
-        tab: '物模型',
+        tab: t('Product.Detail.index.5rcy2a8o9cs0'),
         class: 'objectModel',
     },
     {
         key: 'Device',
-        tab: '设备接入',
+        tab: t('Product.Detail.index.5rcy2a8o9lw0'),
     },
 ]);
 
@@ -204,7 +206,7 @@ const handleDeploy = async () => {
     if (productStore.current.id) {
         const resp = await _deploy(productStore.current.id);
         if (resp.status === 200) {
-            onlyMessage('操作成功！');
+            onlyMessage(t('Product.Detail.index.5rcy2a8o9t00'));
             productStore.refresh(productStore.current.id);
         }
     }
@@ -217,7 +219,7 @@ const handleUndeploy = async () => {
     if (productStore.current.id) {
         const resp = await _undeploy(productStore.current.id);
         if (resp.status === 200) {
-            onlyMessage('操作成功！');
+            onlyMessage(t('Product.Detail.index.5rcy2a8o9t00'));
             productStore.refresh(productStore.current.id);
         }
     }
@@ -253,42 +255,42 @@ const getProtocol = async () => {
                 list.value = [
                     {
                         key: 'Info',
-                        tab: '配置信息',
+                        tab: t('Product.Detail.index.5rcy2a8o95c0'),
                     },
                     {
                         key: 'Metadata',
-                        tab: '物模型',
+                        tab: t('Product.Detail.index.5rcy2a8o9cs0'),
                         class: 'objectModel',
                     },
                     {
                         key: 'Device',
-                        tab: '设备接入',
+                        tab: t('Product.Detail.index.5rcy2a8o9lw0'),
                     },
                     {
                         key: 'DataAnalysis',
-                        tab: '数据解析',
+                        tab: t('Product.Detail.index.5rcy2a8oa1c0'),
                     },
                 ];
             } else {
                 list.value = [
                     {
                         key: 'Info',
-                        tab: '配置信息',
+                        tab: t('Product.Detail.index.5rcy2a8o95c0'),
                     },
                     {
                         key: 'Metadata',
-                        tab: '物模型',
+                        tab: t('Product.Detail.index.5rcy2a8o9cs0'),
                         class: 'objectModel',
                     },
                     {
                         key: 'Device',
-                        tab: '设备接入',
+                        tab: t('Product.Detail.index.5rcy2a8o9lw0'),
                     },
                 ];
             }
         }
         if (productStore.current?.accessProvider === 'plugin_gateway') {
-          list.value.push({ key: 'MetadataMap', tab: '物模型映射'})
+          list.value.push({ key: 'MetadataMap', tab: t('Product.Detail.index.5rcy2a8oa9k0')})
         }
     }
 };

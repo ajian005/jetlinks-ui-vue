@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const WeixinApp = () => {
+    const { t } = useI18n()
     const appId = getImage('/notice/doc/config/weixin-official/01-AppID.jpg');
     const appSecret = getImage(
         '/notice/doc/config/weixin-official/02-AppSecret.jpg',

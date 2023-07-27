@@ -3,11 +3,11 @@
         <template v-for="(item, index) in tagList" :key="item.id">
             <j-row :gutter="24" style="margin-bottom: 12px">
                 <j-col :span="4">
-                    <span v-if="index === 0" class="tagName">标签选择</span>
+                    <span v-if="index === 0" class="tagName">{{t('Device.device.Tag.5rg4pmv0x7k0')}}</span>
                     <j-select
                         :options="[
-                            { label: '并且', value: 'and' },
-                            { label: '或者', value: 'or' },
+                            { label: t('Device.device.Tag.5rg4pmv0yk40'), value: 'and' },
+                            { label: t('Device.device.Tag.5rg4pmv0yuk0'), value: 'or' },
                         ]"
                         v-else
                         :value="item?.type"
@@ -21,7 +21,7 @@
                             <j-select
                                 style="width: 120px"
                                 :value="item.id"
-                                placeholder="请选择标签"
+                                :placeholder="t('Device.device.Tag.5rg4pmv0z100')"
                                 :options="options"
                                 @select="
                                     (_, _data) => onTagSelect(_data, index)
@@ -45,8 +45,8 @@
                                           )
                                         : item.valueType === 'boolean'
                                         ? [
-                                              { label: '是', value: true },
-                                              { label: '否', value: false },
+                                              { label: t('Device.device.Tag.5rg4pmv0z7o0'), value: true },
+                                              { label: t('Device.device.Tag.5rg4pmv0zeg0'), value: false },
                                           ]
                                         : undefined
                                 "
@@ -76,7 +76,9 @@
 
 <script lang="ts" setup>
 import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     value: {
         type: Array as PropType<any>,
@@ -135,8 +137,8 @@ const onValueChange = () => {
             value: item?.value,
         };
     });
-    emits('update:value', [{ value: newValue, name: '标签' }]);
-    emits('change', [{ value: newValue, name: '标签' }], tagList.value);
+    emits('update:value', [{ value: newValue, name: t('Device.device.Tag.5rg4pmv0zkg0') }]);
+    emits('change', [{ value: newValue, name: t('Device.device.Tag.5rg4pmv0zkg0') }], tagList.value);
 };
 
 watch(

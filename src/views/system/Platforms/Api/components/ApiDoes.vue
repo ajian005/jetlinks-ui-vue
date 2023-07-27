@@ -9,25 +9,25 @@
         </div>
 
         <p>
-            <span class="label">请求数据类型</span>
+            <span class="label">{{t('Api.components.ApiDoes.5rga28pom0o0')}}</span>
             <span>{{
                 getContent(selectApi.requestBody) ||
                 'application/x-www-form-urlencoded'
             }}</span>
-            <span class="label">响应数据类型</span>
+            <span class="label">{{t('Api.components.ApiDoes.5rga28pongc0')}}</span>
             <span>{{ `["/"]` }}</span>
         </p>
 
         <div class="api-card" v-if="props.selectApi.description">
-            <h5>接口描述</h5>
+            <h5>{{t('Api.components.ApiDoes.5rga28ponu00')}}</h5>
             <div>{{ props.selectApi.description }}</div>
         </div>
         <div class="api-card" v-if="requestCard.codeText">
-            <h5>请求示例</h5>
+            <h5>{{t('Api.components.ApiDoes.5rga28poo0k0')}}</h5>
             <JsonViewer :value="requestCard.codeText" copyable />
         </div>
         <div class="api-card">
-            <h5>请求参数</h5>
+            <h5>{{t('Api.components.ApiDoes.5rga28poo6w0')}}</h5>
             <div class="content">
                 <j-pro-table
                     :columns="requestCard.columns"
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="api-card">
-            <h5>响应状态</h5>
+            <h5>{{t('Api.components.ApiDoes.5rga28pooe40')}}</h5>
             <div class="content">
                 <j-pro-table
                     :columns="responseStatusCard.columns"
@@ -68,7 +68,7 @@
         </div>
 
         <div class="api-card">
-            <h5>响应参数</h5>
+            <h5>{{t('Api.components.ApiDoes.5rga28poojs0')}}</h5>
             <div class="content">
                 <j-pro-table
                     :columns="respParamsCard.columns"
@@ -92,7 +92,9 @@ import type { apiDetailsType } from '../typing';
 import InputCard from './InputCard.vue';
 import { PropType } from 'vue';
 import { findData, getCodeText } from '../utils';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type cardType = {
     columns: object[];
     tableData: any[];
@@ -118,28 +120,28 @@ const { selectApi } = toRefs(props);
 const requestCard = reactive<cardType>({
     columns: [
         {
-            title: '参数名',
+            title: t('Api.components.ApiDoes.5rga28poop40'),
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: '参数说明',
+            title: t('Api.components.ApiDoes.5rga28poouo0'),
             dataIndex: 'description',
             key: 'description',
         },
         {
-            title: '请求类型',
+            title: t('Api.components.ApiDoes.5rga28pop3k0'),
             dataIndex: 'in',
             key: 'in',
         },
         {
-            title: '是否必须',
+            title: t('Api.components.ApiDoes.5rga28pop8s0'),
             dataIndex: 'required',
             key: 'required',
             scopedSlots: true,
         },
         {
-            title: '参数类型',
+            title: t('Api.components.ApiDoes.5rga28pope80'),
             dataIndex: 'type',
             key: 'type',
             scopedSlots: true,
@@ -184,12 +186,12 @@ const responseStatusCard = reactive<cardType>({
     activeKey: '',
     columns: [
         {
-            title: '状态码',
+            title: t('Api.components.ApiDoes.5rga28popj00'),
             dataIndex: 'code',
             key: 'code',
         },
         {
-            title: '说明',
+            title: t('Api.components.ApiDoes.5rga28popqs0'),
             dataIndex: 'desc',
             key: 'desc',
         },
@@ -227,15 +229,15 @@ const tabs = computed(() =>
 const respParamsCard = reactive<cardType>({
     columns: [
         {
-            title: '参数名称',
+            title: t('Api.components.ApiDoes.5rga28popz80'),
             dataIndex: 'paramsName',
         },
         {
-            title: '参数说明',
+            title: t('Api.components.ApiDoes.5rga28poouo0'),
             dataIndex: 'desc',
         },
         {
-            title: '类型',
+            title: t('Api.components.ApiDoes.5rga28poq480'),
             dataIndex: 'paramsType',
         },
     ],

@@ -1,7 +1,7 @@
 <template>
     <j-modal
         visible
-        title="新增"
+        :title="t('Role.components.AddDialog.5rkjo56mia80')"
         width="670px"
         @cancel="emits('update:visible', false)"
         @ok="confirm"
@@ -10,22 +10,22 @@
         <j-form ref="formRef" :model="form" layout="vertical">
             <j-form-item
                 name="name"
-                label="名称"
+                :label="t('Role.components.AddDialog.5rkjo56mj380')"
                 :rules="[
-                    { required: true, message: '请输入名称' },
-                    { max: 64, message: '最多可输入64个字符' },
+                    { required: true, message: t('Role.components.AddDialog.5rkjo56mjf00') },
+                    { max: 64, message: t('Role.components.AddDialog.5rkjo56mjko0') },
                 ]"
             >
                 <j-input
                     v-model:value="form.name"
-                    placeholder="请输入角色名称"
+                    :placeholder="t('Role.components.AddDialog.5rkjo56mjpw0')"
                     allow-clear
                 />
             </j-form-item>
-            <j-form-item name="name" label="说明">
+            <j-form-item name="name" :label="t('Role.components.AddDialog.5rkjo56mjvk0')">
                 <j-textarea
                     v-model:value="form.description"
-                    placeholder="请输入说明"
+                    :placeholder="t('Role.components.AddDialog.5rkjo56mk0g0')"
                     allow-clear
                     :maxlength="200"
                     show-count
@@ -40,6 +40,9 @@ import { FormInstance } from 'ant-design-vue';
 import { saveRole_api } from '@/api/system/role';
 import { useMenuStore } from '@/store/menu';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n() 
 const route = useRoute();
 const { jumpPage } = useMenuStore();
 
@@ -59,7 +62,7 @@ const confirm = () => {
         .then(() => saveRole_api(form.value))
         .then((resp) => {
             if (resp.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('Role.components.AddDialog.5rkjo56mk5g0'));
                 emits('update:visible', false);
 
                 if (route.query.save) {

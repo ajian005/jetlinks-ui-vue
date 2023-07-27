@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const DingTalk = () => {
+    const { t } = useI18n()
     const appKey = getImage(
         '/notice/doc/config/dingTalk-message/01-AppKey.jpg',
     );

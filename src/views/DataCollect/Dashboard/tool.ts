@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
-
+import createI18n from '@/locales/index';
+const { t } = createI18n.global
 const getParams = (dt: any) => {
     switch (dt.type) {
         case 'today':
@@ -132,9 +133,9 @@ export const statusData = [
     [
         {
             type: 'channel',
-            title: '异常通道',
+            title: t("DataCollect.DashBoard.tool.abnormal_channel"),
             status: 'error',
-            label: '通道数量',
+            label: t("DataCollect.DashBoard.tool.channel_number"),
             value: 0,
             total: 0,
         },
@@ -142,9 +143,9 @@ export const statusData = [
     [
         {
             type: 'collector',
-            title: '异常采集器',
+            title: t("DataCollect.DashBoard.tool.abnormal_collector"),
             status: 'error',
-            label: '采集器数量',
+            label: t("DataCollect.DashBoard.tool.collector_number"),
             value: 0,
             total: 0,
         },
@@ -152,9 +153,9 @@ export const statusData = [
     [
         {
             type: 'point',
-            title: '异常点位',
+            title: t("DataCollect.DashBoard.tool.abnormal_point"),
             status: 'error',
-            label: '采集点位',
+            label: t("DataCollect.DashBoard.tool.point_number"),
             value: 0,
             total: 0,
         },

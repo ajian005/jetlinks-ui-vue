@@ -19,11 +19,11 @@
                 class="question-item"
             >
                 <template #label>
-                    <span>标识</span>
+                    <span>{{t('Permission.components.EditDialog.5rg9t8k9y9o0')}}</span>
                     <span class="required-icon">*</span>
                     <j-tooltip placement="top">
                         <template #title>
-                            <span>标识ID需与代码中的标识ID一致</span>
+                            <span>{{t('Permission.components.EditDialog.5rg9t8k9zs00')}}</span>
                         </template>
                         <AIcon
                             type="QuestionCircleOutlined"
@@ -33,24 +33,24 @@
                 </template>
                 <j-input
                     v-model:value="form.data.id"
-                    placeholder="请输入标识(ID)"
-                    :disabled="dialogTitle === '编辑'"
+                    :placeholder="t('Permission.components.EditDialog.5rg9t8ka0300')"
+                    :disabled="dialogTitle === t('Permission.components.EditDialog.5rg9t8ka09s0')"
                 />
             </j-form-item>
             <j-form-item
                 name="name"
-                label="名称"
+                :label="t('Permission.components.EditDialog.5rg9t8ka0fs0')"
                 :rules="[
-                    { required: true, message: '请输入名称' },
+                    { required: true, message: t('Permission.components.EditDialog.5rg9t8ka0os0') },
                     {
                         max: 64,
-                        message: '最多可输入64个字符',
+                        message: t('Permission.components.EditDialog.5rg9t8ka0vc0'),
                     },
                 ]"
             >
                 <j-input
                     v-model:value="form.data.name"
-                    placeholder="请输入名称"
+                    :placeholder="t('Permission.components.EditDialog.5rg9t8ka0os0')"
                 />
             </j-form-item>
 
@@ -79,11 +79,11 @@
                             :rules="[
                                 {
                                     required: column.key !== 'describe',
-                                    message: `请输入${column.title}`,
+                                    message: `${t('Permission.components.EditDialog.input') + column.title}`,
                                 },
                                 {
                                     max: 64,
-                                    message: '最多可输入64个字符',
+                                    message: t('Permission.components.EditDialog.5rg9t8ka0vc0'),
                                 },
                             ]"
                         >
@@ -118,7 +118,7 @@
         </div>
 
         <j-button type="dashed" style="width: 100%" @click="table.clickAdd">
-            <AIcon type="PlusOutlined" /> 添加
+            <AIcon type="PlusOutlined" /> {{t('Permission.components.EditDialog.5rg9t8ka11k0')}}
         </j-button>
     </j-modal>
 </template>
@@ -134,11 +134,13 @@ import {
 } from '@/api/system/permission';
 import { cloneDeep } from 'lodash-es';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const defaultAction = [
-    { action: 'query', name: '查询', describe: '查询' },
-    { action: 'save', name: '保存', describe: '保存' },
-    { action: 'delete', name: '删除', describe: '删除' },
+    { action: 'query', name: t('Permission.components.EditDialog.5rg9t8ka1740'), describe: t('Permission.components.EditDialog.5rg9t8ka1740') },
+    { action: 'save', name: t('Permission.components.EditDialog.5rg9t8ka1cg0'), describe: t('Permission.components.EditDialog.5rg9t8ka1cg0') },
+    { action: 'delete', name: t('Permission.components.EditDialog.5rg9t8ka1hk0'), describe: t('Permission.components.EditDialog.5rg9t8ka1hk0') },
 ];
 const emits = defineEmits(['refresh', 'update:visible']);
 const props = defineProps<{
@@ -147,7 +149,7 @@ const props = defineProps<{
 }>();
 
 const loading = ref(false);
-const dialogTitle = computed(() => (props.data?.id ? '编辑' : '新增'));
+const dialogTitle = computed(() => (props.data?.id ? t('Permission.components.EditDialog.5rg9t8ka09s0') : t('Permission.components.EditDialog.5rg9t8ka1n80')));
 const confirm = () => {
     loading.value = true;
     formRef.value
@@ -155,7 +157,7 @@ const confirm = () => {
         .then(() => form.submit())
         .then((resp) => {
             if (resp.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('Permission.components.EditDialog.5rg9t8ka1sc0'));
                 emits('refresh');
                 emits('update:visible', false);
             }
@@ -183,9 +185,9 @@ const form = reactive({
     rules: {
         // 校验标识是否可用
         idCheck: async (_rule: Rule, id: string): Promise<any> => {
-            if (!id) return Promise.reject('请输入标识(ID)');
+            if (!id) return Promise.reject(t('Permission.components.EditDialog.5rg9t8ka0300'));
             else if (id.length > 64)
-                return Promise.reject('最多可输入64个字符');
+                return Promise.reject(t('Permission.components.EditDialog.5rg9t8ka0vc0'));
             else if (props.data?.id && props.data?.id === form.data?.id)
                 return Promise.resolve();
             else {
@@ -216,25 +218,25 @@ const table = reactive({
             align: 'center',
         },
         {
-            title: '操作类型',
+            title: t('Permission.components.EditDialog.5rg9t8ka1x00'),
             dataIndex: 'action',
             key: 'action',
             width: 220,
         },
         {
-            title: '名称',
+            title: t('Permission.components.EditDialog.5rg9t8ka0fs0'),
             dataIndex: 'name',
             key: 'name',
             width: 220,
         },
         {
-            title: '说明',
+            title: t('Permission.components.EditDialog.5rg9t8ka23w0'),
             dataIndex: 'describe',
             key: 'describe',
             width: 220,
         },
         {
-            title: '操作',
+            title: t('Permission.components.EditDialog.5rg9t8ka28w0'),
             dataIndex: 'act',
             key: 'act',
         },

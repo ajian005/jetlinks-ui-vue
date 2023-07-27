@@ -25,7 +25,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('link.Protocol.index.5rg3cmuyuck0')}}
                         </PermissionButton>
                     </template>
                     <template #card="slotProps">
@@ -73,7 +73,7 @@
                                         </j-col>
                                         <j-col :span="12">
                                             <div class="card-item-content-text">
-                                                类型
+                                                {{t('link.Protocol.index.5rg3cmuyvbk0')}}
                                             </div>
                                             <div class="card-item-content-text">
                                                 <j-tooltip>
@@ -147,7 +147,9 @@ import { list, remove } from '@/api/link/protocol';
 import { onlyMessage } from '@/utils/comm';
 import Save from './Save/index.vue';
 import _ from 'lodash';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const tableRef = ref<Record<string, any>>({});
 const params = ref<Record<string, any>>({});
 const route = useRoute();
@@ -167,7 +169,7 @@ const columns = [
         fixed: 'left',
     },
     {
-        title: '名称',
+        title: t('link.Protocol.index.5rg3cmuyvi40'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -176,7 +178,7 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: '类型',
+        title: t('link.Protocol.index.5rg3cmuyvbk0'),
         dataIndex: 'type',
         key: 'type',
         search: {
@@ -195,7 +197,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '说明',
+        title: t('link.Protocol.index.5rg3cmuyvno0'),
         dataIndex: 'description',
         key: 'description',
         search: {
@@ -204,7 +206,7 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: '操作',
+        title: t('link.Protocol.index.5rg3cmuyvrs0'),
         key: 'action',
         fixed: 'right',
         width: 100,
@@ -220,9 +222,9 @@ const getActions = (
     const actions = [
         {
             key: 'update',
-            text: '编辑',
+            text: t('link.Protocol.index.5rg3cmuyvwc0'),
             tooltip: {
-                title: '编辑',
+                title: t('link.Protocol.index.5rg3cmuyvwc0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -231,16 +233,16 @@ const getActions = (
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('link.Protocol.index.5rg3cmuyw0o0'),
             tooltip: {
-                title: '删除',
+                title: t('link.Protocol.index.5rg3cmuyw0o0'),
             },
             popConfirm: {
-                title: '确认删除?',
+                title: t('link.Protocol.index.5rg3cmuyw4s0'),
                 onConfirm: async () => {
                     const res: any = await remove(data.id);
                     if (res.status === 200) {
-                        onlyMessage('操作成功', 'success');
+                        onlyMessage(t('link.Protocol.index.5rg3cmuyw9c0'), 'success');
                         tableRef.value.reload();
                     } else {
                         onlyMessage(res?.message, 'error');
@@ -266,7 +268,7 @@ const saveChange = (value: object) => {
     visible.value = false;
     current.value = {};
     if (value) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('link.Protocol.index.5rg3cmuyw9c0'), 'success');
         tableRef.value.reload();
     }
 };

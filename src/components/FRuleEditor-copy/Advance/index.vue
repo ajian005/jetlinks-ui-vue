@@ -1,5 +1,5 @@
 <template>
-  <j-modal :mask-closable="false" visible width="70vw" title="设置属性规则" @cancel="handleCancel" @ok="handleOk">
+  <j-modal :mask-closable="false" visible width="70vw" :title="$t('FRuleEditor.Advance.index.5rlc8p41ek80')" @cancel="handleCancel" @ok="handleOk">
     <div class="advance-box">
         <div class="left">
           <Editor
@@ -26,7 +26,9 @@
 import Editor from '../Editor/index.vue'
 import Debug from '../Debug/index.vue'
 import Operator from '../Operator/index.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface Emits {
   (e: 'update:value', data: string | undefined): void;
   (e: 'change', data: string): void;

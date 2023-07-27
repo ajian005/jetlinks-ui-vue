@@ -2,7 +2,7 @@
     <j-modal
         :width="1000"
         :visible="true"
-        title="编辑标签"
+        :title="t('components.Tags.Save.5rcykwmcdew0')"
         @ok="handleOk"
         @cancel="handleCancel"
     >
@@ -52,7 +52,9 @@ import { useInstanceStore } from '@/store/instance';
 import _ from 'lodash';
 import { saveTags, delTags } from '@/api/device/instance'
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close', 'save']);
 
 const columns = [
@@ -62,12 +64,12 @@ const columns = [
         with: '33%',
     },
     {
-        title: '名称',
+        title: t('components.Tags.Save.5rcykwmcet80'),
         dataIndex: 'name',
         with: '33%',
     },
     {
-        title: '值',
+        title: t('components.Tags.Save.5rcykwmcf3k0'),
         dataIndex: 'value',
         with: '34%',
     },
@@ -93,7 +95,7 @@ const handleOk = async () => {
             // 填值
             const resp = await saveTags(instanceStore.current?.id || '', list);
             if (resp.status === 200) {
-                onlyMessage('操作成功！');
+                onlyMessage(t('components.Tags.Save.5rcykwmcfbs0'));
             }
           }
           const _list = (dataSource.value || []).filter((item: any) => item?.key && !item?.value);

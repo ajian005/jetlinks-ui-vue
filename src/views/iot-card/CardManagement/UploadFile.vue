@@ -17,21 +17,21 @@
         >
             <j-button>
                 <template #icon><AIcon type="UploadOutlined" /></template>
-                文件上传
+                {{t('iot-card.CardManagement.UploadFile.5rgbhe4qr880')}}
             </j-button>
         </j-upload>
         <div style="margin-left: 20px">
             <j-space>
-                下载模板
+                {{t('iot-card.CardManagement.UploadFile.5rgbhe4qsf40')}}
                 <a @click="downFile('xlsx')">.xlsx</a>
                 <a @click="downFile('csv')">.csv</a>
             </j-space>
         </div>
     </j-space>
     <div style="margin-top: 20px" v-if="importLoading">
-        <j-badge v-if="flag" status="processing" text="进行中" />
-        <j-badge v-else status="success" text="已完成" />
-        <span>总数量：{{ count }}</span>
+        <j-badge v-if="flag" status="processing" :text="t('iot-card.CardManagement.UploadFile.5rgbhe4qslw0')" />
+        <j-badge v-else status="success" :text="t('iot-card.CardManagement.UploadFile.5rgbhe4qsww0')" />
+        <span>{{t('iot-card.CardManagement.UploadFile.total') + count }}</span>
         <p style="color: red">{{ errMessage }}</p>
     </div>
 </template>
@@ -42,7 +42,9 @@ import { TOKEN_KEY } from '@/utils/variable';
 import { LocalStore, onlyMessage } from '@/utils/comm';
 import { downloadFileByUrl } from '@/utils/utils';
 import { exportCard, _import } from '@/api/iot-card/cardManagement';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:modelValue', data: string[]): void;
 };
@@ -85,10 +87,10 @@ const beforeUpload = (_file: any) => {
         _file.type ===
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     if (!isCsv && fileType !== 'xlsx') {
-        onlyMessage('请上传.csv格式文件', 'warning');
+        onlyMessage(t('iot-card.CardManagement.UploadFile.5rgbhe4qt7w0'), 'warning');
     }
     if (!isXlsx && fileType !== 'csv') {
-        onlyMessage('请上传.xlsx格式文件', 'warning');
+        onlyMessage(t('iot-card.CardManagement.UploadFile.5rgbhe4qtdo0'), 'warning');
     }
     return (isCsv && fileType !== 'xlsx') || (isXlsx && fileType !== 'csv');
 };
@@ -101,11 +103,11 @@ const uploadChange = async (info: Record<string, any>) => {
         _import(props.product, { fileUrl: resp.result })
             .then((response: any) => {
                 count.value = response.result?.total || 0
-                onlyMessage('导入成功');
+                onlyMessage(t('iot-card.CardManagement.UploadFile.5rgbhe4qtis0'));
                 errMessage.value = '';
             })
             .catch((err) => {
-                errMessage.value = err?.response?.data?.message || '导入失败'
+                errMessage.value = err?.response?.data?.message || t('iot-card.CardManagement.UploadFile.5rgbhe4qtno0')
             })
             .finally(() => {
                 flag.value = false;

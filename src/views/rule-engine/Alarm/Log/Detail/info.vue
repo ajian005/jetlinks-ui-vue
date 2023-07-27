@@ -1,9 +1,9 @@
 <template>
     <j-modal
         visible
-        title="详情"
-        okText="确定"
-        cancelText="取消"
+        :title="t('Log.Detail.info.5rg44l76xs40')"
+        :okText="t('Log.Detail.info.5rg44l76zlc0')"
+        :cancelText="t('Log.Detail.info.5rg44l76zv40')"
         :width="1000"
         @ok="closeModal"
         @cancel="closeModal"
@@ -11,23 +11,23 @@
         <j-descriptions bordered :column="2">
             <j-descriptions-item
                 v-if="props.data.targetType === 'device'"
-                label="告警设备"
+                :label="t('Log.Detail.info.5rg44l7702o0')"
                 :span="1"
                 >{{ props.data?.targetName || '' }}</j-descriptions-item
             >
             <j-descriptions-item
                 v-if="props.data.targetType === 'device'"
-                label="设备ID"
+                :label="t('Log.Detail.info.5rg44l7709c0')"
                 :span="1"
                 >{{ props.data?.targetId || '' }}</j-descriptions-item
             >
-            <j-descriptions-item label="告警名称" :span="1">{{
+            <j-descriptions-item :label="t('Log.Detail.info.5rg44l770gg0')" :span="1">{{
                 props.data?.alarmConfigName
             }}</j-descriptions-item>
-            <j-descriptions-item label="告警时间" :span="1">{{
+            <j-descriptions-item :label="t('Log.Detail.info.5rg44l770mo0')" :span="1">{{
                 dayjs(data?.alarmTime).format('YYYY-MM-DD HH:mm:ss')
             }}</j-descriptions-item>
-            <j-descriptions-item label="告警级别" :span="1">
+            <j-descriptions-item :label="t('Log.Detail.info.5rg44l770wg0')" :span="1">
                 <j-tooltip
                     placement="topLeft"
                     :title="_level"
@@ -39,14 +39,14 @@
                     </Ellipsis>
                 </j-tooltip>
             </j-descriptions-item>
-            <j-descriptions-item label="告警说明" :span="1">
+            <j-descriptions-item :label="t('Log.Detail.info.5rg44l771480')" :span="1">
                 <Ellipsis style="width: calc(100% - 20px)">
                     <span>
                         {{ description || '' }}
                     </span>
                 </Ellipsis>
             </j-descriptions-item>
-            <j-descriptions-item label="告警流水" :span="2"
+            <j-descriptions-item :label="t('Log.Detail.info.5rg44l771b40')" :span="2"
                 ><div style="max-height: 500px; overflow-y: auto">
                     <JsonViewer
                         :value="data"
@@ -61,6 +61,9 @@
 import { queryLevel } from '@/api/rule-engine/config';
 import dayjs from 'dayjs';
 import JsonViewer from 'vue-json-viewer';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
     data: Object,
     description: String,

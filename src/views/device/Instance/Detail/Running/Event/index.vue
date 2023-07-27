@@ -23,10 +23,10 @@
             </j-button>
         </template>
     </JProTable>
-    <j-modal :width="600" v-model:visible="visible" title="详情" class="device-running-event-modal">
+    <j-modal :width="600" v-model:visible="visible" :title="t('Running.Event.index.5rcym62apc00')" class="device-running-event-modal">
         <JsonViewer :value="info" />
         <template #footer>
-            <j-button type="primary" @click="visible = false">关闭</j-button>
+            <j-button type="primary" @click="visible = false">{{t('Running.Event.index.5rcym62aqwc0')}}</j-button>
         </template>
     </j-modal>
 </template>
@@ -36,7 +36,9 @@ import dayjs from 'dayjs';
 import { getEventList } from '@/api/device/instance';
 import { useInstanceStore } from '@/store/instance';
 import JsonViewer from 'vue-json-viewer';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const events = defineProps({
     data: {
         type: Object,
@@ -47,7 +49,7 @@ const instanceStore = useInstanceStore();
 
 const defaultColumns = [
   {
-    title: '时间',
+    title: t('Running.Event.index.5rcym62ar440'),
     dataIndex: 'timestamp',
     key: 'timestamp',
     scopedSlots: true,
@@ -56,7 +58,7 @@ const defaultColumns = [
     },
   },
   {
-    title: '操作',
+    title: t('Running.Event.index.5rcym62arac0'),
     dataIndex: 'action',
     key: 'action',
     scopedSlots: true,
@@ -87,7 +89,7 @@ watchEffect(() => {
         });
     } else {
         columns.value.splice(0, 0, {
-            title: '数据',
+            title: t('Running.Event.index.5rcym62argo0'),
             dataIndex: 'value',
         });
     }

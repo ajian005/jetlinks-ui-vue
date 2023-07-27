@@ -5,30 +5,16 @@
             <j-row>
                 <j-col :span="10">
                     <j-form layout="vertical" :rules='formRules' ref='formRef' :model='formData'>
-                        <j-form-item
-                            label="通知方式"
-                            name='type'
-                        >
-                            <j-select
-                                v-model:value="formData.type"
-                                placeholder="请选择通知方式"
-                                :disabled="!!formData.id"
-                                @change="handleTypeChange"
-                            >
-                                <j-select-option
-                                    v-for="(item, index) in NOTICE_METHOD"
-                                    :key="index"
-                                    :value="item.value"
-                                >
+                        <j-form-item :label="t('common.notiMode')" name='type'>
+                            <j-select v-model:value="formData.type" :placeholder="t('common.tips.notification')"
+                                :disabled="!!formData.id" @change="handleTypeChange">
+                                <j-select-option v-for="(item, index) in NOTICE_METHOD" :key="index" :value="item.value">
                                     {{ item.label }}
                                 </j-select-option>
                             </j-select>
                         </j-form-item>
-                        <j-form-item label="名称" name='name'>
-                            <j-input
-                                v-model:value="formData.name"
-                                placeholder="请输入名称"
-                            />
+                        <j-form-item :label="t('common.name')" name='name'>
+                            <j-input v-model:value="formData.name" :placeholder="t('common.tips.name')" />
                         </j-form-item>
                         <j-form-item
                             label="类型"
@@ -51,14 +37,9 @@
                         >
                             <template #label>
                                 <span>
-                                    绑定配置
-                                    <j-tooltip
-                                        title="使用固定的通知配置来发送此通知模板"
-                                    >
-                                        <AIcon
-                                            type="QuestionCircleOutlined"
-                                            style="margin-left: 2px"
-                                        />
+                                    {{ t('pages.iot.notice.template.bindConfig') }}
+                                    <j-tooltip :title="t('pages.iot.notice.template.configTip')">
+                                        <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                     </j-tooltip>
                                 </span>
                             </template>
@@ -79,332 +60,196 @@
                         </j-form-item>
                         <!-- 钉钉 -->
                         <template v-if="formData.type === 'dingTalk'">
-                            <template
-                                v-if="formData.provider === 'dingTalkMessage'"
-                            >
-                                <j-form-item
-                                    :name='["template", "agentId"]'
-                                >
+                            <template v-if="formData.provider === 'dingTalkMessage'">
+                                <j-form-item :name='["template", "agentId"]'>
                                     <template #label>
                                         <span>
                                             AgentId
-                                            <j-tooltip title="应用唯一标识">
-                                                <AIcon
-                                                    type="QuestionCircleOutlined"
-                                                    style="margin-left: 2px"
-                                                />
+                                            <j-tooltip :title="t('pages.iot.notice.template.AgentIdTip')">
+                                                <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                             </j-tooltip>
                                         </span>
                                     </template>
-                                    <j-input
-                                        v-model:value="
-                                            formData.template.agentId
-                                        "
-                                        placeholder="请输入AgentId"
-                                    />
+                                    <j-input v-model:value="formData.template.agentId
+                                        " :placeholder="t('common.tips.input') + 'AgentId'" />
                                 </j-form-item>
                                 <j-row :gutter="10">
                                     <j-col :span="12">
-                                        <j-form-item label="收信部门">
-                                            <ToOrg
-                                                v-model:toParty="
-                                                    formData.template
-                                                        .departmentIdList
-                                                "
-                                                :type="formData.type"
-                                                :config-id="formData.configId"
-                                            />
+                                        <j-form-item :label="t('pages.iot.notice.template.receiveD')">
+                                            <ToOrg v-model:toParty="formData.template
+                                                .departmentIdList
+                                                " :type="formData.type" :config-id="formData.configId" />
                                         </j-form-item>
                                     </j-col>
                                     <j-col :span="12">
                                         <j-form-item>
                                             <template #label>
                                                 <span>
-                                                    收信人
-                                                    <j-tooltip
-                                                        title="如果不填写该字段，将在使用此模板发送通知时进行指定"
-                                                    >
-                                                        <AIcon
-                                                            type="QuestionCircleOutlined"
-                                                            style="
+                                                    {{ t('pages.iot.notice.template.receive') }}
+                                                    <j-tooltip :title="t('pages.iot.notice.template.receiveTip')">
+                                                        <AIcon type="QuestionCircleOutlined" style="
                                                                 margin-left: 2px;
-                                                            "
-                                                        />
+                                                            " />
                                                     </j-tooltip>
                                                 </span>
                                             </template>
-                                            <ToUser
-                                                v-model:toUser="
-                                                    formData.template.userIdList
-                                                "
-                                                :type="formData.type"
-                                                :config-id="formData.configId"
-                                            />
+                                            <ToUser v-model:toUser="formData.template.userIdList
+                                                " :type="formData.type" :config-id="formData.configId" />
                                         </j-form-item>
                                     </j-col>
                                 </j-row>
                             </template>
-                            <template
-                                v-if="
-                                    formData.provider === 'dingTalkRobotWebHook'
-                                "
-                            >
-                                <j-form-item
-                                    label="消息类型"
-                                    :name='["template", "messageType"]'
-                                >
-                                    <j-select
-                                        v-model:value="
-                                            formData.template.messageType
-                                        "
-                                        placeholder="请选择消息类型"
-                                        @change="handleMessageTypeChange"
-                                    >
-                                        <j-select-option
-                                            v-for="(
+                            <template v-if="formData.provider === 'dingTalkRobotWebHook'
+                                ">
+                                <j-form-item :label="t('pages.iot.notice.template.messageType')"
+                                    :name='["template", "messageType"]'>
+                                    <j-select v-model:value="formData.template.messageType
+                                        " :placeholder="t('pages.iot.notice.template.messageTip')"
+                                        @change="handleMessageTypeChange">
+                                        <j-select-option v-for="(
                                                 item, index
-                                            ) in ROBOT_MSG_TYPE"
-                                            :key="index"
-                                            :value="item.value"
-                                        >
+                                            ) in ROBOT_MSG_TYPE" :key="index" :value="item.value">
                                             {{ item.label }}
                                         </j-select-option>
                                     </j-select>
                                 </j-form-item>
-                                <template
-                                    v-if="
-                                        formData.template.messageType ===
-                                        'markdown'
-                                    "
-                                >
-                                    <j-form-item
-                                        label="标题"
-                                        :name='["template", "markdown", "title"]'
-                                    >
-                                        <j-input
-                                            v-model:value="
-                                                formData.template.markdown.title
-                                            "
-                                            placeholder="请输入标题"
-                                        />
+                                <template v-if="formData.template.messageType ===
+                                    'markdown'
+                                    ">
+                                    <j-form-item :label="t('pages.iot.notice.template.title')"
+                                        :name='["template", "markdown", "title"]'>
+                                        <j-input v-model:value="formData.template.markdown.title
+                                            " :placeholder="t('pages.iot.notice.template.titleTip')" />
                                     </j-form-item>
                                 </template>
-                                <template
-                                    v-if="
-                                        formData.template.messageType === 'link'
-                                    "
-                                >
-                                    <j-form-item
-                                        label="标题"
-                                        :name='["template", "link", "title"]'
-                                    >
-                                        <j-input
-                                            v-model:value="
-                                                formData.template.link.title
-                                            "
-                                            placeholder="请输入标题"
-                                        />
+                                <template v-if="formData.template.messageType === 'link'
+                                    ">
+                                    <j-form-item :label="t('pages.iot.notice.template.title')"
+                                        :name='["template", "link", "title"]'>
+                                        <j-input v-model:value="formData.template.link.title
+                                            " :placeholder="t('pages.iot.notice.template.titleTip')" />
                                     </j-form-item>
-                                    <j-form-item label="图片链接">
-                                        <j-input
-                                            v-model:value="
-                                                formData.template.link.picUrl
-                                            "
-                                            placeholder="请输入图片链接"
-                                        >
+                                    <j-form-item :label="t('pages.iot.notice.template.img')">
+                                        <j-input v-model:value="formData.template.link.picUrl
+                                            " :placeholder="t('pages.iot.notice.template.imgTip')">
                                             <template #addonAfter>
-                                                <a-upload
-                                                    name="file"
-                                                    :action="FILE_UPLOAD"
-                                                    :headers="{
-                                                        [TOKEN_KEY]:
-                                                            LocalStore.get(
-                                                                TOKEN_KEY,
-                                                            ),
-                                                    }"
-                                                    :showUploadList="false"
-                                                    @change="
-                                                        (e) =>
-                                                            handleLinkChange(e)
-                                                    "
-                                                >
-                                                    <AIcon
-                                                        type="UploadOutlined"
-                                                    />
+                                                <a-upload name="file" :action="FILE_UPLOAD" :headers="{
+                                                    [TOKEN_KEY]:
+                                                        LocalStore.get(
+                                                            TOKEN_KEY,
+                                                        ),
+                                                }" :showUploadList="false" @change="(e) =>
+    handleLinkChange(e)
+    ">
+                                                    <AIcon type="UploadOutlined" />
                                                 </a-upload>
                                             </template>
                                         </j-input>
                                     </j-form-item>
-                                    <j-form-item label="内容链接">
-                                        <j-input
-                                            v-model:value="
-                                                formData.template.link
-                                                    .messageUrl
-                                            "
-                                            placeholder="请输入内容链接"
-                                        />
+                                    <j-form-item :label="t('pages.iot.notice.template.content')">
+                                        <j-input v-model:value="formData.template.link
+                                            .messageUrl
+                                            " :placeholder="t('pages.iot.notice.template.contentTip')" />
                                     </j-form-item>
                                 </template>
                             </template>
                         </template>
                         <!-- 微信 -->
                         <template v-if="formData.type === 'weixin'">
-                            <j-form-item
-                                :name='["template", "agentId"]'
-                            >
+                            <j-form-item :name='["template", "agentId"]'>
                                 <template #label>
                                     <span>
                                         AgentId
-                                        <j-tooltip title="应用唯一标识">
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        <j-tooltip :title="t('pages.iot.notice.template.AgentIdTip')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <j-input
-                                    v-model:value="formData.template.agentId"
-                                    placeholder="请输入AgentId"
-                                />
+                                <j-input v-model:value="formData.template.agentId"
+                                    :placeholder="t('common.tips.input') + 'AgentId'" />
                             </j-form-item>
                             <j-row :gutter="10">
                                 <j-col :span="12">
                                     <j-form-item>
                                         <template #label>
                                             <span>
-                                                收信人
-                                                <j-tooltip
-                                                    title="如果不填写该字段,将在使用此模板发送通知时进行指定。"
-                                                >
-                                                    <AIcon
-                                                        type="QuestionCircleOutlined"
-                                                        style="margin-left: 2px"
-                                                    />
+                                                {{ t('pages.iot.notice.template.receive') }}
+                                                <j-tooltip :title="t('pages.iot.notice.template.receiveTip')">
+                                                    <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                                 </j-tooltip>
                                             </span>
                                         </template>
-                                        <ToUser
-                                            v-model:toUser="
-                                                formData.template.toUser
-                                            "
-                                            :type="formData.type"
-                                            :config-id="formData.configId"
-                                        />
+                                        <ToUser v-model:toUser="formData.template.toUser
+                                            " :type="formData.type" :config-id="formData.configId" />
                                     </j-form-item>
                                 </j-col>
                                 <j-col :span="12">
-                                    <j-form-item label="收信部门">
-                                        <ToOrg
-                                            v-model:toParty="
-                                                formData.template.toParty
-                                            "
-                                            :type="formData.type"
-                                            :config-id="formData.configId"
-                                        />
+                                    <j-form-item :label="t('pages.iot.notice.template.receiveD')">
+                                        <ToOrg v-model:toParty="formData.template.toParty
+                                            " :type="formData.type" :config-id="formData.configId" />
                                     </j-form-item>
                                 </j-col>
                             </j-row>
                             <j-form-item>
                                 <template #label>
                                     <span>
-                                        标签推送
-                                        <j-tooltip
-                                            title="本企业微信的标签ID列表,最多支持100个,如果不填写该字段,将在使用此模板发送通知时进行指定"
-                                        >
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{ t('pages.iot.notice.template.labelPush') }}
+                                        <j-tooltip :title="t('pages.iot.notice.template.labelTip')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <ToTag
-                                    v-model:toTag="formData.template.toTag"
-                                    :type="formData.type"
-                                    :config-id="formData.configId"
-                                />
+                                <ToTag v-model:toTag="formData.template.toTag" :type="formData.type"
+                                    :config-id="formData.configId" />
                             </j-form-item>
                         </template>
                         <!-- 邮件 -->
                         <template v-if="formData.type === 'email'">
-                            <j-form-item
-                                :name='["template", "subject"]'
-                            >
+                            <j-form-item :name='["template", "subject"]'>
                                 <template #label>
                                     <span>
-                                        标题
-                                        <j-tooltip title="邮件标题">
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{ t('pages.iot.notice.template.title') }}
+                                        <j-tooltip :title="t('pages.iot.notice.template.mail')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <j-input
-                                    v-model:value="formData.template.subject"
-                                    placeholder="请输入标题"
-                                />
+                                <j-input v-model:value="formData.template.subject"
+                                    :placeholder="t('pages.iot.notice.template.titleTip')" />
                             </j-form-item>
-                            <j-form-item
-                                :name='["template", "sendTo"]'
-                            >
+                            <j-form-item :name='["template", "sendTo"]'>
                                 <template #label>
                                     <span>
-                                        收件人
-                                        <j-tooltip
-                                            title="多个收件人用换行分隔 最大支持1000个号码"
-                                        >
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{ t('pages.iot.notice.template.addressee') }}
+                                        <j-tooltip :title="t('pages.iot.notice.template.addresseeTip1')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <j-select
-                                    mode="tags"
-                                    v-model:value="formData.template.sendTo"
-                                    placeholder="请输入收件人邮箱,多个收件人用换行分隔"
-                                />
+                                <j-select mode="tags" v-model:value="formData.template.sendTo"
+                                    :placeholder="t('pages.iot.notice.template.addresseeTip2')" />
                             </j-form-item>
                             <j-form-item>
                                 <template #label>
                                     <span>
-                                        附件信息
-                                        <j-tooltip
-                                            title="附件只输入文件名称将在发送邮件时进行文件上传"
-                                        >
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{ t('pages.iot.notice.template.attachments') }}
+                                        <j-tooltip :title="t('pages.iot.notice.template.attachmentsTip')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <Attachments
-                                    v-model:attachments="
-                                        formData.template.attachments
-                                    "
-                                />
+                                <Attachments v-model:attachments="formData.template.attachments
+                                    " />
                             </j-form-item>
                         </template>
                         <!-- 语音 -->
                         <template v-if="formData.type === 'voice'">
-                            <j-form-item
-                                :name='["template", "templateType"]'
-                            >
+                            <j-form-item :name='["template", "templateType"]'>
                                 <template #label>
                                     <span>
-                                        类型
-                                        <j-tooltip
-                                            title="语音验证码类型可配置变量，并且只支持数字和英文字母"
-                                        >
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{ t('common.type') }}
+                                        <j-tooltip :title="t('pages.iot.notice.template.typeTip')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
@@ -426,9 +271,7 @@
                             </j-form-item>
                             <j-row :gutter="10">
                                 <j-col :span="12">
-                                    <j-form-item
-                                       :name='["template", "templateCode"]'
-                                    >
+                                    <j-form-item :name='["template", "templateCode"]'>
                                         <template #label>
                                             <span>
                                                 {{ formData.template.templateType === 'voice' ? '语音ID' : '模板ID' }}
@@ -442,296 +285,174 @@
                                                 </j-tooltip>
                                             </span>
                                         </template>
-                                        <j-input
-                                            v-model:value="
-                                                formData.template.templateCode
-                                            "
-                                            placeholder="请输入模板ID"
-                                        />
+                                        <j-input v-model:value="formData.template.templateCode
+                                            " :placeholder="t('pages.iot.notice.template.templateIDIpt')" />
                                     </j-form-item>
                                 </j-col>
                                 <j-col :span="12">
-                                    <j-form-item
-                                        :name='["template", "calledNumber"]'
-                                    >
+                                    <j-form-item :name='["template", "calledNumber"]'>
                                         <template #label>
                                             <span>
-                                                被叫号码
-                                                <j-tooltip
-                                                    title="仅支持中国大陆号码"
-                                                >
-                                                    <AIcon
-                                                        type="QuestionCircleOutlined"
-                                                        style="margin-left: 2px"
-                                                    />
+                                                {{ t('pages.iot.notice.template.called') }}
+                                                <j-tooltip :title="t('pages.iot.notice.template.calledTip')">
+                                                    <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                                 </j-tooltip>
                                             </span>
                                         </template>
-                                        <j-input
-                                            v-model:value="
-                                                formData.template.calledNumber
-                                            "
-                                            placeholder="请输入被叫号码"
-                                        />
+                                        <j-input v-model:value="formData.template.calledNumber
+                                            " :placeholder="t('pages.iot.notice.template.calledIpt')" />
                                     </j-form-item>
                                 </j-col>
                             </j-row>
-                            <j-form-item
-                                :name='["template", "calledShowNumbers"]'
-                            >
+                            <j-form-item :name='["template", "calledShowNumbers"]'>
                                 <template #label>
                                     <span>
-                                        被叫显号
-                                        <j-tooltip
-                                            title="必须是已购买的号码,用于呼叫号码显示"
-                                        >
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{ t('pages.iot.notice.template.calledSignal') }}
+                                        <j-tooltip :title="t('pages.iot.notice.template.calledSignalTip')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <j-input
-                                    v-model:value="
-                                        formData.template.calledShowNumbers
-                                    "
-                                    placeholder="请输入被叫显号"
-                                />
+                                <j-input v-model:value="formData.template.calledShowNumbers
+                                    " :placeholder="t('pages.iot.notice.template.calledSignalIpt')" />
                             </j-form-item>
-                            <j-form-item
-                                :name='["template", "playTimes"]'
-                            >
+                            <j-form-item :name='["template", "playTimes"]'>
                                 <template #label>
                                     <span>
-                                        播放次数
-                                        <j-tooltip title="语音文件的播放次数">
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{ t('pages.iot.notice.template.plays') }}
+                                        <j-tooltip :title=" t('pages.iot.notice.template.playsTip') ">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <j-input-number
-                                    v-model:value="formData.template.playTimes"
-                                    placeholder="请输入播放次数"
-                                    style="width: 100%"
-                                />
+                                <j-input-number v-model:value=" formData.template.playTimes " :placeholder="t('pages.iot.notice.template.playsIpt')"
+                                    style="width: 100%" />
                             </j-form-item>
-                            <j-form-item
-                                v-if="formData.template.templateType === 'tts'"
-                                :name='["template", "ttsmessage"]'
-                            >
+                            <j-form-item v-if=" formData.template.templateType === 'tts' " :name=' ["template", "ttsmessage"] '>
                                 <template #label>
                                     <span>
-                                        模板内容
-                                        <j-tooltip
-                                            title="语音验证码内容输入框，用于渲染验语音证码变量。"
-                                        >
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{ t('pages.iot.notice.template.temContent') }}
+                                        <j-tooltip :title="t('pages.iot.notice.template.temContentTip')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <j-textarea
-                                    v-model:value="formData.template.ttsmessage"
-                                    :rows="5"
-                                    placeholder="内容中的变量将用于阿里云语音验证码"
-                                />
+                                <j-textarea v-model:value=" formData.template.ttsmessage " :rows=" 5 "
+                                :placeholder="t('pages.iot.notice.template.temContentIpt')" />
                             </j-form-item>
                         </template>
                         <!-- 短信 -->
-                        <template v-if="formData.type === 'sms'">
-                            <j-row :gutter="10">
-                                <j-col :span="12">
-                                    <j-form-item
-                                        :name='["template", "code"]'
-                                    >
+                        <template v-if=" formData.type === 'sms' ">
+                            <j-row :gutter=" 10 ">
+                                <j-col :span=" 12 ">
+                                    <j-form-item :name=' ["template", "code"] '>
                                         <template #label>
                                             <span>
-                                                模板
-                                                <j-tooltip
-                                                    title="阿里云短信平台自定义的模板名称"
-                                                >
-                                                    <AIcon
-                                                        type="QuestionCircleOutlined"
-                                                        style="margin-left: 2px"
-                                                    />
+                                                {{t('pages.iot.notice.template.template')}}
+                                                <j-tooltip :title="t('pages.iot.notice.template.templateTip')">
+                                                    <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                                 </j-tooltip>
                                             </span>
                                         </template>
-                                        <j-select
-                                            v-model:value="
-                                                formData.template.code
-                                            "
-                                            placeholder="请选择模板"
-                                            @change="handleTemplateChange"
-                                        >
-                                            <j-select-option
-                                                v-for="(
-                                                    item, index
-                                                ) in templateList"
-                                                :key="index"
-                                                :value="item.templateCode"
-                                            >
+                                        <j-select v-model:value="
+                                            formData.template.code
+                                        " :placeholder="t('pages.iot.notice.template.templateIpt')" @change=" handleTemplateChange ">
+                                            <j-select-option v-for="(
+                                                     item, index 
+                                                ) in  templateList " :key=" index " :value=" item.templateCode ">
                                                 {{ item.templateName }}
                                             </j-select-option>
                                         </j-select>
                                     </j-form-item>
                                 </j-col>
-                                <j-col :span="12">
-                                    <j-form-item
-                                        :name='["template", "phoneNumber"]'
-                                    >
+                                <j-col :span=" 12 ">
+                                    <j-form-item :name=' ["template", "phoneNumber"] '>
                                         <template #label>
                                             <span>
-                                                收信人
-                                                <j-tooltip
-                                                    title="仅支持中国大陆号码"
-                                                >
-                                                    <AIcon
-                                                        type="QuestionCircleOutlined"
-                                                        style="margin-left: 2px"
-                                                    />
+                                                {{t('pages.iot.notice.template.receive')}}
+                                                <j-tooltip :title="t('pages.iot.notice.template.receiveRest')">
+                                                    <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                                 </j-tooltip>
                                             </span>
                                         </template>
-                                        <j-input
-                                            v-model:value="
-                                                formData.template.phoneNumber
-                                            "
-                                            placeholder="请输入收信人"
-                                        />
+                                        <j-input v-model:value="
+                                            formData.template.phoneNumber
+                                        " :placeholder="t('pages.iot.notice.template.receiveIpt')" />
                                     </j-form-item>
                                 </j-col>
                             </j-row>
-                            <j-form-item
-                                :name='["template", "signName"]'
-                            >
+                            <j-form-item :name=' ["template", "signName"] '>
                                 <template #label>
                                     <span>
-                                        签名
-                                        <j-tooltip
-                                            title="用于短信内容签名信息显示"
-                                        >
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{t('pages.iot.notice.template.signature')}}
+                                        <j-tooltip :title="t('pages.iot.notice.template.signatureTip')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <j-select
-                                    v-model:value="formData.template.signName"
-                                    placeholder="请选择签名"
-                                >
-                                    <j-select-option
-                                        v-for="(item, index) in signsList"
-                                        :key="index"
-                                        :value="item.signName"
-                                    >
+                                <j-select v-model:value=" formData.template.signName " :placeholder="t('pages.iot.notice.template.signatureSel')">
+                                    <j-select-option v-for="( item, index ) in  signsList " :key=" index " :value=" item.signName ">
                                         {{ item.signName }}
                                     </j-select-option>
                                 </j-select>
                             </j-form-item>
                         </template>
                         <!-- webhook -->
-                        <template v-if="formData.type === 'webhook'">
-                            <j-form-item label="请求体">
-                                <j-radio-group
-                                    v-model:value="
-                                        formData.template.contextAsBody
-                                    "
-                                    style="margin-bottom: 20px"
-                                >
-                                    <j-radio :value="true">默认</j-radio>
-                                    <j-radio :value="false">自定义</j-radio>
+                        <template v-if=" formData.type === 'webhook' ">
+                            <j-form-item :label="t('common.reqHeader')">
+                                <j-radio-group v-model:value="
+                                    formData.template.contextAsBody
+                                " style="margin-bottom: 20px">
+                                    <j-radio :value=" true ">{{ t('pages.iot.notice.template.acquiesce') }}</j-radio>
+                                    <j-radio :value=" false ">{{ t('pages.iot.notice.template.Custom') }}</j-radio>
                                 </j-radio-group>
-                                <j-textarea
-                                    placeholder="请求体中的数据来自于发送通知时指定的所有变量"
-                                    v-if="formData.template.contextAsBody"
-                                    disabled
-                                    :rows="5"
-                                />
+                                <j-textarea :placeholder=" t('pages.iot.notice.template.reqHeaderIpt')" v-if=" formData.template.contextAsBody "
+                                    disabled :rows=" 5 " />
                                 <div v-else style="height: 400px">
-                                    <MonacoEditor
-                                        theme="vs"
-                                        v-model:modelValue="
-                                            formData.template.body
-                                        "
-                                    />
+                                    <MonacoEditor theme="vs" v-model:modelValue="
+                                        formData.template.body
+                                    " />
                                 </div>
                             </j-form-item>
                         </template>
-                        <template
-                            v-if="
-                                formData.type !== 'webhook' &&
-                                formData.type !== 'voice'
-                            "
-                        >
-                            <j-form-item
-                                :name='["template", "message"]'
-                            >
+                        <template v-if="
+                            formData.type !== 'webhook' &&
+                            formData.type !== 'voice'
+                        ">
+                            <j-form-item :name=' ["template", "message"] '>
                                 <template #label>
                                     <span>
-                                        模板内容
-                                        <j-tooltip
-                                            title="发送的内容，支持录入变量"
-                                        >
-                                            <AIcon
-                                                type="QuestionCircleOutlined"
-                                                style="margin-left: 2px"
-                                            />
+                                        {{t('pages.iot.notice.template.temContent')}}
+                                        <j-tooltip :title="t('pages.iot.notice.template.temTip')">
+                                            <AIcon type="QuestionCircleOutlined" style="margin-left: 2px" />
                                         </j-tooltip>
                                     </span>
                                 </template>
-                                <j-textarea
-                                    v-model:value="formData.template.message"
-                                    :rows="5"
-                                    :disabled="formData.type === 'sms'"
-                                    placeholder="变量格式:${name};
-    示例:尊敬的${name},${time}有设备触发告警,请注意处理"
-                                />
+                                <j-textarea v-model:value=" formData.template.message " :rows=" 5 "
+                                    :disabled=" formData.type === 'sms' " :placeholder="t('pages.iot.notice.template.temIpt')" />
                             </j-form-item>
                         </template>
-                        <j-form-item
-                            label="变量列表"
-                            v-if="
-                                formData.variableDefinitions &&
-                                formData.variableDefinitions.length
-                            "
-                        >
-                            <VariableDefinitions
-                                v-model:variableDefinitions="
-                                    formData.variableDefinitions
-                                "
-                            />
+                        <j-form-item :label="t('pages.iot.notice.template.variable')" v-if="
+                            formData.variableDefinitions &&
+                            formData.variableDefinitions.length
+                        ">
+                            <VariableDefinitions v-model:variableDefinitions="
+                                formData.variableDefinitions
+                            " />
                         </j-form-item>
-                        <j-form-item label="说明">
-                            <j-textarea
-                                v-model:value="formData.description"
-                                show-count
-                                :maxlength="200"
-                                :rows="5"
-                                placeholder="请输入说明"
-                            />
+                        <j-form-item :label="t('common.descri')">
+                            <j-textarea v-model:value=" formData.description " show-count :maxlength=" 200 " :rows=" 5 "
+                                :placeholder="t('common.tips.descri')" />
                         </j-form-item>
                         <j-form-item>
-                            <j-button
-                                type="primary"
-                                @click="handleSubmit"
-                                :loading="btnLoading"
-                            >
-                                保存
+                            <j-button type="primary" @click=" handleSubmit " :loading=" btnLoading ">
+                                {{ t('common.save') }}
                             </j-button>
                         </j-form-item>
                     </j-form>
                 </j-col>
-                <j-col :span="12" :push="2">
-                    <Doc :docData="formData" />
+                <j-col :span=" 12 " :push=" 2 ">
+                    <Doc :docData=" formData " />
                 </j-col>
             </j-row>
         </j-card>
@@ -765,7 +486,9 @@ import { TOKEN_KEY } from '@/utils/variable';
 import { phoneRegEx } from '@/utils/validate';
 import type { Rule } from 'ant-design-vue/es/form';
 import { cloneDeep } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter();
 const route = useRoute();
 const useForm = Form.useForm;
@@ -775,12 +498,12 @@ const flag = ref<boolean>(false)
 // 消息类型
 const msgType = ref([
     {
-        label: '钉钉消息',
+        label: t('pages.iot.notice.common.dingding'),
         value: 'dingTalkMessage',
         logo: getImage('/notice/dingtalk.png'),
     },
     {
-        label: '群机器人消息',
+        label: t('common.iot.notice.common.robot'),
         value: 'dingTalkRobotWebHook',
         logo: getImage('/notice/dingTalk-rebot.png'),
     },
@@ -891,13 +614,13 @@ watch(
 
 // 验证规则
 const formRules = {
-    type: [{ required: true, message: '请选择通知方式' }],
+    type: [{ required: true, message: t('common.tips.notification') }],
     name: [
-        { required: true, message: '请输入名称' },
-        { max: 64, message: '最多可输入64个字符' },
+        { required: true, message: t('common.tips.name') },
+        { max: 64, message: t('common.tips.max64') },
     ],
-    provider: [{ required: true, message: '请选择类型' }],
-    configId: [{ required: true, message: '请选择绑定配置' }],
+    provider: [{ required: true, message: t('common.tips.type') }],
+    configId: [{ required: true, message: t('pages.iot.notice.template.bindTip') }],
     template: {
       agentId: [
         { required: true, message: '请输入AgentId' },
@@ -997,7 +720,7 @@ const formRules = {
         { max: 500, message: '最多可输入500个字符' }
       ]
     },
-    description: [{ max: 200, message: '最多可输入200个字符' }],
+    description: [{ max: 200, message: t('common.tips.max200') }],
 }
 
 // const { validate, validateInfos } = useForm(
@@ -1063,11 +786,11 @@ const variableReg = () => {
         oldKey.includes(m)
             ? formData.value.variableDefinitions.find((item) => item.id === m)
             : {
-                  id: m,
-                  name: '',
-                  type: 'string',
-                  format: '%s',
-              },
+                id: m,
+                name: '',
+                type: 'string',
+                format: '%s',
+            },
     );
     formData.value.variableDefinitions = result as IVariableDefinitions[];
 };
@@ -1249,13 +972,13 @@ const handleSubmit = () => {
       }
     }
 
-  formRef.value?.validate()
-    .then(async () => {
-      btnLoading.value = true;
+    formRef.value?.validate()
+        .then(async () => {
+            btnLoading.value = true;
 
-      const res = formData.value.id
-        ? await templateApi.update(formData.value)
-        : await templateApi.save(formData.value);
+            const res = formData.value.id
+                ? await templateApi.update(formData.value)
+                : await templateApi.save(formData.value);
 
       if (res?.success) {
         onlyMessage('保存成功');

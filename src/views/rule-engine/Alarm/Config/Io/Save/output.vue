@@ -2,39 +2,39 @@
     <j-modal
         :maskClosable="false"
         width="45vw"
-        title="编辑"
+        :title="t('Io.Save.output.5rg3yoihjmg0')"
         @cancel="close"
         @ok="save"
         visible
-        cancelText="取消"
-        okText="确定"
+        :cancelText="t('Io.Save.output.5rg3yoihks00')"
+        :okText="t('Io.Save.output.5rg3yoihkxw0')"
     >
         <j-form layout="vertical" :model="outputData" ref="formRef">
-            <j-form-item label="状态">
+            <j-form-item :label="t('Io.Save.output.5rg3yoihl2s0')">
                 <j-switch
-                    checked-children="启用"
-                    un-checked-children="启用"
+                    :checked-children="t('Io.Save.output.5rg3yoihl700')"
+                    :un-checked-children="t('Io.Save.output.5rg3yoihlbs0')"
                     v-model:checked="outputData.status"
                 ></j-switch>
             </j-form-item>
             <j-form-item
                 v-if="outputData.status"
-                label="kafka地址"
+                :label="t('Io.Save.output.kafka')"
                 name="address"
                 :rules="[
                     {
                         required: true,
-                        message: '请输入kafka地址',
+                        message: t('Io.Save.output.5rg3yoihlfk0'),
                     },
                     {
                         max: 64,
-                        message: '最多输入64个字符',
+                        message: t('Io.Save.output.5rg3yoihlj80'),
                     },
                 ]"
             >
                 <j-input
                     v-model:value="outputData.address"
-                    placeholder="请输入kafka地址"
+                    :placeholder="t('Io.Save.output.5rg3yoihlfk0')"
                 ></j-input>
             </j-form-item>
             <j-form-item
@@ -44,11 +44,11 @@
                 :rules="[
                     {
                         required: true,
-                        message: '请输入topic',
+                        message: t('Io.Save.output.5rg3yoihln80'),
                     },
                     {
                         max: 64,
-                        message: '最多输入64个字符',
+                        message: t('Io.Save.output.5rg3yoihlj80'),
                     },
                 ]"
             >
@@ -62,6 +62,9 @@
 import { saveOutputData } from '@/api/rule-engine/config';
 import { onlyMessage } from '@/utils/comm';
 import { Form } from 'jetlinks-ui-components';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const formRef = ref();
 const useForm = Form.useForm;
 const Myprops = defineProps({
@@ -100,7 +103,7 @@ const save = () => {
             exchangeType: 'producer',
         }).then((res) => {
             if (res.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('Io.Save.output.5rg3yoihlsw0'));
                 emit('saveSuc');
             }
         });

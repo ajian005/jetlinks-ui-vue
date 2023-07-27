@@ -63,6 +63,9 @@ import { useAlarmStore } from '@/store/alarm';
 import Info from './info.vue';
 import { storeToRefs } from 'pinia';
 import { useRouterParams } from '@/utils/hooks/useParams';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const route = useRoute();
 const id = route.params?.id;
 const { params: routerParams } = useRouterParams();
@@ -70,7 +73,7 @@ let visiable = ref(false);
 let description = ref<string>();
 const columns = [
     {
-        title: '告警时间',
+        title: t('Log.Detail.index.5rg447u5n3o0'),
         dataIndex: 'alarmTime',
         key: 'alarmTime',
         scopedSlots: true,
@@ -79,17 +82,17 @@ const columns = [
         },
     },
     {
-        title: '告警名称',
+        title: t('Log.Detail.index.5rg447u5o0o0'),
         dataIndex: 'alarmConfigName',
         key: 'alarmConfigName',
     },
     {
-        title: '说明',
+        title: t('Log.Detail.index.5rg447u5o6g0'),
         dataIndex: 'description',
         key: 'description',
     },
     {
-        title: '操作',
+        title: t('Log.Detail.index.5rg447u5oac0'),
         dataIndex: 'action',
         key: 'action',
         scopedSlots: true,
@@ -105,9 +108,9 @@ const getActions = (
     const actions = [
         {
             key: 'view',
-            text: '查看',
+            text: t('Log.Detail.index.5rg447u5oe00'),
             tooltip: {
-                title: '查看',
+                title: t('Log.Detail.index.5rg447u5oe00'),
             },
             icon: 'SearchOutlined',
             onClick: () => {
@@ -174,7 +177,7 @@ watchEffect(async () => {
         if (res.result.targetType === 'device') {
             columns.splice(2, 0, {
                 dataIndex: 'targetName',
-                title: '告警设备',
+                title: t('Log.Detail.index.5rg447u5ohw0'),
                 key: 'targetName',
             });
         }

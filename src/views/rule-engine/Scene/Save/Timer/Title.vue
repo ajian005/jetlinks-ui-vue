@@ -1,6 +1,6 @@
 <template>
   <div :class='["trigger-options-content", isAdd ? "is-add" : ""]'>
-    <span v-if='!isAdd'> 点击配置定时触发 </span>
+    <span v-if='!isAdd'> {{t('Save.Timer.Title.5rg5875wzo40')}} </span>
     <template v-else>
       <div v-if='options.when'>
         <span className='trigger-options-when'>{{ options.when }}</span>
@@ -16,7 +16,9 @@
 </template>
 
 <script setup lang='ts' name='TimerTitle'>
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
   options: {
     type: Object,

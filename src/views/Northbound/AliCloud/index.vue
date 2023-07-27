@@ -25,7 +25,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('Northbound.AliCloud.index.5rg4hlqn56w0')}}
                         </PermissionButton>
                     </j-space>
                 </template>
@@ -53,7 +53,7 @@
                             <j-row style="margin-top: 15px">
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        网桥产品
+                                        {{t('Northbound.AliCloud.index.5rg4hlqn7ac0')}}
                                     </div>
                                     <Ellipsis>
                                         <div>
@@ -63,7 +63,7 @@
                                 </j-col>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        <label>说明</label>
+                                        <label>{{t('Northbound.AliCloud.index.5rg4hlqn7gs0')}}</label>
                                     </div>
                                     <Ellipsis>
                                         <div>{{ slotProps?.description }}</div>
@@ -141,7 +141,9 @@ import type { ActionsType } from '@/views/device/Instance/typings';
 import { getImage, onlyMessage } from '@/utils/comm';
 import { useMenuStore } from 'store/menu';
 import BadgeStatus from '@/components/BadgeStatus/index.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const instanceRef = ref<Record<string, any>>({});
 const params = ref<Record<string, any>>({});
 
@@ -149,7 +151,7 @@ const menuStory = useMenuStore();
 
 const columns = [
     {
-        title: '名称',
+        title: t('Northbound.AliCloud.index.5rg4hlqn7lc0'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -157,7 +159,7 @@ const columns = [
         },
     },
     {
-        title: '网桥产品',
+        title: t('Northbound.AliCloud.index.5rg4hlqn7ac0'),
         dataIndex: 'bridgeProductName',
         key: 'bridgeProductName',
         search: {
@@ -165,7 +167,7 @@ const columns = [
         },
     },
     {
-        title: '说明',
+        title: t('Northbound.AliCloud.index.5rg4hlqn7gs0'),
         dataIndex: 'description',
         key: 'description',
         ellipsis: true,
@@ -174,20 +176,20 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('Northbound.AliCloud.index.5rg4hlqn7p80'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '正常', value: 'enabled' },
-                { label: '禁用', value: 'disabled' },
+                { label: t('Northbound.AliCloud.index.5rg4hlqn7uc0'), value: 'enabled' },
+                { label: t('Northbound.AliCloud.index.5rg4hlqn7yc0'), value: 'disabled' },
             ],
         },
     },
     {
-        title: '操作',
+        title: t('Northbound.AliCloud.index.5rg4hlqn85k0'),
         key: 'action',
         fixed: 'right',
         width: 160,
@@ -196,14 +198,14 @@ const columns = [
 ];
 
 /**
- * 新增
+ * {{t('Northbound.AliCloud.index.5rg4hlqn56w0')}}
  */
 const handleAdd = () => {
     menuStory.jumpPage('Northbound/AliCloud/Detail', { id: ':id' });
 };
 
 /**
- * 查看
+ * {{t('Northbound.AliCloud.index.5rg4hlqn89c0')}}
  */
 const handleView = (id: string) => {
     menuStory.jumpPage('Northbound/AliCloud/Detail', { id }, { type: 'view' });
@@ -217,9 +219,9 @@ const getActions = (
     const actions = [
         {
             key: 'view',
-            text: '查看',
+            text: t('Northbound.AliCloud.index.5rg4hlqn89c0'),
             tooltip: {
-                title: '查看',
+                title: t('Northbound.AliCloud.index.5rg4hlqn89c0'),
             },
             icon: 'EyeOutlined',
             onClick: () => {
@@ -228,9 +230,9 @@ const getActions = (
         },
         {
             key: 'update',
-            text: '编辑',
+            text: t('Northbound.AliCloud.index.5rg4hlqn8dg0'),
             tooltip: {
-                title: '编辑',
+                title: t('Northbound.AliCloud.index.5rg4hlqn8dg0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -243,17 +245,17 @@ const getActions = (
         },
         {
             key: 'action',
-            text: data.state?.value !== 'disabled' ? '禁用' : '启用',
+            text: data.state?.value !== 'disabled' ? t('Northbound.AliCloud.index.5rg4hlqn7yc0') : t('Northbound.AliCloud.index.5rg4hlqn8hc0'),
             tooltip: {
-                title: data.state?.value !== 'disabled' ? '禁用' : '启用',
+                title: data.state?.value !== 'disabled' ? t('Northbound.AliCloud.index.5rg4hlqn7yc0') : t('Northbound.AliCloud.index.5rg4hlqn8hc0'),
             },
             icon:
                 data.state.value !== 'disabled'
                     ? 'StopOutlined'
                     : 'CheckCircleOutlined',
             popConfirm: {
-                title: `确认${
-                    data.state.value !== 'disabled' ? '禁用' : '启用'
+                title: `${t('Northbound.AliCloud.index.verify') + 
+                    (data.state.value !== 'disabled' ? t('Northbound.AliCloud.index.5rg4hlqn7yc0') : t('Northbound.AliCloud.index.5rg4hlqn8hc0'))
                 }?`,
                 onConfirm: async () => {
                     let response = undefined;
@@ -263,33 +265,33 @@ const getActions = (
                         response = await _deploy(data.id);
                     }
                     if (response && response.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('Northbound.AliCloud.index.5rg4hlqn8n00'));
                         instanceRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('Northbound.AliCloud.index.5rg4hlqn8qo0'), 'error');
                     }
                 },
             },
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('Northbound.AliCloud.index.5rg4hlqn8ug0'),
             disabled: data.state?.value !== 'disabled',
             tooltip: {
                 title:
                     data.state.value !== 'disabled'
-                        ? '请先禁用该数据，再删除。'
-                        : '删除',
+                        ? t('Northbound.AliCloud.index.5rg4hlqn8y40')
+                        : t('Northbound.AliCloud.index.5rg4hlqn8ug0'),
             },
             popConfirm: {
-                title: '确认删除?',
+                title: t('Northbound.AliCloud.index.5rg4hlqn91o0'),
                 onConfirm: async () => {
                     const resp = await _delete(data.id);
                     if (resp.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('Northbound.AliCloud.index.5rg4hlqn8n00'));
                         instanceRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('Northbound.AliCloud.index.5rg4hlqn8qo0'), 'error');
                     }
                 },
             },

@@ -1,7 +1,9 @@
+import createI18n from "@/locales/index"
+const t = createI18n.global.t
 export const keyByLabel = {
-  manual: '手动触发',
-  timer: '定时触发',
-  device: '设备触发',
+  manual: t('rule-engine.Scene.typings.Manual'),
+  timer: t('rule-engine.Scene.typings.timing'),
+  device:t('rule-engine.Scene.typings.device'),
 }
 
 type State = {

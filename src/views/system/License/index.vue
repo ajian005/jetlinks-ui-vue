@@ -6,12 +6,15 @@
 import Card from './component/Card.vue';
 import { getModule, licenseInit, initPage } from '@/api/system/license';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 let info = ref();
 const saveData = (data: any) => {
     if (data) {
         save(data);
     } else {
-        onlyMessage('请配置License', 'error');
+        onlyMessage(t('system.License.index.5rgb4hv02440'), 'error');
     }
 };
 const getInfo = async () => {
@@ -23,7 +26,7 @@ const getInfo = async () => {
 const save = async (data: any) => {
     const res: any = await licenseInit(data);
     if (res.status === 200) {
-        onlyMessage('配置成功');
+        onlyMessage(t('system.License.index.5rgb4hv03280'));
         const resp: any = await initPage();
         if (resp.status === 200 && !resp.result.length) {
             window.location.href = '/#/init-home';

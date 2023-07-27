@@ -24,7 +24,9 @@ import { initData } from '../data';
 import { getAllNotice } from '@/api/account/center';
 import { useRouterParams } from '@/utils/hooks/useParams';
 import { useUserInfo } from '@/store/userInfo';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const tabs = ref<any[]>([]);
 const router = useRouterParams();
 const user = useUserInfo();

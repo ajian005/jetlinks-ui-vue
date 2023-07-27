@@ -1,17 +1,19 @@
+import createI18n from '@/locales/index';
+const { t }  = createI18n.global
 export const typeOptions = [
-  { label: '或者', value: 'or' },
-  { label: '并且', value: 'and' },
+  { label: t('components.Search.util.or'), value: 'or' },
+  { label: t('components.Search.util.and'), value: 'and' },
 ]
 
 export const termType = [
   { label: '=', value: 'eq' },
   { label: '!=', value: 'not' },
-  { label: '包含', value: 'like' },
-  { label: '不包含', value: 'nlike' },
+  { label: t('components.Search.util.like'), value: 'like' },
+  { label: t('components.Search.util.nlike'), value: 'nlike' },
   { label: '>', value: 'gt' },
   { label: '>=', value: 'gte' },
   { label: '<', value: 'lt' },
   { label: '<=', value: 'lte' },
-  { label: '属于', value: 'in' },
-  { label: '不属于', value: 'nin' },
+  { label: t('components.Search.util.in'), value: 'in' },
+  { label: t('components.Search.util.nin'), value: 'nin' },
 ];

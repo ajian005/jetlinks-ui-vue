@@ -46,12 +46,12 @@
         </j-table>
     </div>
     <j-modal
-        title="详情"
+        :title="t('Property.Detail.Table.5rcynbb1sr40')"
         :visible="visible"
         @ok="visible = false"
         @cancel="visible = false"
     >
-        <div>自定义属性</div>
+        <div>{{t('Property.Detail.Table.5rcynbb1uw00')}}</div>
         <JsonViewer
             v-if="
                 data?.valueType?.type === 'object' ||
@@ -77,7 +77,9 @@ import moment from 'moment';
 import { getType } from '../index';
 import ValueRender from '../ValueRender.vue';
 import JsonViewer from 'vue-json-viewer';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const _props = defineProps({
     data: {
         type: Object,
@@ -102,7 +104,7 @@ const visible = ref<boolean>(false);
 const columns = computed(() => {
     const arr: any[] = [
         {
-            title: '时间',
+            title: t('Property.Detail.Table.5rcynbb1v9s0'),
             dataIndex: 'timestamp',
             key: 'timestamp',
             ellipsis: true,
@@ -116,7 +118,7 @@ const columns = computed(() => {
     ];
     if (_props.data?.valueType?.type != 'geoPoint') {
         arr.push({
-            title: '操作',
+            title: t('Property.Detail.Table.5rcynbb1vk40'),
             dataIndex: 'action',
             key: 'action',
         });

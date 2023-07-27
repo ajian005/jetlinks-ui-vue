@@ -17,7 +17,7 @@
                 <div class="upload-image-content" :style="props.style">
                     <template v-if="imageUrl">
                         <img :src="imageUrl" width="100%" class="upload-image" />
-                        <div class="upload-image-mask">点击修改</div>
+                        <div class="upload-image-mask">{{t('components.Upload.index.5rlcmiveuj40')}}</div>
                     </template>
                     <template v-else>
                         <AIcon
@@ -30,7 +30,7 @@
                                 class="upload-image"
                                 :style="`background-image: url(${bgImage});`"
                             ></div>
-                            <div class="upload-image-mask">点击修改</div>
+                            <div class="upload-image-mask">{{t('components.Upload.index.5rlcmiveuj40')}}</div>
                         </template>
                         <AIcon
                             v-else
@@ -61,7 +61,9 @@ import { TOKEN_KEY } from '@/utils/variable';
 import {getBase64, LocalStore, onlyMessage} from '@/utils/comm';
 import { CSSProperties } from 'vue';
 import ImageCropper from './Cropper.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:modelValue', data: string): void;
 };

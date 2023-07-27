@@ -1,16 +1,18 @@
 <template>
     <a-space align="end">
-        <a-radio-group button-style="solid" v-model:value="modelValue.fileType" placeholder="请选择文件格式">
+        <a-radio-group button-style="solid" v-model:value="modelValue.fileType" :placeholder="t('components.FileFormat.index.5rlc88rnw6c0')">
             <a-radio-button value="xlsx">xlsx</a-radio-button>
             <a-radio-button value="csv">csv</a-radio-button>
         </a-radio-group>
-        <a-checkbox v-model:checked="modelValue.autoDeploy">自动启用</a-checkbox>
+        <a-checkbox v-model:checked="modelValue.autoDeploy">{{t('components.FileFormat.index.5rlc88rnxng0')}}</a-checkbox>
     </a-space>
 </template>
 
 <script lang="ts" setup>
 import { PropType } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Props = {
     autoDeploy: boolean,
     fileType: 'xlsx' | 'csv'

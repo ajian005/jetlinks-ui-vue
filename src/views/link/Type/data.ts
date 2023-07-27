@@ -1,3 +1,5 @@
+import createI18n from '@/locales/index';
+const { t } = createI18n.global
 export const ParserConfiguration = {
     delimited: '',
     lang: '',
@@ -81,11 +83,11 @@ export const VisibleData = {
 };
 
 export const ParserTypeOptions = [
-    { value: 'DIRECT', label: '不处理' },
-    { value: 'DELIMITED', label: '分隔符' },
-    { value: 'SCRIPT', label: '自定义脚本' },
-    { value: 'FIXED_LENGTH', label: '固定长度' },
-    { value: 'LENGTH_FIELD', label: '长度字段' },
+    { value: 'DIRECT', label: t('link.Type.data.DIRECT') },
+    { value: 'DELIMITED', label: t('link.Type.data.DELIMITED') },
+    { value: 'SCRIPT', label: t('link.Type.data.SCRIPT') },
+    { value: 'FIXED_LENGTH', label: t('link.Type.data.FIXED_LENGTH') },
+    { value: 'LENGTH_FIELD', label: t('link.Type.data.LENGTH_FIELD') },
 ];
 export const LengthOptions = [
     { value: '1', label: '1' },
@@ -95,8 +97,8 @@ export const LengthOptions = [
     { value: '8', label: '8' },
 ];
 export const LittleOptions = [
-    { label: '大端', value: 'false' },
-    { label: '小端', value: 'true' },
+    { label: t('link.Type.data.bigPort'), value: 'false' },
+    { label: t('link.Type.data.smallPort'), value: 'true' },
 ];
 
 export const isVisible = (
@@ -111,7 +113,7 @@ export const Validator = {
     regIPv6: new RegExp(/^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/),
     regDomain: new RegExp(
         // /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i,
-      /^[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/
+        /^[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/
     ),
     regOnlyNumber: new RegExp(/^\d+$/),
 };
@@ -127,7 +129,7 @@ const validateAddress = (_rule: any, value: string): Promise<any> => {
         ) {
             return resolve('');
         } else {
-            return value ? reject('请输入正确的IP地址或者域名') : resolve('');
+            return value ? reject(t('link.Type.data.addressTip')) : resolve('');
         }
     });
 };
@@ -146,123 +148,123 @@ export const Rules = {
     name: [
         {
             required: true,
-            message: '请输入名称',
+            message: t('link.Type.data.nameTip'),
         },
         {
             max: 64,
-            message: '最大可输入64个字符',
+            message: t('link.Type.data.64max'),
         },
     ],
     type: [
         {
             required: true,
-            message: '请选择类型',
+            message: t('link.Type.data.type'),
         },
     ],
     shareCluster: [
         {
             required: true,
-            message: '请选择集群',
+            message: t('link.Type.data.cluster'),
         },
     ],
     serverId: [
         {
             required: true,
-            message: '请选择节点名称',
+            message: t('link.Type.data.nodeName'),
         },
     ],
     host: [
         {
             required: true,
-            message: '请选择本地地址',
+            message: t('link.Type.data.localAddress'),
         },
     ],
     port: [
         {
             required: true,
-            message: '请选择本地端口',
+            message: t('link.Type.data.localPort'),
         },
     ],
     publicHost: [
         {
             required: true,
-            message: '请输入公网地址',
+            message: t('link.Type.data.publicNetwork'),
         },
         {
             validator: validateAddress,
-            message: '请输入正确的IP地址或者域名',
+            message: t('link.Type.data.addressTip'),
         },
     ],
     publicPort: [
         {
             required: true,
-            message: '请输入公网端口',
+            message: t('link.Type.data.publicPort'),
         },
         {
             pattern: Validator.regOnlyNumber,
-            message: '请输入1-65535之间的正整数',
+            message: t('link.Type.data.inputTip'),
         },
     ],
     remoteHost: [
         {
             required: true,
-            message: '请输入远程地址',
+            message: t('link.Type.data.longRange'),
         },
         {
             validator: validateAddress,
-            message: '请输入正确格式的域名或ip',
+            message: t('link.Type.data.IPTip'),
         },
     ],
     remotePort: [
         {
             required: true,
-            message: '输入远程端口',
+            message: t('link.Type.data.longRangePort')
         },
         {
             pattern: Validator.regOnlyNumber,
-            message: '请输入1-65535之间的正整数',
+            message: t('link.Type.data.inputTip'),
         },
     ],
     clientId: [
         {
             required: true,
-            message: '请输入ClientId',
+            message: t('link.Type.data.clientId'),
         },
         {
             max: 64,
-            message: '最大可输入64个字符',
+            message: t('link.Type.data.64max'),
         },
     ],
     username: [
         {
             required: true,
-            message: '请输入用户名',
+            message:  t('link.Type.data.userName'),
         },
         {
             max: 64,
-            message: '最大可输入64个字符',
+            message: t('link.Type.data.64max'),
         },
     ],
     password: [
         {
             required: true,
-            message: '请输入密码',
+            message: t('link.Type.data.pwd'),
         },
         {
             max: 64,
-            message: '最大可输入64个字符',
+            message: t('link.Type.data.64max'),
         },
     ],
     topicPrefix: [
         {
             max: 64,
-            message: '最大可输入64个字符',
+            message: t('link.Type.data.64max'),
         },
     ],
     maxMessageSize: [
         {
             required: true,
-            message: '请输入最大消息长度',
+            message: t('link.Type.data.maxLength'),
         },
     ],
     secure: [
@@ -273,55 +275,55 @@ export const Rules = {
     certId: [
         {
             required: true,
-            message: '请选择证书',
+            message: t('link.Type.data.certificate'),
         },
     ],
     privateKeyAlias: [
         {
             required: true,
-            message: '请输入私钥别名',
+            message: t('link.Type.data.privateKey'),
         },
         {
             max: 64,
-            message: '最大可输入64个字符',
+            message: t('link.Type.data.64max'),
         },
     ],
     parserType: [
         {
             required: true,
-            message: '请选择粘拆包规则',
+            message:  t('link.Type.data.rule'),
         },
     ],
     delimited: [
         {
             required: true,
-            message: '请输入分隔符',
+            message: t('link.Type.data.separator'),
         },
         {
             max: 64,
-            message: '最大可输入64个字符',
+            message: t('link.Type.data.64max'),
         },
     ],
     lang: [
         {
             required: true,
-            message: '请选择脚本语言',
+            message: t('link.Type.data.scripitingLan'),
         },
         {
             max: 64,
-            message: '最大可输入64个字符',
+            message: t('link.Type.data.64max'),
         },
     ],
     script: [
         {
             required: true,
-            message: '请输入脚本',
+            message: t('link.Type.data.inputScript'),
         },
     ],
     size: [
         {
             required: true,
-            message: '请输入长度值',
+            message:  t('link.Type.data.lengthValue'),
         },
         {
             validator:sizeValidator,
@@ -332,13 +334,13 @@ export const Rules = {
     length: [
         {
             required: true,
-            message: '请选择长度',
+            message: t('link.Type.data.selectLength'),
         },
     ],
     offset: [
         {
             pattern: Validator.regOnlyNumber,
-            message: '请输入0-65535之间的正整数',
+            message: t('link.Type.data.inputTip2'),
         },
     ],
 };

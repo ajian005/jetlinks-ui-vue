@@ -13,9 +13,9 @@
                         type="CloseOutlined"
                         style="margin-right: 5px"
                         @click="onClose"
-                    />编辑配置</span
+                    />{{t('components.Config.Save.5rcyjkshg4w0')}}</span
                 >
-                <j-button type="primary" @click="saveBtn">保存</j-button>
+                <j-button type="primary" @click="saveBtn">{{t('components.Config.Save.5rcyjkshhgk0')}}</j-button>
             </div>
         </template>
         <j-form layout="vertical" ref="formRef" :model="modelRef">
@@ -25,7 +25,7 @@
                     :name="i.property"
                     :key="i.property"
                     :required='!!i.type.expands?.required'
-                    :rules='!!i.type.expands?.required ? [{ required: true, message: `请输入${i.name}`}] :[]'
+                    :rules="!!i.type.expands?.required ? [{ required: true, message: `${t('components.Config.Save.input') + i.name}`}] :[]"
                 >
                     <template #label>
                         <span style="margin-right: 5px">{{ i.name }}</span>
@@ -57,7 +57,8 @@
 import { modify } from '@/api/device/instance';
 import { useInstanceStore } from '@/store/instance';
 import { onlyMessage } from '@/utils/comm';
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const emit = defineEmits(['close', 'save']);
 
 const formRef = ref();
@@ -100,7 +101,7 @@ const saveBtn = () => {
             configuration: { ...values }
         })
         if(resp.status === 200){
-            onlyMessage('操作成功！')
+            onlyMessage(t('components.Config.Save.5rcyjkshhp80'))
             emit('save');
         }
       }

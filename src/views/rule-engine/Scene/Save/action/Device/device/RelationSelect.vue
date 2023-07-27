@@ -1,6 +1,6 @@
 <template>
     <j-select
-        placeholder="请选择关系"
+        :placeholder="t('Device.device.RelationSelect.5rg4pf5z51s0')"
         :options="relationList"
         show-search
         :value="value ? value[0]?.value?.relation : undefined"
@@ -10,6 +10,9 @@
 
 <script lang="ts" setup>
 import NoticeApi from '@/api/notice/config';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
     value: {
         type: Array,
@@ -28,7 +31,7 @@ const queryRelationList = () => {
     NoticeApi.getRelationUsers({
         paging: false,
         sorts: [{ name: 'createTime', order: 'desc' }],
-        terms: [{ termType: 'eq', column: 'objectTypeName', value: '设备' }],
+        terms: [{ termType: 'eq', column: 'objectTypeName', value: t('Device.device.RelationSelect.5rg4pf5z6d80') }],
     }).then((resp) => {
         if (resp.status === 200) {
             relationList.value = (resp.result as any[]).map((item) => {

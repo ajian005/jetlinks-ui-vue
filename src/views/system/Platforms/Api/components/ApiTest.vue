@@ -5,12 +5,12 @@
             <div class="input">
                 <InputCard :value="props.selectApi.method" />
                 <j-input :value="props.selectApi?.url" disabled />
-                <span class="send" @click="send">发送</span>
+                <span class="send" @click="send">{{t('Api.components.ApiTest.5rga2ieo44s0')}}</span>
             </div>
         </div>
 
         <div class="api-card">
-            <h5>请求参数</h5>
+            <h5>{{t('Api.components.ApiTest.5rga2ieo50s0')}}</h5>
             <div class="content">
                 <div class="table" v-if="paramsTable.length">
                     <j-form :model="requestBody.params" ref="formRef">
@@ -34,7 +34,7 @@
                                         :rules="[
                                             {
                                                 required: true,
-                                                message: '该字段是必填字段',
+                                                message: t('Api.components.ApiTest.5rga2ieo5680'),
                                             },
                                         ]"
                                     >
@@ -55,7 +55,7 @@
                                         :rules="[
                                             {
                                                 required: true,
-                                                message: '该字段是必填字段',
+                                                message: t('Api.components.ApiTest.5rga2ieo5680'),
                                             },
                                         ]"
                                     >
@@ -68,7 +68,7 @@
                                     <PermissionButton
                                         type="text"
                                         :popConfirm="{
-                                            title: `确定删除`,
+                                            title: t('Api.components.ApiTest.deleteTip'),
                                             onConfirm: () =>
                                                 requestBody.clickDel(index),
                                         }"
@@ -110,7 +110,8 @@
                         @click="requestBody.addRow"
                         style="width: 100%; text-align: center; margin-top: 5px"
                     >
-                        <AIcon type="PlusOutlined" />新增
+                        <AIcon type="PlusOutlined" />
+                       {{ t('Api.components.ApiTest.5rkkbgpz2t00') }}
                     </j-button>
                 </div>
                 <j-monaco-editor
@@ -124,7 +125,7 @@
             </div>
         </div>
         <div class="api-card">
-            <h5>响应参数</h5>
+            <h5>{{t('Api.components.ApiTest.5rga2ieo5a80')}}</h5>
             <div class="content">
                 <JsonViewer :value="responsesContent" copyable />
             </div>
@@ -141,7 +142,9 @@ import { cloneDeep, toLower } from 'lodash';
 import { FormInstance } from 'ant-design-vue';
 import server from '@/utils/request';
 import { findData, getCodeText } from '../utils';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps<{
     selectApi: apiDetailsType;
     schemas: any;
@@ -152,19 +155,19 @@ const formRef = ref<FormInstance>();
 const requestBody = reactive({
     tableColumns: [
         {
-            title: '参数名称',
+            title: t('Api.components.ApiTest.5rga2ieo5e00'),
             dataIndex: 'name',
             key: 'name',
             scopedSlots: true,
         },
         {
-            title: '参数值',
+            title: t('Api.components.ApiTest.5rga2ieo5hs0'),
             dataIndex: 'value',
             key: 'value',
             scopedSlots: true,
         },
         {
-            title: '操作',
+            title: t('Api.components.ApiTest.5rga2ieo5lc0'),
             dataIndex: 'action',
             key: 'action',
             width: '80px',

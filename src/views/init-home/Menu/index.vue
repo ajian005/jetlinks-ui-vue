@@ -4,8 +4,8 @@
             <img :src="getImage('/init-home/menu.png')" />
         </div>
         <div class="menu-info">
-            <b>系统初始化{{ count }}个菜单</b>
-            <div>初始化后的菜单可在“菜单管理”页面进行维护管理</div>
+            <b>{{ t('init-home.Menu.index.initialize', { count: count }) }}</b>
+            <div>{{ t('init-home.Menu.index.5rlbq599jhs0') }}</div>
         </div>
     </div>
 </template>
@@ -16,6 +16,9 @@ import BaseMenu, { USER_CENTER_MENU_DATA } from '../data/baseMenu'
 import { getSystemPermission, updateMenus } from '@/api/initHome';
 import { protocolList } from '@/utils/consts';
 import { getProviders } from '@/api/data-collect/channel';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 /**
  * 获取菜单数据
  */
@@ -107,6 +110,7 @@ defineExpose({
 .menu-style {
     display: flex;
     align-items: center;
+
     .menu-img {
         margin-right: 16px;
     }

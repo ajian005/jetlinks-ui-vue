@@ -21,26 +21,26 @@
                 v-if="showReset"
               key="reload"
                 :hasPermission="`${permission}:update`"
-              :popConfirm="{ title: '确认重置？', onConfirm: resetMetadata, }"
-                :tooltip="{ title: '重置后将使用产品的物模型配置' }"
+              :popConfirm="{ title: t('components.Metadata.index.5rra77wj8y80'), onConfirm: resetMetadata, }"
+                :tooltip="{ title: t('components.Metadata.index.5rra77wj93k0') }"
             >
-              重置操作
+              {{t('components.Metadata.index.5rra77wj9ek0')}}
             </PermissionButton>
-            <PermissionButton :hasPermission="`${permission}:update`" @click="visible = true" key="import">快速导入</PermissionButton>
-            <PermissionButton :hasPermission="`${permission}:update`" @click="cat = true" key="tsl">物模型TSL</PermissionButton>
+            <PermissionButton :hasPermission="`${permission}:update`" @click="visible = true" key="import">{{t('components.Metadata.index.5rra77wj9lk0')}}</PermissionButton>
+            <PermissionButton :hasPermission="`${permission}:update`" @click="cat = true" key="tsl">{{t('components.Metadata.index.5rra77wj9r80')}}</PermissionButton>
           </j-space>
         </template>
 
-        <j-tab-pane tab="属性定义" key="properties">
+        <j-tab-pane :tab="t('components.Metadata.index.5rra77wj9ws0')" key="properties">
           <BaseMetadata :target="type" type="properties" :permission="permission" />
         </j-tab-pane>
-        <j-tab-pane tab="功能定义" key="functions">
+        <j-tab-pane :tab="t('components.Metadata.index.5rra77wja2w0')" key="functions">
           <BaseMetadata :target="type" type="functions" :permission="permission" />
         </j-tab-pane>
-        <j-tab-pane tab="事件定义" key="events">
+        <j-tab-pane :tab="t('components.Metadata.index.5rra77wja900')" key="events">
           <BaseMetadata :target="type" type="events" :permission="permission" />
         </j-tab-pane>
-        <j-tab-pane tab="标签定义" key="tags">
+        <j-tab-pane :tab="t('components.Metadata.index.5rra77wjae40')" key="tags">
           <BaseMetadata :target="type" type="tags" :permission="permission" />
         </j-tab-pane>
       </j-tabs>
@@ -60,7 +60,9 @@ import BaseMetadata from './Base/Base.vue'
 import { useMetadataStore } from '@/store/metadata'
 import {EventEmitter} from "@/utils/utils";
 import {isEqual} from "lodash-es";
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute()
 const instanceStore = useInstanceStore()
 const metadataStore = useMetadataStore()
@@ -93,8 +95,7 @@ const resetMetadata = async () => {
   const { id } = route.params
   const resp = await deleteMetadata(id as string)
   if (resp.status === 200) {
-
-    message.info('操作成功')
+    message.info(t('components.Metadata.index.5rra77wjakk0'))
     instanceStore.refresh(id as string).then(() => {
       metadataStore.set('importMetadata', true)
     })

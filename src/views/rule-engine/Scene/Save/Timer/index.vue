@@ -5,7 +5,7 @@
         :name="['trigger', 'timer']"
       >
         <template #label>
-          <TitleComponent data='触发规则' style='font-size: 14px;' />
+          <TitleComponent :data="t('Save.Timer.index.5rg580jly400')" style='font-size: 14px;' />
         </template>
         <AddButton
             style='width: 100%'
@@ -42,7 +42,9 @@ import AddModel from './AddModal.vue'
 import AddButton from '../components/AddButton.vue'
 import Title from './Title.vue'
 import type { OperationTimer, BranchesThen } from '@/views/rule-engine/Scene/typings'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore();
 const { data } = storeToRefs(sceneStore);
 const visible = ref(false)
@@ -51,7 +53,7 @@ const rules = [{
   validator(_: any, v: any) {
     console.log(v)
     if (!v) {
-      return Promise.reject(new Error('请配置定时触发规则'));
+      return Promise.reject(new Error(t('Save.Timer.index.5rg580jlzlk0')));
     }
     return Promise.resolve();
   },
@@ -60,7 +62,7 @@ const rules = [{
 const actionRules = [{
   validator(_: any, v?: BranchesThen[]) {
     if (!v || (v && !v.length) || !v.some(item => item.actions && item.actions.length)) {
-      return Promise.reject('至少配置一个执行动作');
+      return Promise.reject(t('Save.Timer.index.5rg580jlzxo0'));
     }
     return Promise.resolve();
   },

@@ -4,10 +4,10 @@
             <j-col :span="24" v-if="actionType === 'command'">
                 <j-form-item
                     name="messageType"
-                    label="指令类型"
+                    :label="t('Detail.command.index.5rg4ez76jy80')"
                     :rules="{
                         required: true,
-                        message: '请选择指令类型',
+                        message: t('Detail.command.index.5rg4ez76l3w0'),
                     }"
                 >
                     <MSelect
@@ -52,14 +52,14 @@
             >
                 <j-form-item
                     :name="['message', 'properties']"
-                    label="属性"
+                    :label="t('Detail.command.index.5rg4ez76mkc0')"
                     :rules="{
                         required: true,
-                        message: '请选择属性',
+                        message: t('Detail.command.index.5rg4ez76mqc0'),
                     }"
                 >
                     <j-select
-                        placeholder="请选择属性"
+                        :placeholder="t('Detail.command.index.5rg4ez76mqc0')"
                         v-model:value="modelRef.message.properties"
                         show-search
                         @change="(val) => onPropertyChange(val, false)"
@@ -84,10 +84,10 @@
             >
                 <j-form-item
                     :name="['message', 'value']"
-                    label="值"
+                    :label="t('Detail.command.index.5rg4ez76n080')"
                     :rules="{
                         required: true,
-                        message: '请输入值',
+                        message: t('Detail.command.index.5rg4ez76n6o0'),
                     }"
                 >
                     <ValueItem
@@ -133,14 +133,14 @@
             >
                 <j-form-item
                     :name="['message', 'functionId']"
-                    label="功能"
+                    :label="t('Detail.command.index.5rg4ez76nps0')"
                     :rules="{
                         required: true,
-                        message: '请选择功能',
+                        message: t('Detail.command.index.5rg4ez76nv80'),
                     }"
                 >
                     <j-select
-                        placeholder="请选择功能"
+                        :placeholder="t('Detail.command.index.5rg4ez76nv80')"
                         v-model:value="modelRef.message.functionId"
                         show-search
                         @change="(e) => funcChange(e)"
@@ -166,10 +166,10 @@
             >
                 <j-form-item
                     :name="['message', 'inputs']"
-                    label="参数列表"
+                    :label="t('Detail.command.index.5rg4ez76o0w0')"
                     :rules="{
                         required: true,
-                        message: '请输入参数列表',
+                        message: t('Detail.command.index.5rg4ez76o6w0'),
                     }"
                 >
                     <EditTable
@@ -185,7 +185,9 @@
 <script lang="ts" setup>
 import EditTable from './EditTable.vue';
 import MSelect from '../../../components/MSelect/index.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const formRef = ref();
 
 const props = defineProps({

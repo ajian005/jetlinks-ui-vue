@@ -1,4 +1,5 @@
 import { getImage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
 export const headerImgMap = new Map();
 headerImgMap.set('loading', getImage('/diagnose/loading-2.png'));
@@ -14,15 +15,21 @@ headerColorMap.set(
 headerColorMap.set('success', 'linear-gradient(89.95deg, #E8F8F7 0.03%, #EBEFFA 99.95%)');
 
 
-export const headerTitleMap = new Map();
-headerTitleMap.set('loading', '正在诊断中');
-headerTitleMap.set('error', '发现连接问题');
-headerTitleMap.set('success', '连接状态正常');
+export const getHeaderTitleMap = (t:any) => {
+  const headerTitleMap = new Map();
+  headerTitleMap.set('loading', t('Detail.Diagnose.util.diagnosing'));
+  headerTitleMap.set('error', t('Detail.Diagnose.util.connectErr'));
+  headerTitleMap.set('success', t('Detail.Diagnose.util.connectSuc'));
+  return headerTitleMap
+}
 
-export const headerDescMap = new Map();
-headerDescMap.set('loading', '已诊断XX个');
-headerDescMap.set('error', '请处理连接异常');
-headerDescMap.set('success', '现在可调试消息通信');
+export const getHeaderDescMap = (t:any) => {
+  const headerDescMap = new Map();
+  headerDescMap.set('loading',  t('Detail.Diagnose.util.diagnosed'));
+  headerDescMap.set('error', t('Detail.Diagnose.util.dealErr'));
+  headerDescMap.set('success', t('Detail.Diagnose.util.debugChannel'));
+  return headerDescMap
+}
 
 export const progressMap = new Map();
 progressMap.set('loading', '#597EF7');

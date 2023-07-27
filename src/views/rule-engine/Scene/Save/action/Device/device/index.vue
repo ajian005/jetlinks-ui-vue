@@ -3,9 +3,9 @@
         <j-form :layout="'vertical'" ref="formRef" :model="modelRef">
             <j-form-item
                 name="selector"
-                label="选择方式"
+                :label="t('Device.device.index.5rg4p6h78aw0')"
                 v-show="!(list.length === 1)"
-                :rules="[{ required: true, message: '请选择方式' }]"
+                :rules="[{ required: true, message: t('Device.device.index.5rg4p6h7b200') }]"
             >
                 <TopCard
                     :typeList="list"
@@ -21,9 +21,9 @@
             />
             <j-form-item
                 v-else-if="modelRef.selector === 'relation'"
-                label="关系"
+                :label="t('Device.device.index.5rg4p6h7bko0')"
                 name="selectorValues"
-                :rules="[{ required: true, message: '请选择关系' }]"
+                :rules="[{ required: true, message: t('Device.device.index.5rg4p6h7buc0') }]"
             >
                 <RelationSelect
                     @change="onRelationChange"
@@ -33,7 +33,7 @@
             <j-form-item
                 v-else-if="modelRef.selector === 'tag' && isTags"
                 name="selectorValues"
-                :rules="[{ required: true, message: '请选择标签' }]"
+                :rules="[{ required: true, message: t('Device.device.index.5rg4p6h7c440') }]"
             >
                 <Tag
                     v-model:value="modelRef.selectorValues"
@@ -44,14 +44,14 @@
             <j-form-item
                 v-else
                 name="upperKey"
-                label="变量"
-                :rules="[{ required: true, message: '请选择' }]"
+                :label="t('Device.device.index.5rg4p6h7cjk0')"
+                :rules="[{ required: true, message: t('Device.device.index.5rg4p6h7cqc0') }]"
             >
                 <j-tree-select
                     style="width: 100%; height: 100%"
                     :tree-data="builtInList"
                     v-model:value="modelRef.upperKey"
-                    placeholder="请选择参数"
+                    :placeholder="t('Device.device.index.5rg4p6h7cyk0')"
                     @select="onVariableChange"
                     :fieldNames="{ label: 'name', value: 'id' }"
                 >
@@ -81,7 +81,9 @@ import RelationSelect from './RelationSelect.vue';
 import { getParams } from '../../../util';
 import { handleParamsData } from '../../../components/Terms/util';
 import _ from 'lodash';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     values: {
         type: Object,
@@ -135,28 +137,28 @@ const tagList = ref<any[]>([]);
 
 const TypeList = [
     {
-        label: '自定义',
+        label: t('Device.device.index.5rg4p6h7d640'),
         value: 'fixed',
         image: getImage('/scene/device-custom.png'),
-        tip: '自定义选择当前产品下的任意设备',
+        tip: t('Device.device.index.5rg4p6h7dds0'),
     },
     {
-        label: '按关系',
+        label: t('Device.device.index.5rg4p6h7f5c0'),
         value: 'relation',
         image: getImage('/scene/device-relation.png'),
-        tip: '选择与触发设备具有相同关系的设备',
+        tip: t('Device.device.index.5rg4p6h7iqg0'),
     },
     {
-        label: '按标签',
+        label: t('Device.device.index.5rg4p6h7j8w0'),
         value: 'tag',
         image: getImage('/scene/device-tag.png'),
-        tip: '按标签选择产品下具有特定标签的设备',
+        tip: t('Device.device.index.5rg4p6h7jiw0'),
     },
     {
-        label: '按变量',
+        label: t('Device.device.index.5rg4p6h7jv40'),
         value: 'context',
         image: getImage('/scene/device-variable.png'),
-        tip: '选择设备ID为上游变量值的设备',
+        tip: t('Device.device.index.5rg4p6h7k3w0'),
     },
 ];
 
@@ -216,7 +218,7 @@ const filterType = async (newVal: any) => {
             paging: false,
             sorts: [{ name: 'createTime', order: 'desc' }],
             terms: [
-                { termType: 'eq', column: 'objectTypeName', value: '设备' },
+                { termType: 'eq', column: 'objectTypeName', value: t('Device.device.index.5rg4p6h7kb00') },
             ],
         });
         if (res.status === 200 && res.result.length !== 0) {
@@ -305,8 +307,8 @@ const onTagChange = (val: any[], arr: any[]) => {
         const _type =
             _index !== 0 && _index !== (arr || []).length && i.type
                 ? i.type === 'and'
-                    ? '并且'
-                    : '或者'
+                    ? t('Device.device.index.5rg4p6h7ki00')
+                    : t('Device.device.index.5rg4p6h7koc0')
                 : '';
         return `${_type}${i.name}为${i.value}`;
     });
@@ -372,7 +374,7 @@ const onFormSave = () => {
             .then(async (_data: any) => {
                 if (modelRef.selector === 'fixed') {
                     if (!modelRef?.selectorValues?.[0]?.value) {
-                        onlyMessage('请选择设备', 'error');
+                        onlyMessage(t('Device.device.index.5rg4p6h7kvc0'), 'error');
                         reject(false);
                     } else {
                         resolve({

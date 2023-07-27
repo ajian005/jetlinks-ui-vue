@@ -3,8 +3,8 @@
         <j-form :layout="'vertical'" ref="formRef" :model="modelRef">
             <j-form-item
                 :name="['message', 'messageType']"
-                label="动作类型"
-                :rules="[{ required: true, message: '请选择动作类型' }]"
+                :label="t('Device.actions.index.5rg4oblqw1g0')"
+                :rules="[{ required: true, message: t('Device.actions.index.5rg4oblqym40') }]"
             >
                 <TopCard
                     :typeList="TypeList"
@@ -15,12 +15,12 @@
             <template v-if="deviceMessageType === 'INVOKE_FUNCTION'">
                 <j-form-item
                     :name="['message', 'functionId']"
-                    label="功能调用"
-                    :rules="[{ required: true, message: '请选择功能' }]"
+                    :label="t('Device.actions.index.5rg4oblqyvk0')"
+                    :rules="[{ required: true, message: t('Device.actions.index.5rg4oblqz8g0') }]"
                 >
                     <j-select
                         showSearch
-                        placeholder="请选择功能"
+                        :placeholder="t('Device.actions.index.5rg4oblqz8g0')"
                         v-model:value="modelRef.message.functionId"
                         @change="functionSelect"
                     >
@@ -48,12 +48,12 @@
             <template v-else-if="deviceMessageType === 'READ_PROPERTY'">
                 <j-form-item
                     :name="['message', 'properties']"
-                    label="读取属性"
-                    :rules="[{ required: true, message: '请选择读取属性' }]"
+                    :label="t('Device.actions.index.5rg4oblqzgo0')"
+                    :rules="[{ required: true, message: t('Device.actions.index.5rg4oblqzmw0') }]"
                 >
                     <j-select
                         showSearch
-                        placeholder="请选择属性"
+                        :placeholder="t('Device.actions.index.5rg4oblqzt80')"
                         v-model:value="modelRef.message.properties[0]"
                         @change="propertySelect"
                     >
@@ -91,25 +91,27 @@ import WriteProperty from './WriteProperty.vue';
 import { useSceneStore } from '@/store/scene';
 import { storeToRefs } from 'pinia';
 import { getParams } from '../../../util';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore();
 const { data } = storeToRefs(sceneStore);
 
 const TypeList = [
     {
-        label: '功能调用',
+        label: t('Device.actions.index.5rg4oblqyvk0'),
         value: 'INVOKE_FUNCTION',
         image: getImage('/scene/invoke-function.png'),
         tip: '',
     },
     {
-        label: '读取属性',
+        label: t('Device.actions.index.5rg4oblqzgo0'),
         value: 'READ_PROPERTY',
         image: getImage('/scene/read-property.png'),
         tip: '',
     },
     {
-        label: '设置属性',
+        label: t('Device.actions.index.5rg4oblqzz00'),
         value: 'WRITE_PROPERTY',
         image: getImage('/scene/write-property.png'),
         tip: '',
@@ -178,7 +180,7 @@ const functionRules = [
             })
             if(arr.length){
                 if(!value?.length) {
-                    return Promise.reject('请输入功能值');
+                    return Promise.reject(t('Device.actions.index.5rg4oblr0440'));
                 } else {
                     const hasValue = value?.find(
                         (item: { name: string; value: any }) => item.value === undefined,
@@ -190,7 +192,7 @@ const functionRules = [
                         return Promise.reject(
                             functionItem?.name
                                 ? `请输入${functionItem.name}值`
-                                : '请输入功能值',
+                                : t('Device.actions.index.5rg4oblr0440'),
                         );
                     }
                 }

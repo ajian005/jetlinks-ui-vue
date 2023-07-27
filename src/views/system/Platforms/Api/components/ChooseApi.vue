@@ -24,7 +24,7 @@
             @click="save"
             v-if="props.mode !== 'home'"
         >
-            保存
+            {{t('Api.components.ChooseApi.5rga3nx6p880')}}
         </PermissionButton>
     </div>
 </template>
@@ -39,7 +39,9 @@ import { modeType } from '../typing';
 import { useDepartmentStore } from '@/store/department';
 import { onlyMessage } from '@/utils/comm';
 import { uniqBy } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const department = useDepartmentStore();
 const emits = defineEmits([
     'refresh',
@@ -64,7 +66,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '说明',
+        title: t('Api.components.ChooseApi.5rga3nx6qrw0'),
         dataIndex: 'summary',
         key: 'summary',
     },
@@ -147,11 +149,11 @@ const save = async () => {
             removeKeys.length && (await delOperations_api(removeKeys));
             const res = await addOperations_api(addKeys);
             if (res.success) {
-                onlyMessage('操作成功');
+                onlyMessage(t('Api.components.ChooseApi.5rga3nx6r4k0'));
                 emits('refresh');
             }
         } else {
-            onlyMessage('请选择API接口','error')
+            onlyMessage(t('Api.components.ChooseApi.5rga3nx6rb00'))
             return
         }
     } else if (props.mode === 'appManger') {
@@ -168,7 +170,7 @@ const save = async () => {
             updateOperations_api(code, '_add', { operations: addItems }),
         ]).then((resps) => {
             if (resps[0].status === 200 && resps[1].status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('Api.components.ChooseApi.5rga3nx6r4k0'));
                 emits('refresh');
             }
         });

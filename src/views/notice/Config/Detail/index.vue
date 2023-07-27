@@ -274,7 +274,6 @@
                                     :placeholder="t('Config.Detail.index.5saxcg0766c0')"
                                 />
                             </j-form-item>
-                        </template>
                         <!-- webhook -->
                         <template v-if="formData.type === 'webhook'">
                             <j-form-item

@@ -1,7 +1,7 @@
 <template>
     <div class="basic-info-container">
         <div class="card">
-            <h3>基本信息</h3>
+            <h3>{{t('Menu.Detail.BasicInfo.5rg9pbi5rw00')}}</h3>
             <j-form ref="basicFormRef" :model="form.data" class="basic-form">
                 <div class="row" style="display: flex">
                     <j-form-item
@@ -11,7 +11,7 @@
                         :rules="[
                             {
                                 required: true,
-                                message: '请上传图标',
+                                message: t('Menu.Detail.BasicInfo.5rg9pbi5t200'),
                                 trigger: 'change',
                             },
                         ]"
@@ -23,7 +23,7 @@
                                 style="font-size: 90px"
                             />
                             <span class="mark" @click="dialogVisible = true"
-                                >点击修改</span
+                                >{{t('Menu.Detail.BasicInfo.5rg9pbi5t6c0')}}</span
                             >
                         </div>
 
@@ -37,47 +37,47 @@
                                     type="PlusOutlined"
                                     style="font-size: 30px"
                                 />
-                                <p>点击选择图标</p>
+                                <p>{{t('Menu.Detail.BasicInfo.5rg9pbi5ta40')}}</p>
                             </span>
                         </div>
                     </j-form-item>
                     <j-row :gutter="24" style="flex: 1 1 auto">
                         <j-col :span="12">
                             <j-form-item
-                                label="名称"
+                                :label="t('Menu.Detail.BasicInfo.5rg9pbi5te80')"
                                 name="name"
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入名称',
+                                        message: t('Menu.Detail.BasicInfo.5rg9pbi5tj40'),
                                         trigger: 'change',
                                     },
                                     {
                                         max: 64,
-                                        message: '最多可输入64个字符',
+                                        message: t('Menu.Detail.BasicInfo.5rg9pbi5tn00'),
                                         trigger: 'change',
                                     },
                                 ]"
                             >
                                 <j-input
                                     v-model:value="form.data.name"
-                                    placeholder="请输入名称"
+                                    :placeholder="t('Menu.Detail.BasicInfo.5rg9pbi5tj40')"
                                 />
                             </j-form-item>
                         </j-col>
                         <j-col :span="12">
                             <j-form-item
-                                label="编码"
+                                :label="t('Menu.Detail.BasicInfo.5rg9pbi5tqs0')"
                                 name="code"
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入编码',
+                                        message: t('Menu.Detail.BasicInfo.5rg9pbi5tu80'),
                                         trigger: 'change',
                                     },
                                     {
                                         max: 64,
-                                        message: '最多可输入64个字符',
+                                        message: t('Menu.Detail.BasicInfo.5rg9pbi5tn00'),
                                         trigger: 'change',
                                     },
                                     {
@@ -88,43 +88,43 @@
                             >
                                 <j-input
                                     v-model:value="form.data.code"
-                                    placeholder="请输入编码"
+                                    :placeholder="t('Menu.Detail.BasicInfo.5rg9pbi5tu80')"
                                 />
                             </j-form-item>
                         </j-col>
                         <j-col :span="12">
                             <j-form-item
-                                label="页面地址"
+                                :label="t('Menu.Detail.BasicInfo.5rg9pbi5txg0')"
                                 name="url"
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入页面地址',
+                                        message: t('Menu.Detail.BasicInfo.5rg9pbi5u100'),
                                     },
-                                    { max: 128, message: '最多可输入128字符' },
-                                    { pattern: /^\// ,message:'请正确填写地址，以/开头'},
+                                    { max: 128, message: t('Menu.Detail.BasicInfo.5rg9pbi5u4g0') },
+                                    { pattern: /^\// ,message:t('Menu.Detail.BasicInfo.addressTip')},
                                 ]"
                             >
                                 <j-input
                                     v-model:value="form.data.url"
-                                    placeholder="请输入页面地址"
+                                    :placeholder="t('Menu.Detail.BasicInfo.5rg9pbi5u100')"
                                 />
                             </j-form-item>
                         </j-col>
                         <j-col :span="12">
                             <j-form-item
-                                label="排序"
+                                :label="t('Menu.Detail.BasicInfo.5rg9pbi5u800')"
                                 name="sortIndex"
                                 :rules="[
                                     {
                                         pattern: /^[0-9]*[1-9][0-9]*$/,
-                                        message: '请输入大于0的整数',
+                                        message: t('Menu.Detail.BasicInfo.5rg9pbi5ubs0'),
                                     },
                                 ]"
                             >
                                 <j-input-number
                                     v-model:value="form.data.sortIndex"
-                                    placeholder="请输入排序"
+                                    :placeholder="t('Menu.Detail.BasicInfo.5rg9pbi5uew0')"
                                     style="width: 100%"
                                 />
                             </j-form-item>
@@ -132,19 +132,19 @@
                     </j-row>
                 </div>
 
-                <j-form-item label="说明" name="describe">
+                <j-form-item :label="t('Menu.Detail.BasicInfo.5rg9pbi5uis0')" name="describe">
                     <j-textarea
                         v-model:value="form.data.describe"
                         :rows="4"
                         show-count
                         :maxlength="200"
-                        placeholder="请输入说明"
+                        :placeholder="t('Menu.Detail.BasicInfo.5rg9pbi5um00')"
                     />
                 </j-form-item>
             </j-form>
         </div>
         <div class="card">
-            <h3>权限配置</h3>
+            <h3>{{t('Menu.Detail.BasicInfo.5rg9pbi5uq40')}}</h3>
             <j-form
                 ref="permissFormRef"
                 :model="form.data"
@@ -152,8 +152,8 @@
             >
                 <j-form-item name="accessSupport" required v-if="isNoCommunity">
                     <template #label>
-                        <span style="margin-right: 3px">数据权限控制</span>
-                        <j-tooltip title="此菜单页面数据所对应的资产类型">
+                        <span style="margin-right: 3px">{{t('Menu.Detail.BasicInfo.5rg9pbi5utg0')}}</span>
+                        <j-tooltip :title="t('Menu.Detail.BasicInfo.5rg9pbi5uy80')">
                             <AIcon
                                 type="QuestionCircleOutlined"
                                 class="img-style"
@@ -165,12 +165,12 @@
                         v-model:value="form.data.accessSupport"
                         name="radioGroup"
                     >
-                        <j-radio value="unsupported">不支持</j-radio>
-                        <j-radio value="support">支持</j-radio>
+                        <j-radio value="unsupported">{{t('Menu.Detail.BasicInfo.5rg9pbi5v0w0')}}</j-radio>
+                        <j-radio value="support">{{t('Menu.Detail.BasicInfo.5rg9pbi5v4c0')}}</j-radio>
                         <j-radio value="indirect">
-                            <span style="margin-right: 3px">间接控制</span>
+                            <span style="margin-right: 3px">{{t('Menu.Detail.BasicInfo.5rg9pbi5v6w0')}}</span>
                             <j-tooltip
-                                title="此菜单内的数据基于其他菜单的数据权限控制"
+                                :title="t('Menu.Detail.BasicInfo.5rg9pbi5v9k0')"
                             >
                                 <AIcon
                                     type="QuestionCircleFilled"
@@ -183,13 +183,13 @@
                     <j-form-item
                         name="assetType"
                         v-if="form.data.accessSupport === 'support'"
-                        :rules="[{ required: true, message: '请选择资产类型' }]"
+                        :rules="[{ required: true, message: t('Menu.Detail.BasicInfo.5rg9pbi5vcg0') }]"
                         style="margin-top: 24px; margin-bottom: 0"
                     >
                         <j-select
                             v-model:value="form.data.assetType"
                             style="width: 500px"
-                            placeholder="请选择资产类型"
+                            :placeholder="t('Menu.Detail.BasicInfo.5rg9pbi5vcg0')"
                             show-search
                             :options="form.assetsType"
                         >
@@ -204,7 +204,7 @@
                     <j-form-item
                         name="indirectMenus"
                         v-if="form.data.accessSupport === 'indirect'"
-                        :rules="[{ required: true, message: '请选择关联菜单' }]"
+                        :rules="[{ required: true, message: t('Menu.Detail.BasicInfo.5rg9pbi5vh80') }]"
                         style="margin-top: 24px; margin-bottom: 0"
                     >
                         <j-tree-select
@@ -214,7 +214,7 @@
                                 maxHeight: '400px',
                                 overflow: 'auto',
                             }"
-                            placeholder="请选择关联菜单"
+                            :placeholder="t('Menu.Detail.BasicInfo.5rg9pbi5vh80')"
                             multiple
                             show-search
                             :tree-data="form.treeData"
@@ -227,7 +227,7 @@
                         </j-tree-select>
                     </j-form-item>
                 </j-form-item>
-                <j-form-item label="权限">
+                <j-form-item :label="t('Menu.Detail.BasicInfo.5rg9pbi5vk00')">
                     <PermissChoose
                         :first-width="3"
                         max-height="350px"
@@ -245,7 +245,7 @@
                 @click="form.clickSave"
                 :loading='form.saveLoading'
             >
-                保存
+                {{t('Menu.Detail.BasicInfo.5rg9pbi5vog0')}}
             </PermissionButton>
         </div>
 
@@ -274,7 +274,9 @@ import {
 import { Rule } from 'ant-design-vue/lib/form';
 import { isNoCommunity } from '@/utils/utils';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const permission = 'system/Menu';
 // 路由
 const route = useRoute();
@@ -336,7 +338,7 @@ const form = reactive({
     },
     checkCode: async (_rule: Rule, value: string): Promise<any> => {
         if (!value) return Promise.reject('');
-        else if (value.length > 64) return Promise.reject('最多可输入64个字符');
+        else if (value.length > 64) return Promise.reject(t('Menu.Detail.BasicInfo.5rg9pbi5tn00'));
         // 编辑时不校验原本的编码
         else if (routeParams.id && value === form.sourceCode)
             return Promise.resolve('');
@@ -346,7 +348,7 @@ const form = reactive({
                 owner: 'iot',
             });
             if (resp.result.passed) return Promise.resolve();
-            else return Promise.reject('该编码重复');
+            else return Promise.reject(t('Menu.Detail.BasicInfo.5rg9pbi5vrg0'));
         }
     },
     clickSave: () => {
@@ -365,10 +367,10 @@ const form = reactive({
                         value: accessSupportValue,
                         label:
                             accessSupportValue === 'unsupported'
-                                ? '不支持'
+                                ? t('Menu.Detail.BasicInfo.5rg9pbi5v0w0')
                                 : accessSupportValue === 'support'
-                                ? '支持'
-                                : '间接控制',
+                                ? t('Menu.Detail.BasicInfo.5rg9pbi5v4c0')
+                                : t('Menu.Detail.BasicInfo.5rg9pbi5v6w0'),
                     },
                     owner: 'iot',
                 };

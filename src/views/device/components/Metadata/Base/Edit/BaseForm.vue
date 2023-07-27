@@ -1,62 +1,62 @@
 <template>
-  <j-form-item label="标识" name="id" :rules="[
-    { required: true, message: '请输入标识' },
-    { max: 64, message: '最多可输入64个字符' },
+  <j-form-item :label="t('Base.Edit.BaseForm.5rnr8p5wlas0')" name="id" :rules="[
+    { required: true, message: t('Base.Edit.BaseForm.5rnr8p5wmf00') },
+    { max: 64, message: t('Base.Edit.BaseForm.5rnr8p5wmlk0') },
     {
       pattern: /^[a-zA-Z0-9_\-]+$/,
-      message: 'ID只能由数字、字母、下划线、中划线组成',
+      message: t('Base.Edit.BaseForm.IDRule'),
     },
   ]">
-    <j-input v-model:value="value.id" size="small" @change="asyncOtherConfig" :disabled="metadataStore.model.action === 'edit'" placeholder="请输入标识"></j-input>
+    <j-input v-model:value="value.id" size="small" @change="asyncOtherConfig" :disabled="metadataStore.model.action === 'edit'" :placeholder="t('Base.Edit.BaseForm.5rnr8p5wmf00')"></j-input>
   </j-form-item>
-  <j-form-item label="名称" name="name" :rules="[
-    { required: true, message: '请输入名称' },
-    { max: 64, message: '最多可输入64个字符' },
+  <j-form-item :label="t('Base.Edit.BaseForm.5rnr8p5wmug0')" name="name" :rules="[
+    { required: true, message: t('Base.Edit.BaseForm.5rnr8p5wmzg0') },
+    { max: 64, message: t('Base.Edit.BaseForm.5rnr8p5wmlk0') },
   ]">
-    <j-input v-model:value="value.name" size="small" placeholder="请输入名称"></j-input>
+    <j-input v-model:value="value.name" size="small" :placeholder="t('Base.Edit.BaseForm.5rnr8p5wmzg0')"></j-input>
   </j-form-item>
   <template v-if="modelType === 'properties'">
-    <value-type-form :name="['valueType']" v-model:value="value.valueType" key="property" title="数据类型"
+    <value-type-form :name="['valueType']" v-model:value="value.valueType" key="property" :title="t('Base.Edit.BaseForm.5rnr8p5wn480')"
       @change-type="changeValueType"></value-type-form>
     <expands-form :name="['expands']" v-model:value="value.expands" :type="type" :id="value.id" :config="config"
       :valueType="value.valueType"></expands-form>
   </template>
   <template v-if="modelType === 'functions'">
-    <j-form-item label="是否异步" name="async" :rules="[
-      { required: true, message: '请选择是否异步' },
+    <j-form-item :label="t('Base.Edit.BaseForm.5rnr8p5wnag0')" name="async" :rules="[
+      { required: true, message: t('Base.Edit.BaseForm.5rnr8p5wnf00') },
     ]">
       <j-radio-group v-model:value="value.async">
-        <j-radio :value="true">是</j-radio>
-        <j-radio :value="false">否</j-radio>
+        <j-radio :value="true">{{t('Base.Edit.BaseForm.5rnr8p5wnnc0')}}</j-radio>
+        <j-radio :value="false">{{t('Base.Edit.BaseForm.5rnr8p5wntw0')}}</j-radio>
       </j-radio-group>
     </j-form-item>
-    <j-form-item label="输入参数" name="inputs" :rules="[
-      { validator: (_rule: Rule, val: Record<any, any>[]) => validateJson(_rule, val, '输入参数', false) },
+    <j-form-item :label="t('Base.Edit.BaseForm.5rnr8p5wnyk0')" name="inputs" :rules="[
+      { validator: (_rule: Rule, val: Record<any, any>[]) => validateJson(_rule, val, t('Base.Edit.BaseForm.5rnr8p5wnyk0'), false) },
     ]">
       <JsonParam v-model:value="value.inputs" :name="['inputs']" :is-sub="false"></JsonParam>
     </j-form-item>
-    <value-type-form :name="['output']" v-model:value="value.output" key="function" title="输出参数" :required="false"></value-type-form>
+    <value-type-form :name="['output']" v-model:value="value.output" key="function" :title="t('Base.Edit.BaseForm.5rnr8p5wo700')" :required="false"></value-type-form>
   </template>
   <template v-if="modelType === 'events'">
-    <j-form-item label="级别" :name="['expands', 'level']" :rules="[
-      { required: true, message: '请选择级别' },
+    <j-form-item :label="t('Base.Edit.BaseForm.5rnr8p5woe80')" :name="['expands', 'level']" :rules="[
+      { required: true, message: t('Base.Edit.BaseForm.5rnr8p5woig0') },
     ]">
-      <j-select v-model:value="value.expands.level" :options="EventLevel" size="small" placeholder="请选择级别"></j-select>
+      <j-select v-model:value="value.expands.level" :options="EventLevel" size="small" :placeholder="t('Base.Edit.BaseForm.5rnr8p5woig0')"></j-select>
     </j-form-item>
-    <value-type-form :name="['valueType']" v-model:value="value.valueType" key="function" title="输出参数" only-object></value-type-form>
+    <value-type-form :name="['valueType']" v-model:value="value.valueType" key="function" :title="t('Base.Edit.BaseForm.5rnr8p5wo700')" only-object></value-type-form>
   </template>
   <template v-if="modelType === 'tags'">
-    <value-type-form :name="['valueType']" v-model:value="value.valueType" key="property" title="数据类型"></value-type-form>
-    <j-form-item label="读写类型" :name="['expands', 'type']" :rules="[
-      { required: true, message: '请选择读写类型' },
+    <value-type-form :name="['valueType']" v-model:value="value.valueType" key="property" :title="t('Base.Edit.BaseForm.5rnr8p5wn480')"></value-type-form>
+    <j-form-item :label="t('Base.Edit.BaseForm.5rnr8p5wow80')" :name="['expands', 'type']" :rules="[
+      { required: true, message: t('Base.Edit.BaseForm.5rnr8p5wp0g0') },
     ]">
-      <j-select v-model:value="value.expands.type" :options="ExpandsTypeList" mode="multiple" size="small" placeholder="请选择读写类型"></j-select>
+      <j-select v-model:value="value.expands.type" :options="ExpandsTypeList" mode="multiple" size="small" :placeholder="t('Base.Edit.BaseForm.5rnr8p5wp0g0')"></j-select>
     </j-form-item>
   </template>
-  <j-form-item label="说明" name="description" :rules="[
-    { max: 200, message: '最多可输入200个字符' },
+  <j-form-item :label="t('Base.Edit.BaseForm.5rnr8p5wp740')" name="description" :rules="[
+    { max: 200, message: t('Base.Edit.BaseForm.5rnr8p5wpfs0') },
   ]">
-    <j-textarea v-model:value="value.description" size="small" placeholder="请输入说明"></j-textarea>
+    <j-textarea v-model:value="value.description" size="small" :placeholder="t('Base.Edit.BaseForm.5rnr8p5wpk40')"></j-textarea>
   </j-form-item>
 </template>
 <script setup lang="ts" name="BaseForm">
@@ -72,7 +72,9 @@ import { useMetadataStore } from '@/store/metadata';
 import { validateJson } from './validator';
 import { Rule } from 'ant-design-vue/es/form';
 import { debounce } from 'lodash';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
   type: {
     type: String as PropType<'product' | 'device'>,

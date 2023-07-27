@@ -3,25 +3,25 @@
         <div>
             <j-space>
                 <div>
-                    统计周期：
+                    {{t('Property.Detail.Charts.5rcymopzshc0')}}
                     <j-select v-model:value="cycle" style="width: 120px">
                         <j-select-option value="*" v-if="_type"
-                            >实际值</j-select-option
+                            >{{t('Property.Detail.Charts.5rcymopzu340')}}</j-select-option
                         >
-                        <j-select-option value="1m">按分钟统计</j-select-option>
-                        <j-select-option value="1h">按小时统计</j-select-option>
-                        <j-select-option value="1d">按天统计</j-select-option>
-                        <j-select-option value="1w">按周统计</j-select-option>
-                        <j-select-option value="1M">按月统计</j-select-option>
+                        <j-select-option value="1m">{{t('Property.Detail.Charts.5rcymopzuc00')}}</j-select-option>
+                        <j-select-option value="1h">{{t('Property.Detail.Charts.5rcymopzuhk0')}}</j-select-option>
+                        <j-select-option value="1d">{{t('Property.Detail.Charts.5rcymopzumk0')}}</j-select-option>
+                        <j-select-option value="1w">{{t('Property.Detail.Charts.5rcymopzurw0')}}</j-select-option>
+                        <j-select-option value="1M">{{t('Property.Detail.Charts.5rcymopzuxc0')}}</j-select-option>
                     </j-select>
                 </div>
                 <div v-if="cycle !== '*' && _type">
-                    统计规则：
+                    {{t('Property.Detail.Charts.5rcymopzv240')}}
                     <j-select v-model:value="agg" style="width: 120px">
-                        <j-select-option value="AVG">平均值</j-select-option>
-                        <j-select-option value="MAX">最大值</j-select-option>
-                        <j-select-option value="MIN">最小值</j-select-option>
-                        <j-select-option value="COUNT">总数</j-select-option>
+                        <j-select-option value="AVG">{{t('Property.Detail.Charts.5rcymopzv740')}}</j-select-option>
+                        <j-select-option value="MAX">{{t('Property.Detail.Charts.5rcymopzvg00')}}</j-select-option>
+                        <j-select-option value="MIN">{{t('Property.Detail.Charts.5rcymopzvkc0')}}</j-select-option>
+                        <j-select-option value="COUNT">{{t('Property.Detail.Charts.5rcymopzvp40')}}</j-select-option>
                     </j-select>
                 </div>
             </j-space>
@@ -38,7 +38,9 @@ import { getPropertiesInfo, getPropertiesList } from '@/api/device/instance';
 import { useInstanceStore } from '@/store/instance';
 import Chart from './Chart.vue';
 import * as echarts from 'echarts';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const list = ['int', 'float', 'double', 'long'];
 
 const prop = defineProps({
@@ -165,7 +167,7 @@ const getOptions = (arr: any[]) => {
                     false,
                 );
             }),
-            name: '时间',
+            name: t('Property.Detail.Charts.5rcymopzvvs0'),
         },
         yAxis: {
             type: 'value',

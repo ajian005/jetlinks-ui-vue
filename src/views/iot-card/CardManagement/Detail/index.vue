@@ -15,7 +15,7 @@
                         <template #title>
                             <Guide>
                                 <template #title>
-                                    <span>基本信息</span>
+                                    <span>{{t('CardManagement.Detail.index.5rgbexy1gvc0')}}</span>
                                     <j-button
                                         type="link"
                                         @click="
@@ -27,66 +27,66 @@
                                         "
                                     >
                                         <AIcon type="EditOutlined"></AIcon>
-                                        编辑
+                                        {{t('CardManagement.Detail.index.5rgbexy1hww0')}}
                                     </j-button>
                                 </template>
                             </Guide>
                         </template>
 
-                        <j-descriptions-item label="卡号">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1i9w0')">{{
                             detail.id
                         }}</j-descriptions-item>
                         <j-descriptions-item label="ICCID">{{
                             detail.iccId
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="绑定设备">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1ifk0')">{{
                             detail.deviceName
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="平台类型">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1ikw0')">{{
                             detail.operatorPlatformType?.text
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="平台名称">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1ir40')">{{
                             detail.platformConfigName
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="运营商">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1iwg0')">{{
                             detail.operatorName
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="类型">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1j1s0')">{{
                             detail.cardType?.text
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="激活日期">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1j740')">{{
                             detail.activationDate
                                 ? moment(detail.activationDate).format(
                                       'YYYY-MM-DD HH:mm:ss',
                                   )
                                 : ''
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="更新时间">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1jbo0')">{{
                             detail.updateTime
                                 ? moment(detail.updateTime).format(
                                       'YYYY-MM-DD HH:mm:ss',
                                   )
                                 : ''
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="总流量">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1jg40')">{{
                             detail.totalFlow
                                 ? detail.totalFlow.toFixed(2) + ' M'
                                 : ''
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="使用流量">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1jlg0')">{{
                             detail.usedFlow
                                 ? detail.usedFlow.toFixed(2) + ' M'
                                 : ''
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="剩余流量">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1jq40')">{{
                             detail.residualFlow
                                 ? detail.residualFlow.toFixed(2) + ' M'
                                 : ''
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="状态">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1jv40')">{{
                             detail?.cardState?.text
                         }}</j-descriptions-item>
-                        <j-descriptions-item label="说明">{{
+                        <j-descriptions-item :label="t('CardManagement.Detail.index.5rgbexy1k000')">{{
                             detail?.describe
                         }}</j-descriptions-item>
                     </j-descriptions>
@@ -97,7 +97,7 @@
                 <j-row :gutter="24">
                     <j-col :span="16">
                         <div class="card">
-                            <Guide title="流量统计">
+                            <Guide :title="t('CardManagement.Detail.index.5rgbexy1k4c0')">
                                 <template #extra>
                                     <TimeSelect
                                         :type="'week'"
@@ -116,11 +116,11 @@
                     </j-col>
                     <j-col :span="8">
                         <div class="card">
-                            <Guide title="数据统计" />
+                            <Guide :title="t('CardManagement.Detail.index.5rgbexy1k9c0')" />
                             <div class="static-info" style="min-height: 490px">
                                 <div class="data-statistics-item">
                                     <div class="flow-info" style="width: 100%">
-                                        <div class="label">昨日流量消耗</div>
+                                        <div class="label">{{t('CardManagement.Detail.index.5rgbexy1kds0')}}</div>
                                         <j-tooltip placement="bottomLeft">
                                             <template #title>
                                                 <span>{{ dayTotal }} M</span>
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="data-statistics-item">
                                     <div class="flow-info" style="width: 100%">
-                                        <div class="label">当月流量消耗</div>
+                                        <div class="label">{{t('CardManagement.Detail.index.5rgbexy1kig0')}}</div>
                                         <j-tooltip placement="bottomLeft">
                                             <template #title>
                                                 <span>{{ monthTotal }} M</span>
@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="data-statistics-item">
                                     <div class="flow-info" style="width: 100%">
-                                        <div class="label">本年流量消耗</div>
+                                        <div class="label">{{t('CardManagement.Detail.index.5rgbexy1knk0')}}</div>
                                         <j-tooltip placement="bottomLeft">
                                             <template #title>
                                                 <span>{{ yearTotal }} M</span>
@@ -187,7 +187,9 @@ import Guide from '@/views/iot-card/components/Guide.vue';
 import LineChart from '@/views/iot-card/components/LineChart.vue';
 import { queryFlow } from '@/api/iot-card/home';
 import TimeSelect from '@/views/iot-card/components/TimeSelect.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const route = useRoute();
 
 const visible = ref<boolean>(false);
@@ -204,10 +206,10 @@ const monthOptions = ref<any[]>([]);
 const yearOptions = ref<any[]>([]);
 
 const quickBtnList = [
-    { label: '昨日', value: 'yesterday' },
-    { label: '近一周', value: 'week' },
-    { label: '近一月', value: 'month' },
-    { label: '近一年', value: 'year' },
+    { label: t('CardManagement.Detail.index.5rgbexy1kwg0'), value: 'yesterday' },
+    { label: t('CardManagement.Detail.index.5rgbexy1l440'), value: 'week' },
+    { label: t('CardManagement.Detail.index.5rgbexy1l940'), value: 'month' },
+    { label: t('CardManagement.Detail.index.5rgbexy1lco0'), value: 'year' },
 ];
 
 const getDetail = () => {
@@ -296,7 +298,7 @@ const getDataTotal = () => {
 };
 
 /**
- * 流量统计
+ * {{t('CardManagement.Detail.index.5rgbexy1k4c0')}}
  * @param data
  */
 const getEcharts = (data: any) => {

@@ -2,7 +2,7 @@
     <j-modal
         :width="540"
         visible
-        title="权限控制"
+        :title="t('components.Auth.index.5rga80st4r00')"
         @cancel="emit('close')"
         @ok="onSave"
     >
@@ -17,7 +17,9 @@
 <script lang="ts" setup>
 import { PropType } from 'vue';
 import Role from '../Role/index.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close', 'save']);
 const props = defineProps({
     data: {

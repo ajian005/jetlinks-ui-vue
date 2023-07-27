@@ -25,7 +25,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('device.Product.index.5rcy142sjs40')}}
                         </PermissionButton>
                         <j-upload
                             name="file"
@@ -35,7 +35,7 @@
                         >
                             <PermissionButton
                                 hasPermission="device/Product:import"
-                                >导入</PermissionButton
+                                >{{t('device.Product.index.5rcy142sl800')}}</PermissionButton
                             >
                         </j-upload>
                     </j-space>
@@ -51,7 +51,7 @@
                         :active="_selectedRowKeys.includes(slotProps.id)"
                         :status="slotProps.state"
                         @click="handleView(slotProps.id)"
-                        :statusText="slotProps.state === 1 ? '正常' : '禁用'"
+                        :statusText="slotProps.state === 1 ? t('device.Product.index.5rcy142slf80') : t('device.Product.index.5rcy142sljs0')"
                         :statusNames="{
                             1: 'processing',
                             0: 'error',
@@ -79,20 +79,20 @@
                             <j-row>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        设备类型
+                                        {{t('device.Product.index.5rcy142slu40')}}
                                     </div>
                                     <div>{{ slotProps?.deviceType?.text }}</div>
                                 </j-col>
                                 <j-col :span="12">
                                     <div class="card-item-content-text">
-                                        接入方式
+                                        {{t('device.Product.index.5rcy142slzs0')}}
                                     </div>
                                     <Ellipsis
                                         ><div>
                                             {{
                                                 slotProps?.accessName
                                                     ? slotProps?.accessName
-                                                    : '未接入'
+                                                    : t('device.Product.index.5rcy142tl080')
                                             }}
                                         </div></Ellipsis
                                     >
@@ -127,7 +127,7 @@
                 </template>
                 <template #state="slotProps">
                     <BadgeStatus
-                        :text="slotProps.state === 1 ? '正常' : '禁用'"
+                        :text="slotProps.state === 1 ? t('device.Product.index.5rcy142slf80') : t('device.Product.index.5rcy142sljs0')"
                         :status="slotProps.state"
                         :statusNames="{
                             1: 'processing',
@@ -198,6 +198,9 @@ import { useRoute } from 'vue-router';
 import { useRouterParams } from '@/utils/hooks/useParams';
 import { accessConfigTypeFilter } from '@/utils/setting';
 import {cloneDeep} from "lodash";
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 /**
  * 表格数据
  */
@@ -215,21 +218,21 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: '产品名称',
+        title: t('device.Product.index.5rcy142tlgw0'),
         dataIndex: 'name',
         key: 'name',
         width: 220,
         ellipsis: true,
     },
     {
-        title: '接入方式',
+        title: t('device.Product.index.5rcy142slzs0'),
         dataIndex: 'accessName',
         key: 'accessName',
         width: 220,
         ellipsis: true,
     },
     {
-        title: '设备类型',
+        title: t('device.Product.index.5rcy142slu40'),
         dataIndex: 'deviceType',
         key: 'deviceType',
         scopedSlots: true,
@@ -237,7 +240,7 @@ const columns = [
         width: 120,
     },
     {
-        title: '状态',
+        title: t('device.Product.index.5rcy142tlvo0'),
         dataIndex: 'state',
         key: 'state',
         scopedSlots: true,
@@ -245,13 +248,13 @@ const columns = [
         width: 90,
     },
     {
-        title: '说明',
+        title: t('device.Product.index.5rcy142tm5g0'),
         dataIndex: 'describe',
         key: 'describe',
         ellipsis: true,
     },
     {
-        title: '操作',
+        title: t('device.Product.index.5rcy142tmdw0'),
         key: 'action',
         fixed: 'right',
         width: 200,
@@ -273,9 +276,9 @@ const getActions = (
     const actions = [
         {
             key: 'view',
-            text: '查看',
+            text: t('device.Product.index.5rcy142tmsw0'),
             tooltip: {
-                title: '查看',
+                title: t('device.Product.index.5rcy142tmsw0'),
             },
             icon: 'EyeOutlined',
             onClick: () => {
@@ -284,13 +287,13 @@ const getActions = (
         },
         {
             key: 'update',
-            text: '编辑',
+            text: t('device.Product.index.5rcy142tn2o0'),
             tooltip: {
-                title: '编辑',
+                title: t('device.Product.index.5rcy142tn2o0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
-                title.value = '编辑';
+                title.value = t('device.Product.index.5rcy142tn2o0');
                 isAdd.value = 2;
                 nextTick(() => {
                     saveRef.value.show(data);
@@ -299,9 +302,9 @@ const getActions = (
         },
         {
             key: 'export',
-            text: '导出',
+            text: t('device.Product.index.5rcy142tnbk0'),
             tooltip: {
-                title: '导出',
+                title: t('device.Product.index.5rcy142tnbk0'),
             },
 
             icon: 'icon-xiazai',
@@ -314,18 +317,18 @@ const getActions = (
                     'accessProvider',
                     'messageProtocol',
                 ]);
-                downloadObject(extra, '产品');
+                downloadObject(extra, t('device.Product.index.5rcy142tnio0'));
             },
         },
         {
             key: 'action',
-            text: data.state !== 0 ? '禁用' : '启用',
+            text: data.state !== 0 ? t('device.Product.index.5rcy142sljs0') : t('device.Product.index.5rcy142tnp40'),
             tooltip: {
-                title: data.state !== 0 ? '禁用' : '启用',
+                title: data.state !== 0 ? t('device.Product.index.5rcy142sljs0') : t('device.Product.index.5rcy142tnp40'),
             },
             icon: data.state !== 0 ? 'StopOutlined' : 'CheckCircleOutlined',
             popConfirm: {
-                title: `确认${data.state !== 0 ? '禁用' : '启用'}?`,
+                title: `${t('device.Product.index.verify') + (data.state !== 0 ? t('device.Product.index.5rcy142sljs0') : t('device.Product.index.5rcy142tnp40'))}?`,
                 onConfirm: async () => {
                     let response = undefined;
                     if (data.state !== 0) {
@@ -334,30 +337,30 @@ const getActions = (
                         response = await _deploy(data.id);
                     }
                     if (response && response.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('device.Product.index.5rcy142tnw00'));
                         tableRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('device.Product.index.5rcy142to240'), 'error');
                     }
                 },
             },
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('device.Product.index.5rcy142to7s0'),
             disabled: data.state !== 0,
             tooltip: {
-                title: data.state !== 0 ? '已启用的产品不能删除' : '删除',
+                title: data.state !== 0 ? t('device.Product.index.5rcy142toe80') : t('device.Product.index.5rcy142to7s0'),
             },
             popConfirm: {
-                title: '确认删除?',
+                title: t('device.Product.index.5rcy142tomg0'),
                 onConfirm: async () => {
                     const resp = await deleteProduct(data.id);
                     if (resp.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('device.Product.index.5rcy142tnw00'));
                         tableRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('device.Product.index.5rcy142to240'), 'error');
                     }
                 },
             },
@@ -370,18 +373,18 @@ const getActions = (
 };
 
 /**
- * 新增
+ * {{t('device.Product.index.5rcy142sjs40')}}
  */
 const add = () => {
     isAdd.value = 1;
-    title.value = '新增';
+    title.value = t('device.Product.index.5rcy142sjs40');
     nextTick(() => {
         saveRef.value.show(currentForm.value);
     });
 };
 
 /**
- * 导入
+ * {{t('device.Product.index.5rcy142sl800')}}
  */
 const beforeUpload = (file: any) => {
     const reader = new FileReader();
@@ -390,7 +393,7 @@ const beforeUpload = (file: any) => {
         const text = result.target?.result;
         console.log('text: ', text);
         if (!file.type.includes('json')) {
-            onlyMessage('请上传json格式文件', 'error');
+            onlyMessage(t('device.Product.index.5rcy142tor80'), 'error');
             return false;
         }
         try {
@@ -398,13 +401,13 @@ const beforeUpload = (file: any) => {
             // 设置导入的产品状态为未发布
             data.state = 0;
             if (Array.isArray(data)) {
-                onlyMessage('请上传json格式文件', 'error');
+                onlyMessage(t('device.Product.index.5rcy142tor80'), 'error');
                 return false;
             }
             delete data.state;
             const res = await updateDevice(data);
             if (res.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('device.Product.index.5rcy142tox40'));
                 tableRef.value?.reload();
             }
             return true;
@@ -416,7 +419,7 @@ const beforeUpload = (file: any) => {
     return false;
 };
 /**
- * 查看
+ * {{t('device.Product.index.5rcy142tmsw0')}}
  */
 const handleView = (id: string) => {
     menuStory.jumpPage('device/Product/Detail', { id });
@@ -435,7 +438,7 @@ const tableRef = ref<Record<string, any>>({});
 const query = reactive({
     columns: [
         {
-            title: '名称',
+            title: t('device.Product.index.5rcy142tp1s0'),
             dataIndex: 'name',
             key: 'name',
             search: {
@@ -452,7 +455,7 @@ const query = reactive({
             },
         },
         {
-            title: '网关类型',
+            title: t('device.Product.index.5rcy142tpb00'),
             key: 'accessProvider',
             dataIndex: 'accessProvider',
             search: {
@@ -468,7 +471,7 @@ const query = reactive({
             },
         },
         {
-            title: '接入方式',
+            title: t('device.Product.index.5rcy142slzs0'),
             key: 'accessId',
             dataIndex: 'accessId',
             search: {
@@ -490,47 +493,47 @@ const query = reactive({
             },
         },
         {
-            title: '设备类型',
+            title: t('device.Product.index.5rcy142slu40'),
             key: 'deviceType',
             dataIndex: 'deviceType',
             search: {
                 type: 'select',
                 options: [
                     {
-                        label: '直连设备',
+                        label: t('device.Product.index.5rcy142tpi00'),
                         value: 'device',
                     },
                     {
-                        label: '网关子设备',
+                        label: t('device.Product.index.5rcy142tpp40'),
                         value: 'childrenDevice',
                     },
                     {
-                        label: '网关设备',
+                        label: t('device.Product.index.5rcy142tpu80'),
                         value: 'gateway',
                     },
                 ],
             },
         },
         {
-            title: '状态',
+            title: t('device.Product.index.5rcy142tlvo0'),
             key: 'state',
             dataIndex: 'state',
             search: {
                 type: 'select',
                 options: [
                     {
-                        label: '正常',
+                        label: t('device.Product.index.5rcy142slf80'),
                         value: 1,
                     },
                     {
-                        label: '禁用',
+                        label: t('device.Product.index.5rcy142sljs0'),
                         value: 0,
                     },
                 ],
             },
         },
         {
-            title: '说明',
+            title: t('device.Product.index.5rcy142tm5g0'),
             key: 'describe',
             dataIndex: 'describe',
             search: {
@@ -538,7 +541,7 @@ const query = reactive({
             },
         },
         {
-            title: '分类',
+            title: t('device.Product.index.5rcy142tpz00'),
             key: 'classified',
             dataIndex: 'classifiedId',
             search: {
@@ -555,7 +558,7 @@ const query = reactive({
             },
         },
         {
-            title: '所属组织',
+            title: t('device.Product.index.5rcy142tq4k0'),
             key: 'id$dim-assets',
             dataIndex: 'id$dim-assets',
             search: {
@@ -594,7 +597,7 @@ const query = reactive({
             },
         },
         {
-            title: '操作',
+            title: t('device.Product.index.5rcy142tmdw0'),
             key: 'action',
             fixed: 'right',
             width: 250,

@@ -1,9 +1,10 @@
 import { getImage } from '@/utils/comm';
-
+import createI18n from "@/locales/index"
+const t = createI18n.global.t
 // 平台类型
 export const platformTypeList = [
   {
-    label: '移动OneLink',
+    label: "移动OneLink",
     value: 'onelink',
     imgUrl: getImage('/iot-card/onelink.png'),
     imgSize: ['78px', '20px'],
@@ -23,23 +24,23 @@ export const platformTypeList = [
 ];
 
 export const OperatorMap = {
-  onelink: '移动',
-  ctwing: '电信',
-  unicom: '联通',
+  onelink: t('views.iot-card.data.onelink'),
+  ctwing: t('views.iot-card.data.ctwing'),
+  unicom: t('views.iot-card.data.unicom'),
 }
 
 //运营商
 export const OperatorList = [
   {
-    label: '移动',
+    label: t('views.iot-card.data.onelink'),
     value: 'onelink',
   },
   {
-    label: '电信',
+    label: t('views.iot-card.data.ctwing'),
     value: 'ctwing',
   },
   {
-    label: '联通',
+    label: t('views.iot-card.data.unicom'),
     value: 'unicom',
   },
 ];
@@ -47,19 +48,19 @@ export const OperatorList = [
 // 类型
 export const TypeList = [
   {
-    label: '年卡',
+    label: t('views.iot-card.data.year'),
     value: 'year',
   },
   {
-    label: '季卡',
+    label: t('views.iot-card.data.season'),
     value: 'season',
   },
   {
-    label: '月卡',
+    label: t('views.iot-card.data.yemonthar'),
     value: 'month',
   },
   {
-    label: '其他',
+    label: t('views.iot-card.data.other'),
     value: 'other',
   },
 ];
@@ -67,19 +68,19 @@ export const TypeList = [
 // 支付方式
 export const PaymentMethod = [
   {
-    label: '支付宝手机网站支付',
+    label: t('views.iot-card.data.ALIPAY_WAP'),
     value: 'ALIPAY_WAP',
   },
   {
-    label: '支付宝网页及时到账支付',
+    label: t('views.iot-card.data.ALIPAY_WEB'),
     value: 'ALIPAY_WEB',
   },
   {
-    label: '微信公众号支付',
+    label: t('views.iot-card.data.WEIXIN_JSAPI'),
     value: 'WEIXIN_JSAPI',
   },
   {
-    label: '微信扫码支付',
+    label: t('views.iot-card.data.WEIXIN_NATIVE'),
     value: 'WEIXIN_NATIVE',
   },
 ];

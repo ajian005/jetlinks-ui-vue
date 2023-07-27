@@ -1,7 +1,7 @@
 <template>
     <j-modal
         visible
-        title="详情"
+        :title="t('NotificationRecord.components.ViewDialog.5rmxnnwmp9s0')"
         width="754px"
         @cancel="emits('update:visible', false)"
         class="view-dialog-container"
@@ -28,27 +28,27 @@
                 }"
             >
                 <template v-if="data?.topicProvider === 'alarm-device'">
-                    <j-descriptions-item label="告警设备">
+                    <j-descriptions-item :label="t('NotificationRecord.components.ViewDialog.5rmxnnwmqr80')">
                         <j-ellipsis>{{ _data?.targetName || ''}}</j-ellipsis>
                     </j-descriptions-item>
-                    <j-descriptions-item label="设备ID">
+                    <j-descriptions-item :label="t('NotificationRecord.components.ViewDialog.5rmxnnwmqxo0')">
                         <j-ellipsis>
                             {{ _data?.targetId || '' }}
                         </j-ellipsis>
                     </j-descriptions-item>
                 </template>
-                <j-descriptions-item label="告警名称">
+                <j-descriptions-item :label="t('NotificationRecord.components.ViewDialog.5rmxnnwmr300')">
                     <j-ellipsis>
                         {{ _data?.alarmName || _data?.alarmConfigName || '' }}
                     </j-ellipsis>
                 </j-descriptions-item>
-                <j-descriptions-item label="告警时间">{{
+                <j-descriptions-item :label="t('NotificationRecord.components.ViewDialog.5rmxnnwmr7o0')">{{
                     dayjs(_data?.alarmTime).format('YYYY-MM-DD HH:mm:ss')
                 }}</j-descriptions-item>
-                <j-descriptions-item label="告警级别">{{
+                <j-descriptions-item :label="t('NotificationRecord.components.ViewDialog.5rmxnnwmrcs0')">{{
                     (levelList.length > 0 && getLevelLabel(_data.level)) || ''
                 }}</j-descriptions-item>
-                <j-descriptions-item label="告警说明">
+                <j-descriptions-item :label="t('NotificationRecord.components.ViewDialog.5rmxnnwmrik0')">
                     <j-ellipsis>
                         {{ _data?.description || '' }}
                     </j-ellipsis>
@@ -77,7 +77,10 @@ import { JsonViewer } from 'vue3-json-viewer';
 import 'vue3-json-viewer/dist/index.css';
 import { queryLevel as queryLevel_api } from '@/api/rule-engine/config';
 import dayjs from 'dayjs';
+import moment from 'moment';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emits = defineEmits(['update:visible']);
 const props = defineProps<{
     visible: boolean;

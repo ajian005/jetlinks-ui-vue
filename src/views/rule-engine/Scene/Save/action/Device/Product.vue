@@ -24,7 +24,7 @@
                 :value="slotProps"
                 :active="rowKey === slotProps.id"
                 :status="String(slotProps.state)"
-                :statusText="slotProps.state === 1 ? '正常' : '禁用'"
+                :statusText="slotProps.state === 1 ? t('action.Device.Product.5rg4q830fk80') : t('action.Device.Product.5rg4q830h940')"
                 :statusNames="{ '1': 'processing', '0': 'error' }"
                 @click="handleClick(slotProps)"
             >
@@ -50,15 +50,15 @@
                     </div>
                     <j-row>
                         <j-col :span="12">
-                            <div class="card-item-content-text">设备类型</div>
+                            <div class="card-item-content-text">{{t('action.Device.Product.5rg4q830hgw0')}}</div>
                             <Ellipsis>{{
                                 slotProps.deviceType?.text
                             }}</Ellipsis>
                         </j-col>
                         <j-col :span="12">
-                            <div class="card-item-content-text">接入方式</div>
+                            <div class="card-item-content-text">{{t('action.Device.Product.5rg4q830hnw0')}}</div>
                             <Ellipsis>{{
-                                slotProps?.accessName || '未接入'
+                                slotProps?.accessName || t('action.Device.Product.5rg4q830htc0')
                             }}</Ellipsis>
                         </j-col>
                     </j-row>
@@ -80,7 +80,9 @@ import { getTreeData_api } from '@/api/system/department';
 import { isNoCommunity } from '@/utils/utils';
 import { getImage } from '@/utils/comm';
 import { accessConfigTypeFilter } from '@/utils/setting';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
     (e: 'update:rowKey', data: string): void;
     (e: 'update:detail', data: any): void;
@@ -114,7 +116,7 @@ const columns = [
         },
     },
     {
-        title: '名称',
+        title: t('action.Device.Product.5rg4q830hys0'),
         dataIndex: 'name',
         width: 200,
         ellipsis: true,
@@ -124,7 +126,7 @@ const columns = [
         },
     },
     {
-        title: '网关类型',
+        title: t('action.Device.Product.5rg4q830i7g0'),
         dataIndex: 'accessProvider',
         width: 150,
         ellipsis: true,
@@ -139,7 +141,7 @@ const columns = [
         },
     },
     {
-        title: '接入方式',
+        title: t('action.Device.Product.5rg4q830hnw0'),
         dataIndex: 'accessName',
         width: 150,
         ellipsis: true,
@@ -155,39 +157,39 @@ const columns = [
         },
     },
     {
-        title: '设备类型',
+        title: t('action.Device.Product.5rg4q830hgw0'),
         dataIndex: 'deviceType',
         width: 150,
         search: {
             type: 'select',
             options: [
-                { label: '直连设备', value: 'device' },
-                { label: '网关子设备', value: 'childrenDevice' },
-                { label: '网关设备', value: 'gateway' },
+                { label: t('action.Device.Product.5rg4q830ie40'), value: 'device' },
+                { label: t('action.Device.Product.5rg4q830inc0'), value: 'childrenDevice' },
+                { label: t('action.Device.Product.5rg4q830is40'), value: 'gateway' },
             ],
         },
     },
     {
-        title: '状态',
+        title: t('action.Device.Product.5rg4q830iw80'),
         dataIndex: 'state',
         width: '90px',
         search: {
             type: 'select',
             options: [
-                { label: '禁用', value: 0 },
-                { label: '正常', value: 1 },
+                { label: t('action.Device.Product.5rg4q830h940'), value: 0 },
+                { label: t('action.Device.Product.5rg4q830fk80'), value: 1 },
             ],
         },
     },
     {
-        title: '说明',
+        title: t('action.Device.Product.5rg4q830j1c0'),
         dataIndex: 'describe',
         ellipsis: true,
         width: 300,
     },
     {
         dataIndex: 'classifiedId',
-        title: '分类',
+        title: t('action.Device.Product.5rg4q830j5s0'),
         hideInTable: true,
         search: {
             type: 'treeSelect',
@@ -208,7 +210,7 @@ const columns = [
     },
     {
         dataIndex: 'id$dim-assets',
-        title: '所属组织',
+        title: t('action.Device.Product.5rg4q830jb80'),
         hideInTable: true,
         search: {
             type: 'treeSelect',

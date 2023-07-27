@@ -7,6 +7,7 @@ import type { PopconfirmProps } from 'ant-design-vue/es/popconfirm'
 import { CSSProperties, PropType } from 'vue';
 import type { JColumnsProps } from './types'
 import JEmpty from '@/components/Empty/index.vue'
+import { useI18n } from 'vue-i18n'
 
 enum ModelEnum {
     TABLE = 'TABLE',
@@ -151,6 +152,7 @@ const JTable = defineComponent<JTableProps>({
         }
     } as any,
     setup(props: JTableProps, { slots, emit, expose }) {
+        const { t } = useI18n()
         const _model = ref<keyof typeof ModelEnum>(props.model ? props.model : ModelEnum.CARD); // 模式切换
         const column = ref<number>(props.gridColumn || 4);
         const _dataSource = ref<Record<string, any>[]>([])
@@ -299,12 +301,12 @@ const JTable = defineComponent<JTableProps>({
                             props.alertRender && props?.rowSelection && props?.rowSelection?.selectedRowKeys && props.rowSelection.selectedRowKeys?.length ?
                                 <div class={styles['jtable-alert']}>
                                     <Alert
-                                        message={'已选择' + props?.rowSelection?.selectedRowKeys?.length + '项'}
+                                        message={t('components.Table.index.Selected',{length:props?.rowSelection?.selectedRowKeys?.length})}
                                         type="info"
                                         onClose={() => {
                                             emit('cancelSelect')
                                         }}
-                                        closeText={<a-button type="link">取消选择</a-button>}
+                                        closeText={<a-button type="link">{t('components.Table.index.deselect')}</a-button>}
                                     />
                                 </div> : null
                         }
@@ -379,7 +381,7 @@ const JTable = defineComponent<JTableProps>({
                                     showTotal={(num) => {
                                         const minSize = pageIndex.value * pageSize.value + 1;
                                         const MaxSize = (pageIndex.value + 1) * pageSize.value;
-                                        return `第 ${minSize} - ${MaxSize > num ? num : MaxSize} 条/总共 ${num} 条`;
+                                        return t('components.Table.index.deselect',{num:(minSize-MaxSize)>num?num:MaxSize,total:num});
                                     }}
                                     onChange={(page, size) => {
                                         handleSearch({

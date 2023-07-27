@@ -66,14 +66,14 @@
                         <j-row>
                             <j-col :span="12">
                                 <div class="card-item-content-text">
-                                    通知方式
+                                    {{t('Save.components.NotifyTemplate.5rga9requr80')}}
                                 </div>
                                 <div>
                                     {{ getMethodTxt(slotProps.type) }}
                                 </div>
                             </j-col>
                             <j-col :span="12">
-                                <div class="card-item-content-text">说明</div>
+                                <div class="card-item-content-text">{{t('Save.components.NotifyTemplate.5rga9reqvk00')}}</div>
                                 <Ellipsis>
                                     {{ slotProps.description }}
                                 </Ellipsis>
@@ -95,6 +95,9 @@
 import TemplateApi from '@/api/notice/template';
 import { MSG_TYPE, NOTICE_METHOD } from '@/views/notice/const';
 import { noticeType, _variableMap } from '../../../data';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const props = defineProps({
     notifierId: {
         type: String,
@@ -127,7 +130,7 @@ const _selectedRowKeys = ref<string[]>([]);
 
 const columns = [
     {
-        title: '名称',
+        title: t('Save.components.NotifyTemplate.5rga9reqvp00'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -143,7 +146,7 @@ const columns = [
         },
     },
     {
-        title: '说明',
+        title: t('Save.components.NotifyTemplate.5rga9reqvk00'),
         dataIndex: 'description',
         key: 'description',
         search: {

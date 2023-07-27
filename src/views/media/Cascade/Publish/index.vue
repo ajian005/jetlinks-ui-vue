@@ -2,18 +2,18 @@
 <template>
     <j-modal
         v-model:visible="_vis"
-        title="推送"
-        cancelText="取消"
-        okText="确定"
+        :title="t('Cascade.Publish.index.5rg8ogcinoc0')"
+        :cancelText="t('Cascade.Publish.index.5rg8ogcitds0')"
+        :okText="t('Cascade.Publish.index.5rg8ogcitwc0')"
         width="900px"
         @ok="_vis = false"
         @cancel="_vis = false"
     >
         <j-row :gutter="20">
             <j-col :span="8">
-                <p>成功：{{ successCount }}</p>
+                <p>{{t('Cascade.Publish.index.suc') + successCount }}</p>
                 <j-space>
-                    <p>失败：{{ failCount }}</p>
+                    <p>{{t('Cascade.Publish.index.lose') + failCount }}</p>
                     <a
                         v-if="errMessage.length"
                         @click="
@@ -22,15 +22,15 @@
                                 data.name + '-推送失败',
                             )
                         "
-                        >下载</a
+                        >{{t('Cascade.Publish.index.5rg8ogciu4g0')}}</a
                     >
                 </j-space>
             </j-col>
             <j-col :span="8">
-                <p>推送通道数量：{{ data.count }}</p>
+                <p>{{t('Cascade.Publish.index.push') + data.count }}</p>
             </j-col>
             <j-col :span="8">
-                <p>已推送通道数量：{{ successCount + failCount }}</p>
+                <p>{{t('Cascade.Publish.index.pushed') + successCount + failCount }}</p>
             </j-col>
         </j-row>
         <div v-if="flag">
@@ -45,7 +45,9 @@ import { BASE_API_PATH, TOKEN_KEY } from '@/utils/variable';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { PropType } from 'vue';
 import { downloadObject } from '@/utils/utils';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:visible', data: boolean): void;
 };
@@ -72,7 +74,7 @@ watch(
 );
 
 /**
- * 推送
+ * {{t('Cascade.Publish.index.5rg8ogcinoc0')}}
  */
 const successCount = ref<number>(0);
 const failCount = ref<number>(0);

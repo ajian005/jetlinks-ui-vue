@@ -101,26 +101,28 @@ const imageTypes = reactive([
     'image/pjp',
     'image/pjpeg',
 ]);
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const user = useUserInfo();
 
 type KeyType = 'HomeView' | 'BindThirdAccount' | 'Subscribe' | 'StationMessage';
 const list: { key: KeyType; title: string }[] = [
     {
         key: 'HomeView',
-        title: '首页视图',
+        title: t('account.Center.index.5rmy0nei4q40'),
     },
     {
         key: 'BindThirdAccount',
-        title: '绑定第三方账号',
+        title: t('account.Center.index.5rmy0nei4uw0'),
     },
     {
         key: 'Subscribe',
-        title: '我的订阅',
+        title: t('account.Center.index.5rmy0nei4zk0'),
     },
     {
         key: 'StationMessage',
-        title: '站内信',
+        title: t('account.Center.index.5rmy0nei54k0'),
     },
 ];
 
@@ -213,6 +215,7 @@ onUnmounted(() => {
                         width: 100%;
                         margin-top: 10px;
                     }
+
                     .person-header-item-info-right-info {
                         width: 100%;
                     }

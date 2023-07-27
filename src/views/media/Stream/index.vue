@@ -28,7 +28,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('media.Stream.index.5rg3jccphhs0')}}
                         </PermissionButton>
                     </template>
                     <template #card="slotProps">
@@ -74,7 +74,7 @@
                                             class="card-item-content-text"
                                         >
                                             <div class="card-item-content-text">
-                                                服务商
+                                                {{t('media.Stream.index.5rg3jccpizw0')}}
                                             </div>
                                             <div class="card-item-content-text">
                                                 <j-tooltip>
@@ -155,14 +155,16 @@ import { getImage } from '@/utils/comm';
 import { query, remove, disable, enalbe } from '@/api/media/stream';
 import { onlyMessage } from '@/utils/comm';
 import { useMenuStore } from 'store/menu';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 const tableRef = ref<Record<string, any>>({});
 const params = ref<Record<string, any>>({});
 
 const columns = [
     {
-        title: '名称',
+        title: t('media.Stream.index.5rg3jccpjcw0'),
         dataIndex: 'name',
         key: 'name',
         search: {
@@ -171,18 +173,18 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '状态',
+        title: t('media.Stream.index.5rg3jccpjl00'),
         dataIndex: 'state',
         key: 'state',
         search: {
             type: 'select',
             options: [
                 {
-                    label: '禁用',
+                    label: t('media.Stream.index.5rg3jccpjw80'),
                     value: 'disabled',
                 },
                 {
-                    label: '正常',
+                    label: t('media.Stream.index.5rg3jccpk440'),
                     value: 'enabled',
                 },
             ],
@@ -194,13 +196,13 @@ const columns = [
 const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
     if (!data) return [];
     const state = data.state.value;
-    const stateText = state === 'enabled' ? '禁用' : '启用';
+    const stateText = state === 'enabled' ? t('media.Stream.index.5rg3jccpjw80') : t('media.Stream.index.5rg3jccpkag0');
     const actions = [
         {
             key: 'update',
-            text: '编辑',
+            text: t('media.Stream.index.5rg3jccpkh40'),
             tooltip: {
-                title: '编辑',
+                title: t('media.Stream.index.5rg3jccpkh40'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -215,14 +217,14 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
             },
             icon: state === 'enabled' ? 'StopOutlined' : 'CheckCircleOutlined',
             popConfirm: {
-                title: `确认${stateText}?`,
+                title: `${t('media.Stream.index.verify') + stateText}?`,
                 onConfirm: async () => {
                     let res =
                         state === 'enabled'
                             ? await disable(data.id)
                             : await enalbe(data.id);
                     if (res.success) {
-                        onlyMessage('操作成功', 'success');
+                        onlyMessage(t('media.Stream.index.5rg3jccpkok0'), 'success');
                         tableRef.value?.reload();
                     }
                 },
@@ -230,17 +232,17 @@ const getActions = (data: Partial<Record<string, any>>): ActionsType[] => {
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('media.Stream.index.5rg3jccpkxs0'),
             disabled: state === 'enabled',
             tooltip: {
-                title: state === 'enabled' ? '正常的流媒体不能删除' : '删除',
+                title: state === 'enabled' ? t('media.Stream.index.5rg3jccpl3w0') : t('media.Stream.index.5rg3jccpkxs0'),
             },
             popConfirm: {
-                title: '确认删除?',
+                title: t('media.Stream.index.5rg3jccpl9w0'),
                 onConfirm: async () => {
                     const res = await remove(data.id);
                     if (res.success) {
-                        onlyMessage('操作成功', 'success');
+                        onlyMessage(t('media.Stream.index.5rg3jccpkok0'), 'success');
                         tableRef.value.reload();
                     }
                 },

@@ -2,38 +2,21 @@
     <page-container>
         <div class="manager-container">
             <div class="left">
-                <j-input-search
-                    v-model:value="leftData.searchValue"
-                    placeholder="请输入"
-                    style="margin-bottom: 24px"
-                />
+                <j-input-search v-model:value="leftData.searchValue" :placeholder="t('DataSource.Management.index.5rg9zlwj22k0')" style="margin-bottom: 24px" />
                 <!-- 使用v-if用于解决异步加载数据后不展开的问题 -->
-                <j-tree
-                    v-if="leftData.treeData.length > 0"
-                    showLine
-                    defaultExpandAll
-                    :tree-data="leftData.treeData"
-                    v-model:selectedKeys="leftData.selectedKeys"
-                    @select="onSelect"
-                >
+                <j-tree v-if="leftData.treeData.length > 0" showLine defaultExpandAll :tree-data="leftData.treeData"
+                    v-model:selectedKeys="leftData.selectedKeys" @select="onSelect">
                     <template #title="{ dataRef }">
-                        <div
-                            v-if="dataRef.root"
-                            style="
+                        <div v-if="dataRef.root" style="
                                 justify-content: space-between;
                                 display: flex;
                                 align-items: center;
                                 width: 200px;
-                            "
-                        >
+                            ">
                             <span>
                                 {{ dataRef.title }}
                             </span>
-                            <AIcon
-                                type="PlusOutlined"
-                                style="color: #1d39c4"
-                                @click="addTable"
-                            />
+                            <AIcon type="PlusOutlined" style="color: #1d39c4" @click="addTable" />
                         </div>
                         <span v-else>
                             {{ dataRef.title }}
@@ -43,121 +26,76 @@
             </div>
             <div class="right">
                 <div class="btns">
-                    <j-button type="primary" @click="clickSave">保存</j-button>
+                    <j-button type="primary" @click="clickSave">{{t('DataSource.Management.index.5rg9zlwj3gg0')}}</j-button>
                 </div>
                 <j-form ref="formRef" :model="table">
-                    <j-table
-                        :columns="columns"
-                        :dataSource="table.data"
-                        :pagination="false"
-                        :scroll="{ y: 500 }"
-                    >
+                    <j-table :columns="columns" :dataSource="table.data" :pagination="false" :scroll="{ y: 500 }">
                         <template #bodyCell="{ column, record, index }">
                             <template v-if="column.key === 'name'">
-                                <j-form-item
-                                    :name="['data', index, 'name']"
-                                    :rules="[
-                                        {
-                                            max: 64,
-                                            message: '最多可输入64个字符',
-                                        },
-                                        {
-                                            required: true,
-                                            message: '请输入名称',
-                                        },
-                                    ]"
-                                >
-                                    <j-input
-                                        :disabled="record.old_id"
-                                        v-model:value="record.name"
-                                        placeholder="请输入名称"
-                                    />
+                                <j-form-item :name="['data', index, 'name']" :rules="[
+                                    {
+                                        max: 64,
+                                        message: t('DataSource.Management.index.5rg9zlwj3mc0'),
+                                    },
+                                    {
+                                        required: true,
+                                        message: t('DataSource.Management.index.5rg9zlwj3rw0'),
+                                    },
+                                ]">
+                                    <j-input :disabled="record.old_id" v-model:value="record.name" :placeholder="t('DataSource.Management.index.5rg9zlwj3rw0')" />
                                 </j-form-item>
                             </template>
                             <template v-else-if="column.key === 'type'">
-                                <j-form-item
-                                    :name="['data', index, 'type']"
-                                    :rules="[
-                                        {
-                                            max: 64,
-                                            message: '最多可输入64个字符',
-                                        },
-                                        {
-                                            required: true,
-                                            message: '请输入类型',
-                                        },
-                                    ]"
-                                >
-                                    <j-input
-                                        v-model:value="record.type"
-                                        placeholder="请输入类型"
-                                    />
+                                <j-form-item :name="['data', index, 'type']" :rules="[
+                                    {
+                                        max: 64,
+                                        message: t('DataSource.Management.index.5rg9zlwj3mc0'),
+                                    },
+                                    {
+                                        required: true,
+                                        message: t('DataSource.Management.index.5rg9zlwj3vw0'),
+                                    },
+                                ]">
+                                    <j-input v-model:value="record.type" :placeholder="t('DataSource.Management.index.5rg9zlwj3vw0')" />
                                 </j-form-item>
                             </template>
                             <template v-else-if="column.key === 'length'">
                                 <j-form-item :name="['data', index, 'length']">
-                                    <j-input-number
-                                        v-model:value="record.length"
-                                        :min="0"
-                                        :max="99999"
-                                        style="width: 100%"
-                                    />
+                                    <j-input-number v-model:value="record.length" :min="0" :max="99999"
+                                        style="width: 100%" />
                                 </j-form-item>
                             </template>
                             <template v-else-if="column.key === 'scale'">
                                 <j-form-item :name="['data', index, 'scale']">
-                                    <j-input-number
-                                        v-model:value="record.scale"
-                                        :min="0"
-                                        :max="99999"
-                                        style="width: 100%"
-                                    />
+                                    <j-input-number v-model:value="record.scale" :min="0" :max="99999"
+                                        style="width: 100%" />
                                 </j-form-item>
                             </template>
                             <template v-else-if="column.key === 'notnull'">
-                                <j-form-item
-                                    :name="['data', index, 'notnull']"
-                                    :rules="[
-                                        {
-                                            required: true,
-                                            message: '请选择是否不能为空',
-                                        },
-                                    ]"
-                                >
-                                    <j-radio-group
-                                        v-model:value="record.notnull"
-                                        button-style="solid"
-                                    >
-                                        <j-radio-button :value="true"
-                                            >是</j-radio-button
-                                        >
-                                        <j-radio-button :value="false"
-                                            >否</j-radio-button
-                                        >
+                                <j-form-item :name="['data', index, 'notnull']" :rules="[
+                                    {
+                                        required: true,
+                                        message: t('DataSource.Management.index.5rg9zlwj4080'),
+                                    },
+                                ]">
+                                    <j-radio-group v-model:value="record.notnull" button-style="solid">
+                                        <j-radio-button :value="true">{{t('DataSource.Management.index.5rg9zlwj4440')}}</j-radio-button>
+                                        <j-radio-button :value="false">{{t('DataSource.Management.index.5rg9zlwj47c0')}}</j-radio-button>
                                     </j-radio-group>
                                 </j-form-item>
                             </template>
                             <template v-else-if="column.key === 'comment'">
                                 <j-form-item :name="['data', index, 'comment']">
-                                    <j-input
-                                        v-model:value="record.comment"
-                                        placeholder="请输入说明"
-                                    />
+                                    <j-input v-model:value="record.comment" :placeholder="t('DataSource.Management.index.5rg9zlwj4aw0')" />
                                 </j-form-item>
                             </template>
                             <template v-else-if="column.key === 'action'">
-                                <PermissionButton
-                                    hasPermission="system/DataSource:delete"
-                                    type="link"
-                                    :tooltip="{ title: '删除' }"
-                                    :danger="true"
-                                    :popConfirm="{
-                                        title: `确认删除`,
+                                <PermissionButton hasPermission="system/DataSource:delete" type="link"
+                                    :tooltip="{ title: t('DataSource.Management.index.5rg9zlwj4ek0') }" :danger="true" :popConfirm="{
+                                        title: t('DataSource.Management.index.deleteTip'),
                                         onConfirm: () =>
                                             clickDel(record, index),
-                                    }"
-                                    :disabled="record.status"
-                                >
+                                    }" :disabled="record.status">
                                     <AIcon type="DeleteOutlined" />
                                 </PermissionButton>
                             </template>
@@ -166,30 +104,24 @@
                 </j-form>
 
                 <j-button class="add-row" @click="addRow">
-                    <AIcon type="PlusOutlined" /> 新增行
+                    <AIcon type="PlusOutlined" /> {{t('DataSource.Management.index.5rg9zlwj4i00')}}
                 </j-button>
             </div>
         </div>
-        <j-modal
-            :visible="true"
-            v-if="dialog.visible"
-            title="新增"
-            @ok="handleOk"
-            @cancel="handleCancel"
-        >
+        <j-modal :visible="true" v-if="dialog.visible" :title="t('DataSource.Management.index.5rg9zlwj4nk0')" @ok="handleOk" @cancel="handleCancel">
             <j-form :model="dialog.form" ref="addFormRef" :layout="'vertical'">
                 <j-form-item
-                    label="名称"
+                    :label="t('DataSource.Management.index.5rg9zlwj4qo0')"
                     name="name"
                     :required="true"
                     :rules="[
                         {
                             required: true,
-                            message: '请输入名称',
+                            message: t('DataSource.Management.index.5rg9zlwj3rw0'),
                         },
                         {
                             max: 64,
-                            message: '最多可输入64个字符',
+                            message: t('DataSource.Management.index.5rg9zlwj3mc0'),
                             trigger: 'change',
                         },
                         {
@@ -207,7 +139,7 @@
                 >
                     <j-input
                         v-model:value="dialog.form.name"
-                        placeholder="请输入名称"
+                        :placeholder="t('DataSource.Management.index.5rg9zlwj3rw0')"
                     />
                 </j-form-item>
             </j-form>
@@ -230,43 +162,45 @@ import { DataNode } from 'ant-design-vue/lib/tree';
 import _ from 'lodash';
 import { cloneDeep } from 'lodash';
 import type { dbColumnType, dictItemType, sourceItemType } from '../typing';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const id = useRoute().query.id as string;
 
 const columns = [
     {
-        title: '列名',
+        title: t('DataSource.Management.index.5rg9zlwj4xk0'),
         dataIndex: 'name',
         key: 'name',
     },
     {
-        title: '类型',
+        title: t('DataSource.Management.index.5rg9zlwj5200'),
         dataIndex: 'type',
         key: 'type',
     },
     {
-        title: '长度',
+        title: t('DataSource.Management.index.5rg9zlwj55k0'),
         dataIndex: 'length',
         key: 'length',
     },
     {
-        title: '精度',
+        title: t('DataSource.Management.index.5rg9zlwj58s0'),
         dataIndex: 'scale',
         key: 'scale',
     },
     {
-        title: '不能为空',
+        title: t('DataSource.Management.index.5rg9zlwj5fg0'),
         dataIndex: 'notnull',
         key: 'notnull',
         width: 130
     },
     {
-        title: '说明',
+        title: t('DataSource.Management.index.5rg9zlwj5j80'),
         dataIndex: 'comment',
         key: 'comment',
     },
     {
-        title: '操作',
+        title: t('DataSource.Management.index.5rg9zlwj5o80'),
         dataIndex: 'action',
         key: 'action',
     },
@@ -318,7 +252,7 @@ const handleSearch = (refresh?: boolean) => {
                 }
             }
         })
-        .catch(() => {});
+        .catch(() => { });
 };
 
 const onSelect = (selectedKeys: string[], e?: any) => {
@@ -390,7 +324,7 @@ const clickSave = () => {
             delete item?.index
         });
         if (!columns.length) {
-            onlyMessage('请配置数据源字段', 'error');
+            onlyMessage(t('DataSource.Management.index.5rg9zlwj5r80'), 'error');
             return;
         }
         const params = {
@@ -399,7 +333,7 @@ const clickSave = () => {
         };
         saveTable_api(id, params).then((resp) => {
             if (resp.status === 200) {
-                onlyMessage('操作成功');
+                onlyMessage(t('DataSource.Management.index.5rg9zlwj5ug0'));
                 queryTables(params.name);
             }
         });
@@ -479,7 +413,7 @@ const checkName = (_: any, value: any) =>
         if (value) {
             const first = value.slice(0, 1);
             if (typeof Number(first) === 'number' && !isNaN(Number(first))) {
-                reject('不能以数字开头');
+                reject(t('DataSource.Management.index.5rg9zlwj5x00'));
             } else {
                 resolve('');
             }
@@ -501,6 +435,7 @@ const checkName = (_: any, value: any) =>
         padding: 0 24px;
         box-sizing: border-box;
     }
+
     .right {
         width: calc(100% - 280px);
         box-sizing: border-box;

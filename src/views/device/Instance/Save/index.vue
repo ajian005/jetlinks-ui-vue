@@ -3,7 +3,7 @@
         :maskClosable="false"
         width="650px"
         :visible="true"
-        :title="!!data?.id ? '编辑' : '新增'"
+        :title="!!data?.id ? t('Instance.Save.index.5rg4mi4y4qs0') : t('Instance.Save.index.5rg4mi4y7f00')"
         @ok="handleSave"
         @cancel="handleCancel"
         :confirmLoading="loading"
@@ -22,11 +22,11 @@
                             :rules="[
                                 {
                                     pattern: /^[a-zA-Z0-9_\-]+$/,
-                                    message: '请输入英文或者数字或者-或者_',
+                                    message: t('Instance.Save.index.5rcy87xoavw0'),
                                 },
                                 {
                                     max: 64,
-                                    message: '最多输入64个字符',
+                                    message: t('Instance.Save.index.5rg4mi4y9i80'),
                                 },
                                 {
                                     validator: vailId,
@@ -38,7 +38,7 @@
                                 <span>
                                     ID
                                     <j-tooltip
-                                        title="若不填写，系统将自动生成唯一ID"
+                                        :title="t('Instance.Save.index.5rcy87xob6s0')"
                                     >
                                         <AIcon
                                             type="QuestionCircleOutlined"
@@ -49,27 +49,27 @@
                             </template>
                             <j-input
                                 v-model:value="modelRef.id"
-                                placeholder="请输入ID"
+                                :placeholder="t('Instance.Save.index.5rcy87xobc40')"
                                 :disabled="!!data?.id"
                             />
                         </j-form-item>
                         <j-form-item
-                            label="名称"
+                            :label="t('Instance.Save.index.5rg4mi4y8jo0')"
                             name="name"
                             :rules="[
                                 {
                                     required: true,
-                                    message: '请输入名称',
+                                    message: t('Instance.Save.index.5rg4mi4y8sw0'),
                                 },
                                 {
                                     max: 64,
-                                    message: '最多输入64个字符',
+                                    message: t('Instance.Save.index.5rg4mi4y9i80'),
                                 },
                             ]"
                         >
                             <j-input
                                 v-model:value="modelRef.name"
-                                placeholder="请输入名称"
+                                :placeholder="t('Instance.Save.index.5rg4mi4y8sw0')"
                             />
                         </j-form-item>
                     </j-col>
@@ -79,14 +79,15 @@
                     :rules="[
                         {
                             required: true,
-                            message: '请选择所属产品',
+                            message: t('Instance.Save.index.5rcy87xobpo0'),
                         },
                     ]"
                 >
                     <template #label>
                         <span
-                            >所属产品
-                            <j-tooltip title="只能选择“正常”状态的产品">
+                            >
+                            {{t('Instance.Save.index.5rh473it3qc0')}}
+                            <j-tooltip :title="t('Instance.Save.index.5rcy87xobu40')">
                                 <AIcon
                                     type="QuestionCircleOutlined"
                                     style="margin-left: 2px"
@@ -98,7 +99,7 @@
                         showSearch
                         v-model:value="modelRef.productId"
                         :disabled="!!data?.id"
-                        placeholder="请选择状态为“正常”的产品"
+                        :placeholder="t('Instance.Save.index.5rcy87xoc040')"
                     >
                         <j-select-option
                             :value="item.id"
@@ -110,18 +111,18 @@
                     </j-select>
                 </j-form-item>
                 <j-form-item
-                    label="说明"
+                    :label="t('Instance.Save.index.5rg4mi4y91w0')"
                     name="describe"
                     :rules="[
                         {
                             max: 200,
-                            message: '最多输入200个字符'
+                            message: t('Instance.Save.index.5rcy87xoc8s0')
                         },
                     ]"
                 >
                     <j-textarea
                         v-model:value="modelRef.describe"
-                        placeholder="请输入说明"
+                        :placeholder="t('Instance.Save.index.5rg4mi4y9bw0')"
                         showCount
                         :maxlength="200"
                     />
@@ -135,7 +136,9 @@
 import { queryNoPagingPost } from '@/api/device/product';
 import { isExists, update } from '@/api/device/instance';
 import { getImage, onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close', 'save']);
 const props = defineProps({
     data: {
@@ -160,7 +163,7 @@ const vailId = async (_: Record<string, any>, value: string) => {
     if (!props?.data?.id && value) {
         const resp = await isExists(value);
         if (resp.status === 200 && resp.result) {
-            return Promise.reject('ID重复');
+            return Promise.reject(t('Instance.Save.index.IDRepeat'));
         } else {
             return Promise.resolve();
         }
@@ -216,7 +219,7 @@ const handleSave = () => {
                 loading.value = false;
             });
             if (resp.status === 200) {
-                onlyMessage('操作成功！');
+                onlyMessage(t('Instance.Save.index.5rg4mi4y9s00'));
                 emit('save');
                 formRef.value.resetFields();
             }

@@ -78,7 +78,7 @@ const subscribeNotice = () => {
                       }
                     },
                     {
-                      default: () => "标记已读"
+                      default: () => t('Layout.components.Notice.5rlcd0kkc7w0')
                     }
                   ),
             });

@@ -1,25 +1,25 @@
 <template>
   <j-modal
-    title="选择处理方式"
+    :title="t('Detail.DeviceAccess.metadataModal.5rcy30umqtc0')"
     visible
     width="900px"
-    okText="确定"
-    cancelText="取消"
+    :okText="t('Detail.DeviceAccess.metadataModal.5rcy30umrzg0')"
+    :cancelText="t('Detail.DeviceAccess.metadataModal.5rcy30umscs0')"
     :confirmLoading='loading'
     @ok="submitData"
     @cancel="cancel"
   >
     <div class='tip'>
       <a-icon type='ExclamationCircleOutlined'/>
-      平台
-      <span style='font-weight: bold;padding:0 4px;'>物模型</span>
-      中已有数据，请选择处理方式。
-      <j-tooltip title='默认采用覆盖的方式处理功能、事件、标签下的数据'>
+      {{t('Detail.DeviceAccess.metadataModal.5rcy30umsn00')}}
+      <span style='font-weight: bold;padding:0 4px;'>{{t('Detail.DeviceAccess.metadataModal.5rcy30umsw80')}}</span>
+      {{t('Detail.DeviceAccess.metadataModal.5rcy30umt600')}}
+      <j-tooltip :title="t('Detail.DeviceAccess.metadataModal.5rcy30umtf00')">
         <a-icon type='QuestionCircleOutlined' />
       </j-tooltip>
     </div>
     <j-form :layout="'vertical'" ref='formRef' :model='handleData'>
-      <j-form-item label='处理方式' :rules='[{ required: true, message: "请选择处理方式"}]' >
+      <j-form-item :label="t('Detail.DeviceAccess.metadataModal.5rcy30umtnw0')" :rules="[{ required: true, message: t('Detail.DeviceAccess.metadataModal.processingMode')}]" >
         <j-card-select
           v-model:value="handleData.type"
           :column='4'
@@ -40,7 +40,9 @@ import { getImage, onlyMessage } from '@/utils/comm'
 import { storeToRefs } from 'pinia'
 import { modify, updateDevice } from '@/api/device/product'
 import { savePluginData } from '@/api/link/plugin'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'submit'): void
   (e: 'cancel'): void
@@ -73,26 +75,26 @@ const loading = ref(false)
 const options = [
   {
     value: 'intersection',
-    label: '取交集',
-    subLabel: '仅保留标识一致的属性',
+    label: t('Detail.DeviceAccess.metadataModal.5rcy30umtxc0'),
+    subLabel: t('Detail.DeviceAccess.metadataModal.5rcy30umu5s0'),
     iconUrl: getImage('/device/intersection.png'),
   },
   {
     value: 'union',
-    label: '取并集',
-    subLabel: '保留平台、插件中的所有属性',
+    label: t('Detail.DeviceAccess.metadataModal.5rcy30umui80'),
+    subLabel: t('Detail.DeviceAccess.metadataModal.5rcy30umurg0'),
     iconUrl: getImage('/device/union.png'),
   },
   {
     value: 'ignore',
-    label: '忽略',
-    subLabel: '仅保留平台中的属性',
+    label: t('Detail.DeviceAccess.metadataModal.5rcy30umuzw0'),
+    subLabel: t('Detail.DeviceAccess.metadataModal.5rcy30umv8k0'),
     iconUrl: getImage('/device/ignore.png'),
   },
   {
     value: 'cover',
-    label: '覆盖',
-    subLabel: '仅保留插件中的属性',
+    label: t('Detail.DeviceAccess.metadataModal.5rcy30umvho0'),
+    subLabel: t('Detail.DeviceAccess.metadataModal.5rcy30umvq00'),
     iconUrl: getImage('/device/cover.png'),
   }
 ]
@@ -149,7 +151,7 @@ const updateAccessData = async (id: string, values: any, metadata: string) => {
   });
   loading.value = false
   if (resp.status === 200) {
-    onlyMessage('操作成功！');
+    onlyMessage(t('Detail.DeviceAccess.metadataModal.5rcy30umvyw0'));
     productStore.current!.storePolicy = storePolicy;
     if ((window as any).onTabSaveSuccess) {
       if (resp.result) {

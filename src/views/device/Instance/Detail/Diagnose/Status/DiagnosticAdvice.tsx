@@ -24,7 +24,7 @@ const DiagnosticAdvice = defineComponent({
             }}
         >
             <div>
-                <TitleComponent data="诊断建议" />
+                <TitleComponent data={t('Instance.tsx.diagnostic.suggest')} />
                 <div class={styles.advice}>
                     <div class={styles.alert}>
                         <span style={{ marginRight: 10 }}><AIcon type="InfoCircleOutlined" /></span>

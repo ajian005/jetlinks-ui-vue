@@ -72,6 +72,7 @@ const confirm = () => {
         .ant-form {
             .ant-form-item-label {
                 color: green;
+
                 .ant-form-item-required {
                     &::before {
                         position: absolute;

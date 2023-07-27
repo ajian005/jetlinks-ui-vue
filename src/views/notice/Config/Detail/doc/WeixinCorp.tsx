@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const WeixinCorp = () => {
+    const { t } = useI18n()
     const corpId = getImage(
         '/notice/doc/config/weixin-corp/01-corpId.jpg',
     );

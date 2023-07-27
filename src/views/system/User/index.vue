@@ -18,88 +18,55 @@
                     }"
                 >
                     <template #headerTitle>
-                        <PermissionButton
-                            :hasPermission="`${permission}:add`"
-                            type="primary"
-                            @click="table.openDialog('add')"
-                        >
-                            <AIcon type="PlusOutlined" />新增
+                        <PermissionButton :hasPermission="`${permission}:add`" type="primary"
+                            @click="table.openDialog('add')">
+                            <AIcon type="PlusOutlined" />
+                            {{t('system.User.index.5rkjhmivlto0')}}
                         </PermissionButton>
                     </template>
                     <template #type="slotProps">
                         {{ slotProps.type?.name }}
                     </template>
                     <template #status="slotProps">
-                        <BadgeStatus
-                            :status="slotProps.status"
-                            :text="slotProps.status ? '正常' : '禁用'"
+                        <BadgeStatus :status="slotProps.status"
+                            :text="slotProps.status ? t('system.User.index.5rg8tfgglf40') : t('system.User.index.5rg8tfggmow0')"
                             :statusNames="{
                                 1: 'success',
                                 0: 'error',
-                            }"
-                        ></BadgeStatus>
+                            }"></BadgeStatus>
                     </template>
                     <template #action="slotProps">
                         <j-space :size="16">
-                            <PermissionButton
-                                :hasPermission="`${permission}:update`"
-                                type="link"
-                                :tooltip="{
-                                    title: '编辑',
-                                }"
-                                @click="table.openDialog('edit', slotProps)"
-                            >
+                            <PermissionButton :hasPermission="`${permission}:update`" type="link" :tooltip="{
+                                title: t('system.User.index.5rg8tfggmx40'),
+                            }" @click="table.openDialog('edit', slotProps)">
                                 <AIcon type="EditOutlined" />
                             </PermissionButton>
-                            <PermissionButton
-                                :hasPermission="`${permission}:action`"
-                                type="link"
-                                :tooltip="{
-                                    title: `${
-                                        slotProps.status ? '禁用' : '启用'
-                                    }`,
-                                }"
-                                :popConfirm="{
-                                    title: `确定${
-                                        slotProps.status ? '禁用' : '启用'
-                                    }吗？`,
-                                    onConfirm: () =>
-                                        table.changeStatus(slotProps),
-                                }"
-                            >
-                                <AIcon
-                                    :type="
-                                        slotProps.status
-                                            ? 'StopOutlined'
-                                            : 'PlayCircleOutlined'
-                                    "
-                                />
+                            <PermissionButton :hasPermission="`${permission}:action`" type="link" :tooltip="{
+                                title: `${slotProps.status ? t('system.User.index.5rg8tfggmow0') : t('system.User.index.5rg8tfggn1w0')}`,
+                            }" :popConfirm="{
+    title:t('system.User.index.verify',{stateText:slotProps.status ? t('system.User.index.5rg8tfggmow0') : t('system.User.index.5rg8tfggn1w0')}), onConfirm: () =>
+        table.changeStatus(slotProps),
+}">
+                                <AIcon :type="slotProps.status
+                                    ? 'StopOutlined'
+                                    : 'PlayCircleOutlined'
+                                    " />
                             </PermissionButton>
-                            <PermissionButton
-                                :hasPermission="`${permission}:update`"
-                                type="link"
-                                :tooltip="{
-                                    title: '重置密码',
-                                }"
-                                @click="table.openDialog('reset', slotProps)"
-                            >
+                            <PermissionButton :hasPermission="`${permission}:update`" type="link" :tooltip="{
+                                title: t('system.User.index.5rg8tfggn5o0'),
+                            }" @click="table.openDialog('reset', slotProps)">
                                 <AIcon type="icon-zhongzhimima" />
                             </PermissionButton>
-                            <PermissionButton
-                                type="link"
-                                :hasPermission="`${permission}:delete`"
-                                :tooltip="{
-                                    title: slotProps.status
-                                        ? '请先禁用，再删除'
-                                        : '删除',
-                                }"
-                                :popConfirm="{
-                                    title: `确认删除`,
-                                    onConfirm: () =>
-                                        table.clickDel(slotProps.id),
-                                }"
-                                :disabled="slotProps.status"
-                            >
+                            <PermissionButton type="link" :hasPermission="`${permission}:delete`" :tooltip="{
+                                title: slotProps.status
+                                    ? t('system.User.index.5rg8tfggne40')
+                                    : t('system.User.index.5rg8tfggnlw0'),
+                            }" :popConfirm="{
+    title: t('system.User.index.deleteTip'),
+    onConfirm: () =>
+        table.clickDel(slotProps.id),
+}" :disabled="slotProps.status">
                                 <AIcon type="DeleteOutlined" />
                             </PermissionButton>
                         </j-space>
@@ -107,13 +74,8 @@
                 </j-pro-table>
             </FullPage>
 
-            <EditUserDialog
-                v-if="dialog.visible"
-                :type="dialog.type"
-                v-model:visible="dialog.visible"
-                :data="dialog.selectItem"
-                @confirm="table.refresh"
-            />
+            <EditUserDialog v-if="dialog.visible" :type="dialog.type" v-model:visible="dialog.visible"
+                :data="dialog.selectItem" @confirm="table.refresh" />
         </div>
     </page-container>
 </template>
@@ -128,12 +90,14 @@ import {
     deleteUser_api,
 } from '@/api/system/user';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const permission = 'system/User';
 
 const columns = [
     {
-        title: '姓名',
+        title: t('system.User.index.5rg8tfggnps0'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -142,7 +106,7 @@ const columns = [
         },
     },
     {
-        title: '用户名',
+        title: t('system.User.index.5rg8tfggntg0'),
         dataIndex: 'username',
         key: 'username',
         ellipsis: true,
@@ -151,7 +115,7 @@ const columns = [
         },
     },
     {
-        title: '用户类型',
+        title: t('system.User.index.5rg8tfggnww0'),
         dataIndex: 'type',
         key: 'type',
         ellipsis: true,
@@ -172,7 +136,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '状态',
+        title: t('system.User.index.5rg8tfggo040'),
         dataIndex: 'status',
         key: 'status',
         ellipsis: true,
@@ -181,11 +145,11 @@ const columns = [
             type: 'select',
             options: [
                 {
-                    label: '正常',
+                    label: t('system.User.index.5rg8tfgglf40'),
                     value: 1,
                 },
                 {
-                    label: '禁用',
+                    label: t('system.User.index.5rg8tfggmow0'),
                     value: 0,
                 },
             ],
@@ -193,7 +157,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '手机号',
+        title: t('system.User.index.5rg8tfggo6w0'),
         dataIndex: 'telephone',
         key: 'telephone',
         ellipsis: true,
@@ -202,7 +166,7 @@ const columns = [
         },
     },
     {
-        title: '邮箱',
+        title: t('system.User.index.5rg8tfggoa80'),
         dataIndex: 'email',
         key: 'email',
         ellipsis: true,
@@ -211,7 +175,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('system.User.index.5rg8tfggodw0'),
         dataIndex: 'action',
         key: 'action',
         fixed: 'right',
@@ -235,14 +199,14 @@ const table = {
             id,
         };
         changeUserStatus_api(params).then(() => {
-            onlyMessage('操作成功');
+            onlyMessage(t('system.User.index.5rg8tfggoh80'));
             table.refresh();
         });
     },
     // 删除
     clickDel: (id: string) => {
         deleteUser_api(id).then(() => {
-            onlyMessage('操作成功');
+            onlyMessage(t('system.User.index.5rg8tfggoh80'));
             table.refresh();
         });
     },
@@ -292,7 +256,7 @@ const handleParams = (params: any) => {
             }
             return item2;
         });
-        if(arr.length){
+        if (arr.length) {
             item1.terms = [...item1.terms, ...arr]
         }
         return item1;

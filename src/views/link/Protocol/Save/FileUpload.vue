@@ -1,7 +1,7 @@
 <template>
     <j-spin :spinning="loading">
         <j-input
-            placeholder="请上传文件"
+            :placeholder="t('Protocol.Save.FileUpload.5rg3c03fs5s0')"
             v-model:value="value"
             style="width: calc(100% - 100px)"
             :disabled="true"
@@ -19,7 +19,7 @@
             class="upload-box"
             :beforeUpload="beforeUpload"
         >
-            <j-button type="primary">上传jar包</j-button>
+            <j-button type="primary">{{t('Protocol.Save.FileUpload.5rg3c03fsy80')}}</j-button>
         </j-upload>
     </j-spin>
 </template>
@@ -32,7 +32,9 @@ import { onlyMessage } from '@/utils/comm';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 import { notification as Notification } from 'jetlinks-ui-components';
 import { useSystem } from '@/store/system';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['update:modelValue', 'change']);
 
 const props = defineProps({
@@ -67,7 +69,7 @@ const handleChange = async (info: UploadChangeParam) => {
         const f = `${paths || ''}/file/${result.id}?accessKey=${
             result.others.accessKey
         }`;
-        onlyMessage('上传成功！', 'success');
+        onlyMessage(t('Protocol.Save.FileUpload.5rg3c03ft8s0'), 'success');
         value.value = f;
         emit('update:modelValue', f);
         emit('change', f);
@@ -75,8 +77,8 @@ const handleChange = async (info: UploadChangeParam) => {
         if (info.file.error) {
             Notification.error({
                 // key: '403',
-                message: '系统提示',
-                description: '系统未知错误，请反馈给管理员',
+                message: t('Protocol.Save.FileUpload.5rg3c03ftd80'),
+                description: t('Protocol.Save.FileUpload.5rg3c03ftho0'),
             });
             loading.value = false;
         } else if (info.file.response) {

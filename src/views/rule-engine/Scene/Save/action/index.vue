@@ -1,7 +1,7 @@
 <template>
   <div class='actions'>
     <div class='actions-title'>
-      <span>执行</span>
+      <span>{{t('Save.action.index.5rg4wraqu140')}}</span>
       <ShakeLimit
         v-if='props.openShakeLimit'
         v-model:value='FormModel.branches[name].shakeLimit'
@@ -12,9 +12,9 @@
         <j-collapse-panel key='1'>
           <template #header>
                           <span>
-                              串行
+                              {{t('Save.action.index.5rg4wraqwbk0')}}
                               <span class='panel-tip'>
-                                  按顺序依次执行动作，适用于基于动作输出参数，判断是否执行后续动作的场景
+                                  {{t('Save.action.index.5rg4wraqwzs0')}}
                               </span>
                           </span>
           </template>
@@ -34,9 +34,9 @@
         <j-collapse-panel key='2'>
           <template #header>
                           <span>
-                              并行
+                              {{t('Save.action.index.5rg4wraqxc40')}}
                               <span class='panel-tip'>
-                                  同时执行所有动作，适用于不需要关注执行动作先后顺序和结果的场景
+                                  {{t('Save.action.index.5rg4wraqxis0')}}
                               </span>
                           </span>
           </template>
@@ -69,7 +69,9 @@ import { randomString } from '@/utils/utils'
 import { storeToRefs } from 'pinia'
 import { useSceneStore } from 'store/scene'
 import { Form } from 'jetlinks-ui-components'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data: FormModel } = storeToRefs(sceneStore)
 

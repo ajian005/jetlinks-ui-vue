@@ -1,7 +1,7 @@
 <template>
     <div class="channel-tree">
         <div class="channel-tree-query">
-            <j-input @change="queryTree" placeholder="请输入目录名称">
+            <j-input @change="queryTree" :placeholder="t('Channel.Tree.index.5rg8aizzfw00')">
                 <template #suffix>
                     <AIcon type="SearchOutlined" />
                 </template>
@@ -30,11 +30,13 @@
 import { debounce } from 'lodash';
 import ChannelApi from '@/api/media/channel';
 import DeviceApi from '@/api/media/device';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface TreeProps {
     deviceId: string;
     onSelect: (id: string) => void;
-    onTreeLoad: (type: boolean) => void;
+    // onTreeLoad: (type: boolean) => void;
 }
 
 const props = defineProps<TreeProps>();
@@ -45,7 +47,7 @@ const selectedKeys = ref<string[]>([]);
 const getTreeData = async (id: string, data?: any) => {
     const { result } = await ChannelApi.queryTree(id, data);
     treeData.value[0].children = result || [];
-    props.onTreeLoad(treeData.value[0].children.length > 10);
+    // props.onTreeLoad(treeData.value[0].children.length > 10);
     treeData.value = treeData.value;
 };
 

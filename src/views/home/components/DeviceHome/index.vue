@@ -20,16 +20,10 @@
         </j-row>
 
         <div class="dialog">
-            <ProductChooseDialog
-                v-if="productDialogVisible"
-                v-model:visible="productDialogVisible"
-                @confirm="(id:string)=>jumpPage('device/Product/Detail', { id, tab: 'Device'})"
-            />
-            <DeviceChooseDialog
-                v-if="deviceDialogVisible"
-                v-model:visible="deviceDialogVisible"
-                @confirm="(id:string)=>jumpPage('device/Instance/Detail', { id, tab: 'Diagnose' })"
-            />
+            <ProductChooseDialog v-if="productDialogVisible" v-model:visible="productDialogVisible"
+                @confirm="(id: string) => jumpPage('device/Product/Detail', { id, tab: 'Device' })" />
+            <DeviceChooseDialog v-if="deviceDialogVisible" v-model:visible="deviceDialogVisible"
+                @confirm="(id: string) => jumpPage('device/Instance/Detail', { id, tab: 'Diagnose' })" />
         </div>
     </div>
 </template>

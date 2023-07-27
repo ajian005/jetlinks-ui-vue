@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div class="dash-board">
           <j-select
               v-if="serverNodeOptions.length > 1"
@@ -28,7 +27,7 @@
                   :max="topValues.usageTotal"
                   :value="topValues.usage"
                   formatter="G"
-                  title="磁盘占用"
+                  :title="t('DashBoard.components.TopCard.5rg346ec9kc0')"
               />
             </div>
             <div class="dash-board-item">
@@ -37,7 +36,7 @@
                   :max="topValues.systemUsageTotal"
                   :value="topValues.systemUsage"
                   formatter="G"
-                  title="系统内存"
+                  :title="t('DashBoard.components.TopCard.5rg346eccjc0')"
               />
             </div>
           </div>
@@ -52,7 +51,9 @@ import TopEchartsItemNode from './TopEchartsItemNode.vue';
 import { getWebSocket } from '@/utils/websocket';
 import { map } from 'rxjs/operators';
 import { isNoCommunity } from '@/utils/utils'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const serverId = ref();
 const serverNodeOptions = ref<Array<any>>([]);
 const topValues = ref({
@@ -73,9 +74,9 @@ const serverIdChange = (val: string) => {
 };
 
 const unSub = () => {
-  if (wsRef.value) {
-    wsRef.value.unsubscribe()
-  }
+    if (wsRef.value) {
+        wsRef.value.unsubscribe()
+    }
 }
 
 const getData = () => {
@@ -121,24 +122,24 @@ const getData = () => {
 onMounted(() => {
   console.log('isNoCommunity')
     if (isNoCommunity) {
-      serverNode().then((resp: any) => {
-          if (resp.success) {
-              serverNodeOptions.value = resp.result.map((item: any) => ({
-                  label: item.name,
-                  value: item.id,
-              }));
-              if (serverNodeOptions.value.length) {
-                  serverId.value = serverNodeOptions.value[0]?.value;
-              }
-          }
-      });
+        serverNode().then((resp: any) => {
+            if (resp.success) {
+                serverNodeOptions.value = resp.result.map((item: any) => ({
+                    label: item.name,
+                    value: item.id,
+                }));
+                if (serverNodeOptions.value.length) {
+                    serverId.value = serverNodeOptions.value[0]?.value;
+                }
+            }
+        });
     } else {
-      getData()
+        getData()
     }
 });
 
 onUnmounted(() => {
-  unSub()
+    unSub()
 })
 
 watch(
@@ -171,10 +172,10 @@ watch(
 }
 
 @media (max-width: 1400px) {
-  .dash-board {
-    .dash-board-item {
-      min-width: calc(50% - 24px);
+    .dash-board {
+        .dash-board-item {
+            min-width: calc(50% - 24px);
+        }
     }
-  }
 }
 </style>

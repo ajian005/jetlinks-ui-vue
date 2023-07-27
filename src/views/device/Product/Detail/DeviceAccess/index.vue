@@ -8,17 +8,17 @@
                         permissionStore.hasPermission('device/Product:update')
                     "
                 >
-                    请先<j-button type="link" @click="showModal">选择</j-button
-                    >设备接入网关，用以提供设备接入能力
+                    {{t('Detail.DeviceAccess.index.5rcy2w1ljj80')}}<j-button type="link" @click="showModal">{{t('Detail.DeviceAccess.index.5rcy2w1lkmg0')}}</j-button
+                    >{{t('Detail.DeviceAccess.index.accessTip')}}
                 </span>
-                <span v-else>请联系管理员配置产品接入方式</span>
+                <span v-else>{{t('Detail.DeviceAccess.index.5rcy2w1lkug0')}}</span>
             </template>
         </j-empty>
     </div>
     <div v-else>
         <j-row :gutter="24">
             <j-col :span="12">
-                <Title data="接入方式">
+                <Title :data="t('Detail.DeviceAccess.index.5rcy2w1ll040')">
                     <template #extra>
                         <PermissionButton
                             style="margin: 0 0 0 20px"
@@ -32,7 +32,7 @@
                             @click="showDevice"
                             hasPermission="device/Product:update"
                         >
-                            更换
+                            {{t('Detail.DeviceAccess.index.5rcy2w1ll680')}}
                         </PermissionButton>
                     </template>
                 </Title>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="item-style">
-                    <Title data="消息协议"></Title>
+                    <Title :data="t('Detail.DeviceAccess.index.5rcy2w1llbg0')"></Title>
                     <div>
                         {{ access?.protocolDetail?.name }}
                     </div>
@@ -58,7 +58,7 @@
                     <div v-if="config?.document" v-html="markdownToHtml"></div>
                 </div>
                 <div class="item-style">
-                    <Title data="连接信息"></Title>
+                    <Title :data="t('Detail.DeviceAccess.index.5rcy2w1llg40')"></Title>
                     <div v-if="access?.channelInfo?.addresses.length > 0">
                         <div
                             v-for="item in access?.channelInfo?.addresses"
@@ -71,16 +71,16 @@
                             </j-badge>
                         </div>
                     </div>
-                    <div v-else>{{ '暂无连接信息' }}</div>
+                    <div v-else>{{ t('Detail.DeviceAccess.index.5rcy2w1llm40') }}</div>
                 </div>
                 <!--        产品类型        -->
                 <j-form ref="pluginFormRef" :model="productData" layout="vertical" v-if='productTypes.length'>
-                  <j-form-item name='id' label='产品类型' :rules='[{ required: true, message: "请选择产品类型"}]'>
+                  <j-form-item name='id' :label="t('Detail.DeviceAccess.index.5rcy2w1lls00')" :rules="[{ required: true, message: t('Detail.DeviceAccess.index.productTip')}]">
                     <j-select
                       v-model:value='productData.id'
                       :options='productTypes'
                       @change='productTypeChange'
-                      placeholder='请选择产品类型'
+                      :placeholder="t('Detail.DeviceAccess.index.5rcy2w1llwk0')"
                     />
                   </j-form-item>
 
@@ -92,7 +92,7 @@
                     class="config"
                 >
                     <template #extra>
-                        <j-tooltip title="此配置来自于产品接入方式所选择的协议">
+                        <j-tooltip :title="t('Detail.DeviceAccess.index.5rcy2w1lm4o0')">
                             <AIcon
                                 type="QuestionCircleOutlined"
                                 style="margin-left: 2px"
@@ -111,24 +111,24 @@
                                 required: !!item?.type?.expands?.required,
                                 message: `${
                                     item.type.type === 'enum'
-                                        ? '请选择'
-                                        : '请输入'
+                                        ? t('Detail.DeviceAccess.index.5rcy2w1lm900')
+                                        : t('Detail.DeviceAccess.index.5rcy2w1lmg80')
                                 }${item.name}`,
                             },
                         ]"
                     >
                         <j-input
-                            placeholder="请输入"
+                            :placeholder="t('Detail.DeviceAccess.index.5rcy2w1lmg80')"
                             v-if="item.type.type === 'string'"
                             v-model:value="formData.data[item.property]"
                         ></j-input>
                         <j-input-password
-                            placeholder="请输入"
+                            :placeholder="t('Detail.DeviceAccess.index.5rcy2w1lmg80')"
                             v-if="item.type.type === 'password'"
                             v-model:value="formData.data[item.property]"
                         ></j-input-password>
                         <j-select
-                            placeholder="请选择"
+                            :placeholder="t('Detail.DeviceAccess.index.5rcy2w1lm900')"
                             v-if="item.type.type === 'enum'"
                             v-model:value="formData.data[item.property]"
                         >
@@ -145,10 +145,10 @@
                         </j-select>
                     </j-form-item>
                 </j-form>
-                <Title data="存储策略">
+                <Title :data="t('Detail.DeviceAccess.index.5rcy2w1lml80')">
                     <template #extra>
                         <j-tooltip
-                            title="若修改存储策略,需要手动做数据迁移,平台只能搜索最新存储策略中的数据"
+                            :title="t('Detail.DeviceAccess.index.5rcy2w1lmqc0')"
                         >
                             <AIcon
                                 type="QuestionCircleOutlined"
@@ -174,7 +174,7 @@
                     @click="submitDevice"
                     hasPermission="device/Instance:update"
                     :loading='submitLoading'
-                    >保存</PermissionButton
+                    >{{t('Detail.DeviceAccess.index.5rcy2w1lmuw0')}}</PermissionButton
                 >
             </j-col>
             <j-col
@@ -188,7 +188,7 @@
                                 access?.provider === 'mqtt-server-gateway' ||
                                 access?.provider === 'mqtt-client-gateway'
                                     ? 'topic'
-                                    : 'URL信息'
+                                    : t('Detail.DeviceAccess.index.URL')
                             }}
                         </div>
                         <j-table
@@ -307,7 +307,9 @@ import MetaDataModal from './metadataModal.vue'
 import { getPluginData, getProductByPluginId, savePluginData } from '@/api/link/plugin'
 import { detail as queryPluginAccessDetail } from '@/api/link/accessConfig'
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const productStore = useProductStore();
 const tableRef = ref();
 const formRef = ref();
@@ -409,10 +411,10 @@ const guide = (data: any) => {
  */
 const driver = new Driver({
     allowClose: false,
-    doneBtnText: '我知道了',
-    closeBtnText: '不再提示',
-    nextBtnText: '下一步',
-    prevBtnText: '上一步',
+    doneBtnText: t('Detail.DeviceAccess.index.5rcy2w1lmzw0'),
+    closeBtnText: t('Detail.DeviceAccess.index.5rcy2w1ln4s0'),
+    nextBtnText: t('Detail.DeviceAccess.index.5rcy2w1ln980'),
+    prevBtnText: t('Detail.DeviceAccess.index.5rcy2w1lne40'),
     onNext: () => {
         stepsRef.current = stepsRef.current + 1;
     },
@@ -432,10 +434,10 @@ const driver = new Driver({
 
 const driver1 = new Driver({
     allowClose: false,
-    doneBtnText: '我知道了',
-    closeBtnText: '不再提示',
-    nextBtnText: '下一步',
-    prevBtnText: '上一步',
+    doneBtnText: t('Detail.DeviceAccess.index.5rcy2w1lmzw0'),
+    closeBtnText: t('Detail.DeviceAccess.index.5rcy2w1ln4s0'),
+    nextBtnText: t('Detail.DeviceAccess.index.5rcy2w1ln980'),
+    prevBtnText: t('Detail.DeviceAccess.index.5rcy2w1lne40'),
     onNext: () => {
         stepsRef.current = stepsRef.current + 1;
     },
@@ -462,7 +464,7 @@ const ColumnsMQTT = [
         ellipsis: true,
     },
     {
-        title: '上下行',
+        title: t('Detail.DeviceAccess.index.5rcy2w1lnn40'),
         dataIndex: 'stream',
         key: 'stream',
         ellipsis: true,
@@ -471,7 +473,7 @@ const ColumnsMQTT = [
         scopedSlots: { customRender: 'stream' },
     },
     {
-        title: '说明',
+        title: t('Detail.DeviceAccess.index.5rcy2w1lnr80'),
         dataIndex: 'description',
         key: 'description',
         ellipsis: true,
@@ -480,21 +482,21 @@ const ColumnsMQTT = [
 const columnsHTTP = ref(<TableColumnType>[]);
 const ColumnsHTTP = [
     {
-        title: '地址',
+        title: t('Detail.DeviceAccess.index.5rcy2w1lnww0'),
         dataIndex: 'address',
         key: 'address',
         ellipsis: true,
         // scopedSlots: { customRender: 'address' },
     },
     {
-        title: '示例',
+        title: t('Detail.DeviceAccess.index.5rcy2w1lo0g0'),
         dataIndex: 'example',
         key: 'example',
         ellipsis: true,
         // scopedSlots: { customRender: 'example' },
     },
     {
-        title: '说明',
+        title: t('Detail.DeviceAccess.index.5rcy2w1lnr80'),
         dataIndex: 'description',
         key: 'description',
         ellipsis: true,
@@ -507,10 +509,10 @@ const ColumnsHTTP = [
 const getStream = (record: any) => {
     const list = [];
     if (record?.upstream) {
-        list.push('上行');
+        list.push(t('Detail.DeviceAccess.index.5rcy2w1lo3o0'));
     }
     if (record?.downstream) {
-        list.push('下行');
+        list.push(t('Detail.DeviceAccess.index.5rcy2w1lo6w0'));
     }
     return `${list.join(',')}`;
 };
@@ -537,7 +539,7 @@ const queryAccessDetail = async (id: string) => {
 
 const handleColumns = () => {
   const Group = {
-    title: '分组',
+    title: t('Detail.DeviceAccess.index.5rcy2w1loaw0'),
     dataIndex: 'group',
     key: 'group',
     ellipsis: true,
@@ -663,7 +665,7 @@ const getData = async (accessId?: string) => {
             if (metadata.value?.properties) {
                 metadata.value?.properties.forEach((item) => {
                     if (
-                        item.name === '流传输模式' &&
+                        item.name === t('Detail.DeviceAccess.index.5rcy2w1loe80') &&
                         (!productStore.current?.configuration ||
                             !productStore.current?.configuration.hasOwnProperty(
                                 item.property,
@@ -804,7 +806,7 @@ const updateAccessData = async (id: string, values: any) => {
   });
   submitLoading.value = false
   if (resp.status === 200) {
-    onlyMessage('操作成功！');
+    onlyMessage(t('Detail.DeviceAccess.index.5rcy2w1loho0'));
     productStore.current!.storePolicy = storePolicy;
     if ((window as any).onTabSaveSuccess) {
       if (resp.result) {
@@ -849,10 +851,10 @@ watchEffect(() => {
 
 const tooltip = computed(() => {
   if (productStore.current?.count > 0) {
-    return '产品下有设备实例时不能更换接入方式'
+    return t('Detail.DeviceAccess.index.5rcy2w1lokw0')
   }
   if (productStore.current.state === 1) {
-    return '停用产品后才可更换接入方式'
+    return t('Detail.DeviceAccess.index.5rcy2w1lors0')
   }
   return ''
 })

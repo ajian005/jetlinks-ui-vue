@@ -4,7 +4,9 @@
 
 <script setup lang="ts">
 import * as echarts from 'echarts';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const { proxy } = <any>getCurrentInstance();
 
 const props = defineProps({
@@ -76,7 +78,7 @@ const createChart = () => {
             ],
             series: [
                 {
-                    name: '流量消耗',
+                    name: t('iot-card.components.LineChart.5rgbby6e0uo0'),
                     type: 'line',
                     symbol: 'circle',
                     showSymbol: false,

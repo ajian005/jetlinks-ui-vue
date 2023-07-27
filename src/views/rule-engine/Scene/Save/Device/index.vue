@@ -5,7 +5,7 @@
       :name='["trigger", "device"]'
     >
       <template #label>
-        <TitleComponent data='触发规则' style='font-size: 14px;' />
+        <TitleComponent :data="t('Save.Device.index.5rg54x58vq40')" style='font-size: 14px;' />
       </template>
 
         <AddButton
@@ -31,7 +31,9 @@ import Terms from '../components/Terms'
 import type { TriggerDevice } from '@/views/rule-engine/Scene/typings'
 import { EventEmitter, DeviceEmitterKey } from '@/views/rule-engine/Scene/Save/util'
 import CheckItem from './CheckItem.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data } = storeToRefs(sceneStore)
 
@@ -40,7 +42,7 @@ const visible = ref(false)
 const rules = [{
   validator(_: any, v: any) {
     if (!v) {
-      return Promise.reject(new Error('请配置设备触发规则'));
+      return Promise.reject(new Error(t('Save.Device.index.5rg54x58y4s0')));
     } else {
         console.log('device-validator', v)
         if (
@@ -51,7 +53,7 @@ const rules = [{
           (v.operation?.operator === 'invokeFunction' && !v.operation.functionId) ||
           (v.operation?.operator === 'reportEvent' && !v.operation.eventId)
         ) {
-          return Promise.reject(new Error('该数据已发生变更，请重新配置'));
+          return Promise.reject(new Error(t('Save.Device.index.5rg54x58yj40')));
         }
       //  判断产品
       //  判断设备或者组织

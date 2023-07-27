@@ -1,16 +1,16 @@
 <template>
     <div class="shakeLimit">
         <j-switch
-            checkedChildren="开启防抖"
-            unCheckedChildren="关闭防抖"
+            :checkedChildren="t('components.ShakeLimit.index.5rg4xv2rnkc0')"
+            :unCheckedChildren="t('components.ShakeLimit.index.5rg4xv2rojw0')"
             v-model:checked="shakeLimit.enabled"
             style="margin-right: 12px"
         />
         <template v-if="shakeLimit.enabled">
             <j-input-number :min="1" :max="100" :precision="0" size="small" v-model:value="shakeLimit.time" style="width: 38px" />
-            <span>秒内发送</span>
+            <span>{{t('components.ShakeLimit.index.5rg4xv2ropc0')}}</span>
             <j-input-number :min="1" :max="100" :precision="0" size="small" v-model:value="shakeLimit.threshold" style="width: 38px" />
-            <span>次及以上时，处理</span>
+            <span>{{t('components.ShakeLimit.index.5rg4xv2rotk0')}}</span>
             <j-radio-group :options="alarmFirstOptions" optionType="button" v-model:value="shakeLimit.alarmFirst" size="small" />
         </template>
     </div>
@@ -19,7 +19,9 @@
 <script lang="ts" setup>
 import { cloneDeep } from "lodash-es";
 import { PropType } from "vue";
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type ShakeLimitType = {
     enabled: boolean | undefined,
     time?: number | undefined | null,
@@ -32,8 +34,8 @@ type Emit = {
 }
 
 const alarmFirstOptions = [
-  { label: '第一次', value: true },
-  { label: '最后一次', value: false },
+  { label: t('components.ShakeLimit.index.5rg4xv2roxw0'), value: true },
+  { label: t('components.ShakeLimit.index.5rg4xv2rp1w0'), value: false },
 ];
 
 const props = defineProps({

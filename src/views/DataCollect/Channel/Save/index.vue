@@ -1,6 +1,6 @@
 <template lang="">
     <j-modal
-        :title="data.id ? '编辑' : '新增'"
+        :title="data.id ? t('Channel.Save.index.5rg5orzohtk0') : t('Channel.Save.index.5rg5orzojf80')"
         :visible="true"
         width="700px"
         @cancel="handleCancel"
@@ -14,18 +14,18 @@
             :rules="FormValidate"
             ref="formRef"
         >
-            <j-form-item label="通道名称" name="name">
+            <j-form-item :label="t('Channel.Save.index.5rg5orzojq40')" name="name">
                 <j-input
-                    placeholder="请输入通道名称"
+                    :placeholder="t('Channel.Save.index.5rg5orzojyo0')"
                     v-model:value="formData.name"
                 />
             </j-form-item>
-            <j-form-item label="通讯协议" name="provider">
+            <j-form-item :label="t('Channel.Save.index.5rg5orzok780')" name="provider">
                 <j-select
                     style="width: 100%"
                     v-model:value="formData.provider"
                     :options="providersList"
-                    placeholder="请选择通讯协议"
+                    :placeholder="t('Channel.Save.index.5rg5orzokfc0')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
@@ -38,8 +38,8 @@
                 :rules="FormValidate.host"
             >
                 <template #label>
-                    Modbus主机IP
-                    <j-tooltip title="支持ipv4、ipv6、域名">
+                    {{t('Channel.Save.index.ip')}}
+                    <j-tooltip :title="t('Channel.Save.index.5rg5orzokmc0')">
                         <AIcon
                             type="QuestionCircleOutlined"
                             style="margin-left: 2px"
@@ -47,19 +47,19 @@
                     </j-tooltip>
                 </template>
                 <j-input
-                    placeholder="请输入Modbus主机IP"
+                    :placeholder="t('Channel.Save.index.5rg5orzoktw0')"
                     v-model:value="formData.configuration.host"
                 />
             </j-form-item>
             <j-form-item
                 v-if="formData.provider === 'MODBUS_TCP'"
-                label="端口"
+                :label="t('Channel.Save.index.5rg5orzol400')"
                 :name="['configuration', 'port']"
                 :rules="FormValidate.port"
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入端口"
+                    :placeholder="t('Channel.Save.index.5rg5orzolb00')"
                     v-model:value="formData.configuration.port"
                     :min="0"
                     :max="65535"
@@ -67,18 +67,18 @@
             </j-form-item>
             <j-form-item
                 v-if="formData.provider === 'OPC_UA'"
-                label="端点url"
+                :label="t('Channel.Save.index.5rg5orzollo0')"
                 :name="['configuration', 'endpoint']"
                 :rules="FormValidate.endpoint"
             >
                 <j-input
-                    placeholder="请输入端点url"
+                    :placeholder="t('Channel.Save.index.5rg5orzolwg0')"
                     v-model:value="formData.configuration.endpoint"
                 />
             </j-form-item>
             <j-form-item
                 v-if="formData.provider === 'OPC_UA'"
-                label="安全策略"
+                :label="t('Channel.Save.index.5rg5orzom400')"
                 :name="['configuration', 'securityPolicy']"
                 :rules="FormValidate.securityPolicy"
             >
@@ -86,7 +86,7 @@
                     style="width: 100%"
                     v-model:value="formData.configuration.securityPolicy"
                     :options="Options['security-policies']"
-                    placeholder="请选择安全策略"
+                    :placeholder="t('Channel.Save.index.5rg5orzome80')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
@@ -94,7 +94,7 @@
             </j-form-item>
             <j-form-item
                 v-if="formData.provider === 'OPC_UA'"
-                label="安全模式"
+                :label="t('Channel.Save.index.5rg5orzomlo0')"
                 :name="['configuration', 'securityMode']"
                 :rules="FormValidate.securityMode"
             >
@@ -102,7 +102,7 @@
                     style="width: 100%"
                     v-model:value="formData.configuration.securityMode"
                     :options="Options['security-modes']"
-                    placeholder="请选择安全模式"
+                    :placeholder="t('Channel.Save.index.5rg5orzoms00')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
@@ -110,7 +110,7 @@
             </j-form-item>
             <j-form-item
                 v-if="isSecurityMode"
-                label="证书"
+                :label="t('Channel.Save.index.5rg5orzomzc0')"
                 :name="['configuration', 'certId']"
                 :rules="FormValidate.certId"
             >
@@ -118,7 +118,7 @@
                     style="width: 100%"
                     v-model:value="formData.configuration.certId"
                     :options="certificateList"
-                    placeholder="请选择证书"
+                    :placeholder="t('Channel.Save.index.5rg5orzon740')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
@@ -126,7 +126,7 @@
             </j-form-item>
             <j-form-item
                 v-if="formData.provider === 'OPC_UA'"
-                label="权限认证"
+                :label="t('Channel.Save.index.5rg5orzoni80')"
                 :name="['configuration', 'authType']"
                 :rules="FormValidate.authType"
             >
@@ -140,29 +140,29 @@
             </j-form-item>
             <j-form-item
                 v-if="isAuthType"
-                label="用户名"
+                :label="t('Channel.Save.index.5rg5orzonp00')"
                 :name="['configuration', 'username']"
                 :rules="FormValidate.username"
             >
                 <j-input
-                    placeholder="请输入用户名"
+                    :placeholder="t('Channel.Save.index.5rg5orzonyk0')"
                     v-model:value="formData.configuration.username"
                 />
             </j-form-item>
             <j-form-item
                 v-if="isAuthType"
-                label="密码"
+                :label="t('Channel.Save.index.5rg5orzoo7k0')"
                 :name="['configuration', 'password']"
                 :rules="FormValidate.password"
             >
                 <j-input-password
-                    placeholder="请输入密码"
+                    :placeholder="t('Channel.Save.index.5rg5orzoofk0')"
                     v-model:value="formData.configuration.password"
                 />
             </j-form-item>
-            <j-form-item label="说明" name="description">
+            <j-form-item :label="t('Channel.Save.index.5rg5orzooks0')" name="description">
                 <j-textarea
-                    placeholder="请输入说明"
+                    :placeholder="t('Channel.Save.index.5rg5orzoops0')"
                     v-model:value="formData.description"
                     :maxlength="200"
                     :rows="3"
@@ -171,7 +171,7 @@
             </j-form-item>
         </j-form>
         <template #footer>
-            <j-button key="back" @click="handleCancel">取消</j-button>
+            <j-button key="back" @click="handleCancel">{{t('Channel.Save.index.5rg5orzoouo0')}}</j-button>
             <PermissionButton
                 key="submit"
                 type="primary"
@@ -180,7 +180,7 @@
                 style="margin-left: 8px"
                 :hasPermission="`DataCollect/Channel:${id ? 'update' : 'add'}`"
             >
-                确认
+                {{t('Channel.Save.index.5rg5orzooz80')}}
             </PermissionButton>
         </template>
     </j-modal>
@@ -198,11 +198,13 @@ import type { FormInstance } from 'ant-design-vue';
 import type { FormDataType } from '../type.d';
 import { cloneDeep, isArray } from 'lodash-es';
 import { protocolList } from '@/utils/consts';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Object,
-        default: () => {},
+        default: () => { },
     },
 });
 
@@ -225,8 +227,8 @@ const handleOk = async () => {
     const params = await formRef.value?.validate();
     loading.value = true;
     const response = !id
-        ? await save(params).catch(() => {})
-        : await update(id, { ...props.data, ...params }).catch(() => {});
+        ? await save(params).catch(() => { })
+        : await update(id, { ...props.data, ...params }).catch(() => { });
     emit('change', response?.status === 200);
     loading.value = false;
     formRef.value?.resetFields();

@@ -29,7 +29,9 @@
 <script lang="ts" setup>
 import { PropType } from 'vue';
 import FunctionItem from './FunctionItem.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const _props = defineProps({
     value: {
         type: Array as PropType<Record<string, any>[]>,
@@ -49,17 +51,17 @@ const emit = defineEmits(['update:value']);
 
 const columns = [
     {
-        title: '参数名称',
+        title: t('Device.actions.EditTable.5rg4nqrntbc0'),
         dataIndex: 'name',
         with: '33%',
     },
     {
-        title: '类型',
+        title: t('Device.actions.EditTable.5rg4nqrnukw0'),
         dataIndex: 'valueType',
         with: '33%',
     },
     {
-        title: '值',
+        title: t('Device.actions.EditTable.5rg4nqrnus80'),
         dataIndex: 'value',
         with: '34%',
     },

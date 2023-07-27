@@ -15,8 +15,8 @@
     @remove='remove'
   >
     <div>
-      <j-button>上传文件</j-button>
-      <span class='upload-tip'>格式要求：.jar .zip</span>
+      <j-button>{{t('link.plugin.UploadFile.5rg3pdwr2co0')}}</j-button>
+      <span class='upload-tip'>{{t('link.plugin.UploadFile.5rg3pdwr3qo0')}} .zip</span>
     </div>
   </j-upload>
 
@@ -31,7 +31,9 @@ import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 import { notification as Notification } from 'jetlinks-ui-components';
 import { useSystem } from '@/store/system';
 import {fileList} from "@/views/device/Instance/Detail/Running/Property/index";
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['update:modelValue', 'change']);
 
 const props = defineProps({
@@ -69,7 +71,7 @@ const beforeUpload: UploadProps['beforeUpload'] = (file, fl) => {
   const arr = file.name.split('.');
   const isFile = ['jar', 'zip'].includes(arr[arr.length - 1]); // file.type === 'application/zip' || file.type === 'application/javj-archive'
   if (!isFile) {
-    onlyMessage('请上传.jar,.zip格式的文件', 'error');
+    onlyMessage(t('link.plugin.UploadFile.5rg3pdwr3ws0'), 'error');
     loading.value = false;
     return false
   }
@@ -84,7 +86,7 @@ const handleChange = async (info: UploadChangeParam) => {
     loading.value = false;
     const result = info.file.response?.result;
     const f = result.accessUrl;
-    onlyMessage('上传成功！', 'success');
+    onlyMessage(t('link.plugin.UploadFile.5rg3pdwr41g0'), 'success');
     value.value = f;
     fileCache.value = info.fileList
     emit('update:modelValue', result.version);
@@ -94,7 +96,7 @@ const handleChange = async (info: UploadChangeParam) => {
       list.value = fileCache.value
       Notification.error({
         // key: '403',
-        message: '系统提示',
+        message: t('link.plugin.UploadFile.5rg3pdwr45c0'),
         description: info.file.response?.message,
       });
       // emit('update:modelValue', { err:'file_upload_error'});

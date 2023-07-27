@@ -36,10 +36,8 @@
             </div>
         </div>
         <div class='btn'>
-          <j-button type='primary' @click='handleBind'
-          >立即绑定
-          </j-button
-          >
+          <j-button type='primary' @click='handleBind'>{{ t('Center.bind.index.bind') }}
+          </j-button>
         </div>
       </template>
       <!-- 未登录-绑定三方账号 -->
@@ -56,63 +54,36 @@
             />
           </div>
           <div class='desc'>
-            你已通过
+            {{ t('Center.bind.index.5rmxfod3f6o0') }}
             {{ bindUser?.appName }}
-            授权,完善以下登录信息即可以完成绑定
+            {{ t('Center.bind.index.5rmxfod3fj40') }}
           </div>
           <div class='login-form'>
             <j-form layout='vertical'>
-              <j-form-item
-                label='账户'
-                v-bind='validateInfos.username'
-              >
-                <j-input
-                  v-model:value='formData.username'
-                  placeholder='请输入账户'
-                />
+              <j-form-item :label="t('Center.bind.index.5rmxfod3fvk0')" v-bind='validateInfos.username'>
+                <j-input v-model:value='formData.username' :placeholder="t('Center.bind.index.5rmxfod3g7k0')" />
               </j-form-item>
-              <j-form-item
-                label='密码'
-                v-bind='validateInfos.password'
-              >
-                <j-input-password
-                  v-model:value='formData.password'
-                  placeholder='请输入密码'
-                />
+              <j-form-item :label="t('Center.bind.index.5rmxfod3gpo0')" v-bind='validateInfos.password'>
+                <j-input-password v-model:value='formData.password' :placeholder="t('Center.bind.index.5rmxfod3h200')" />
               </j-form-item>
               <template v-if='captcha.base64'>
-                <j-form-item
-                  label='验证码'
-                  v-bind='validateInfos.verifyCode'
-                  :rules="[
-                    {
-                        required: true,
-                        message: '请输入验证码',
-                    },
-                ]"
-                >
-                  <j-input
-                    v-model:value='formData.verifyCode'
-                    placeholder='请输入验证码'
-                  >
+                <j-form-item :label="t('Center.bind.index.5rmxfod3hf40')" v-bind='validateInfos.verifyCode' :rules="[
+                  {
+                    required: true,
+                    message: t('Center.bind.index.5rmxfod3hog0'),
+                  },
+                ]">
+                  <j-input v-model:value='formData.verifyCode' :placeholder="t('Center.bind.index.5rmxfod3hog0')">
                     <template #addonAfter>
-                      <img
-                        :src='captcha.base64'
-                        @click='getCode'
-                        style='cursor: pointer'
-                      />
+                      <img :src='captcha.base64' @click='getCode' style='cursor: pointer' />
                     </template>
                   </j-input>
                 </j-form-item>
 
               </template>
               <j-form-item>
-                <j-button
-                  type='primary'
-                  @click='handleLoginBind'
-                  style='width: 100%'
-                >
-                  登录并绑定账户
+                <j-button type='primary' @click='handleLoginBind' style='width: 100%'>
+                  {{ t('Center.bind.index.5rmxfod3hvg0') }}
                 </j-button>
               </j-form-item>
             </j-form>
@@ -134,6 +105,10 @@ import { useSystem } from '@/store/system'
 
 const useForm = Form.useForm;
 const systemStore = useSystem();
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 
 interface formData {
   username: string;
@@ -179,9 +154,9 @@ const getAppInfo = async () => {
   bindUser.value = result
 
   if (result.applicationProvider === 'dingtalk-ent-app') {
-    bindUser.value.appName = '钉钉'
+    bindUser.value.appName = t('Center.bind.index.5rmxfod3i780')
   } else if (result.applicationProvider === 'wechat-webapp') {
-    bindUser.value.appName = '微信'
+    bindUser.value.appName = t('Center.bind.index.5rmxfod3ie00')
   } else {
     bindUser.value.appName = result.applicationName
   }
@@ -210,13 +185,13 @@ const formRules = ref({
   username: [
     {
       required: true,
-      message: '请输入账户'
+      message: t('Center.bind.index.5rmxfod3g7k0')
     }
   ],
   password: [
     {
       required: true,
-      message: '请输入密码'
+      message: t('Center.bind.index.5rmxfod3h200')
     }
   ]
 })
@@ -241,7 +216,7 @@ const getCode = async () => {
 
 
 /**
- * 登录并绑定账户
+ * {{t('Center.bind.index.5rmxfod3hvg0')}}
  */
 const handleLoginBind = () => {
   validate()
@@ -301,12 +276,7 @@ onMounted(() => {
 </script>
 
 <style lang='less' scoped>
-:deep(
-        .ant-form-item-label
-            > label.ant-form-item-required:not(
-                .ant-form-item-required-mark-optional
-            )::before
-    ) {
+:deep(.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before) {
   display: none;
 }
 

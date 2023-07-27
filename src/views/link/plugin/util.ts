@@ -1,4 +1,6 @@
+import createI18n from '@/locales/index';
+const { t }  = createI18n.global
 export const TypeMap = {
-  'deviceGateway': '设备接入网关',
-  'thingsManager': '物管理',
+  'deviceGateway': t('link.plugin.util.access'),
+  'thingsManager': t('link.plugin.util.thingsManager'),
 }

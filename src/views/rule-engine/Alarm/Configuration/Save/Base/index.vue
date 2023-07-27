@@ -4,9 +4,9 @@
             <j-form layout="vertical" :rules="rule" :model="form" ref="formRef">
                 <j-row :gutter="24">
                     <j-col :span="12">
-                        <j-form-item label="名称" name="name">
+                        <j-form-item :label="t('Save.Base.index.5rg41krgv9w0')" name="name">
                             <j-input
-                                placeholder="请输入名称"
+                                :placeholder="t('Save.Base.index.5rg41krgwa40')"
                                 v-model:value="form.name"
                             ></j-input> </j-form-item
                     ></j-col>
@@ -14,7 +14,7 @@
                         <j-form-item name="targetType">
                             <template #label>
                                 <j-space>
-                                    类型
+                                    {{t('Save.Base.index.5rg41krgwg00')}}
                                     <j-tooltip>
                                         <template #title>
                                             <div>产品：以产品维度告警，某产品下的多个设备异常仅发送一条告警。</div>
@@ -40,7 +40,7 @@
                         </j-form-item>
                     </j-col>
                 </j-row>
-                <j-form-item label="级别" name="level">
+                <j-form-item :label="t('Save.Base.index.5rg41krgwkg0')" name="level">
                     <j-radio-group
                         v-model:value="form.level"
                         class="levelSelect"
@@ -69,7 +69,7 @@
                         </j-radio-button>
                     </j-radio-group>
                 </j-form-item>
-                <j-form-item label="说明" name="description">
+                <j-form-item :label="t('Save.Base.index.5rg41krgwoc0')" name="description">
                     <j-textarea
                         v-model:value="form.description"
                         showCount
@@ -84,7 +84,7 @@
                         'rule-engine/Alarm/Configuration:add',
                         'rule-engine/Alarm/Configuration:update',
                     ]"
-                    >保存</PermissionButton
+                    >{{t('Save.Base.index.5rg41krgwsk0')}}</PermissionButton
                 >
             </j-form>
         </div>
@@ -106,6 +106,9 @@ import { useRoute } from 'vue-router';
 import { useAlarmConfigurationStore } from '@/store/alarm';
 import { storeToRefs } from 'pinia';
 import { usePermissionStore } from '@/store/permission';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const route = useRoute();
 let selectDisable = ref(false);
 const alarmConfigurationStore = useAlarmConfigurationStore();
@@ -156,29 +159,29 @@ const rule = {
     name: [
         {
             required: true,
-            message: '请输入名称',
+            message: t('Save.Base.index.5rg41krgwa40'),
         },
         {
             max: 64,
-            message: '最多输入64个字符',
+            message: t('Save.Base.index.5rg41krgww80'),
         },
     ],
     targetType: [
         {
             required: true,
-            message: '请选择类型',
+            message: t('Save.Base.index.5rg41krgwzg0'),
         },
     ],
     level: [
         {
             required: true,
-            message: '请选择级别',
+            message: t('Save.Base.index.5rg41krgx2w0'),
         },
     ],
     description: [
         {
             max: 200,
-            message: '最多可输入200个字符',
+            message: t('Save.Base.index.5rg41krgx680'),
         },
     ],
 };
@@ -227,7 +230,7 @@ const handleSave = async () => {
                 ? await updata(form.value)
                 : await save(form.value);
             if (res.status === 200) {
-                onlyMessage('操作成功,请配置关联的场景联动');
+                onlyMessage(t('Save.Base.index.5rg41krgx9o0'));
                 loading.value = false;
                 emit('change', form.value.targetType);
                 if (res.result?.id) {

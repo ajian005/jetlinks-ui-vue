@@ -50,7 +50,9 @@ import BuildIn from './variableItem/BuildIn.vue';
 import Tag from './variableItem/Tag.vue';
 import InputFile from './variableItem/InputFile.vue';
 import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     variableDefinitions: {
         type: Array as PropType<any>,
@@ -90,40 +92,40 @@ const checkValue = (_rule: any, value: any, item: any) => {
         return Promise.reject(new Error('请输入' + item.name));
     } else if (type === 'link') {
         if (!value) {
-            return Promise.reject(new Error('请输入' + item.name));
+            return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4kvs0') + item.name));
         } else if (value.length > 64) {
-            return Promise.reject(new Error('最多64个字符'));
+            return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4l4g0')));
         }
     } else if (type === 'tag' && !value) {
-        return Promise.reject(new Error('请选择' + item.name));
+        return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4l8w0') + item.name));
     } else if (['date'].includes(type)) {
         if (!value) {
-            return Promise.reject(new Error('请选择' + item.name));
+            return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4l8w0') + item.name));
         } else {
             if (value?.source === 'upper') {
                 if (!value?.upperKey) {
-                    return Promise.reject(new Error('请选择' + item.name));
+                    return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4l8w0') + item.name));
                 } else {
                     return Promise.resolve();
                 }
             } else {
                 if (!value?.value) {
-                    return Promise.reject(new Error('请选择' + item.name));
+                    return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4l8w0') + item.name));
                 } else {
                     return Promise.resolve();
                 }
             }
         }
     } else if (value?.source === 'fixed' && !value?.value) {
-        return Promise.reject(new Error('请输入' + item.name));
+        return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4kvs0') + item.name));
     } else if (
         value?.source === 'relation' &&
         !value?.value &&
         !value?.relation
     ) {
-        return Promise.reject(new Error('请选择' + item.name));
+        return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4l8w0') + item.name));
     } else if (value?.source === 'upper' && !value.upperKey) {
-        return Promise.reject(new Error('请选择' + item.name));
+        return Promise.reject(new Error(t('Save.components.VariableDefinitions.5rgaa0i4l8w0') + item.name));
     }
     return Promise.resolve();
 };

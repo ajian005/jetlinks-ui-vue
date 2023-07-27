@@ -1,7 +1,7 @@
 <template>
     <j-input
         allowClear
-        placeholder="请上传文件"
+        :placeholder="t('Notify.variableItem.InputFile.5rg4ubxxbsc0')"
         v-model:value="url"
         @change="onChange"
     >
@@ -21,7 +21,7 @@
                 <j-button type="link" style="height: 30px">
                     <AIcon type="LoadingOutlined" v-if="loading" />
                     <AIcon type="PlusOutlined" v-else />
-                    上传附件
+                    {{t('Notify.variableItem.InputFile.5rg4ubxxd1w0')}}
                 </j-button>
             </j-upload>
         </template>
@@ -31,7 +31,9 @@
 <script lang="ts" setup>
 import { BASE_API_PATH, TOKEN_KEY } from '@/utils/variable';
 import { LocalStore, onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     id: {
         type: String,
@@ -62,11 +64,11 @@ const handleChange = (info: any) => {
 const handleBeforeUpload = (file: any) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
-        onlyMessage('请上传正确格式图片', 'error');
+        onlyMessage(t('Notify.variableItem.InputFile.5rg4ubxxda00'), 'error');
     }
     const isSize = file.size / 1024 / 1024 < 4;
     if (!isSize) {
-        onlyMessage(`图片大小必须小于4M`, 'error');
+        onlyMessage(t('Notify.variableItem.InputFile.limit'), 'error');
     }
     return isJpgOrPng && isSize;
 };

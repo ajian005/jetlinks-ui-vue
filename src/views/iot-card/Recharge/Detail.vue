@@ -3,9 +3,9 @@
         :maskClosable="false"
         width="1000px"
         :visible="true"
-        title="详情"
-        okText="确定"
-        cancelText="取消"
+        :title="t('iot-card.Recharge.Detail.5rgbj155z4c0')"
+        :okText="t('iot-card.Recharge.Detail.5rgbj15628g0')"
+        :cancelText="t('iot-card.Recharge.Detail.5rgbj1562kk0')"
         @ok="handleCancel"
         @cancel="handleCancel"
     >
@@ -16,27 +16,27 @@
                 :contentStyle="{ minWidth: '300px' }"
                 :labelStyle="{ minWidth: '120px' }"
             >
-                <j-descriptions-item label="充值金额">{{
+                <j-descriptions-item :label="t('iot-card.Recharge.Detail.5rgbj1562vs0')">{{
                     data.chargeMoney
                 }}</j-descriptions-item>
-                <j-descriptions-item label="账户id">{{
+                <j-descriptions-item :label="t('iot-card.Recharge.Detail.5rgbj1563400')">{{
                     data?.rechargeId
                 }}</j-descriptions-item>
-                <j-descriptions-item label="平台对接">{{
+                <j-descriptions-item :label="t('iot-card.Recharge.Detail.5rgbj1563do0')">{{
                     data.configName
                 }}</j-descriptions-item>
-                <j-descriptions-item label="订单号">{{
+                <j-descriptions-item :label="t('iot-card.Recharge.Detail.5rgbj1563lg0')">{{
                     data.orderNumber
                 }}</j-descriptions-item>
-                <j-descriptions-item label="支付方式">{{
+                <j-descriptions-item :label="t('iot-card.Recharge.Detail.5rgbj1563u80')">{{
                     data.paymentType
                 }}</j-descriptions-item>
-                <j-descriptions-item label="支付URL">
+                <j-descriptions-item :label="t('iot-card.Recharge.Detail.5rgbj15643g0')">
                     <div style="height: 100px; overflow: auto">
                         {{ data.url ? data.url : '' }}
                     </div>
                 </j-descriptions-item>
-                <j-descriptions-item label="订单时间">{{
+                <j-descriptions-item :label="t('iot-card.Recharge.Detail.5rgbj1564ak0')">{{
                     data.createTime
                         ? moment(data.createTime).format('YYYY-MM-DD HH:mm:ss')
                         : '-'
@@ -48,6 +48,9 @@
 
 <script lang="ts" setup>
 import moment from 'moment';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const emit = defineEmits(['close']);
 
 const props = defineProps({

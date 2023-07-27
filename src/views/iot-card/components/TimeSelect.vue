@@ -8,7 +8,7 @@
             @change="(e) => handleBtnChange(e.target.value)"
         >
             <j-radio-button
-                v-for="item in quickBtnList"
+                v-for="item in btnList"
                 :key="item.value"
                 :value="item.value"
             >
@@ -31,7 +31,9 @@
 <script setup lang="ts">
 import dayjs from 'dayjs';
 import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface BtnOptions {
     label: string;
     value: string;
@@ -52,19 +54,21 @@ const props = defineProps({
     // 快捷按钮列表
     quickBtnList: {
         type: Array as PropType<BtnOptions[]>,
-        default: [
-            { label: '今日', value: 'today' },
-            { label: '近一周', value: 'week' },
-            { label: '近一月', value: 'month' },
-            { label: '近一年', value: 'year' },
-        ],
+       
     },
     type: {
         type: String,
         default: 'today',
     },
 });
-
+const btnList = computed(() => {
+    return props.quickBtnList || [
+    { label: t('iot-card.components.TimeSelect.5rl8267ns4g0'), value: 'today' },
+    { label: t('iot-card.components.TimeSelect.5rl8267ntg00'), value: 'week' },
+    { label: t('iot-card.components.TimeSelect.5rl8267ntow0'), value: 'month' },
+    { label: t('iot-card.components.TimeSelect.5rl8267nvg80'), value: 'year' },
+    ]
+})
 const radioValue = ref(props.type || 'week' || undefined);
 const rangeVal = ref<[string, string]>();
 

@@ -2,230 +2,137 @@
     <page-container>
         <FullPage>
             <div class="basis-container">
-                <j-form
-                    layout="vertical"
-                    ref="formRef"
-                    :rules="rulesFrom"
-                    :model="formValue"
-                >
+                <j-form layout="vertical" ref="formRef" :rules="rulesFrom" :model="formValue">
                     <j-row :span="24" :gutter="24">
                         <j-col :span="10">
-                            <j-form-item label="系统名称" name="title">
-                                <j-input
-                                    v-model:value="formValue.title"
-                                    placeholder="请输入系统名称"
-                                />
+                            <j-form-item :label="t('system.Basis.index.5rg8sgvihmk0')" name="title">
+                                <j-input v-model:value="formValue.title"
+                                    :placeholder="t('system.Basis.index.5rg8sgvijk40')" />
                             </j-form-item>
-                            <j-form-item label="主题色" name="headerTheme">
+                            <j-form-item :label="t('system.Basis.index.5rg8sgviju80')" name="headerTheme">
                                 <j-select v-model:value="formValue.headerTheme">
                                     <j-select-option value="light">
-                                        白色
+                                        {{ t('system.Basis.index.5rg8sgvik1k0') }}
                                     </j-select-option>
                                     <j-select-option value="dark">
-                                        黑色
+                                        {{ t('system.Basis.index.5rg8sgvik7k0') }}
                                     </j-select-option>
                                 </j-select>
                             </j-form-item>
                             <j-form-item>
                                 <template #label>
-                                    <span>高德API Key</span>
-                                    <j-tooltip
-                                        title="配置后平台可调用高德地图GIS服务"
-                                    >
-                                        <img
-                                            class="img-style"
-                                            :src="
-                                                getImage('/init-home/mark.png')
-                                            "
-                                        />
+                                    <span>{{ t('system.Basis.index.5rg8sgvike80') }} Key</span>
+                                    <j-tooltip :title="t('system.Basis.index.5rg8sgvikls0')">
+                                        <img class="img-style" :src="getImage('/init-home/mark.png')
+                                            " />
                                     </j-tooltip>
                                 </template>
-                                <j-input
-                                    v-model:value="formValue.apiKey"
-                                    placeholder="请输入高德API Key"
-                                />
+                                <j-input v-model:value="formValue.apiKey" :placeholder="t('system.Basis.index.inputApi')" />
                             </j-form-item>
                             <j-form-item name="base-path">
                                 <template #label>
                                     <span>base-path</span>
-                                    <j-tooltip >
-                                      <template #title>
-                                        <div style='word-break: break-all;'>
-                                          <div>
-                                            系统后台访问的url。
-                                          </div>
-                                          <div>
-                                           格式：{http/https}: //{前端所在服务器IP地址}:{前端暴露的服务端口}/api
-                                          </div>
-                                        </div>
-                                      </template>
+                                    <j-tooltip>
+                                        <template #title>
+                                            <div style='word-break: break-all;'>
+                                                <div>
+                                                    {{ t('system.Basis.index.5rg8sgvikr40') }}
+                                                </div>
+                                                <div>
+                                                    {{ t('system.Basis.index.basePath') }}
+                                                </div>
+                                            </div>
+                                        </template>
 
-                                        <img
-                                            class="img-style"
-                                            :src="
-                                                getImage('/init-home/mark.png')
-                                            "
-                                        />
+                                        <img class="img-style" :src="getImage('/init-home/mark.png')
+                                            " />
                                     </j-tooltip>
                                 </template>
-                                <j-input
-                                    v-model:value="formValue['base-path']"
-                                    placeholder="{http/https}: //{前端所在服务器IP地址}:{前端暴露的服务端口}/api"
-                                />
+                                <j-input v-model:value="formValue['base-path']"
+                                    :placeholder="t('system.Basis.index.basePath')" />
                             </j-form-item>
                             <j-row :gutter="24" :span="24">
                                 <j-col>
-                                    <j-form-item label="系统logo">
+                                    <j-form-item :label="t('system.Basis.index.5rg8sgvikwg0')">
                                         <div class="upload-image-warp-logo">
-                                            <div
-                                                class="upload-image-border-logo"
-                                            >
-                                                <j-upload
-                                                    name="file"
-                                                    :action="action"
-                                                    :headers="headers"
-                                                    :showUploadList="false"
-                                                    :beforeUpload="
-                                                        uploader.beforeLogoUpload
-                                                    "
-                                                    @change="
-                                                        uploader.handleChangeLogo
-                                                    "
-                                                    :accept="
-                                                        uploader.imageTypes
-                                                    "
-                                                >
-                                                    <div
-                                                        class="upload-image-content-logo"
-                                                    >
-                                                        <div
-                                                            class="loading-logo"
-                                                            v-if="
-                                                                form.logoLoading
-                                                            "
-                                                        >
-                                                            <AIcon
-                                                                type="LoadingOutlined"
-                                                            />
+                                            <div class="upload-image-border-logo">
+                                                <j-upload name="file" :action="action" :headers="headers"
+                                                    :showUploadList="false" :beforeUpload="uploader.beforeLogoUpload
+                                                        " @change="
+        uploader.handleChangeLogo
+        " :accept="uploader.imageTypes
+        ">
+                                                    <div class="upload-image-content-logo">
+                                                        <div class="loading-logo" v-if="form.logoLoading
+                                                            ">
+                                                            <AIcon type="LoadingOutlined" />
                                                         </div>
-                                                        <div
-                                                            class="upload-image"
-                                                            style="height: 100%"
-                                                            v-if="
-                                                                formValue.logo
-                                                            "
-                                                            :style="
-                                                                formValue.logo
-                                                                    ? `background-image: url(${formValue.logo});`
-                                                                    : ''
-                                                            "
-                                                        ></div>
-                                                        <div
-                                                            v-if="
-                                                                formValue.logo
-                                                            "
-                                                            class="upload-image-mask"
-                                                        >
-                                                            点击修改
+                                                        <div class="upload-image" style="height: 100%" v-if="formValue.logo
+                                                            " :style="formValue.logo
+            ? `background-image: url(${formValue.logo});`
+            : ''
+        "></div>
+                                                        <div v-if="formValue.logo
+                                                            " class="upload-image-mask">
+                                                            {{ t('system.Basis.index.5rg8sgvil1k0') }}
                                                         </div>
                                                         <div v-else>
-                                                            <AIcon
-                                                                :type="
-                                                                    form.logoLoading
-                                                                        ? 'LoadingOutlined'
-                                                                        : 'PlusOutlined'
-                                                                "
-                                                            />
+                                                            <AIcon :type="form.logoLoading
+                                                                    ? 'LoadingOutlined'
+                                                                    : 'PlusOutlined'
+                                                                " />
                                                         </div>
                                                     </div>
                                                 </j-upload>
                                                 <div v-if="form.logoLoading">
-                                                    <div
-                                                        class="upload-loading-mask"
-                                                    >
-                                                        <AIcon
-                                                            type="LoadingOutlined"
-                                                        />
+                                                    <div class="upload-loading-mask">
+                                                        <AIcon type="LoadingOutlined" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="upload-tips">
-                                            推荐尺寸200*200
+                                            {{ t('system.Basis.index.5rg8sgvil600') }}
                                         </div>
                                         <div class="upload-tips">
-                                            支持jpg,png,jfif,pjp,pjpeg,jpeg
+                                            {{ t('system.Basis.index.5rg8sgvilak0') }}
                                         </div>
                                     </j-form-item>
                                 </j-col>
                                 <j-col>
                                     <j-form-item>
                                         <template #label>
-                                            <span>浏览器页签</span>
-                                            <j-tooltip
-                                                title="浏览器tab页中显示的图片元素"
-                                            >
-                                                <img
-                                                    class="img-style"
-                                                    :src="
-                                                        getImage(
-                                                            '/init-home/mark.png',
-                                                        )
-                                                    "
-                                                />
+                                            <span>{{ t('system.Basis.index.5rg8sgvilf40') }}</span>
+                                            <j-tooltip :title="t('system.Basis.index.5rg8sgviljk0')">
+                                                <img class="img-style" :src="getImage(
+                                                    '/init-home/mark.png',
+                                                )
+                                                    " />
                                             </j-tooltip>
                                         </template>
                                         <div class="upload-image-warp-logo">
-                                            <div
-                                                class="upload-image-border-logo"
-                                            >
-                                                <j-upload
-                                                    name="file"
-                                                    :action="action"
-                                                    :headers="headers"
-                                                    :showUploadList="false"
-                                                    :beforeUpload="
-                                                        uploader.beforeIconUpload
-                                                    "
-                                                    @change="
-                                                        uploader.changeIconUpload
-                                                    "
-                                                    :accept="uploader.iconTypes"
-                                                >
-                                                    <div
-                                                        class="upload-image-content-logo"
-                                                    >
-                                                        <div
-                                                            v-if="
-                                                                form.iconLoading
-                                                            "
-                                                            class="loading-icon"
-                                                        >
-                                                            <AIcon
-                                                                type="LoadingOutlined"
-                                                            />
+                                            <div class="upload-image-border-logo">
+                                                <j-upload name="file" :action="action" :headers="headers"
+                                                    :showUploadList="false" :beforeUpload="uploader.beforeIconUpload
+                                                        " @change="
+        uploader.changeIconUpload
+        " :accept="uploader.iconTypes">
+                                                    <div class="upload-image-content-logo">
+                                                        <div v-if="form.iconLoading
+                                                            " class="loading-icon">
+                                                            <AIcon type="LoadingOutlined" />
                                                         </div>
-                                                        <div
-                                                            class="upload-image-icon"
-                                                            v-if="formValue.ico"
-                                                            :style="
-                                                                formValue.ico
-                                                                    ? `background-image: url(${formValue.ico});`
-                                                                    : ''
-                                                            "
-                                                        ></div>
-                                                        <div
-                                                            v-if="formValue.ico"
-                                                            class="upload-image-mask"
-                                                        >
-                                                            点击修改
+                                                        <div class="upload-image-icon" v-if="formValue.ico" :style="formValue.ico
+                                                                ? `background-image: url(${formValue.ico});`
+                                                                : ''
+                                                            "></div>
+                                                        <div v-if="formValue.ico" class="upload-image-mask">
+                                                            {{ t('system.Basis.index.5rg8sgvil1k0') }}
                                                         </div>
                                                         <div v-else>
                                                             <div>
-                                                                <AIcon
-                                                                    type="PlusOutlined"
-                                                                />
+                                                                <AIcon type="PlusOutlined" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -234,61 +141,36 @@
                                         </div>
 
                                         <div class="upload-tips">
-                                            推荐尺寸64*64
+                                            {{ t('system.Basis.index.5rg8sgvilo80') }}
                                         </div>
                                         <div class="upload-tips">
-                                            支持ico格式
+                                            {{ t('system.Basis.index.5rg8sgvilu80') }}
                                         </div>
                                     </j-form-item>
                                 </j-col>
                             </j-row>
                         </j-col>
                         <j-col :span="14">
-                            <j-form-item label="登录背景图">
+                            <j-form-item :label="t('system.Basis.index.5rg8sgvilyo0')">
                                 <div class="upload-image-warp-back">
                                     <div class="upload-image-border-back">
-                                        <j-upload
-                                            name="file"
-                                            :action="action"
-                                            :headers="headers"
-                                            :beforeUpload="
-                                                uploader.beforeLogoUpload
-                                            "
-                                            :showUploadList="false"
-                                            @change="uploader.changeBackUpload"
-                                            :accept="uploader.imageTypes"
-                                        >
-                                            <div
-                                                class="upload-image-content-back"
-                                            >
-                                                <div
-                                                    v-if="form.backLoading"
-                                                    class="loading-back"
-                                                >
-                                                    <AIcon
-                                                        type="LoadingOutlined"
-                                                    />
+                                        <j-upload name="file" :action="action" :headers="headers" :beforeUpload="uploader.beforeLogoUpload
+                                            " :showUploadList="false" @change="uploader.changeBackUpload"
+                                            :accept="uploader.imageTypes">
+                                            <div class="upload-image-content-back">
+                                                <div v-if="form.backLoading" class="loading-back">
+                                                    <AIcon type="LoadingOutlined" />
                                                 </div>
-                                                <div
-                                                    class="upload-image"
-                                                    v-if="formValue.backgroud"
-                                                    :style="
-                                                        formValue.backgroud
-                                                            ? `background-image: url(${formValue.backgroud});`
-                                                            : ''
-                                                    "
-                                                ></div>
-                                                <div
-                                                    v-if="formValue.backgroud"
-                                                    class="upload-image-mask"
-                                                >
-                                                    点击修改
+                                                <div class="upload-image" v-if="formValue.backgroud" :style="formValue.backgroud
+                                                        ? `background-image: url(${formValue.backgroud});`
+                                                        : ''
+                                                    "></div>
+                                                <div v-if="formValue.backgroud" class="upload-image-mask">
+                                                    {{ t('system.Basis.index.5rg8sgvil1k0') }}
                                                 </div>
                                                 <div v-else>
                                                     <div>
-                                                        <AIcon
-                                                            type="PlusOutlined"
-                                                        />
+                                                        <AIcon type="PlusOutlined" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -296,26 +178,20 @@
                                     </div>
                                 </div>
                                 <div class="upload-tips">
-                                    支持4M以内的图片:
-                                    支持jpg,png,jfif,pjp,pjpeg,jpeg
+                                    {{ t('system.Basis.index.5rg8sgvilak0') }}
                                 </div>
-                                <div class="upload-tips">建议尺寸1400x1080</div>
+                                <div class="upload-tips">{{ t('system.Basis.index.5rg8sgvim4w0') }}</div>
                             </j-form-item>
                         </j-col>
                     </j-row>
                 </j-form>
 
-                <j-button
-                    type="primary"
-                    @click="form.clickSave"
-                    :disabled="
-                        form.saveLoading ||
-                        form.logoLoading ||
-                        form.iconLoading ||
-                        form.backLoading
-                    "
-                >
-                    保存
+                <j-button type="primary" @click="form.clickSave" :disabled="form.saveLoading ||
+                    form.logoLoading ||
+                    form.iconLoading ||
+                    form.backLoading
+                    ">
+                    {{ t('system.Basis.index.5rg8sgvim9c0') }}
                 </j-button>
             </div>
         </FullPage>
@@ -332,7 +208,9 @@ import { save_api } from '@/api/system/basis';
 import { usePermissionStore } from '@/store/permission';
 import { useSystem } from '@/store/system';
 import { settingDetail } from '@/api/login';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const action = `${BASE_API_PATH}/file/static`;
 const headers = { [TOKEN_KEY]: LocalStore.get(TOKEN_KEY) };
 const formRef = ref();
@@ -352,24 +230,24 @@ const form = reactive<formType>({
         title: [
             {
                 required: true,
-                message: '请输入系统名称',
+                message: t('system.Basis.index.5rg8sgvijk40'),
             },
             {
                 max: 64,
-                message: '最多可输入64个字符',
+                message: t('system.Basis.index.5rg8sgvimls0'),
             },
         ],
         headerTheme: [
             {
                 required: true,
-                message: '请选择主题色',
+                message: t('system.Basis.index.5rg8sgvimpk0'),
                 trigger: 'blur',
             },
         ],
         'base-path': [
             {
                 required: true,
-                message: '请输入base-path',
+                message: t('system.Basis.index.5rg8sgvimxg0'),
                 trigger: 'blur',
             },
         ],
@@ -425,7 +303,7 @@ const form = reactive<formType>({
                 save_api(params)
                     .then(async (resp) => {
                         if (resp.status === 200) {
-                            onlyMessage('保存成功');
+                            onlyMessage(t('system.Basis.index.5rg8sgvin1o0'));
                             await system.getSystemConfig()
                             await form.getDetails();
                         }
@@ -433,7 +311,7 @@ const form = reactive<formType>({
                     .finally(() => (form.saveLoading = false));
             });
         } else {
-            onlyMessage('暂无权限，请联系管理员', 'warning');
+            onlyMessage(t('system.Basis.index.5rg8sgvin6c0'), 'warning');
         }
     },
 });
@@ -488,7 +366,7 @@ const uploader: uploaderType = {
             form.formValue.logo = info.file.response?.result;
         } else if (info.file.status === 'error') {
             form.logoLoading = false;
-            onlyMessage('系统logo上传失败，请稍后再试', 'error');
+            onlyMessage(t('system.Basis.index.5rg8sgvinc80'), 'error');
         }
     },
     // 背景上传改变事件
@@ -501,7 +379,7 @@ const uploader: uploaderType = {
             form.formValue.backgroud = info.file.response?.result;
         } else if (info.file.status === 'error') {
             form.logoLoading = false;
-            onlyMessage('背景图上传失败，请稍后再试', 'error');
+            onlyMessage(t('system.Basis.index.5rg8sgvini00'), 'error');
         }
     },
     // 浏览器页签上传改变事件
@@ -514,7 +392,7 @@ const uploader: uploaderType = {
             form.formValue.ico = info.file.response?.result;
         } else if (info.file.status === 'error') {
             form.logoLoading = false;
-            onlyMessage('浏览器页签上传失败，请稍后再试', 'error');
+            onlyMessage(t('system.Basis.index.5rg8sgvinrk0'), 'error');
         }
     },
 };
@@ -526,14 +404,17 @@ form.getDetails();
 .basis-container {
     padding: 24px;
     background-color: #fff;
+
     .img-style {
         width: 16px;
         height: 16px;
         margin-left: 5px;
     }
+
     .upload-image-warp-logo {
         display: flex;
         justify-content: flex-start;
+
         .upload-image-border-logo {
             position: relative;
             overflow: hidden;
@@ -541,10 +422,12 @@ form.getDetails();
             transition: all 0.3s;
             width: 160px;
             height: 150px;
+
             &:hover {
                 border: 1px dashed #1890ff;
                 display: flex;
             }
+
             .upload-image-content-logo {
                 align-items: center;
                 justify-content: center;
@@ -556,10 +439,12 @@ form.getDetails();
                 padding: 8px;
                 background-color: rgba(0, 0, 0, 0.06);
                 cursor: pointer;
+
                 .loading-logo {
                     position: absolute;
                     top: 50%;
                 }
+
                 .loading-icon {
                     position: absolute;
                 }
@@ -571,6 +456,7 @@ form.getDetails();
                     background-position: 50%;
                     background-size: inherit;
                 }
+
                 .upload-image-mask {
                     align-items: center;
                     justify-content: center;
@@ -584,15 +470,18 @@ form.getDetails();
                     font-size: 16px;
                     background-color: rgba(0, 0, 0, 0.35);
                 }
+
                 &:hover .upload-image-mask {
                     display: flex;
                 }
             }
         }
     }
+
     .upload-image-warp-back {
         display: flex;
         justify-content: flex-start;
+
         .upload-image-border-back {
             position: relative;
             overflow: hidden;
@@ -600,10 +489,12 @@ form.getDetails();
             transition: all 0.3s;
             width: 570px;
             height: 415px;
+
             &:hover {
                 border: 1px dashed #1890ff;
                 display: flex;
             }
+
             .upload-image-content-back {
                 align-items: center;
                 justify-content: center;
@@ -615,9 +506,11 @@ form.getDetails();
                 padding: 8px;
                 background-color: rgba(0, 0, 0, 0.06);
                 cursor: pointer;
+
                 .loading-back {
                     position: absolute;
                 }
+
                 .upload-image-mask {
                     align-items: center;
                     justify-content: center;
@@ -631,12 +524,14 @@ form.getDetails();
                     font-size: 16px;
                     background-color: rgba(0, 0, 0, 0.35);
                 }
+
                 &:hover .upload-image-mask {
                     display: flex;
                 }
             }
         }
     }
+
     .upload-image {
         width: 100%;
         height: 100%;
@@ -644,6 +539,7 @@ form.getDetails();
         background-position: 50%;
         background-size: cover;
     }
+
     .upload-tips {
         color: rgba(0, 0, 0, 0.45);
         font-size: 14px;

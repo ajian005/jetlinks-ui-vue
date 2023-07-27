@@ -32,12 +32,14 @@
 <script setup lang="ts">
 import { queryList } from '@/api/iot-card/record';
 import moment from 'moment';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const params = ref<Record<string, any>>({});
 
 const columns = [
     {
-        title: '卡号',
+        title: t('iot-card.Record.index.5rgbm1zgxxg0'),
         dataIndex: 'cardId',
         key: 'cardId',
         ellipsis: true,
@@ -46,7 +48,7 @@ const columns = [
         },
     },
     {
-        title: '操作类型',
+        title: t('iot-card.Record.index.5rgbm1zgz7s0'),
         dataIndex: 'type',
         key: 'type',
         search: {
@@ -54,7 +56,7 @@ const columns = [
         },
     },
     {
-        title: '操作时间',
+        title: t('iot-card.Record.index.5rgbm1zgzh00'),
         dataIndex: 'time',
         key: 'time',
         scopedSlots: true,
@@ -63,7 +65,7 @@ const columns = [
         },
     },
     {
-        title: '操作人',
+        title: t('iot-card.Record.index.5rgbm1zgzoc0'),
         dataIndex: 'operator',
         key: 'operator',
         ellipsis: true,

@@ -17,7 +17,9 @@ import { useSceneStore } from '@/store/scene';
 import { storeToRefs } from 'pinia';
 import type { BranchesThen } from '@/views/rule-engine/Scene/typings'
 import Action from '../action/index.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore();
 const { data } = storeToRefs(sceneStore);
 
@@ -25,7 +27,7 @@ const actionRules = [{
   validator(_: any, v?: BranchesThen[]) {
 
     if (!v || (v && !v.length) || !v.some(item => item.actions && item.actions.length)) {
-      return Promise.reject('至少配置一个执行动作');
+      return Promise.reject(t('Save.Manual.index.5rg56uuk4rk0'));
     }
     return Promise.resolve();
   },

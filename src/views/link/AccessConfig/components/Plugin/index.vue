@@ -1,15 +1,15 @@
 <template>
   <div>
     <j-steps :current="current">
-      <j-step disabled :key="0" title="选择插件" />
-      <j-step disabled :key="1" title="完成" />
+      <j-step disabled :key="0" :title="t('components.Plugin.index.5rg386071gw0')" />
+      <j-step disabled :key="1" :title="t('components.Plugin.index.5rg386072x80')" />
     </j-steps>
     <div class='steps-content'>
       <div class="steps-box" v-if="current === 0">
         <div class="search">
           <j-input-search
             allowClear
-            placeholder="请输入"
+            :placeholder="t('components.Plugin.index.5rg386073740')"
             style="width: 300px"
             @search="pluginSearch"
           />
@@ -20,7 +20,7 @@
             hasPermission="link/plugin:add"
           >
             <template #icon><AIcon type="PlusOutlined" /></template>
-            新增
+            {{t('components.Plugin.index.5rg386073ec0')}}
           </PermissionButton>
         </div>
         <j-scrollbar height="480">
@@ -67,7 +67,7 @@
           <j-empty
             style="margin-top: 10%"
             v-else
-            description="暂无数据"
+            :description="t('components.Plugin.index.5rg386073z40')"
           />
         </j-scrollbar>
       </div>
@@ -78,19 +78,19 @@
         >
           <j-row :gutter="[24, 24]">
             <j-col :span="16">
-              <title-component data="基本信息" />
+              <title-component :data="t('components.Plugin.index.5rg386074680')" />
               <j-form
                 ref="formRef"
                 :model="formData"
                 layout="vertical"
               >
                 <j-form-item
-                  label="名称"
+                  :label="t('components.Plugin.index.5rg386074c40')"
                   :rules="[
-                      { required: true, message: '请输入名称', trigger: 'blur' },
+                      { required: true, message: t('components.Plugin.index.5rg386074jc0'), trigger: 'blur' },
                       {
                           max: 64,
-                          message: '最多可输入64个字符',
+                          message: t('components.Plugin.index.5rg386074ro0'),
                       },
                   ]"
                   name='name'
@@ -98,16 +98,16 @@
                   <j-input
                     v-model:value="formData.name"
                     allowClear
-                    placeholder="请输入名称"
+                    :placeholder="t('components.Plugin.index.5rg386074jc0')"
                   />
                 </j-form-item>
                 <j-form-item
-                  label="说明"
-                  :rules="[{ max: 200, message: '最多可输入200个字符' }]"
+                  :label="t('components.Plugin.index.5rg386074xs0')"
+                  :rules="[{ max: 200, message: t('components.Plugin.index.5rg3860752o0') }]"
                   name='description'
                 >
                   <j-textarea
-                    placeholder="请输入说明"
+                    :placeholder="t('components.Plugin.index.5rg3860757s0')"
                     :rows="4"
                     v-model:value="formData.description"
                     show-count
@@ -115,7 +115,7 @@
                   />
                 </j-form-item>
                 <template v-if='config.length' >
-                  <title-component data="通用配置" />
+                  <title-component :data="t('components.Plugin.index.5rg386075cg0')" />
                   <j-form-item
                     v-for='item in config'
                     :key='item.name'
@@ -140,7 +140,7 @@
         @click="prev"
         style="margin-right: 8px"
       >
-        上一步
+        {{t('components.Plugin.index.5rg386075gw0')}}
       </j-button>
 
       <PermissionButton
@@ -153,7 +153,7 @@
                 }`"
         :loading='loading'
       >
-        保存
+        {{t('components.Plugin.index.5rg386075p80')}}
       </PermissionButton>
       <j-button
         v-if="current === 0"
@@ -161,7 +161,7 @@
 
         @click="next"
       >
-        下一步
+        {{t('components.Plugin.index.5rg386075v80')}}
       </j-button>
     </div>
   </div>
@@ -177,7 +177,9 @@ import AccessCard from '../AccessCard/index.vue';
 import { useMenuStore } from 'store/menu'
 import { onlyMessage } from '@/utils/comm';
 import { CreteRuleByType } from 'components/Form/rules'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
   provider: {
     type: Object,
@@ -231,11 +233,11 @@ const showAddBtn = computed(() => {
 })
 
 const getRules = (item: any) => {
-  let typeName = '输入'
+  let typeName = t('components.Plugin.index.5rg386075zk0')
   let rules: any[] = []
 
   if (['select', 'date'].includes(item.type?.type || 'string')) {
-    typeName = '选择'
+    typeName = t('components.Plugin.index.5rg386076500')
   }
 
   if (item.type?.expands?.required) {
@@ -299,24 +301,24 @@ const addPlugin = () => {
 }
 
 /**
- * 下一步
+ * {{t('components.Plugin.index.5rg386075v80')}}
  */
 const next = () => {
   if (!AccessCurrent.value) {
-    return onlyMessage('请选择插件！', 'error');
+    return onlyMessage(t('components.Plugin.index.5rg386076dw0'), 'error');
   }
   current.value += 1
 }
 
 /**
- * 上一步
+ * {{t('components.Plugin.index.5rg386075gw0')}}
  */
 const prev = () => {
   current.value -= 1
 }
 
 /**
- * 保存
+ * {{t('components.Plugin.index.5rg386075p80')}}
  */
 const saveData = () => {
   formRef.value.validate().then(async (data: any) => {
@@ -338,7 +340,7 @@ const saveData = () => {
           : await update({ ...params, id: paramsId }).catch(() => { success: false});
       loading.value = false
       if (resp.success) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('components.Plugin.index.5rg386076hw0'), 'success');
         history.back();
         if ((window as any).onTabSaveSuccess) {
           if (resp.result?.id) {

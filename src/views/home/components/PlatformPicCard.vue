@@ -4,11 +4,8 @@
             <span>{{t('home.components.PlatformPicCard.5sav76km0uc0')}}</span>
             <p>PLATFORM ARCHITECTURE DIAGRAM</p>
         </div>
-      <div class='plaid'></div>
-      <div
-        class='bj'
-        :style='{ backgroundImage: `url(${props.image || "/images/home/content.png"})`}'
-      ></div>
+        <div class='plaid'></div>
+        <div class='bj' :style='{ backgroundImage: `url(${props.image || "/images/home/content.png"})` }'></div>
     </div>
 </template>
 
@@ -31,14 +28,14 @@ const props = defineProps({
     height: 458px;
 
     .plaid {
-      background: repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(#000, .1) 36px),
-              repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(#000, .1) 36px);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height:100%;
-      z-index: 1;
+        background: repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(#000, .1) 36px),
+            repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(#000, .1) 36px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
     }
 
     .bj {

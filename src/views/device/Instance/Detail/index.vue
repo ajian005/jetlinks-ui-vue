@@ -15,7 +15,7 @@
                 <j-divider type="vertical" />
                 <j-space>
                     <span style="font-size: 14px; color: rgba(0, 0, 0, 0.85)">
-                        状态：
+                        {{t('Instance.Detail.index.5rcyr31fjkc0')}}
                         <j-badge
                             :status="
                                 statusMap.get(
@@ -32,24 +32,24 @@
                         type="link"
                         style="margin-top: -5px; padding: 0 20px"
                         :popConfirm="{
-                            title: '确认启用设备',
+                            title: t('Instance.Detail.index.5rcyr31fn900'),
                             onConfirm: handleAction,
                         }"
                         hasPermission="device/Instance:action"
                     >
-                        启用设备
+                        {{t('Instance.Detail.index.5rcyr31fnp00')}}
                     </PermissionButton>
                     <PermissionButton
                         v-if="instanceStore.current?.state?.value === 'online'"
                         type="link"
                         style="margin-top: -5px; padding: 0 20px"
                         :popConfirm="{
-                            title: '确认断开连接？',
+                            title: t('Instance.Detail.index.5rcyr31fnws0'),
                             onConfirm: handleDisconnect,
                         }"
                         hasPermission="device/Instance:action"
                     >
-                        断开连接
+                        {{t('Instance.Detail.index.5rcyr31fo4s0')}}
                     </PermissionButton>
                     <j-tooltip
                         v-if="
@@ -61,8 +61,8 @@
                             instanceStore.current?.features?.find(
                                 (item) => item?.id === 'selfManageState',
                             )
-                                ? '该设备的在线状态与父设备(网关设备)保持一致'
-                                : '该设备在线状态由设备自身运行状态决定，不继承父设备（网关设备）的在线状态'
+                                ? t('Instance.Detail.index.5rcyr31foe00')
+                                : t('Instance.Detail.index.5rcyr31fol00')
                         "
                     >
                         <AIcon
@@ -78,7 +78,7 @@
                 <j-descriptions-item label="ID">{{
                     instanceStore.current?.id
                 }}</j-descriptions-item>
-                <j-descriptions-item label="所属产品">
+                <j-descriptions-item :label="t('Instance.Detail.index.5rcyr31forc0')">
                     <PermissionButton
                         type="link"
                         style="margin-top: -5px; padding: 0"
@@ -129,7 +129,9 @@ import { getWebSocket } from '@/utils/websocket';
 import { useMenuStore } from '@/store/menu';
 import { useRouterParams } from '@/utils/hooks/useParams';
 import { EventEmitter } from '@/utils/utils'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 
 const route = useRoute();
@@ -147,23 +149,23 @@ const statusRef = ref();
 const initList = [
     {
         key: 'Info',
-        tab: '实例信息',
+        tab: t('Instance.Detail.index.5rcyr31foy40'),
     },
     {
         key: 'Running',
-        tab: '运行状态',
+        tab: t('Instance.Detail.index.5rcyr31fp4g0'),
     },
     {
         key: 'Metadata',
-        tab: '物模型',
+        tab: t('Instance.Detail.index.5rcyr31fpac0'),
     },
     {
         key: 'Function',
-        tab: '设备功能',
+        tab: t('Instance.Detail.index.5rcyr31fpgw0'),
     },
     {
         key: 'Log',
-        tab: '日志管理',
+        tab: t('Instance.Detail.index.5rcyr31fpn40'),
     },
 ];
 
@@ -205,7 +207,7 @@ const getDetail = () => {
     ) {
         list.value.push({
             key: 'Diagnose',
-            tab: '设备诊断',
+            tab: t('Instance.Detail.index.5rcyr31fpx80'),
         });
     }
     if (
@@ -216,7 +218,7 @@ const getDetail = () => {
     ) {
         list.value.push({
             key: 'Parsing',
-            tab: '数据解析',
+            tab: t('Instance.Detail.index.5rcyr31fq5s0'),
         });
     }
     if (
@@ -244,7 +246,7 @@ const getDetail = () => {
         // 产品类型为网关的情况下才显示此模块
         list.value.push({
             key: 'ChildDevice',
-            tab: '子设备',
+            tab: t('Instance.Detail.index.5rcyr31fqes0'),
         });
     }
     if (
@@ -254,7 +256,7 @@ const getDetail = () => {
     ) {
         list.value.push({
             key: 'EdgeMap',
-            tab: '边缘端映射',
+            tab: t('Instance.Detail.index.5rcyr31fqo80'),
         });
     }
 
@@ -312,7 +314,7 @@ const handleAction = async () => {
     if (instanceStore.current?.id) {
         const resp = await _deploy(instanceStore.current?.id);
         if (resp.status === 200) {
-            onlyMessage('操作成功！');
+            onlyMessage(t('Instance.Detail.index.5rcyr31fqww0'));
             instanceStore.refresh(instanceStore.current?.id);
         }
     }
@@ -322,7 +324,7 @@ const handleDisconnect = async () => {
     if (instanceStore.current?.id) {
         const resp = await _disconnect(instanceStore.current?.id);
         if (resp.status === 200) {
-            onlyMessage('操作成功！');
+            onlyMessage(t('Instance.Detail.index.5rcyr31fqww0'));
             instanceStore.refresh(instanceStore.current?.id);
         }
     }
@@ -331,7 +333,7 @@ const handleDisconnect = async () => {
 const handleRefresh = async () => {
     if (instanceStore.current?.id) {
         await instanceStore.refresh(instanceStore.current?.id);
-        onlyMessage('操作成功');
+        onlyMessage(t('Instance.Detail.index.5rcyr31fr5o0'));
     }
 };
 

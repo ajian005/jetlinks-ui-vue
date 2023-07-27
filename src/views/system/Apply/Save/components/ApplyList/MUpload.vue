@@ -16,8 +16,8 @@
                 <div class="upload-image-content" :style="props.style">
                     <template v-if="imageUrl">
                         <img :src="imageUrl" width="100%" class="upload-image" />
-                        <div v-if="imageUrl === defaultValue" class="upload-image-mask">替换图标</div>
-                        <div v-else @click.stop="onDelete" class="upload-image-mask">删除图标</div>
+                        <div v-if="imageUrl === defaultValue" class="upload-image-mask">{{t('components.ApplyList.MUpload.5rgb1dttv2w0')}}</div>
+                        <div v-else @click.stop="onDelete" class="upload-image-mask">{{t('components.ApplyList.MUpload.5rgb1dttw0g0')}}</div>
                     </template>
                     <template v-else>
                         <AIcon
@@ -50,7 +50,9 @@ import { TOKEN_KEY } from '@/utils/variable';
 import {getBase64, LocalStore, onlyMessage} from '@/utils/comm';
 import { CSSProperties } from 'vue';
 import ImageCropper from '@/components/Upload/Cropper.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emits = {
     (e: 'update:modelValue', data: string): void;
     (e: 'change', data: string): void;

@@ -2,7 +2,7 @@
     <j-spin :spinning="loading">
         <div class="dash-board">
             <div class="header">
-                <h3>JVM内存使用率趋势</h3>
+                <h3> {{t('DashBoard.components.Jvm.JVM')}}</h3>
                 <j-range-picker
                     @change="pickerTimeChange"
                     :allowClear="false"
@@ -20,11 +20,15 @@
                             style="margin-right: 10px"
                             v-model:value="data.type"
                         >
-                          <j-radio-button value="hour">
-                            最近1小时
-                          </j-radio-button>
-                          <j-radio-button value="day"> 最近24小时 </j-radio-button>
-                          <j-radio-button value="week"> 近一周 </j-radio-button>
+                            <j-radio-button value="hour">
+                                {{t('DashBoard.components.Jvm.5rg33mevn3s0')}}
+                            </j-radio-button>
+                            <j-radio-button value="today">
+                                {{t('DashBoard.components.Jvm.5rg33mevos40')}}
+                            </j-radio-button>
+                            <j-radio-button value="week">
+                                {{t('DashBoard.components.Jvm.5rg33mevtbg0')}}
+                            </j-radio-button>
                         </j-radio-group></template
                     >
                 </j-range-picker>
@@ -66,7 +70,9 @@ import {
 import { DataType } from '../typings';
 import ServerList from './ServerList.vue'
 import Echarts from './echarts.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
   serviceId: {
     type: String,

@@ -1,6 +1,6 @@
 <template lang="">
     <j-modal
-        :title="data.id ? '编辑' : '新增'"
+        :title="data.id ? t('Tree.Save.index.5rg7wkstors0') : t('Tree.Save.index.5rg7wkstshg0')"
         :visible="true"
         width="700px"
         @cancel="handleCancel"
@@ -14,7 +14,7 @@
             ref="formRef"
         >
             <j-form-item
-                label="所属通道"
+                :label="t('Tree.Save.index.5rg7wkstswg0')"
                 name="channelId"
                 :rules="LeftTreeRules.channelId"
             >
@@ -22,7 +22,7 @@
                     style="width: 100%"
                     v-model:value="formData.channelId"
                     :options="channelList"
-                    placeholder="请选择所属通道"
+                    :placeholder="t('Tree.Save.index.5rg7wkstt2k0')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
@@ -30,24 +30,24 @@
                 />
             </j-form-item>
             <j-form-item
-                label="采集器名称"
+                :label="t('Tree.Save.index.5rg7wkstt6w0')"
                 name="name"
                 :rules="LeftTreeRules.name"
             >
                 <j-input
-                    placeholder="请输入采集器名称"
+                    :placeholder="t('Tree.Save.index.5rg7wksttd40')"
                     v-model:value="formData.name"
                 />
             </j-form-item>
             <j-form-item
-                label="从机地址"
+                :label="t('Tree.Save.index.5rg7wksttmw0')"
                 :name="['configuration', 'unitId']"
                 v-if="visibleUnitId"
                 :rules="LeftTreeRules.unitId"
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入从机地址"
+                    :placeholder="t('Tree.Save.index.5rg7wksttrc0')"
                     v-model:value="formData.configuration.unitId"
                     :min="0"
                     :max="255"
@@ -62,9 +62,9 @@
                     :showImage="false"
                     v-model:value="formData.configuration.inheritBreakerSpec.type"
                     :options="[
-                        { label: '降频', value: 'LowerFrequency' },
-                        { label: '断开', value: 'Break' },
-                        { label: '忽略', value: 'Ignore' },
+                        { label: t('Tree.Save.index.5rg7wkstu3c0'), value: 'LowerFrequency' },
+                        { label: t('Tree.Save.index.5rg7wkstu740'), value: 'Break' },
+                        { label: t('Tree.Save.index.5rg7wkstub80'), value: 'Ignore' },
                     ]"
                     @change="changeCardSelectType"
                 />
@@ -73,7 +73,7 @@
                 {{ getTypeTooltip(formData.configuration.inheritBreakerSpec.type) }}
             </p>
             <j-form-item
-                label="双字高低位切换"
+                :label="t('Tree.Save.index.5rg7wkstuew0')"
                 :name="['configuration', 'endian']"
                 v-if="visibleEndian"
                 :rules="LeftTreeRules.endian"
@@ -90,7 +90,7 @@
                 />
             </j-form-item>
             <j-form-item
-                label="单字高低位切换"
+                :label="t('Tree.Save.index.5rg7wkstuio0')"
                 :name="['configuration', 'endianIn']"
                 v-if="visibleEndian"
                 :rules="LeftTreeRules.endianIn"
@@ -107,19 +107,19 @@
                 />
             </j-form-item>
             <div style="color: #616161" v-if="visibleEndian">
-                <p>当前内存布局: {{ endianData }}</p>
+                <p>{{ t('Tree.Save.index.layout') + endianData }}</p>
                 <p>
-                    只有4字节数据类型(int32、ieee754 float)
-                    具有4种内存布局，其它只有ABCD、DCBA两种内存布局(以双字配置为准)
+                    {{t('Tree.Save.index.5rg7wkstums0')}} float)
+                    {{t('Tree.Save.index.5rg7wksturk0')}}
                 </p>
             </div>
             <j-form-item
-                label="请求超时时间配置"
+                :label="t('Tree.Save.index.5rg7wkstuxg0')"
                 :name="['configuration', 'requsetTimeout']"
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入请求超时时间配置"
+                    :placeholder="t('Tree.Save.index.5rg7wkstv2o0')"
                     v-model:value="formData.configuration.requsetTimeout"
                     addon-after="ms"
                     :max="2147483648"
@@ -127,9 +127,9 @@
                 />
             </j-form-item>
 
-            <j-form-item label="说明" name="description">
+            <j-form-item :label="t('Tree.Save.index.5rg7wkstv600')" name="description">
                 <j-textarea
-                    placeholder="请输入说明"
+                    :placeholder="t('Tree.Save.index.5rg7wkstvbk0')"
                     v-model:value="formData.description"
                     :maxlength="200"
                     :rows="3"
@@ -138,7 +138,7 @@
             </j-form-item>
         </j-form>
         <template #footer>
-            <j-button key="back" @click="handleCancel">取消</j-button>
+            <j-button key="back" @click="handleCancel">{{t('Tree.Save.index.5rg7wkstvm80')}}</j-button>
             <PermissionButton
                 key="submit"
                 type="primary"
@@ -149,7 +149,7 @@
                     id ? 'update' : 'add'
                 }`"
             >
-                确认
+                {{t('Tree.Save.index.5rg7wkstvps0')}}
             </PermissionButton>
         </template>
     </j-modal>
@@ -159,7 +159,9 @@ import { save, update } from '@/api/data-collect/collector';
 import { LeftTreeRules } from '../../data';
 import type { FormInstance } from 'ant-design-vue';
 import {cloneDeep} from "lodash-es";
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const loading = ref(false);
 const visibleEndian = ref(false);
 const visibleUnitId = ref(false);

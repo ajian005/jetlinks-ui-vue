@@ -3,7 +3,7 @@
         allowClear
         v-model:value="_value"
         @change="onChange"
-        placeholder="请选择"
+        :placeholder="t('Detail.EdgeMap.MSelect.5rcyhngueow0')"
         style="width: 100%"
     >
         <j-select-option
@@ -20,7 +20,9 @@
 
 <script lang="ts" setup>
 import queryDataList from './utils';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const _props = defineProps({
     modelValue: {
         type: String,

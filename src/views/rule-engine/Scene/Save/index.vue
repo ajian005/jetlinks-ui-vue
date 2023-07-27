@@ -18,11 +18,11 @@
           <j-form-item
           >
             <template #label>
-              <TitleComponent data='说明' style='font-size: 14px;' />
+              <TitleComponent :data="t('Scene.Save.index.5rg58exx8w00')" style='font-size: 14px;' />
             </template>
             <j-textarea
                 v-model:value="data.description"
-                placeholder='请输入说明'
+                :placeholder="t('Scene.Save.index.5rg58exxamk0')"
                 :rows="4"
                 show-count
                 :maxLength="200"
@@ -35,7 +35,7 @@
           :loading='loading'
           @click='save'
         >
-          保存
+          {{t('Scene.Save.index.5rg58exxaz80')}}
         </PermissionButton>
       </div>
     </FullPage>
@@ -53,7 +53,9 @@ import Timer from './Timer/index.vue'
 import { modify } from '@/api/rule-engine/scene'
 import { useMenuStore } from '@/store/menu'
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const menuStore = useMenuStore()
 const { data } = storeToRefs(sceneStore)
@@ -74,7 +76,7 @@ const save = async () => {
     loading.value = false
     if (resp.success) {
       menuStore.jumpPage('rule-engine/Scene');
-      onlyMessage('操作成功');
+      onlyMessage(t('Scene.Save.index.5rg58exxb4k0'));
     }
   }
 }

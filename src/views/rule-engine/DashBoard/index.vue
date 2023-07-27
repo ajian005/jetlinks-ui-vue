@@ -4,7 +4,7 @@
             <j-row :gutter="24">
                 <j-col :span="6">
                     <TopCard
-                        title="今日告警"
+                        :title="t('rule-engine.DashBoard.index.5rg3u2dz9hk0')"
                         :value="state.today"
                         :footer="currentMonAlarm"
                     >
@@ -13,7 +13,7 @@
                 </j-col>
                 <j-col :span="6">
                     <TopCard
-                        title="告警配置"
+                        :title="t('rule-engine.DashBoard.index.5rg3u2dzaog0')"
                         :value="state.config"
                         :footer="alarmState"
                         :img="getImage('/device/device-number.png')"
@@ -28,7 +28,7 @@
                     <div class="alarm-card">
                         <Guide>
                             <template #title>
-                                <span style="margin-right: 24px">告警统计</span>
+                                <span style="margin-right: 24px">{{t('rule-engine.DashBoard.index.5rg3u2dzau80')}}</span>
                                 <j-select
                                     style="width: 40%"
                                     v-model:value="queryCodition.targetType"
@@ -58,7 +58,7 @@
                                 ></Charts>
                             </div>
                             <div class="alarmRank">
-                                <h4>告警排名</h4>
+                                <h4>{{t('rule-engine.DashBoard.index.5rg3u2dzb000')}}</h4>
                                 <ul
                                     v-if="state.ranking.length"
                                     class="rankingList"
@@ -120,35 +120,38 @@ import {
     getAlarmLevel,
 } from '@/api/rule-engine/dashboard';
 import dayjs from 'dayjs';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 let currentMonAlarm = ref<Footer[]>([
     {
-        title: '当月告警',
+        title: t('rule-engine.DashBoard.index.5rg3u2dzb3w0'),
         value: 0,
         status: 'success',
     },
 ]);
 let alarmState = ref<Footer[]>([
     {
-        title: '正常',
+        title: t('rule-engine.DashBoard.index.5rg3u2dzb840'),
         value: 0,
         status: 'success',
     },
     {
-        title: '禁用',
+        title: t('rule-engine.DashBoard.index.5rg3u2dzbc80'),
         value: 0,
         status: 'error',
     },
 ]);
 const selectOpt1 = ref<Object[]>([
-    { label: '设备', value: 'device' },
-    { label: '产品', value: 'product' },
-    { label: '组织', value: 'org' },
-    { label: '其它', value: 'other' },
+    { label: t('rule-engine.DashBoard.index.5rg3u2dzbfs0'), value: 'device' },
+    { label: t('rule-engine.DashBoard.index.5rg3u2dzbjk0'), value: 'product' },
+    { label: t('rule-engine.DashBoard.index.5rg3u2dzbn40'), value: 'org' },
+    { label: t('rule-engine.DashBoard.index.5rg3u2dzbqk0'), value: 'other' },
 ]);
 const selectOpt2 = ref<SelectTypes['options']>([
-    { label: '设备', value: 'device' },
-    { label: '产品', value: 'product' },
-    { label: '其它', value: 'other' },
+    { label: t('rule-engine.DashBoard.index.5rg3u2dzbfs0'), value: 'device' },
+    { label: t('rule-engine.DashBoard.index.5rg3u2dzbjk0'), value: 'product' },
+    { label: t('rule-engine.DashBoard.index.5rg3u2dzbqk0'), value: 'other' },
 ]);
 let queryCodition = reactive({
     startTime: 0,
@@ -267,7 +270,7 @@ const getDashBoard = () => {
                 },
                 series: [
                     {
-                        name: '告警数',
+                        name: t('rule-engine.DashBoard.index.5rg3u2dzbu80'),
                         data: fifteenData.map((item) => item.value),
                         type: 'line',
                         color: '#FF595E',
@@ -423,13 +426,13 @@ const selectChange = () => {
             limit: 9,
         },
     };
-    let tip = '其它';
+    let tip = t('rule-engine.DashBoard.index.5rg3u2dzbqk0');
     if (queryCodition.targetType === 'device') {
-        tip = '设备';
+        tip = t('rule-engine.DashBoard.index.5rg3u2dzbfs0');
     } else if (queryCodition.targetType === 'product') {
-        tip = '产品';
+        tip = t('rule-engine.DashBoard.index.5rg3u2dzbjk0');
     } else if (queryCodition.targetType === 'org') {
-        tip = '组织';
+        tip = t('rule-engine.DashBoard.index.5rg3u2dzbn40');
     }
     // 网络请求
     dashboard([chartData, order]).then((res) => {

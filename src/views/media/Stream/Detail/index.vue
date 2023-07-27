@@ -13,33 +13,33 @@
                     <j-row :gutter="[16, 0]">
                         <j-col :span="12">
                             <j-form-item
-                                label="流媒体名称"
+                                :label="t('Stream.Detail.index.5rg3j3op5cg0')"
                                 name="name"
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入流媒体名称',
+                                        message: t('Stream.Detail.index.5rg3j3op6w80'),
                                     },
                                     {
                                         max: 64,
-                                        message: '最大可输入64个字符',
+                                        message: t('Stream.Detail.index.5rg3j3op75s0'),
                                     },
                                 ]"
                             >
                                 <j-input
                                     v-model:value="formData.name"
-                                    placeholder="请输入流媒体名称"
+                                    :placeholder="t('Stream.Detail.index.5rg3j3op6w80')"
                                 />
                             </j-form-item>
                         </j-col>
                         <j-col :span="12">
                             <j-form-item
-                                label="服务商"
+                                :label="t('Stream.Detail.index.5rg3j3op7hc0')"
                                 name="provider"
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请选择服务商',
+                                        message: t('Stream.Detail.index.5rg3j3op7o40'),
                                     },
                                 ]"
                             >
@@ -47,23 +47,23 @@
                                     ref="select"
                                     v-model:value="formData.provider"
                                     :options="options"
-                                    placeholder="请选择服务商"
+                                    :placeholder="t('Stream.Detail.index.5rg3j3op7o40')"
                                 ></j-select>
                             </j-form-item>
                         </j-col>
                         <j-col :span="12">
                             <j-form-item
-                                label="密钥"
+                                :label="t('Stream.Detail.index.5rg3j3op7tw0')"
                                 :name="['configuration', 'secret']"
                                 :rules="[
                                     {
                                         max: 64,
-                                        message: '最大可输入64个字符',
+                                        message: t('Stream.Detail.index.5rg3j3op75s0'),
                                     },
                                 ]"
                             >
                                 <j-input-password
-                                    placeholder="请输入密钥"
+                                    :placeholder="t('Stream.Detail.index.5rg3j3op7yo0')"
                                     v-model:value="
                                         formData.configuration.secret
                                     "
@@ -76,18 +76,18 @@
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入API Host',
+                                        message: ('Stream.Detail.index.5rg8mnb3vw40'),
                                     },
                                     {
                                         validator: validateAddress,
-                                        message: '请输入正确的IP地址或者域名',
+                                        message: t('Stream.Detail.index.5rg3j3op8340'),
                                     },
                                 ]"
                             >
                                 <template #label>
                                     API Host
                                     <j-tooltip
-                                        title="调用流媒体接口时请求的服务地址"
+                                        :title="t('Stream.Detail.index.5rg3j3op88g0')"
                                     >
                                         <AIcon
                                             type="QuestionCircleOutlined"
@@ -96,7 +96,7 @@
                                     </j-tooltip>
                                 </template>
                                 <j-input
-                                    placeholder="请输入API Host"
+                                    :placeholder="('Stream.Detail.index.5rg8mnb3vw40')"
                                     v-model:value="
                                         formData.configuration.apiHost
                                     "
@@ -110,7 +110,7 @@
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入端口',
+                                        message: t('Stream.Detail.index.5rg3j3op8co0'),
                                     },
                                 ]"
                             >
@@ -121,7 +121,7 @@
                                     :min="1"
                                     :max="65535"
                                     :precision="0"
-                                    placeholder="请输入输入端口"
+                                    :placeholder="t('Stream.Detail.index.5rg3j3op8gw0')"
                                     v-model:value="
                                         formData.configuration.apiPort
                                     "
@@ -134,18 +134,18 @@
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入RTP IP',
+                                        message: ('Stream.Detail.index.5rg8mnb3wv00'),
                                     },
                                     {
                                         validator: validateAddress,
-                                        message: '请输入正确的IP地址或者域名',
+                                        message: t('Stream.Detail.index.5rg3j3op8340'),
                                     },
                                 ]"
                             >
                                 <template #label>
                                     RTP IP
                                     <j-tooltip
-                                        title="视频设备将流推送到该IP地址下，部分设备仅支持IP地址，建议全是用IP地址"
+                                        :title="t('Stream.Detail.index.5rg3j3op8lk0')"
                                     >
                                         <AIcon
                                             type="QuestionCircleOutlined"
@@ -154,7 +154,7 @@
                                     </j-tooltip>
                                 </template>
                                 <j-input
-                                    placeholder="请输入RTP IP"
+                                    :placeholder="('Stream.Detail.index.5rg8mnb3wv00')"
                                     v-model:value="formData.configuration.rtpIp"
                                 />
                             </j-form-item>
@@ -166,7 +166,7 @@
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入端口',
+                                        message: t('Stream.Detail.index.5rg3j3op8co0'),
                                     },
                                 ]"
                             >
@@ -177,7 +177,7 @@
                                     :min="1"
                                     :max="65535"
                                     :precision="0"
-                                    placeholder="请输入端口"
+                                    :placeholder="t('Stream.Detail.index.5rg3j3op8co0')"
                                     v-model:value="
                                         formData.configuration.rtpPort
                                     "
@@ -194,7 +194,7 @@
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入起始端口',
+                                        message: t('Stream.Detail.index.5rg3j3op8uc0'),
                                     },
                                 ]"
                             >
@@ -207,7 +207,7 @@
                                             .dynamicRtpPortRange1 || 65535
                                     "
                                     :precision="0"
-                                    placeholder="起始端口"
+                                    :placeholder="t('Stream.Detail.index.5rg3j3op9000')"
                                     v-model:value="
                                         formData.configuration
                                             .dynamicRtpPortRange0
@@ -215,7 +215,7 @@
                                 />
                             </j-form-item>
                         </j-col>
-                        <div class="form-item-checked" v-if="checked">至</div>
+                        <div class="form-item-checked" v-if="checked">{{t('Stream.Detail.index.5rg3j3op95c0')}}</div>
                         <j-col :span="4" v-if="checked">
                             <j-form-item
                                 class="form-item"
@@ -226,7 +226,7 @@
                                 :rules="[
                                     {
                                         required: true,
-                                        message: '请输入终止端口',
+                                        message: t('Stream.Detail.index.5rg3j3op9b80'),
                                     },
                                 ]"
                             >
@@ -239,7 +239,7 @@
                                     "
                                     :max="65535"
                                     :precision="0"
-                                    placeholder="终止端口"
+                                    :placeholder="t('Stream.Detail.index.5rg3j3op9ho0')"
                                     v-model:value="
                                         formData.configuration
                                             .dynamicRtpPortRange1
@@ -258,7 +258,7 @@
                                         formData.configuration.dynamicRtpPort
                                     "
                                 >
-                                    动态端口
+                                    {{t('Stream.Detail.index.5rg3j3op9n00')}}
                                 </j-checkbox>
                             </j-form-item>
                         </j-col>
@@ -271,7 +271,7 @@
                                     type="primary"
                                     @click.prevent="onSubmit"
                                     :loading="loading"
-                                    >保存</j-button
+                                    >{{t('Stream.Detail.index.5rg3j3op9sg0')}}</j-button
                                 >
                             </j-form-item>
                         </j-col>
@@ -288,7 +288,9 @@ import { queryProviders, queryDetail, save, update } from '@/api/media/stream';
 import type { FormInstance } from 'ant-design-vue';
 
 import { FormDataType } from '../type';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter();
 const route = useRoute();
 const view = route.query.view as string;
@@ -320,7 +322,7 @@ const validateAddress = (_rule: any, value: string): Promise<any> =>
         ) {
             return resolve('');
         } else {
-            return value ? reject('请输入正确的IP地址或者域名') : resolve('');
+            return value ? reject(t('Stream.Detail.index.5rg3j3op8340')) : resolve('');
         }
     });
 
@@ -358,7 +360,7 @@ const onSubmit = async () => {
     const response =
         id === ':id' ? await save(params) : await update({ ...params, id });
     if (response.status === 200) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('Stream.Detail.index.5rg3j3op9z80'), 'success');
         router.push('/iot/link/Stream');
     }
     loading.value = false;

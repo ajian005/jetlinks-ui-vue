@@ -1,23 +1,25 @@
 <template>
-    <j-modal
-        :maskClosable="false"
-        width="800px"
-        :visible="true"
-        :title="type === 'active' ? '启用' : '同步'"
-        :closable="false"
-    >
+    <j-modal :maskClosable="false" width="800px" :visible="true"
+        :title="type === 'active' ? t('Instance.Process.index.5rcy8rtoch40') : t('Instance.Process.index.5rcy8rtodx00')"
+        :closable="false">
         <div style="margin: 10px 0px 20px 0px; padding-right: 10px;">
             <div v-if="flag">
-                <div>{{ type === 'active' ? '正在启用全部设备' : '正在同步设备状态' }}</div>
+                <div>{{ type === 'active' ? t('Instance.Process.index.5rcy8rtoe500') :
+                    t('Instance.Process.index.5rcy8rtoecc0') }}</div>
                 <j-progress :percent="_percent" />
             </div>
             <div v-else>
-                <p>{{ type === 'active' ? '启用' : '同步' }}成功：{{ count }}条</p>
-                <p v-if="type === 'active'">启用失败：{{ errCount }}条<j-tooltip title="实例信息页面中的配置项未完善"><AIcon style="margin-left: 5px" type="QuestionCircleOutlined" /></j-tooltip></p>
+                <p>{{ (type === 'active' ? t('Instance.Process.index.5rcy8rtoch40') :
+                    t('Instance.Process.index.5rcy8rtodx00')) + t('Instance.Process.index.suc', { count: count })}}</p>
+                <p v-if="type === 'active'">{{ t('Instance.Process.index.err',{ errCount: errCount } )}}<j-tooltip
+                        :title="t('Instance.Process.index.imperfection')">
+                        <AIcon style="margin-left: 5px" type="QuestionCircleOutlined" />
+                    </j-tooltip></p>
             </div>
         </div>
         <template #footer>
-            <j-button v-if="!flag" type="primary" @click="handleCancel">完成</j-button>
+            <j-button v-if="!flag" type="primary"
+                @click="handleCancel">{{ t('Instance.Process.index.5rcy8rtoeic0') }}</j-button>
         </template>
     </j-modal>
 </template>
@@ -25,7 +27,9 @@
 <script lang="ts" setup>
 import { getDeviceNumber } from '@/api/device/instance';
 import { EventSourcePolyfill } from 'event-source-polyfill';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const emit = defineEmits(['close', 'save']);
 const props = defineProps({
     api: {
@@ -83,17 +87,17 @@ const getData = (api: string) => {
                 break;
         }
         if ((count.value + errCount.value) >= total.value) {
-          setTimeout(() => {
-            _source.close();
-            flag.value = false;
-          }, 500)
+            setTimeout(() => {
+                _source.close();
+                flag.value = false;
+            }, 500)
         }
     };
     _source.onerror = () => {
         _source.close();
         flag.value = false;
     };
-    _source.onopen = () => {};
+    _source.onopen = () => { };
 };
 
 watch(
@@ -101,7 +105,7 @@ watch(
     (newValue) => {
         if (newValue) {
             getDeviceNumber(props.data).then(resp => {
-                if(resp.status === 200){
+                if (resp.status === 200) {
                     total.value = resp.result
                     getData(newValue);
                 }

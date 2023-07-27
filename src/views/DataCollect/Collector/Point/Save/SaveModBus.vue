@@ -1,6 +1,6 @@
 <template lang="">
     <j-modal
-        :title="data.id ? '编辑' : '新增'"
+        :title="data.id ? t('Point.Save.SaveModBus.5rg7tv8s8zg0') : t('Point.Save.SaveModBus.5rg7tv8sa380')"
         :visible="true"
         width="700px"
         @cancel="handleCancel"
@@ -14,14 +14,14 @@
             :rules="ModBusRules"
             ref="formRef"
         >
-            <j-form-item label="点位名称" name="name">
+            <j-form-item :label="t('Point.Save.SaveModBus.5rg7tv8sahg0')" name="name">
                 <j-input
-                    placeholder="请输入点位名称"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8saog0')"
                     v-model:value="formData.name"
                 />
             </j-form-item>
             <j-form-item
-                label="功能码"
+                :label="t('Point.Save.SaveModBus.5rg7tv8saso0')"
                 :name="['configuration', 'function']"
                 :rules="ModBusRules.function"
             >
@@ -29,12 +29,12 @@
                     style="width: 100%"
                     v-model:value="formData.configuration.function"
                     :options="[
-                        { label: '01线圈寄存器', value: 'Coils' },
-                        { label: '02离散输入寄存器', value: 'DiscreteInputs' },
-                        { label: '03保存寄存器', value: 'HoldingRegisters' },
-                        { label: '04输入寄存器', value: 'InputRegisters' },
+                        { label: t('Point.Save.SaveModBus.code1'), value: 'Coils' },
+                        { label: t('Point.Save.SaveModBus.code2'), value: 'DiscreteInputs' },
+                        { label: t('Point.Save.SaveModBus.code3'), value: 'HoldingRegisters' },
+                        { label: t('Point.Save.SaveModBus.code4'), value: 'InputRegisters' },
                     ]"
-                    placeholder="请选择所功能码"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sax80')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
@@ -42,7 +42,7 @@
                 />
             </j-form-item>
             <j-form-item
-                label="地址"
+                :label="t('Point.Save.SaveModBus.5rg7tv8sb1k0')"
                 :name="['pointKey']"
                 validateFirst
                 :rules="[
@@ -55,7 +55,7 @@
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入地址"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sb5o0')"
                     v-model:value="formData.pointKey"
                     :min="0"
                     :max="999999"
@@ -63,19 +63,19 @@
                 />
             </j-form-item>
             <p style="color: #616161" v-if="formData.configuration.function">
-                PLC地址: {{
+                {{t('Point.Save.SaveModBus.PCL') + 
                     InitAddress[formData.configuration.function] +
                         Number(formData.pointKey) || 0
                 }}
             </p>
             <j-form-item
-                label="寄存器数量"
+                :label="t('Point.Save.SaveModBus.5rg7tv8sb9w0')"
                 :name="['configuration', 'parameter', 'quantity']"
                 :rules="ModBusRules.quantity"
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入寄存器数量"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sbf00')"
                     v-model:value="formData.configuration.parameter.quantity"
                     :min="1"
                     :max="255"
@@ -86,7 +86,7 @@
 
             <j-form-item
                 v-if="['HoldingRegisters', 'InputRegisters'].includes(formData.configuration.function)"
-                label="数据类型"
+                :label="t('Point.Save.SaveModBus.5rg7tv8sbik0')"
                 :name="['configuration', 'codec', 'provider']"
                 :rules="[
                     ...ModBusRules.provider,
@@ -100,14 +100,14 @@
                     style="width: 100%"
                     v-model:value="formData.configuration.codec.provider"
                     :options="providerList"
-                    placeholder="请选择数据类型"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sbm40')"
                     allowClear
                     show-search
                     :filter-option="filterOption"
                 />
             </j-form-item>
             <j-form-item
-                label="缩放因子"
+                :label="t('Point.Save.SaveModBus.5rg7tv8sbps0')"
                 :name="[
                     'configuration',
                     'codec',
@@ -118,19 +118,19 @@
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入缩放因子"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sbtg0')"
                     v-model:value="
                         formData.configuration.codec.configuration.scaleFactor
                     "
                 />
             </j-form-item>
             <j-form-item
-                label="小数保留位数"
+                :label="t('Point.Save.SaveModBus.5rg7tv8sbzk0')"
                 :name="['configuration', 'codec', 'configuration', 'scale']"
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入小数保留位数"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sc2w0')"
                     :min="0"
                     :max="65535"
                     :precision="0"
@@ -141,7 +141,7 @@
             </j-form-item>
             <j-form-item
                 v-if="formData.configuration.function"
-                label="访问类型"
+                :label="t('Point.Save.SaveModBus.5rg7tv8sc6o0')"
                 name="accessModes"
             >
                 <j-card-select
@@ -151,10 +151,10 @@
                     :options="
                         formData.configuration.function === 'InputRegisters' ||
                         formData.configuration.function === 'DiscreteInputs'
-                            ? [{ label: '读', value: 'read' }]
+                            ? [{ label: t('Point.Save.SaveModBus.5rg7tv8sca40'), value: 'read' }]
                             : [
-                                  { label: '读', value: 'read' },
-                                  { label: '写', value: 'write' },
+                                  { label: t('Point.Save.SaveModBus.5rg7tv8sca40'), value: 'read' },
+                                  { label: t('Point.Save.SaveModBus.5rg7tv8scf80'), value: 'write' },
                               ]
                     "
                     :column="2"
@@ -167,7 +167,7 @@
                     formData.configuration.function === 'HoldingRegisters'
                 "
             >
-                <span style="margin-right: 10px">非标准协议写入配置</span>
+                <span style="margin-right: 10px">{{t('Point.Save.SaveModBus.5rg7tv8sckg0')}}</span>
                 <j-switch
                     @change="changeNspwc"
                     v-model:checked="formData.nspwc"
@@ -179,7 +179,7 @@
                     formData.accessModes?.includes('write') &&
                     formData.configuration.function === 'HoldingRegisters'
                 "
-                label="是否写入数据区长度"
+                :label="t('Point.Save.SaveModBus.5rg7tv8scqk0')"
                 :name="['configuration', 'parameter', 'writeByteCount']"
                 :rules="ModBusRules.writeByteCount"
             >
@@ -189,8 +189,8 @@
                         formData.configuration.parameter.writeByteCount
                     "
                     :options="[
-                        { label: '是', value: true },
-                        { label: '否', value: false },
+                        { label: t('Point.Save.SaveModBus.5rg7tv8sctg0'), value: true },
+                        { label: t('Point.Save.SaveModBus.5rg7tv8scx00'), value: false },
                     ]"
                     @change="changeWriteByteCount"
                     :column="2"
@@ -202,23 +202,23 @@
                     formData.accessModes?.includes('write') &&
                     formData.configuration.function === 'HoldingRegisters'
                 "
-                label="自定义数据区长度（byte）"
+                :label="t('Point.Save.SaveModBus.5rg7tv8sczs0')"
                 :name="['configuration', 'parameter', 'byteCount']"
                 :rules="ModBusRules.byteCount"
             >
                 <j-input
-                    placeholder="请输入自定义数据区长度（byte）"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sd2s0')"
                     v-model:value="formData.configuration.parameter.byteCount"
                 />
             </j-form-item>
             <j-form-item
-                label="采集频率"
+                :label="t('Point.Save.SaveModBus.5rg7tv8sd5k0')"
                 :name="['configuration', 'interval']"
                 :rules="[...ModBusRules.interval]"
             >
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入采集频率"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sd8c0')"
                     v-model:value="formData.configuration.interval"
                     addon-after="ms"
                     :max="2147483648"
@@ -229,14 +229,14 @@
             <j-form-item label="" :name="['features']">
                 <j-checkbox-group v-model:value="formData.features">
                     <j-checkbox value="changedOnly" name="type"
-                        >只推送变化的数据</j-checkbox
+                        >{{t('Point.Save.SaveModBus.5rg7tv8sdb00')}}</j-checkbox
                     >
                 </j-checkbox-group>
             </j-form-item>
 
-            <j-form-item label="说明" :name="['description']">
+            <j-form-item :label="t('Point.Save.SaveModBus.5rg7tv8sdgc0')" :name="['description']">
                 <j-textarea
-                    placeholder="请输入说明"
+                    :placeholder="t('Point.Save.SaveModBus.5rg7tv8sdj80')"
                     v-model:value="formData.description"
                     :maxlength="200"
                     :rows="3"
@@ -245,7 +245,7 @@
             </j-form-item>
         </j-form>
         <template #footer>
-            <j-button key="back" @click="handleCancel">取消</j-button>
+            <j-button key="back" @click="handleCancel">{{t('Point.Save.SaveModBus.5rg7tv8sdm80')}}</j-button>
             <PermissionButton
                 key="submit"
                 type="primary"
@@ -256,7 +256,7 @@
                     id ? 'update' : 'add'
                 }`"
             >
-                确认
+                {{t('Point.Save.SaveModBus.5rg7tv8sdp00')}}
             </PermissionButton>
         </template>
     </j-modal>
@@ -272,7 +272,9 @@ import { ModBusRules, checkProviderData } from '../../data.ts';
 import type { FormInstance } from 'ant-design-vue';
 import type { Rule } from 'ant-design-vue/lib/form';
 import { cloneDeep } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Object,
@@ -388,7 +390,7 @@ const checkProvider = (_rule: Rule, value: string): Promise<any> =>
         if (value) {
             const { quantity } = formData.value.configuration.parameter;
             return checkProviderData[value] > Number(quantity) * 2
-                ? reject('数据类型长度需 <= 寄存器数量 * 2')
+                ? reject(`${t('Point.Save.SaveModBus.limit')} <= ${t('Point.Save.SaveModBus.5rg7tv8sb9w0')} * 2`)
                 : resolve('');
         } else {
             return reject('');
@@ -405,7 +407,7 @@ const checkPointKey = (_rule: Rule, value: string): Promise<any> =>
             });
             return res.result?.passed ? resolve('') : reject(res.result.reason);
         } else {
-            return reject('请输入地址');
+            return reject(t('Point.Save.SaveModBus.5rg7tv8sb5o0'));
         }
     });
 

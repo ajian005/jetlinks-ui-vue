@@ -52,7 +52,7 @@
             />
         </j-form-item>
     </j-form>
-    <j-empty v-else style="margin: 20px 0" description="暂无模板变量" />
+    <j-empty v-else style="margin: 20px 0" :description="t('action.Notify.VariableDefinitions.5rg4w51pmy80')" />
 </template>
 
 <script lang="ts" setup>
@@ -62,7 +62,9 @@ import Tag from './variableItem/Tag.vue';
 import InputFile from './variableItem/InputFile.vue';
 import User from './variableItem/User.vue';
 import { PropType } from 'vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     variableDefinitions: {
         type: Array as PropType<any>,
@@ -116,40 +118,40 @@ const checkValue = (_rule: any, value: any, item: any) => {
         return Promise.resolve();
     } else if (type === 'link') {
         if (!value) {
-            return Promise.reject(new Error('请输入' + item.name));
+            return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pqzk0') + item.name));
         } else if (value.length > 64) {
-            return Promise.reject(new Error('最多64个字符'));
+            return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51prf40')));
         }
     } else if (type === 'tag' && !value) {
-        return Promise.reject(new Error('请选择' + item.name));
+        return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pro00') + item.name));
     } else if (['date', 'org'].includes(type)) {
         if (!value) {
-            return Promise.reject(new Error('请选择' + item.name));
+            return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pro00') + item.name));
         } else {
             if (value?.source === 'upper') {
                 if (!value?.upperKey) {
-                    return Promise.reject(new Error('请选择' + item.name));
+                    return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pro00') + item.name));
                 } else {
                     return Promise.resolve();
                 }
             } else {
                 if (!value?.value) {
-                    return Promise.reject(new Error('请选择' + item.name));
+                    return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pro00') + item.name));
                 } else {
                     return Promise.resolve();
                 }
             }
         }
     } else if (value?.source === 'fixed' && !value?.value) {
-        return Promise.reject(new Error('请输入' + item.name));
+        return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pqzk0') + item.name));
     } else if (
         value?.source === 'relation' &&
         !value?.value &&
         !value?.relation
     ) {
-        return Promise.reject(new Error('请选择' + item.name));
+        return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pro00') + item.name));
     } else if (value?.source === 'upper' && !value.upperKey) {
-        return Promise.reject(new Error('请选择' + item.name));
+        return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pro00') + item.name));
     } else if (type === 'user') {
         if (
             props.notify.notifyType === 'email' &&
@@ -157,7 +159,7 @@ const checkValue = (_rule: any, value: any, item: any) => {
         ) {
             if (Array.isArray(value?.value)) {
                 if (!value?.value.length) {
-                    return Promise.reject(new Error('请输入收件人'));
+                    return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51prys0')));
                 }
                 const reg =
                     /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
@@ -165,7 +167,7 @@ const checkValue = (_rule: any, value: any, item: any) => {
                     return reg.test(it);
                 });
                 if (!flag) {
-                    return Promise.reject(new Error('请输入正确的邮箱地址'));
+                    return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51pscw0')));
                 } else {
                     return Promise.resolve();
                 }
@@ -180,7 +182,7 @@ const checkValue = (_rule: any, value: any, item: any) => {
         ) {
             const reg = /^[1][3-9]\d{9}$/;
             if (!reg.test(value?.value)) {
-                return Promise.reject(new Error('请输入正确的手机号码'));
+                return Promise.reject(new Error(t('action.Notify.VariableDefinitions.5rg4w51psjg0')));
             } else {
                 return Promise.resolve();
             }

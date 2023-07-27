@@ -35,7 +35,7 @@
                             </div>
                             <div class="right">
                                 <j-button type="primary" @click="click(item)"
-                                    >接入</j-button
+                                    >{{t('components.Provider.index.5rg38m5uiv00')}}</j-button
                                 >
                             </div>
                         </div>
@@ -49,7 +49,9 @@
 <script lang="ts" setup name="AccessConfigProvider">
 import TitleComponent from '@/components/TitleComponent/index.vue';
 import { BackMap } from '../../data';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     dataSource: {
         type: Object,

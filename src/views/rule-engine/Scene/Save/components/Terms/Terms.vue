@@ -1,12 +1,12 @@
 <template>
   <div class='actions-terms'>
-    <TitleComponent data='触发条件' style='font-size: 14px;' >
+    <TitleComponent :data="t('components.Terms.Terms.5rg4yhwvhhg0')" style='font-size: 14px;' >
       <template #extra>
         <j-switch
           v-model:checked='open'
           @change='change'
-          checkedChildren='开'
-          unCheckedChildren='关'
+          :checkedChildren="t('components.Terms.Terms.5rg4yhwvimg0')"
+          :unCheckedChildren="t('components.Terms.Terms.5rg4yhwvis00')"
           style='margin-left: 4px;'
         />
       </template>
@@ -24,7 +24,7 @@
         />
         <div v-else class='actions-terms-warp' :style='{ marginTop: data.branches.length === 2 ? 0 : 24 }'>
           <div class='actions-terms-title' style='padding: 0;margin-bottom: 24px;'>
-            否则
+            {{t('components.Terms.Terms.5rg4yhwvivo0')}}
           </div>
           <div class='actions-terms-options no-when'>
             <AIcon type='PlusOutlined' class='when-add-button' @click='addBranches' />
@@ -57,7 +57,9 @@ import { getParseTerm } from '@/api/rule-engine/scene'
 import type { FormModelType } from '@/views/rule-engine/Scene/typings'
 import Branches from './Branches.vue'
 import Action from '../../action/index.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data } = storeToRefs(sceneStore)
 const open = ref<boolean>(false)

@@ -2,13 +2,14 @@
     <div style="margin-top: 20px">
         <j-descriptions bordered>
             <template #title>
-                标签
+                {{t('components.Tags.index.5rcykpi2is00')}}
                 <PermissionButton
                     type="link"
                     @click="visible = true"
                     hasPermission="device/Instance:update"
                 >
-                    <AIcon type="EditOutlined" />编辑
+                    <AIcon type="EditOutlined" />
+                    {{t('components.Tags.index.5rh40qyokzg0')}}
                 </PermissionButton>
             </template>
             <j-descriptions-item
@@ -29,7 +30,9 @@
 <script lang="ts" setup>
 import { useInstanceStore } from '@/store/instance';
 import Save from './Save.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const instanceStore = useInstanceStore();
 
 const dataSource = ref<Record<any, any>[]>([]);

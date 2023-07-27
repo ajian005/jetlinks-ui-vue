@@ -9,10 +9,10 @@
         width="650px"
     >
         <template #title>
-            <span>产品创建成功</span>
+            <span>{{t('Product.DialogTips.index.5rcy2231c2g0')}}</span>
         </template>
         <template #footer>
-            <j-button @click="cancel">关闭</j-button>
+            <j-button @click="cancel">{{t('Product.DialogTips.index.5rcy2231djo0')}}</j-button>
         </template>
         <div class="product-tips">
             <div style="display: flex">
@@ -22,34 +22,34 @@
                         class="icon-style"
                     ></AIcon>
                 </div>
-                <div class="product-title">产品创建成功</div>
+                <div class="product-title">{{t('Product.DialogTips.index.5rcy2231c2g0')}}</div>
             </div>
             <div style="display: flex">
-                <div class="product-id">产品ID: {{ idValue }}</div>
+                <div class="product-id">{{ t('Product.DialogTips.index.productId')+idValue }}</div>
                 <div
                     class="product-btn"
                     @click="showDetail"
                     style="cursor: pointer"
                 >
-                    查看详情
+                    {{t('Product.DialogTips.index.5rcy2231dv40')}}
                 </div>
             </div>
-            <div>接下来推荐操作:</div>
-            <div class="product-main">1、配置产品接入方式</div>
+            <div>{{ t('Product.DialogTips.index.stepTitle') }}</div>
+            <div class="product-main">{{ t('Product.DialogTips.index.step1') }}</div>
             <div class="product-text">
-                点击具体产品的查看按钮,进入“设备接入”tab页，并参照设备铭牌说明选择匹配的接入方式
+                {{t('Product.DialogTips.index.5rcy2231e400')}}
             </div>
-            <div class="product-main">2、添加测试设备</div>
+            <div class="product-main">{{ t('Product.DialogTips.index.step2') }}</div>
             <div class="product-text">
-                进入设备列表，添加单个设备，用于验证产品模型是否配置正确
+                {{t('Product.DialogTips.index.5rcy2231ec80')}}
             </div>
-            <div class="product-main">3、功能调试</div>
+            <div class="product-main">{{ t('Product.DialogTips.index.step3') }}</div>
             <div class="product-text">
-                点击查看具体设备，进入“设备诊断”对添加的测试设备进行功能调试，验证能否连接到平台，设备功能是否配置正确
+                {{t('Product.DialogTips.index.5rcy2231elg0')}}
             </div>
-            <div class="product-main">4、批量添加设备</div>
+            <div class="product-main">{{ t('Product.DialogTips.index.step4') }}</div>
             <div class="product-text">
-                进入设备列表页面，点击批量导入设备，批量添加同一产品下的设备
+                {{t('Product.DialogTips.index.5rcy2231etc0')}}
             </div>
         </div>
     </j-modal>
@@ -58,6 +58,9 @@
 import { getImage } from '@/utils/comm.ts';
 import { useProductStore } from '@/store/product';
 import { useMenuStore } from '@/store/menu';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const visible = ref<boolean>(false);
 const productStore = useProductStore();
 const router = useRouter();
@@ -77,7 +80,7 @@ const show = (id: string) => {
     idValue.value = id;
 };
 /**
- * 查看详情
+ * {{t('Product.DialogTips.index.5rcy2231dv40')}}
  */
 const showDetail = () => {
     menuStore.jumpPage('device/Product/Detail', { id: idValue.value });

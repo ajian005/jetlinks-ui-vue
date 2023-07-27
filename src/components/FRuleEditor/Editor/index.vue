@@ -22,7 +22,7 @@
       </div>
       <div class="right">
         <span v-if="mode !== 'advance'">
-          <j-tooltip :title="!id ? '请先输入标识' : '设置属性规则'">
+          <j-tooltip :title="!id ? t('FRuleEditor.Editor.index.5rlc9j4n8fo0') : t('FRuleEditor.Editor.index.5rlc9j4n9io0')">
             <AIcon type="FullscreenOutlined" :class="!id ? 'disabled' : ''" @click="fullscreenClick" />
           </j-tooltip>
         </span>
@@ -34,7 +34,9 @@
   </div>
 </template>
 <script setup lang="ts" name="Editor">
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface Props {
   mode?: 'advance' | 'simple';
   id?: string;

@@ -7,12 +7,12 @@
             <div class="steps-box" v-if="current === 0">
                 <div class="alert">
                     <AIcon type="InfoCircleOutlined" />
-                    选择与设备通信的网络组件
+                    {{t('components.Network.index.5rg37sm5quk0')}}
                 </div>
                 <div class="search">
                     <j-input-search
                         allowClear
-                        placeholder="请输入"
+                        :placeholder="t('components.Network.index.5rg37sm5s0c0')"
                         style="width: 300px"
                         @search="networkSearch"
                     />
@@ -23,7 +23,7 @@
                         hasPermission="link/Type:add"
                     >
                         <template #icon><AIcon type="PlusOutlined" /></template>
-                        新增
+                        {{t('components.Network.index.5rg37sm5s6c0')}}
                     </PermissionButton>
                 </div>
                 <j-scrollbar height="480">
@@ -79,19 +79,19 @@
                     <j-empty
                         style="margin-top: 10%"
                         v-else
-                        description="暂无数据"
+                        :description="t('components.Network.index.5rg37sm5sb40')"
                     />
                 </j-scrollbar>
             </div>
             <div class="steps-box" v-else-if="current === 1">
                 <div class="alert">
                     <AIcon type="InfoCircleOutlined" />
-                    使用选择的消息协议，对网络组件通信数据进行编解码、认证等操作
+                    {{t('components.Network.index.5rg37sm5sf80')}}
                 </div>
                 <div class="search">
                     <j-input-search
                         allowClear
-                        placeholder="请输入"
+                        :placeholder="t('components.Network.index.5rg37sm5s0c0')"
                         style="width: 300px"
                         @search="procotolSearch"
                     />
@@ -102,7 +102,7 @@
                         hasPermission="link/Protocol:add"
                     >
                         <template #icon><AIcon type="PlusOutlined" /></template>
-                        新增
+                        {{t('components.Network.index.5rg37sm5s6c0')}}
                     </PermissionButton>
                 </div>
                 <j-scrollbar height="480">
@@ -128,7 +128,7 @@
                     <j-empty
                         style="margin-top: 10%"
                         v-else
-                        description="暂无数据"
+                        :description="t('components.Network.index.5rg37sm5sb40')"
                     />
                 </j-scrollbar>
             </div>
@@ -141,28 +141,28 @@
                 >
                     <j-row :gutter="[24, 24]">
                         <j-col :span="12">
-                            <title-component data="基本信息" />
+                            <title-component :data="t('components.Network.index.5rg37sm5sk80')" />
                             <j-form
                                 ref="formRef"
                                 :model="formData"
                                 layout="vertical"
                             >
                                 <j-form-item
-                                    label="名称"
+                                    :label="t('components.Network.index.5rg37sm5so40')"
                                     v-bind="validateInfos.name"
                                 >
                                     <j-input
                                         v-model:value="formData.name"
                                         allowClear
-                                        placeholder="请输入名称"
+                                        :placeholder="t('components.Network.index.5rg37sm5ssc0')"
                                     />
                                 </j-form-item>
                                 <j-form-item
-                                    label="说明"
+                                    :label="t('components.Network.index.5rg37sm5sws0')"
                                     v-bind="validateInfos.description"
                                 >
                                     <j-textarea
-                                        placeholder="请输入说明"
+                                        :placeholder="t('components.Network.index.5rg37sm5t0w0')"
                                         :rows="4"
                                         v-model:value="formData.description"
                                         show-count
@@ -174,14 +174,14 @@
                         <j-col :span="12">
                             <j-scrollbar height="580">
                                 <div class="doc">
-                                    <h1>接入方式</h1>
+                                    <h1>{{t('components.Network.index.5rg37sm5t4w0')}}</h1>
                                     <p>
                                         {{ provider.name }}
                                     </p>
                                     <p>
                                         {{ provider.description }}
                                     </p>
-                                    <h1>消息协议</h1>
+                                    <h1>{{t('components.Network.index.5rg37sm5tak0')}}</h1>
                                     <p>
                                         {{
                                             procotolList.find(
@@ -194,7 +194,7 @@
                                         <Markdown :source="config.document" />
                                     </p>
                                     <div v-if="getNetworkCurrent()">
-                                        <h1>网络组件</h1>
+                                        <h1>{{t('components.Network.index.5rg37sm5tec0')}}</h1>
                                         <p
                                             v-for="i in getNetworkCurrentData()"
                                             :key="i.address"
@@ -218,7 +218,7 @@
                                                 data.provider ===
                                                     'mqtt-client-gateway'
                                                     ? 'topic'
-                                                    : 'URL信息'
+                                                    : t('components.Network.index.URL')
                                             }}
                                         </h1>
                                         <j-scrollbar height="400">
@@ -268,7 +268,7 @@
               style="margin-right: 8px"
               @click="prev"
             >
-              上一步
+              {{t('components.Network.index.5rg37sm5ti80')}}
             </j-button>
             <PermissionButton
                 v-if="current === 2 && view === 'false'"
@@ -280,14 +280,14 @@
                 }`"
                 :loading='loading'
             >
-                保存
+                {{t('components.Network.index.5rg37sm5tm00')}}
             </PermissionButton>
             <j-button
               v-if="[0, 1].includes(current)"
               type="primary"
               @click="next"
             >
-              下一步
+              {{t('components.Network.index.5rg37sm5tpw0')}}
             </j-button>
         </div>
     </div>
@@ -314,7 +314,9 @@ import { Form } from 'ant-design-vue';
 import type { FormInstance, TableColumnType } from 'ant-design-vue';
 import { useMenuStore } from 'store/menu';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 function generateUUID() {
     var d = new Date().getTime();
@@ -354,7 +356,7 @@ const useForm = Form.useForm;
 
 const current = ref(0);
 const stepCurrent = ref(0);
-const steps = ref(['网络组件', '消息协议', '完成']);
+const steps = ref([t('components.Network.index.5rg37sm5tec0'), t('components.Network.index.5rg37sm5tak0'), t('components.Network.index.5rg37sm5tu00')]);
 const networkList: any = ref([]);
 const allNetworkList: any = ref([]);
 const procotolList: any = ref([]);
@@ -374,14 +376,14 @@ const { resetFields, validate, validateInfos } = useForm(
     formData,
     reactive({
         name: [
-            { required: true, message: '请输入名称', trigger: 'blur' },
+            { required: true, message: t('components.Network.index.5rg37sm5ssc0'), trigger: 'blur' },
             {
                 max: 64,
-                message: '最多可输入64个字符',
+                message: t('components.Network.index.5rg37sm5u200'),
                 trigger: 'blur',
             },
         ],
-        description: [{ max: 200, message: '最多可输入200个字符' }],
+        description: [{ max: 200, message: t('components.Network.index.5rg37sm5u640') }],
     }),
 );
 
@@ -456,9 +458,9 @@ const getColor = (i: any) => (i.health === -1 ? 'error' : 'processing');
 
 const getStream = (record: any) => {
     let stream = '';
-    if (record.upstream && record.downstream) stream = '上行、下行';
-    else if (record.upstream) stream = '上行';
-    else if (record.downstream) stream = '下行';
+    if (record.upstream && record.downstream) stream = t('components.Network.index.5rg37sm5ua80');
+    else if (record.upstream) stream = t('components.Network.index.5rg37sm5ug40');
+    else if (record.downstream) stream = t('components.Network.index.5rg37sm5ujc0');
     return stream;
 };
 
@@ -517,7 +519,7 @@ const saveData = () => {
                     : await update({ ...params, id });
             loading.value = false
             if (resp.status === 200) {
-                onlyMessage('操作成功', 'success');
+                onlyMessage(t('components.Network.index.5rg37sm5un80'), 'success');
                 history.back();
                 if ((window as any).onTabSaveSuccess) {
                     if (resp.result?.id) {
@@ -533,14 +535,14 @@ const saveData = () => {
 const next = async () => {
     if (current.value === 0) {
         if (!networkCurrent.value) {
-            onlyMessage('请选择网络组件！', 'error');
+            onlyMessage(t('components.Network.index.5rg37sm5uqk0'), 'error');
         } else {
             queryProcotolList(props.provider.id);
             current.value = current.value + 1;
         }
     } else if (current.value === 1) {
         if (!procotolCurrent.value) {
-            onlyMessage('请选择消息协议！', 'error');
+            onlyMessage(t('components.Network.index.5rg37sm5uuo0'), 'error');
         } else {
             const resp =
                 type !== 'child-device'
@@ -553,7 +555,7 @@ const next = async () => {
                 config.value = resp.result;
                 current.value = current.value + 1;
                 const Group = {
-                    title: '分组',
+                    title: t('components.Network.index.5rg37sm5uzo0'),
                     dataIndex: 'group',
                     key: 'group',
                     ellipsis: true,
@@ -594,9 +596,9 @@ onMounted(() => {
             networkCurrent.value = props.data.channelId;
             queryNetworkList(props.provider.id, networkCurrent.value);
             procotolCurrent.value = props.data.protocol;
-            steps.value = ['网络组件', '消息协议', '完成'];
+            steps.value = [t('components.Network.index.5rg37sm5tec0'), t('components.Network.index.5rg37sm5tak0'), t('components.Network.index.5rg37sm5tu00')];
         } else {
-            steps.value = ['消息协议', '完成'];
+            steps.value = [t('components.Network.index.5rg37sm5tak0'), t('components.Network.index.5rg37sm5tu00')];
             current.value = 1;
             queryProcotolList(props.provider.id);
         }
@@ -604,10 +606,10 @@ onMounted(() => {
         if (props.provider?.id) {
             if (type !== 'child-device') {
                 queryNetworkList(props.provider.id, '');
-                steps.value = ['网络组件', '消息协议', '完成'];
+                steps.value = [t('components.Network.index.5rg37sm5tec0'), t('components.Network.index.5rg37sm5tak0'), t('components.Network.index.5rg37sm5tu00')];
                 current.value = 0;
             } else {
-                steps.value = ['消息协议', '完成'];
+                steps.value = [t('components.Network.index.5rg37sm5tak0'), t('components.Network.index.5rg37sm5tu00')];
                 current.value = 1;
                 queryProcotolList(props.provider.id);
             }

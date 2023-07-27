@@ -1,38 +1,39 @@
 import { getImage } from '@/utils/comm'
-
+import createI18n from '@/locales/index';
+const { t }  = createI18n.global
 export const TypeName = {
-  online: '设备上线',
-  offline: '设备离线',
-  reportEvent: '事件上报',
-  reportProperty: '属性上报',
-  readProperty: '读取属性',
-  writeProperty: '修改属性',
-  invokeFunction: '功能调用',
+  online: t('Save.Device.util.online'),
+  offline: t('Save.Device.util.offline'),
+  reportEvent: t('Save.Device.util.reportEvent'),
+  reportProperty: t('Save.Device.util.reportProperty'),
+  readProperty:  t('Save.Device.util.readProperty'),
+  writeProperty: t('Save.Device.util.writeProperty'),
+  invokeFunction: t('Save.Device.util.invokeFunction'),
 };
 
 export const TypeEnum = {
   reportProperty: {
-    label: '属性上报',
+    label: t('Save.Device.util.reportProperty'),
     value: 'reportProperty',
     img: getImage('/scene/reportProperty.png'),
   },
   reportEvent: {
-    label: '事件上报',
+    label: t('Save.Device.util.reportEvent'),
     value: 'reportEvent',
     img: getImage('/scene/reportProperty.png'),
   },
   readProperty: {
-    label: '读取属性',
+    label: t('Save.Device.util.read'),
     value: 'readProperty',
     img: getImage('/scene/readProperty.png'),
   },
   writeProperty: {
-    label: '修改属性',
+    label: t('Save.Device.util.edit'),
     value: 'writeProperty',
     img: getImage('/scene/writeProperty.png'),
   },
   invokeFunction: {
-    label: '功能调用',
+    label: t('Save.Device.util.invokeFunction'),
     value: 'invokeFunction',
     img: getImage('/scene/invokeFunction.png'),
   },

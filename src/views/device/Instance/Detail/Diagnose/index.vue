@@ -28,13 +28,13 @@
                 </div>
                 <div class="diagnose-text">
                     <div class="diagnose-title">
-                        {{ headerTitleMap.get(topState) }}
+                        {{ getHeaderTitleMap(t).get(topState) }}
                     </div>
                     <div class="diagnose-desc">
                         <template v-if="topState !== 'loading'">{{
-                            headerDescMap.get(topState)
+                            getHeaderDescMap(t).get(topState)
                         }}</template>
-                        <template v-else>已诊断{{ count }}个</template>
+                        <template v-else>{{t('Detail.Diagnose.index.diagnosed',{count:count + 1}) }}</template>
                     </div>
                 </div>
             </div>
@@ -85,22 +85,24 @@
 import {
     headerImgMap,
     headerColorMap,
-    headerTitleMap,
-    headerDescMap,
+    getHeaderTitleMap,
+    getHeaderDescMap,
     progressMap,
 } from './util';
 import { getImage } from '@/utils/comm';
 import Status from './Status/index';
 import Message from './Message/index.vue';
 import { useInstanceStore } from '@/store/instance';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type TypeProps = 'network' | 'child-device' | 'media' | 'cloud' | 'channel';
 
 const instanceStore = useInstanceStore();
 
 const tabList = [
-    { key: 'status', text: '连接状态' },
-    { key: 'message', text: '消息通信' },
+    { key: 'status', text: t('Detail.Diagnose.index.5rcyh18y5ak0') },
+    { key: 'message', text: t('Detail.Diagnose.index.5rcyh18y6wg0') },
 ];
 
 const activeStyle = {

@@ -1,14 +1,14 @@
 <template>
     <j-modal
-        title="批量编辑"
+        :title="t('components.BatchUpdate.index.5rg7ss2s2xs0')"
         :visible="true"
         width="700px"
         @cancel="handleCancel"
         :destroyOnClose="true"
     >
         <div class="sizeText">
-            将批量修改
-            {{ data.length }} 条数据的访问类型、采集频率、只推送变化的数据
+            {{t('components.BatchUpdate.index.5rg7ss2s4gg0')}}
+            {{ data.length }} {{t('components.BatchUpdate.index.5rg7ss2s4pc0')}}
         </div>
         <j-form
             class="form"
@@ -18,15 +18,15 @@
             autocomplete="off"
             ref="formRef"
         >
-            <j-form-item label="访问类型" name="accessModes">
+            <j-form-item :label="t('components.BatchUpdate.index.5rg7ss2s5040')" name="accessModes">
                 <j-card-select
                     multiple
                     :showImage="false"
                     v-model:value="formData.accessModes"
                     :options="[
-                        { label: '读', value: 'read' },
-                        { label: '写', value: 'write' },
-                        { label: '订阅', value: 'subscribe' },
+                        { label: t('components.BatchUpdate.index.5rg7ss2s5680'), value: 'read' },
+                        { label: t('components.BatchUpdate.index.5rg7ss2s5gg0'), value: 'write' },
+                        { label: t('components.BatchUpdate.index.5rg7ss2s5po0'), value: 'subscribe' },
                     ]"
                 />
             </j-form-item>
@@ -35,14 +35,14 @@
                 :rules="[
                     {
                         pattern: regOnlyNumber,
-                        message: '请输入0或者正整数',
+                        message: t('components.BatchUpdate.index.5rg7ss2s6040'),
                     },
                 ]"
             >
                 <template #label>
                     <span>
-                        采集频率
-                        <j-tooltip title="采集频率为0时不执行轮询任务">
+                        {{t('components.BatchUpdate.index.5rg7ss2s69c0')}}
+                        <j-tooltip :title="t('components.BatchUpdate.index.5rg7ss2s6fg0')">
                             <AIcon
                                 type="QuestionCircleOutlined"
                                 style="margin-left: 2px"
@@ -52,7 +52,7 @@
                 </template>
                 <j-input-number
                     style="width: 100%"
-                    placeholder="请输入采集频率"
+                    :placeholder="t('components.BatchUpdate.index.5rg7ss2s6ns0')"
                     v-model:value="formData.interval"
                     addon-after="ms"
                     :max="2147483648"
@@ -64,13 +64,13 @@
             <j-form-item :name="['features']">
                 <j-checkbox-group v-model:value="formData.features">
                     <j-checkbox value="changedOnly" name="type"
-                        >只推送变化的数据</j-checkbox
+                        >{{t('components.BatchUpdate.index.5rg7ss2s6ws0')}}</j-checkbox
                     >
                 </j-checkbox-group>
             </j-form-item>
         </j-form>
         <template #footer>
-            <j-button key="back" @click="handleCancel">取消</j-button>
+            <j-button key="back" @click="handleCancel">{{t('components.BatchUpdate.index.5rg7ss2s72c0')}}</j-button>
             <PermissionButton
                 key="submit"
                 type="primary"
@@ -79,7 +79,7 @@
                 style="margin-left: 8px"
                 :hasPermission="`DataCollect/Collector:update`"
             >
-                确认
+                {{t('components.BatchUpdate.index.5rg7ss2s77w0')}}
             </PermissionButton>
         </template>
     </j-modal>
@@ -89,7 +89,9 @@ import type { FormInstance } from 'ant-design-vue';
 import { savePointBatch } from '@/api/data-collect/collector';
 import { cloneDeep, isObject } from 'lodash';
 import { regOnlyNumber } from '../../../data';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const props = defineProps({
     data: {
         type: Array,

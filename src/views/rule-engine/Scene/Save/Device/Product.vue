@@ -25,7 +25,7 @@
         :value='slotProps'
         :active="rowKey === slotProps.id"
         :status="slotProps.state"
-        :statusText="slotProps.state === 1 ? '正常' : '禁用'"
+        :statusText="slotProps.state === 1 ? t('Save.Device.Product.5rg55mrnvqg0') : t('Save.Device.Product.5rg55mrnx6c0')"
         :statusNames="{ 1: 'processing', 0: 'error',  }"
         @click="handleClick"
       >
@@ -45,9 +45,9 @@
           <j-row>
             <j-col :span="12">
               <div class="card-item-content-text">
-                设备类型
+                {{t('Save.Device.Product.5rg55mrnxf00')}}
               </div>
-              <div>直连设备</div>
+              <div>{{t('Save.Device.Product.5rg55mrnxjg0')}}</div>
             </j-col>
           </j-row>
         </template>
@@ -63,7 +63,9 @@ import { getTreeData_api } from '@/api/system/department'
 import { isNoCommunity } from '@/utils/utils'
 import { getImage } from '@/utils/comm'
 import { accessConfigTypeFilter } from '@/utils/setting'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type Emit = {
   (e: 'update:rowKey', data: string): void
   (e: 'update:detail', data: string): void
@@ -98,7 +100,7 @@ const columns = [
     },
   },
   {
-    title: '名称',
+    title: t('Save.Device.Product.5rg55mrnxnc0'),
     dataIndex: 'name',
     width: 200,
     ellipsis: true,
@@ -108,7 +110,7 @@ const columns = [
     }
   },
   {
-    title: '网关类型',
+    title: t('Save.Device.Product.5rg55mrnxs80'),
     dataIndex: 'accessProvider',
     width: 150,
     ellipsis: true,
@@ -121,7 +123,7 @@ const columns = [
     }
   },
   {
-    title: '接入方式',
+    title: t('Save.Device.Product.5rg55mrnxw40'),
     dataIndex: 'accessName',
     width: 150,
     ellipsis: true,
@@ -135,39 +137,39 @@ const columns = [
     }
   },
   {
-    title: '设备类型',
+    title: t('Save.Device.Product.5rg55mrnxf00'),
     dataIndex: 'deviceType',
     width: 150,
     search: {
       type: 'select',
       options: [
-        { label: '直连设备', value: 'device' },
-        { label: '网关子设备', value: 'childrenDevice' },
-        { label: '网关设备', value: 'gateway' },
+        { label: t('Save.Device.Product.5rg55mrnxjg0'), value: 'device' },
+        { label: t('Save.Device.Product.5rg55mrnxzs0'), value: 'childrenDevice' },
+        { label: t('Save.Device.Product.5rg55mrny3g0'), value: 'gateway' },
       ]
     }
   },
   {
-    title: '状态',
+    title: t('Save.Device.Product.5rg55mrny700'),
     dataIndex: 'state',
     width: '90px',
     search: {
       type: 'select',
       options: [
-        { label: '禁用', value: 0 },
-        { label: '正常', value: 1 },
+        { label: t('Save.Device.Product.5rg55mrnx6c0'), value: 0 },
+        { label: t('Save.Device.Product.5rg55mrnvqg0'), value: 1 },
       ]
     }
   },
   {
-    title: '说明',
+    title: t('Save.Device.Product.5rg55mrnyb40'),
     dataIndex: 'describe',
     ellipsis: true,
     width: 300,
   },
   {
     dataIndex: 'classifiedId',
-    title: '分类',
+    title: t('Save.Device.Product.5rg55mrnyes0'),
     hideInTable: true,
     search: {
       type: 'treeSelect',
@@ -188,7 +190,7 @@ const columns = [
   },
   {
     dataIndex: 'id$dim-assets',
-    title: '所属组织',
+    title: t('Save.Device.Product.5rg55mrnyik0'),
     hideInTable: true,
     search: {
       type: 'treeSelect',

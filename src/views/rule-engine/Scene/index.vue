@@ -18,7 +18,7 @@
                         hasPermission="rule-engine/Scene:add"
                     >
                         <template #icon><AIcon type="PlusOutlined" /></template>
-                        新增
+                        {{t('rule-engine.Scene.index.5rg593nz4ng0')}}
                     </PermissionButton>
                 </j-space>
             </template>
@@ -56,7 +56,7 @@
                         </Ellipsis>
                       <div class="subTitle">
                         <span class='subTitle-title'>
-                        说明：
+                        {{t('rule-engine.Scene.index.5rg593nz5vo0')}}
                         </span>
                         <span class='subTitle-content'>
                           <Ellipsis :lineClamp="2">
@@ -144,7 +144,9 @@ import type { ActionsType } from '@/components/Table';
 import { getImage, onlyMessage } from '@/utils/comm';
 import BadgeStatus from '@/components/BadgeStatus/index.vue';
 import { Modal } from 'jetlinks-ui-components'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 const visible = ref<boolean>(false);
 const current = ref<Record<string, any>>({});
@@ -158,22 +160,22 @@ const sceneRef = ref<Record<string, any>>({});
 
 const typeMap = new Map();
 typeMap.set('manual', {
-    text: '手动触发',
+    text: t('rule-engine.Scene.index.5rg593nz6300'),
     img: getImage('/scene/scene-hand.png'),
     icon: getImage('/scene/trigger-type-icon/manual.png'),
-    tip: '适用于第三方平台向物联网平台下发指令控制设备',
+    tip: t('rule-engine.Scene.index.5rg593nz68o0'),
 });
 typeMap.set('timer', {
-    text: '定时触发',
+    text: t('rule-engine.Scene.index.5rg593nz6d00'),
     img: getImage('/scene/scene-timer.png'),
     icon: getImage('/scene/trigger-type-icon/timing.png'),
-    tip: '适用于定期执行固定任务',
+    tip: t('rule-engine.Scene.index.5rg593nz6is0'),
 });
 typeMap.set('device', {
-    text: '设备触发',
+    text: t('rule-engine.Scene.index.5rg593nz6no0'),
     img: getImage('/scene/scene-device.png'),
     icon: getImage('/scene/trigger-type-icon/device.png'),
-    tip: '适用于设备数据或行为满足触发条件时，执行指定的动作',
+    tip: t('rule-engine.Scene.index.5rg593nz6s00'),
 });
 
 const columns = [
@@ -182,14 +184,14 @@ const columns = [
         fixed: 'left',
         ellipsis: true,
         width: 300,
-        title: '名称',
+        title: t('rule-engine.Scene.index.5rg593nz6vw0'),
         search: {
             type: 'string',
         },
     },
     {
         dataIndex: 'triggerType',
-        title: '触发方式',
+        title: t('rule-engine.Scene.index.5rg593nz6zg0'),
         scopedSlots: true,
         search: {
             type: 'select',
@@ -203,19 +205,19 @@ const columns = [
     },
     {
         dataIndex: 'state',
-        title: '状态',
+        title: t('rule-engine.Scene.index.5rg593nz73k0'),
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '正常', value: 'started' },
-                { label: '禁用', value: 'disable' },
+                { label: t('rule-engine.Scene.index.5rg593nz79s0'), value: 'started' },
+                { label: t('rule-engine.Scene.index.5rg593nz7dc0'), value: 'disable' },
             ],
         },
     },
     {
         dataIndex: 'description',
-        title: '说明',
+        title: t('rule-engine.Scene.index.5rg593nz7hs0'),
         ellipsis: true,
         search: {
             type: 'string',
@@ -223,7 +225,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '操作',
+        title: t('rule-engine.Scene.index.5rg593nz7rg0'),
         key: 'action',
         fixed: 'right',
         width: 200,
@@ -234,10 +236,10 @@ const columns = [
 const deleteScene = async (id: string) => {
   const resp = await _delete(id);
   if (resp.status === 200) {
-    onlyMessage('操作成功！');
+    onlyMessage(t('rule-engine.Scene.index.5rg593nz8840'));
     sceneRef.value?.reload();
   } else {
-    onlyMessage('操作失败！', 'error');
+    onlyMessage(t('rule-engine.Scene.index.5rg593nz8c00'), 'error');
   }
 }
 
@@ -260,9 +262,9 @@ const getActions = (
     const actions: ActionsType[] = [
         {
             key: 'update',
-            text: '编辑',
+            text: t('rule-engine.Scene.index.5rg593nz7vk0'),
             tooltip: {
-                title: '编辑',
+                title: t('rule-engine.Scene.index.5rg593nz7vk0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -272,13 +274,13 @@ const getActions = (
         },
         {
             key: 'action',
-            text: data.state?.value !== 'disable' ? '禁用' : '启用',
+            text: data.state?.value !== 'disable' ? t('rule-engine.Scene.index.5rg593nz7dc0') : t('rule-engine.Scene.index.5rg593nz8080'),
             tooltip: {
                 title: !(!!data.triggerType && (data.branches || [])?.length)
-                    ? '未配置规则的不能启用'
+                    ? t('rule-engine.Scene.index.5rg593nz8480')
                     : data.state?.value !== 'disable'
-                    ? '禁用'
-                    : '启用',
+                    ? t('rule-engine.Scene.index.5rg593nz7dc0')
+                    : t('rule-engine.Scene.index.5rg593nz8080'),
             },
             disabled: !(!!data?.triggerType && (data?.branches || [])?.length),
             icon:
@@ -286,8 +288,8 @@ const getActions = (
                     ? 'StopOutlined'
                     : 'CheckCircleOutlined',
             popConfirm: {
-                title: `确认${
-                    data.state.value !== 'disable' ? '禁用' : '启用'
+                title: `${t('rule-engine.Scene.index.verify') +
+                    (data.state.value !== 'disable' ? t('rule-engine.Scene.index.5rg593nz7dc0') : t('rule-engine.Scene.index.5rg593nz8080'))
                 }?`,
                 onConfirm: async () => {
                     let response = undefined;
@@ -297,26 +299,26 @@ const getActions = (
                         response = await _action(data.id, '_enable');
                     }
                     if (response && response.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('rule-engine.Scene.index.5rg593nz8840'));
                         sceneRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('rule-engine.Scene.index.5rg593nz8c00'), 'error');
                     }
                 },
             },
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('rule-engine.Scene.index.5rg593nz8mo0'),
             disabled: data.state?.value !== 'disable',
             tooltip: {
                 title:
                     data.state.value !== 'disable'
-                        ? '请先禁用该场景,再删除'
-                        : '删除',
+                        ? t('rule-engine.Scene.index.5rg593nz8s80')
+                        : t('rule-engine.Scene.index.5rg593nz8mo0'),
             },
             popConfirm: {
-                title: '确认删除?',
+                title: t('rule-engine.Scene.index.5rg593nz8wg0'),
                 onConfirm: async () => {
                   // 查询该场景是否绑定告警
                   const resp = await queryList({
@@ -348,24 +350,24 @@ const getActions = (
     if (data.triggerType === 'manual') {
         const _item: ActionsType = {
             key: 'tigger',
-            text: '手动触发',
+            text: t('rule-engine.Scene.index.5rg593nz6300'),
             disabled: data.state?.value === 'disable',
             tooltip: {
                 title:
                     data.state.value !== 'disable'
-                        ? '手动触发'
-                        : '未启用，不能手动触发',
+                        ? t('rule-engine.Scene.index.5rg593nz6300')
+                        : t('rule-engine.Scene.index.5rg593nz8z80'),
             },
             icon: 'LikeOutlined',
             popConfirm: {
-                title: '确认手动触发？',
+                title: t('rule-engine.Scene.index.5rg593nz9340'),
                 onConfirm: async () => {
                     const resp = await _execute(data.id);
                     if (resp.status === 200) {
-                        onlyMessage('操作成功！');
+                        onlyMessage(t('rule-engine.Scene.index.5rg593nz8840'));
                         sceneRef.value?.reload();
                     } else {
-                        onlyMessage('操作失败！', 'error');
+                        onlyMessage(t('rule-engine.Scene.index.5rg593nz8c00'), 'error');
                     }
                 },
             },
@@ -375,9 +377,9 @@ const getActions = (
     if (type === 'table') {
         actions.splice(0, 0, {
             key: 'view',
-            text: '查看',
+            text: t('rule-engine.Scene.index.5rg593nz9640'),
             tooltip: {
-                title: '查看',
+                title: t('rule-engine.Scene.index.5rg593nz9640'),
             },
             icon: 'EyeOutlined',
             onClick: () => {
@@ -398,7 +400,7 @@ const handleAdd = () => {
 };
 
 /**
- * 编辑
+ * {{t('rule-engine.Scene.index.5rg593nz7vk0')}}
  * @param id
  * @param triggerType 触发类型
  */
@@ -411,7 +413,7 @@ const handleEdit = (id: string, triggerType: string) => {
 };
 
 /**
- * 查看
+ * {{t('rule-engine.Scene.index.5rg593nz9640')}}
  * @param id
  * @param triggerType 触发类型
  */

@@ -26,7 +26,7 @@
                             <template #icon
                                 ><AIcon type="PlusOutlined"
                             /></template>
-                            新增
+                            {{t('link.Type.index.5rg3f4lisdw0')}}
                         </PermissionButton>
                     </template>
                     <template #card="slotProps">
@@ -71,7 +71,7 @@
                                             <div
                                                 class="card-item-content-text-title"
                                             >
-                                                类型
+                                                {{t('link.Type.index.5rg3f4litms0')}}
                                             </div>
                                             <div class="card-item-content-text">
                                                 <j-tooltip>
@@ -87,7 +87,7 @@
                                             <div
                                                 class="card-item-content-text-title"
                                             >
-                                                详情
+                                                {{t('link.Type.index.5rg3f4litsw0')}}
                                             </div>
                                             <div class="card-item-content-text">
                                                 <j-tooltip>
@@ -161,8 +161,8 @@
                     <template #shareCluster="slotProps">
                         {{
                             slotProps.shareCluster === true
-                                ? '共享配置'
-                                : '独立配置'
+                                ? t('link.Type.index.5rg3f4litxs0')
+                                : t('link.Type.index.5rg3f4liu240')
                         }}
                     </template>
                     <template #type="slotProps">
@@ -183,7 +183,9 @@ import { supports, query, remove, start, shutdown } from '@/api/link/type';
 import { onlyMessage } from '@/utils/comm';
 import { useMenuStore } from 'store/menu';
 import BadgeStatus from '@/components/BadgeStatus/index.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const menuStory = useMenuStore();
 const tableRef = ref<Record<string, any>>({});
 const params = ref<Record<string, any>>({});
@@ -191,7 +193,7 @@ const options = ref([]);
 
 const columns = [
     {
-        title: '名称',
+        title: t('link.Type.index.5rg3f4liu6o0'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -202,7 +204,7 @@ const columns = [
         },
     },
     {
-        title: '类型',
+        title: t('link.Type.index.5rg3f4litms0'),
         dataIndex: 'type',
         key: 'type',
         ellipsis: true,
@@ -214,7 +216,7 @@ const columns = [
         scopedSlots: true,
     },
     {
-        title: '集群',
+        title: t('link.Type.index.5rg3f4liuag0'),
         dataIndex: 'shareCluster',
         key: 'shareCluster',
         width: 120,
@@ -223,20 +225,20 @@ const columns = [
         search: {
             type: 'select',
             options: [
-                { label: '共享配置', value: 'true' },
-                { label: '独立配置', value: 'false' },
+                { label: t('link.Type.index.5rg3f4litxs0'), value: 'true' },
+                { label: t('link.Type.index.5rg3f4liu240'), value: 'false' },
             ],
         },
     },
     {
-        title: '详情',
+        title: t('link.Type.index.5rg3f4litsw0'),
         dataIndex: 'details',
         key: 'details',
         ellipsis: true,
         scopedSlots: true,
     },
     {
-        title: '状态',
+        title: t('link.Type.index.5rg3f4liue40'),
         dataIndex: 'state',
         key: 'state',
         width: 100,
@@ -245,13 +247,13 @@ const columns = [
         search: {
             type: 'select',
             options: [
-                { label: '正常', value: 'enabled' },
-                { label: '禁用', value: 'disabled' },
+                { label: t('link.Type.index.5rg3f4liuhw0'), value: 'enabled' },
+                { label: t('link.Type.index.5rg3f4liupk0'), value: 'disabled' },
             ],
         },
     },
     {
-        title: '说明',
+        title: t('link.Type.index.5rg3f4liut40'),
         dataIndex: 'description',
         key: 'description',
         ellipsis: true,
@@ -260,7 +262,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('link.Type.index.5rg3f4liuwo0'),
         key: 'action',
         fixed: 'right',
         width: 120,
@@ -274,13 +276,13 @@ const getActions = (
 ): ActionsType[] => {
     if (!data) return [];
     const state = data.state.value;
-    const stateText = state === 'enabled' ? '禁用' : '启用';
+    const stateText = state === 'enabled' ? t('link.Type.index.5rg3f4liupk0') : t('link.Type.index.5rg3f4liv040');
     const actions = [
         {
             key: 'view',
-            text: '查看',
+            text: t('link.Type.index.5rg3f4liv3w0'),
             tooltip: {
-                title: '查看',
+                title: t('link.Type.index.5rg3f4liv3w0'),
             },
             icon: 'EyeOutlined',
             onClick: async () => {
@@ -289,9 +291,9 @@ const getActions = (
         },
         {
             key: 'update',
-            text: '编辑',
+            text: t('link.Type.index.5rg3f4liv7g0'),
             tooltip: {
-                title: '编辑',
+                title: t('link.Type.index.5rg3f4liv7g0'),
             },
             icon: 'EditOutlined',
             onClick: () => {
@@ -306,14 +308,14 @@ const getActions = (
             },
             icon: state === 'enabled' ? 'StopOutlined' : 'CheckCircleOutlined',
             popConfirm: {
-                title: `确认${stateText}?`,
+                title: t('link.Type.index.verify',{stateText:stateText}),
                 onConfirm: async () => {
                     let res =
                         state === 'enabled'
                             ? await shutdown(data.id)
                             : await start(data.id);
                     if (res.success) {
-                        onlyMessage('操作成功', 'success');
+                        onlyMessage(t('link.Type.index.5rg3f4livb00'), 'success');
                         tableRef.value?.reload();
                     }
                 },
@@ -321,18 +323,18 @@ const getActions = (
         },
         {
             key: 'delete',
-            text: '删除',
+            text: t('link.Type.index.5rg3f4livhs0'),
             disabled: state === 'enabled',
             tooltip: {
                 title:
-                    state === 'enabled' ? '请先禁用该组件，再删除。' : '删除',
+                    state === 'enabled' ? t('link.Type.index.5rg3f4livlo0') : t('link.Type.index.5rg3f4livhs0'),
             },
             popConfirm: {
-                title: '确认删除?',
+                title: t('link.Type.index.5rg3f4livp00'),
                 onConfirm: async () => {
                     const res: any = await remove(data.id);
                     if (res.status === 200) {
-                        onlyMessage('操作成功', 'success');
+                        onlyMessage(t('link.Type.index.5rg3f4livb00'), 'success');
                         tableRef.value.reload();
                     } else {
                         onlyMessage(res?.message, 'error');

@@ -11,8 +11,12 @@
             </j-col>
             <j-col :span="18" class="right">
                 <j-row :gutter="24">
-                    <j-col :span="12"><DeviceCountCard /></j-col>
-                    <j-col :span="12"><BasicCountCard /></j-col>
+                    <j-col :span="12">
+                        <DeviceCountCard />
+                    </j-col>
+                    <j-col :span="12">
+                        <BasicCountCard />
+                    </j-col>
                     <j-col :span="24" style="margin-top: 24px">
                         <PlatformPicCard image="/images/home/content.png" />
                     </j-col>
@@ -33,16 +37,10 @@
         />
 
         <div class="dialog">
-            <ProductChooseDialog
-                v-if="productDialogVisible"
-                v-model:visible="productDialogVisible"
-                @confirm="(id:string)=>jumpPage('device/Product/Detail', { id, tab: 'Device'})"
-            />
-            <DeviceChooseDialog
-                v-if="deviceDialogVisible"
-                v-model:visible="deviceDialogVisible"
-                @confirm="(id:string)=>jumpPage('device/Instance/Detail', { id, tab: 'Diagnose' })"
-            />
+            <ProductChooseDialog v-if="productDialogVisible" v-model:visible="productDialogVisible"
+                @confirm="(id: string) => jumpPage('device/Product/Detail', { id, tab: 'Device' })" />
+            <DeviceChooseDialog v-if="deviceDialogVisible" v-model:visible="deviceDialogVisible"
+                @confirm="(id: string) => jumpPage('device/Instance/Detail', { id, tab: 'Diagnose' })" />
         </div>
     </div>
 </template>

@@ -3,8 +3,8 @@
         <j-card :bordered="false" style="padding: 0">
             <template #extra>
                 <j-space>
-                    <j-button @click="visible = true">批量映射</j-button>
-                    <j-button type="primary" @click="onSave">保存</j-button>
+                    <j-button @click="visible = true">{{t('Detail.EdgeMap.index.5rcyhehog580')}}</j-button>
+                    <j-button type="primary" @click="onSave">{{t('Detail.EdgeMap.index.5rcyhehohjo0')}}</j-button>
                 </j-space>
             </template>
             <j-form ref="formRef" :model="modelRef">
@@ -15,8 +15,8 @@
                 >
                     <template #headerCell="{ column }">
                         <template v-if="column.key === 'collectorId'">
-                            采集器
-                            <j-tooltip title="边缘网关代理的真实物理设备">
+                            {{t('Detail.EdgeMap.index.5rcyhehohuc0')}}
+                            <j-tooltip :title="t('Detail.EdgeMap.index.5rcyhehoi1s0')">
                                 <AIcon type="QuestionCircleOutlined" />
                             </j-tooltip>
                         </template>
@@ -33,7 +33,7 @@
                                 <j-select
                                     style="width: 100%"
                                     v-model:value="record[column.dataIndex]"
-                                    placeholder="请选择"
+                                    :placeholder="t('Detail.EdgeMap.index.5rcyhehoi8g0')"
                                     allowClear
                                     @change="
                                         () => onChannelChange(index, 'channel')
@@ -55,7 +55,7 @@
                                 :rules="[
                                     {
                                         required: !!record.channelId,
-                                        message: '请选择采集器',
+                                        message: t('Detail.EdgeMap.index.5rcyhehoifk0'),
                                     },
                                 ]"
                             >
@@ -77,7 +77,7 @@
                                 :rules="[
                                     {
                                         required: !!record.channelId,
-                                        message: '请选择点位',
+                                        message: t('Detail.EdgeMap.index.5rcyhehoilk0'),
                                     },
                                 ]"
                             >
@@ -94,27 +94,27 @@
                                 <j-badge
                                     v-if="record.state.value === 'enabled'"
                                     status="success"
-                                    text="启用"
+                                    :text="t('Detail.EdgeMap.index.5rcyhehoir40')"
                                 />
                                 <j-badge
                                     v-else
                                     status="warning"
-                                    text="禁用"
+                                    :text="t('Detail.EdgeMap.index.5rcyhehoix00')"
                                 />
                             </template>
-                            <j-badge v-else status="error" text="未绑定" />
+                            <j-badge v-else status="error" :text="t('Detail.EdgeMap.index.5rcyhehoj2o0')" />
                         </template>
                         <template v-if="column.key === 'action'">
                             <j-space>
                                 <j-tooltip
                                     :title="
                                         isPermission
-                                            ? '解绑'
-                                            : '暂无权限，请联系管理员'
+                                            ? t('Detail.EdgeMap.index.5rcyhehoj8c0')
+                                            : t('Detail.EdgeMap.index.5rcyhehoje80')
                                     "
                                 >
                                     <j-popconfirm
-                                        title="确认解绑？"
+                                        :title="t('Detail.EdgeMap.index.5rcyhehojm80')"
                                         :disabled="!record.id || !isPermission"
                                         @confirm="unbind(record.id)"
                                     >
@@ -135,16 +135,16 @@
                                             isPermission
                                                 ? record.state.value ===
                                                   'enabled'
-                                                    ? '禁用'
-                                                    : '启用'
-                                                : '暂无权限，请联系管理员'
+                                                    ? t('Detail.EdgeMap.index.5rcyhehojrw0')
+                                                    : t('Detail.EdgeMap.index.5rcyhehojxc0')
+                                                : t('Detail.EdgeMap.index.5rcyhehoje80')
                                         "
                                     >
                                         <j-popconfirm
                                             :title="
                                                 record.state.value === 'enabled'
-                                                    ? '确认禁用？'
-                                                    : '确认启用?'
+                                                    ? t('Detail.EdgeMap.index.5rcyhehok2w0')
+                                                    : t('Detail.EdgeMap.index.5rcyhehok8k0')
                                             "
                                             :disabled="!isPermission"
                                             @confirm="onAction(record)"
@@ -193,7 +193,7 @@
         />
     </j-spin>
     <j-card v-else :bordered="false" style="padding: 0">
-        <JEmpty description="暂无数据，请配置物模型" style="margin: 10% 0" />
+        <JEmpty :description="t('Detail.EdgeMap.index.5rcyhehoke80')" style="margin: 10% 0" />
     </j-card>
 </template>
 
@@ -210,40 +210,42 @@ import PatchMapping from './PatchMapping.vue';
 import { onlyMessage } from '@/utils/comm';
 import { cloneDeep } from 'lodash-es';
 import { usePermissionStore } from '@/store/permission';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const columns = [
     {
-        title: '名称',
+        title: t('Detail.EdgeMap.index.5rcyhehokjc0'),
         dataIndex: 'metadataName',
         key: 'metadataName',
         width: '20%',
     },
     {
-        title: '通道',
+        title: t('Detail.EdgeMap.index.5rcyhehokpc0'),
         dataIndex: 'channelId',
         key: 'channelId',
         width: '20%',
     },
     {
-        title: '采集器',
+        title: t('Detail.EdgeMap.index.5rcyhehohuc0'),
         dataIndex: 'collectorId',
         key: 'collectorId',
         width: '20%',
     },
     {
-        title: '点位',
+        title: t('Detail.EdgeMap.index.5rcyhehokx40'),
         key: 'pointId',
         dataIndex: 'pointId',
         width: '20%',
     },
     {
-        title: '状态',
+        title: t('Detail.EdgeMap.index.5rcyhehol400'),
         key: 'id',
         dataIndex: 'id',
         width: '10%',
     },
     {
-        title: '操作',
+        title: t('Detail.EdgeMap.index.5rcyhehol9k0'),
         key: 'action',
         width: '10%',
     },
@@ -341,7 +343,7 @@ const unbind = async (id: string) => {
             },
         );
         if (resp.status === 200) {
-            onlyMessage('操作成功！', 'success');
+            onlyMessage(t('Detail.EdgeMap.index.5rcyhehole40'), 'success');
             handleSearch(_properties.value);
         }
     }
@@ -388,7 +390,7 @@ const onSave = () => {
                     submitData,
                 );
                 if (resp.status === 200) {
-                    onlyMessage('操作成功！', 'success');
+                    onlyMessage(t('Detail.EdgeMap.index.5rcyhehole40'), 'success');
                     onRefresh();
                 }
             }
@@ -418,7 +420,7 @@ const onAction = async (record: any) => {
         submitData,
     );
     if (resp.status === 200) {
-        onlyMessage('操作成功！', 'success');
+        onlyMessage(t('Detail.EdgeMap.index.5rcyhehole40'), 'success');
         onRefresh();
     }
 };

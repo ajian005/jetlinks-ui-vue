@@ -23,10 +23,11 @@
                             :hasPermission="`${permission}:add`"
                             @click="table.openDialog(undefined)"
                         >
-                            <AIcon type="PlusOutlined" />新增
+                            <AIcon type="PlusOutlined" />
+                            {{t('system.Permission.index.5rg9un6bg3k0')}}
                         </PermissionButton>
                         <j-dropdown trigger="hover">
-                            <j-button>批量操作</j-button>
+                            <j-button>{{t('system.Permission.index.5rg9un6bhos0')}}</j-button>
                             <template #overlay>
                                 <j-menu>
                                     <j-menu-item>
@@ -45,7 +46,7 @@
                                             <PermissionButton
                                                 :hasPermission="`${permission}:import`"
                                             >
-                                                导入
+                                                {{t('system.Permission.index.5rg9un6bi280')}}
                                             </PermissionButton>
                                         </j-upload>
                                     </j-menu-item>
@@ -53,12 +54,12 @@
                                         <PermissionButton
                                             :hasPermission="`${permission}:export`"
                                             :popConfirm="{
-                                                title: `确认导出？`,
+                                                title: t('system.Permission.index.export'),
                                                 onConfirm: () =>
                                                     table.clickExport(),
                                             }"
                                         >
-                                            导出
+                                            {{t('system.Permission.index.5rg9un6bib40')}}
                                         </PermissionButton>
                                     </j-menu-item>
                                 </j-menu>
@@ -68,7 +69,7 @@
                     <template #status="slotProps">
                         <BadgeStatus
                             :status="slotProps.status"
-                            :text="slotProps.status ? '启用' : '禁用'"
+                            :text="slotProps.status ? t('system.Permission.index.5rg9un6bik40') : t('system.Permission.index.5rg9un6bisk0')"
                             :statusNames="{
                                 1: 'success',
                                 0: 'error',
@@ -81,7 +82,7 @@
                                 :hasPermission="`${permission}:update`"
                                 type="link"
                                 :tooltip="{
-                                    title: '编辑',
+                                    title: t('system.Permission.index.5rg9un6bj340'),
                                 }"
                                 @click="table.openDialog(slotProps)"
                             >
@@ -92,14 +93,12 @@
                                 :hasPermission="`${permission}:action`"
                                 type="link"
                                 :popConfirm="{
-                                    title: `确定要${
-                                        slotProps.status ? '禁用' : '启用'
-                                    }吗？`,
+                                    title: t('system.Permission.index.verify',{stateText: slotProps.status ? t('system.Permission.index.5rg9un6bisk0') : t('system.Permission.index.5rg9un6bik40') }) ,
                                     onConfirm: () =>
                                         table.changeStatus(slotProps),
                                 }"
                                 :tooltip="{
-                                    title: slotProps.status ? '禁用' : '启用',
+                                    title: slotProps.status ? t('system.Permission.index.5rg9un6bisk0') : t('system.Permission.index.5rg9un6bik40'),
                                 }"
                             >
                                 <AIcon
@@ -116,11 +115,11 @@
                                 type="link"
                                 :tooltip="{
                                     title: slotProps.status
-                                        ? '请先禁用，再删除'
-                                        : '删除',
+                                        ? t('system.Permission.index.5rg9un6bjcg0')
+                                        : t('system.Permission.index.5rg9un6bjpg0'),
                                 }"
                                 :popConfirm="{
-                                    title: `确认删除`,
+                                    title: t('system.Permission.index.deleteTip'),
                                     onConfirm: () => table.clickDel(slotProps),
                                 }"
                                 :disabled="slotProps.status"
@@ -154,13 +153,15 @@ import {
 import { downloadObject } from '@/utils/utils';
 import { usePermissionStore } from '@/store/permission';
 import { onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const permission = 'system/Permission';
 const hasPermission = usePermissionStore().hasPermission;
 
 const columns = [
     {
-        title: '标识',
+        title: t('system.Permission.index.5rg9un6bjxs0'),
         dataIndex: 'id',
         key: 'id',
         ellipsis: true,
@@ -170,7 +171,7 @@ const columns = [
         },
     },
     {
-        title: '名称',
+        title: t('system.Permission.index.5rg9un6bk5c0'),
         dataIndex: 'name',
         key: 'name',
         ellipsis: true,
@@ -180,15 +181,15 @@ const columns = [
         },
     },
     {
-        title: '状态',
+        title: t('system.Permission.index.5rg9un6bke00'),
         dataIndex: 'status',
         key: 'status',
         scopedSlots: true,
         search: {
             type: 'select',
             options: [
-                { label: '启用', value: 1 },
-                { label: '禁用', value: 0 },
+                { label: t('system.Permission.index.5rg9un6bik40'), value: 1 },
+                { label: t('system.Permission.index.5rg9un6bisk0'), value: 0 },
             ],
             handleValue: (v: any) => {
                 return v;
@@ -196,7 +197,7 @@ const columns = [
         },
     },
     {
-        title: '操作',
+        title: t('system.Permission.index.5rg9un6bklg0'),
         dataIndex: 'action',
         key: 'action',
         width: 120,
@@ -226,15 +227,15 @@ const table = {
                     const data = JSON.parse(result.target.result);
                     editPermission_api(data).then((resp) => {
                         if (resp.status === 200) {
-                            onlyMessage('导入成功');
+                            onlyMessage(t('system.Permission.index.5rg9un6bktc0'));
                             table.refresh();
                         }
                     });
                 } catch (error) {
-                    onlyMessage('导入失败，请重试！', 'error');
+                    onlyMessage(t('system.Permission.index.5rg9un6bl0w0'), 'error');
                 }
             };
-        } else onlyMessage('请上传json格式', 'error');
+        } else onlyMessage(t('system.Permission.index.5rg9un6bl8g0'), 'error');
         return false;
     },
     // 导出数据
@@ -245,10 +246,10 @@ const table = {
         };
         exportPermission_api(params).then((resp) => {
             if (resp.status === 200) {
-                downloadObject(resp.result as any, '权限数据');
-                onlyMessage('导出成功');
+                downloadObject(resp.result as any, t('system.Permission.index.5rg9un6blgw0'));
+                onlyMessage(t('system.Permission.index.5rg9un6blsk0'));
             } else {
-                onlyMessage('导出错误', 'error');
+                onlyMessage(t('system.Permission.index.5rg9un6bm1c0'), 'error');
             }
         });
     },
@@ -259,7 +260,7 @@ const table = {
             status: row.status ? 0 : 1,
         };
         editPermission_api(params).then(() => {
-            onlyMessage('操作成功');
+            onlyMessage(t('system.Permission.index.5rg9un6bmdc0'));
             tableRef.value.reload();
         });
     },
@@ -268,13 +269,13 @@ const table = {
         delPermission_api(row.id).then((resp: any) => {
             if (resp.status === 200) {
                 tableRef.value?.reload();
-                onlyMessage('操作成功!');
+                onlyMessage(t('system.Permission.index.5rg9un6bmnw0'));
             }
         });
     },
     // 刷新列表
     refresh: () => {
-        tableRef.value.reload();
+        tableRef.value.reload();s
     },
 };
 

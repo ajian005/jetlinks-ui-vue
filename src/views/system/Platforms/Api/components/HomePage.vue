@@ -1,14 +1,14 @@
 <template>
     <div class="home">
-        <h1>第三方接入说明</h1>
+        <h1>{{t('Api.components.HomePage.5rga3xywvvk0')}}</h1>
         <div style="color: #666666">
-            第三方平台接口请求基于数据签名调用方式，使用签名来校验客户端请求的完整性以及合法性，您可以参看如下文档，来构造
-            HTTP 接口以调用对应的第三方平台接口 。
+            {{t('Api.components.HomePage.5rga3xywxi80')}}
+            HTTP {{t('Api.components.HomePage.5rga3xywxrc0')}} 。
         </div>
-        <h2>签名示例说明</h2>
-        <div class="h2-text">1. 签名方式,支持MD5和Sha256两种方式.</div>
+        <h2>{{t('Api.components.HomePage.5rga3xywxws0')}}</h2>
+        <div class="h2-text">1. {{t('Api.components.HomePage.5rga3xyx1gw0')}}</div>
         <div class="h2-text">
-            2. 发起请求的签名信息都需要放到请求头中,而不是请求体.
+            2. {{t('Api.components.HomePage.5rga3xyx2uo0')}}
         </div>
         <div
             style="
@@ -19,23 +19,23 @@
             "
         >
             <div>
-                <h3>签名规则</h3>
+                <h3>{{t('Api.components.HomePage.5rga3xyx3ds0')}}</h3>
                 <p>
-                    注意：签名时间戳与服务器时间不能相差五分钟以上，否则服务器将拒绝本次请求
+                    {{t('Api.components.HomePage.5rga3xyx5940')}}
                 </p>
                 <div class="div-border">
                     <div class="h3-text">
-                        将参数key按ascii排序得到: pageIndex=0&pageSize=20
+                        {{t('Api.components.HomePage.ascii')}} pageIndex=0&pageSize=20
                     </div>
                     <div class="h3-text">
-                        使用拼接时间戳以及密钥得到:
+                        {{t('Api.components.HomePage.Secretkey')}}
                         pageIndex=0&pageSize=201574993804802testSecure
                     </div>
                     <div class="h3-text">
-                        使用md5(pageIndex=0&pageSize=201574993804802testSecure)得到837fe7fa29e7a5e4852d447578269523
+                        {{t('Api.components.HomePage.5rga3xyx5l40')}}
                     </div>
                 </div>
-                <h3>请求头示例</h3>
+                <h3>{{t('Api.components.HomePage.5rga3xyx5s40')}}</h3>
                 <div class="div-border">
                     <div class="h3-text">
                         GET /api/device?pageIndex=0&amp;pageSize=20
@@ -46,7 +46,7 @@
                         X-Sign: 837fe7fa29e7a5e4852d447578269523
                     </div>
                 </div>
-                <h3>响应结果示例</h3>
+                <h3>{{t('Api.components.HomePage.5rga3xyx5x00')}}</h3>
                 <div class="div-border">
                     <div class="h3-text">xxx</div>
                     <div class="h3-text">HTTP/1.1 200 OK</div>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div style="width: 50%">
-                <h3>示例数据</h3>
+                <h3>{{t('Api.components.HomePage.5rga3xyx6ak0')}}</h3>
                 <div>
                     <j-pro-table
                         :dataSource="data"
@@ -66,11 +66,11 @@
                         noPagination
                         :columns="[
                             {
-                                title: '示例数据类型',
+                                title: t('Api.components.HomePage.5rga3xyx6g00'),
                                 dataIndex: 'type',
                             },
                             {
-                                title: '示例数据',
+                                title: t('Api.components.HomePage.5rga3xyx6ak0'),
                                 dataIndex: 'data',
                             },
                         ]"
@@ -88,15 +88,15 @@
             }"
         >
             <div>
-                <h3>服务器验签流程</h3>
+                <h3>{{t('Api.components.HomePage.5rga3xyx6lc0')}}</h3>
                 <div>
                     <img :src="getImage('/apiHome.png')" style="width: 80%" />
                 </div>
             </div>
             <div style="width: 505px">
-                <h3>验签说明</h3>
+                <h3>{{t('Api.components.HomePage.5rga3xyx6q80')}}</h3>
                 <div>
-                    <p>使用和签名相同的算法(不需要对响应结果排序)</p>
+                    <p>{{t('Api.components.HomePage.5rga3xyx7es0')}}</p>
                     <div>
                         <j-monaco-editor
                             language="java"
@@ -109,15 +109,15 @@
             </div>
         </div>
         <div>
-            <h2>java SDK接入说明</h2>
+            <h2>{{ t('Api.components.HomePage.SDK') }}</h2>
             <div class="div-border">
                 <div class="h3-text">
-                    JetLinks平台java SDK基于java 8版本开发。
+                    {{ t('Api.components.HomePage.SDKTip') }}
                 </div>
             </div>
 
-            <h3>添加 SDK 依赖</h3>
-            <div class="h3-text">将以下Maven依赖加入到pom.xml文件中</div>
+            <h3>{{t('Api.components.HomePage.5rga3xyx7nw0')}} SDK {{t('Api.components.HomePage.5rga3xyx7t80')}}</h3>
+            <div class="h3-text">{{t('Api.components.HomePage.5rga3xyx88k0')}}</div>
             <div>
                 <j-monaco-editor
                     language="java"
@@ -126,7 +126,7 @@
                     v-model:modelValue="javaStr2"
                 />
             </div>
-            <h3>SDK 客户端的初始化和请求方式</h3>
+            <h3>SDK {{t('Api.components.HomePage.5rga3xyx8no0')}}</h3>
             <div>
                 <j-monaco-editor
                     language="java"
@@ -141,7 +141,9 @@
 
 <script setup lang="ts">
 import { getImage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const data = [
     {
         key: '1',
@@ -155,27 +157,27 @@ const data = [
     },
     {
         key: '3',
-        type: '请求URI',
+        type: t('Api.components.HomePage.5rga3xyx8z40'),
         data: '/api/v1/device/dev0001/log/_query',
     },
     {
         key: '4',
-        type: '请求方式',
+        type: t('Api.components.HomePage.5rga3xyx9580'),
         data: 'GET',
     },
     {
         key: '5',
-        type: '请求参数',
+        type: t('Api.components.HomePage.5rga3xyx9hw0'),
         data: 'pageSize=20&pageIndex=0',
     },
     {
         key: '6',
-        type: '签名方式',
+        type: t('Api.components.HomePage.5rga3xyx9n00'),
         data: 'MD5',
     },
     {
         key: '7',
-        type: '签名示例时间戳',
+        type: t('Api.components.HomePage.5rga3xyxals0'),
         data: '1574993804802 ',
     },
 ];

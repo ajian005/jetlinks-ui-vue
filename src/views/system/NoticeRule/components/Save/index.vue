@@ -2,7 +2,7 @@
     <j-modal
         :width="1056"
         visible
-        title="配置通知方式"
+        :title="t('components.Save.index.5rgaa7r7y2k0')"
         @cancel="emit('close')"
         :bodyStyle="{ padding: 0 }"
     >
@@ -103,21 +103,21 @@
         <template #footer>
             <j-space>
                 <j-button v-if="current === 0" @click="emit('close')"
-                    >取消</j-button
+                    >{{t('components.Save.index.5rgaa7r7zck0')}}</j-button
                 >
-                <j-button v-else @click="onPrev">上一步</j-button>
+                <j-button v-else @click="onPrev">{{t('components.Save.index.5rgaa7r7zkg0')}}</j-button>
                 <j-button
                     type="primary"
                     @click="onNext"
                     v-if="current !== stepList.length - 1"
-                    >下一步</j-button
+                    >{{t('components.Save.index.5rgaa7r7zqk0')}}</j-button
                 >
                 <j-button
                     :loading="loading"
                     type="primary"
                     @click="onSave"
                     v-else
-                    >确认</j-button
+                    >{{t('components.Save.index.5rgaa7r7zvo0')}}</j-button
                 >
             </j-space>
         </template>
@@ -134,7 +134,9 @@ import { onlyMessage } from '@/utils/comm';
 import Template from '@/api/notice/template';
 import { variableMap } from '../../data';
 import { cloneDeep } from 'lodash-es';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 type GrantType = {
     role: {
         idList?: string[];
@@ -170,11 +172,11 @@ const props = defineProps({
 });
 
 const stepList = [
-    '选择通知方式',
-    '选择通知配置',
-    '选择通知模板',
-    '配置模板变量',
-    '配置用户权限',
+    t('components.Save.index.5rgaa7r80140'),
+    t('components.Save.index.5rgaa7r806k0'),
+    t('components.Save.index.5rgaa7r80bk0'),
+    t('components.Save.index.5rgaa7r80go0'),
+    t('components.Save.index.5rgaa7r80l80'),
     '完成',
 ];
 const current = ref<number>(0);
@@ -243,19 +245,19 @@ const handleVariable = (obj: any) => {
 const jumpStep = async (val: number) => {
     if (val >= 1) {
         if (!formModel.channelProvider) {
-            onlyMessage('请选择通知方式', 'error');
+            onlyMessage(t('components.Save.index.5rgaa7r80qw0'), 'error');
             return;
         }
     }
     if (val >= 2) {
         if (!formModel.channelConfiguration.notifierId) {
-            onlyMessage('请选择通知配置', 'error');
+            onlyMessage(t('components.Save.index.5rgaa7r80wo0'), 'error');
             return;
         }
     }
     if (val >= 3) {
         if (!formModel.channelConfiguration.templateId) {
-            onlyMessage('请选择通知模板', 'error');
+            onlyMessage(t('components.Save.index.5rgaa7r812k0'), 'error');
             return;
         } else {
             // 查询变量
@@ -275,7 +277,7 @@ const jumpStep = async (val: number) => {
                     if (obj) {
                         handleVariable(obj);
                     } else {
-                        onlyMessage('请配置模版变量', 'error');
+                        onlyMessage(t('components.Save.index.5rgaa7r81740'), 'error');
                         return;
                     }
                 } else {
@@ -298,7 +300,7 @@ const jumpStep = async (val: number) => {
                         },
                     );
                     if (!flag) {
-                        onlyMessage('请配置模版变量', 'error');
+                        onlyMessage(t('components.Save.index.5rgaa7r81740'), 'error');
                         return;
                     }
                 }

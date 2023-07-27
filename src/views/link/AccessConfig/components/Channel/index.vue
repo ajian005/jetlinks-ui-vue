@@ -2,55 +2,32 @@
     <div v-if="type === 'channel'" class="card-last">
         <j-row :gutter="[24, 24]">
             <j-col :span="12">
-                <title-component data="基本信息" />
+                <title-component :data="t('components.Channel.index.5rg34u5fd1w0')" />
                 <div>
-                    <j-form
-                        :model="formState"
-                        name="basic"
-                        autocomplete="off"
-                        layout="vertical"
-                        @finish="onFinish"
-                    >
-                        <j-form-item
-                            label="名称"
-                            name="name"
-                            :rules="[
-                                {
-                                    required: true,
-                                    message: '请输入名称',
-                                    trigger: 'blur',
-                                },
-                                {
-                                    max: 64,
-                                    message: '最多可输入64个字符',
-                                    trigger: 'blur',
-                                },
-                            ]"
-                        >
-                            <j-input
-                                placeholder="请输入名称"
-                                v-model:value="formState.name"
-                            />
+                    <j-form :model="formState" name="basic" autocomplete="off" layout="vertical" @finish="onFinish">
+                        <j-form-item :label="t('components.Channel.index.5rg34u5fgx40')" name="name" :rules="[
+                            {
+                                required: true,
+                                message: t('components.Channel.index.5rg34u5fhc80'),
+                                trigger: 'blur',
+                            },
+                            {
+                                max: 64,
+                                message: t('components.Channel.index.5rg34u5fhjg0'),
+                                trigger: 'blur',
+                            },
+                        ]">
+                            <j-input :placeholder="t('components.Channel.index.5rg34u5fhc80')"
+                                v-model:value="formState.name" />
                         </j-form-item>
-                        <j-form-item label="说明" name="description">
-                            <j-textarea
-                                placeholder="请输入说明"
-                                :rows="4"
-                                v-model:value="formState.description"
-                                show-count
-                                :maxlength="200"
-                            />
+                        <j-form-item :label="t('components.Channel.index.5rg34u5fi700')" name="description">
+                            <j-textarea :placeholder="t('components.Channel.index.5rg34u5firs0')" :rows="4"
+                                v-model:value="formState.description" show-count :maxlength="200" />
                         </j-form-item>
                         <j-form-item>
-                            <PermissionButton
-                                v-if="view === 'false'"
-                                type="primary"
-                                html-type="submit"
-                                :hasPermission="`link/AccessConfig:${
-                                    id === ':id' ? 'add' : 'update'
-                                }`"
-                            >
-                                保存
+                            <PermissionButton v-if="view === 'false'" type="primary" html-type="submit" :hasPermission="`link/AccessConfig:${id === ':id' ? 'add' : 'update'
+                                }`">
+                                {{ t('components.Channel.index.5rg34u5fj6c0') }}
                             </PermissionButton>
                         </j-form-item>
                     </j-form>
@@ -58,17 +35,17 @@
             </j-col>
             <j-col :span="12">
                 <div class="doc" style="height: 600px">
-                    <TitleComponent data="配置概览" />
-                    <p>接入方式：{{ provider.name }}</p>
+                    <TitleComponent :data="t('components.Channel.index.5rg34u5fjqg0')" />
+                    <p>{{ t('components.Channel.index.accessMode') + provider.name }}</p>
                     <p>
                         {{ provider.description }}
                     </p>
-                    <p>消息协议：{{ provider.id }}</p>
-                    <TitleComponent data="设备接入指引" />
-                    <p>1、配置{{ provider.name }}通道</p>
-                    <p>2、创建{{ provider.name }}设备接入网关</p>
-                    <p>3、创建产品，并选中接入方式为{{ provider.name }}</p>
-                    <p>4、添加设备，单独为每一个设备进行数据点绑定</p>
+                    <p>{{ t('components.Channel.index.agreement') + provider.id }}</p>
+                    <TitleComponent :data="t('components.Channel.index.5rg34u5fk540')" />
+                    <p>1、{{ t('components.Channel.index.channel', { name: provider.name }) }}</p>
+                    <p>2、{{ t('components.Channel.index.accessGateway', { name: provider.name }) }}</p>
+                    <p>3、{{ t('components.Channel.index.productTip') + provider.name }}</p>
+                    <p>4、{{ t('components.Channel.index.bind') }}</p>
                 </div>
             </j-col>
         </j-row>
@@ -79,7 +56,9 @@
 import { onlyMessage } from '@/utils/comm';
 import { update, save } from '@/api/link/accessConfig';
 import { ProtocolMapping } from '../../data';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 interface FormState {
     name: string;
     description: string;
@@ -91,11 +70,11 @@ const id = route.params.id as string;
 const props = defineProps({
     provider: {
         type: Object,
-        default: () => {},
+        default: () => { },
     },
     data: {
         type: Object,
-        default: () => {},
+        default: () => { },
     },
 });
 
@@ -117,7 +96,7 @@ const onFinish = async (values: any) => {
     const resp =
         id === ':id' ? await save(params) : await update({ ...params, id });
     if (resp.status === 200) {
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('components.Channel.index.5rg34u5fkfw0'), 'success');
         history.back();
         if ((window as any).onTabSaveSuccess) {
             (window as any).onTabSaveSuccess(resp);

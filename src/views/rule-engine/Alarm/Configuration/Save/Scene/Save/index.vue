@@ -1,9 +1,9 @@
 <template>
     <j-modal
         visible
-        title="新增"
-        okText="确定"
-        cancelText="取消"
+        :title="t('Scene.Save.index.5rg41y6hqh00')"
+        :okText="t('Scene.Save.index.5rg41y6hrlc0')"
+        :cancelText="t('Scene.Save.index.5rg41y6hrvo0')"
         :width="1000"
         @cancel="closeModal"
         @ok="saveCorrelation"
@@ -31,34 +31,19 @@
                 :params="params"
             >
                 <template #card="slotProps">
-                    <CardBox
-                        :value="slotProps"
-                        :status="slotProps.state?.value"
-                        :statusText="slotProps.state?.text"
-                        :active="_selectedRowKeys.includes(slotProps.id)"
-                        @click="handleClick"
-                        :statusNames="{
+                    <CardBox :value="slotProps" :status="slotProps.state?.value" :statusText="slotProps.state?.text"
+                        :active="_selectedRowKeys.includes(slotProps.id)" @click="handleClick" :statusNames="{
                             started: 'processing',
                             disable: 'error',
-                        }"
-                    >
+                        }">
                         <template #type>
-                            <span
-                                ><img
-                                    :height="16"
-                                    :src="
-                                        typeMap.get(slotProps.triggerType)?.icon
-                                    "
-                                    style="margin-right: 5px"
-                                />{{
-                                    typeMap.get(slotProps.triggerType)?.text
-                                }}</span
-                            >
+                            <span><img :height="16" :src="typeMap.get(slotProps.triggerType)?.icon
+                                " style="margin-right: 5px" />{{
+        typeMap.get(slotProps.triggerType)?.text
+    }}</span>
                         </template>
                         <template #img>
-                            <img
-                                :src="typeMap.get(slotProps.triggerType)?.img"
-                            />
+                            <img :src="typeMap.get(slotProps.triggerType)?.img" />
                         </template>
                         <template #content>
                             <Ellipsis style="width: calc(100% - 100px)">
@@ -68,9 +53,9 @@
                             </Ellipsis>
                             <Ellipsis :lineClamp="2">
                                 <div class="subTitle">
-                                    说明：{{
-                                        slotProps?.description ||
-                                        typeMap.get(slotProps.triggerType)?.tip
+                                    {{ t('Scene.Save.index.5rg41y6hrvo0') +
+                                        (slotProps?.description ||
+                                            typeMap.get(slotProps.triggerType)?.tip)
                                     }}
                                 </div>
                             </Ellipsis>
@@ -86,6 +71,9 @@
 import { query } from '@/api/rule-engine/scene';
 import { bindScene } from '@/api/rule-engine/configuration';
 import { getImage, onlyMessage } from '@/utils/comm';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const columns = [
     {
         title: '场景名称',
@@ -128,40 +116,40 @@ const columns = [
         },
     },
     {
-        title: '触发方式',
+        title: t('Scene.Save.index.5rg41y6hsac0'),
         dataIndex: 'triggerType',
         key: 'triggerType',
         search: {
             type: 'select',
             options: [
                 {
-                    label: '手动触发',
+                    label: t('Scene.Save.index.5rg41y6hsi40'),
                     value: 'manual',
                 },
                 {
-                    label: '定时触发',
+                    label: t('Scene.Save.index.5rg41y6hspc0'),
                     value: 'timer',
                 },
                 {
-                    label: '设备触发',
+                    label: t('Scene.Save.index.5rg41y6hsvs0'),
                     value: 'device',
                 },
             ],
         },
     },
     {
-        title: '状态',
+        title: t('Scene.Save.index.5rg41y6ht380'),
         dataIndex: 'state',
         key: 'state',
         search: {
             type: 'select',
             options: [
                 {
-                    label: '正常',
+                    label: t('Scene.Save.index.5rg41y6htcg0'),
                     value: 'started',
                 },
                 {
-                    label: '禁用',
+                    label: t('Scene.Save.index.5rg41y6htm80'),
                     value: 'disable',
                 },
             ],
@@ -197,22 +185,22 @@ const terms = [
 const params = ref();
 const typeMap = new Map();
 typeMap.set('manual', {
-    text: '手动触发',
+    text: t('Scene.Save.index.5rg41y6hsi40'),
     img: getImage('/scene/scene-hand.png'),
     icon: getImage('/scene/trigger-type-icon/manual.png'),
-    tip: '适用于第三方平台向物联网平台下发指令控制设备',
+    tip: t('Scene.Save.index.5rg41y6htt00'),
 });
 typeMap.set('timer', {
-    text: '定时触发',
+    text: t('Scene.Save.index.5rg41y6hspc0'),
     img: getImage('/scene/scene-timer.png'),
     icon: getImage('/scene/trigger-type-icon/timing.png'),
-    tip: '适用于定期执行固定任务',
+    tip: t('Scene.Save.index.5rg41y6htz00'),
 });
 typeMap.set('device', {
-    text: '设备触发',
+    text: t('Scene.Save.index.5rg41y6hsvs0'),
     img: getImage('/scene/scene-device.png'),
     icon: getImage('/scene/trigger-type-icon/device.png'),
-    tip: '适用于设备数据或行为满足触发条件时，执行指定的动作',
+    tip: t('Scene.Save.index.5rg41y6hu540'),
 });
 const _selectedRowKeys = ref<string[]>([]);
 const handleClick = (dt: any) => {
@@ -229,7 +217,7 @@ const handleClick = (dt: any) => {
 const onSelectChange = (arr: any[]) => {
     _selectedRowKeys.value = arr
 };
-const log = () => {};
+const log = () => { };
 log();
 const handleSearch = (e: any) => {
     params.value = e;
@@ -248,11 +236,11 @@ const saveCorrelation = async () => {
         });
         const res = await bindScene([...list]);
         if (res.status === 200) {
-            onlyMessage('操作成功');
+            onlyMessage(t('Scene.Save.index.5rg58exxb4k0'));
             emit('saveScene');
         }
     } else {
-        onlyMessage('请选择至少一条数据', 'error');
+        onlyMessage(t('Scene.Save.index.5rg41y6huh00'), 'error');
     }
 };
 const closeModal = () => {

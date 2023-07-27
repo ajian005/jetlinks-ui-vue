@@ -2,10 +2,10 @@
   <div class='terms-params-item'>
     <div v-if='!isFirst' class='term-type-warp'>
       <DropdownButton
-        :options='[
-            { label: "并且", value: "and" },
-            { label: "或者", value: "or" },
-          ]'
+        :options="[
+            { label: t('components.Terms.ParamsItem.5rg4ybmwqlc0'), value: 'and' },
+            { label: t('components.Terms.ParamsItem.5rg4ybmwreg0'), value: 'or' },
+          ]"
         type='type'
         v-model:value='paramsValue.type'
         @select='typeSelect'
@@ -22,7 +22,7 @@
         type='column'
         value-name='column'
         label-name='fullName'
-        placeholder='请选择参数'
+        :placeholder="t('components.Terms.ParamsItem.5rg4ybmwrk80')"
         v-model:value='paramsValue.column'
         component='treeSelect'
         @select='columnSelect'
@@ -32,14 +32,14 @@
         type="termType"
         value-name='id'
         label-name='name'
-        placeholder="操作符"
+        :placeholder="t('components.Terms.ParamsItem.5rg4ybmwro00')"
         v-model:value='paramsValue.termType'
         @select='termsTypeSelect'
       />
       <DoubleParamsDropdown
         v-if='showDouble'
         icon='icon-canshu'
-        placeholder='参数值'
+        :placeholder="t('components.Terms.ParamsItem.5rg4ybmwrro0')"
         :options='valueOptions'
         :metricOptions='metricOption'
         :tabsOptions='tabsOptions'
@@ -50,7 +50,7 @@
       <ParamsDropdown
         v-else
         icon='icon-canshu'
-        placeholder='参数值'
+        :placeholder="t('components.Terms.ParamsItem.5rg4ybmwrro0')"
         :options='valueOptions'
         :metricOptions='metricOption'
         :tabsOptions='tabsOptions'
@@ -59,7 +59,7 @@
         v-model:source='paramsValue.value.source'
         @select='valueSelect'
       />
-      <j-popconfirm title='确认删除？' @confirm='onDelete' :overlayStyle='{minWidth: "180px"}'>
+      <j-popconfirm :title="t('components.Terms.ParamsItem.5rg4ybmwrvg0')" @confirm='onDelete' :overlayStyle='{minWidth: "180px"}'>
         <div v-show='showDelete' class='button-delete'> <AIcon type='CloseOutlined' /></div>
       </j-popconfirm>
     </div>
@@ -83,8 +83,13 @@ import { useSceneStore } from 'store/scene'
 import { storeToRefs } from 'pinia';
 import { Form } from 'jetlinks-ui-components'
 import { isArray, isObject, pick } from 'lodash-es'
+<<<<<<< HEAD
 import {cloneDeep} from "lodash";
+=======
+import { useI18n } from 'vue-i18n'
+>>>>>>> dev-locales
 
+const { t } = useI18n()
 const sceneStore = useSceneStore()
 const { data: formModel } = storeToRefs(sceneStore)
 const formItemContext = Form.useInjectFormItemContext();
@@ -159,7 +164,7 @@ const termTypeOptions = ref<Array<{ id: string, name: string}>>([]) // 条件值
 const valueOptions = ref<any[]>([]) // 默认手动输入下拉
 const metricOption = ref<any[]>([])  // 根据termType获取对应指标值
 const isMetric = ref<boolean>(false) // 是否为指标值
-const tabsOptions = ref<Array<TabsOption>>([{ label: '手动输入', key: 'manual', component: 'string' }])
+const tabsOptions = ref<Array<TabsOption>>([{ label: t('components.Terms.ParamsItem.5rg4ybmws280'), key: 'manual', component: 'string' }])
 const metricsCacheOption = ref<any[]>([]) // 缓存指标值
 
 const handOptionByColumn = (option: any) => {
@@ -172,7 +177,7 @@ const handOptionByColumn = (option: any) => {
     if (option.metrics && option.metrics.length) {
 
       tabsOptions.value.push(
-        { label: '指标值', key: 'metric', component: 'select' }
+        { label: t('components.Terms.ParamsItem.5rg4ybmws5k0'), key: 'metric', component: 'select' }
       )
       isMetric.value = true
     } else {
@@ -190,8 +195,8 @@ const handOptionByColumn = (option: any) => {
         ]
       } else {
         valueOptions.value = option.options?.map((item: any) => ({ ...item, label: item.name, value: item.id})) || [
-          { label: '是', value: 'true' },
-          { label: '否', value: 'false' },
+          { label: t('components.Terms.ParamsItem.5rg4ybmws9c0'), value: 'true' },
+          { label: t('components.Terms.ParamsItem.5rg4ybmwsco0'), value: 'false' },
         ]
       }
     } else if(option.dataType === 'enum') {
@@ -362,7 +367,7 @@ const termAdd = () => {
     key: `params_${new Date().getTime()}`
   }
   formModel.value.branches?.[props.branchName]?.when?.[props.whenName]?.terms?.push(terms)
-  formModel.value.options!.when[props.branchName].terms[props.whenName].terms[props.termsName].push(['', '', '', '并且'])
+  formModel.value.options!.when[props.branchName].terms[props.whenName].terms[props.termsName].push(['', '', '', t('components.Terms.ParamsItem.5rg4ybmwqlc0')])
 }
 
 const onDelete = () => {
