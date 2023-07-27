@@ -1785,13 +1785,22 @@
                 "5rmxmuyx8580": "完成",
                 "5rmxmuyx8hc0": "验证失败",
                 "5rmxmuyx8p80": "两次密码输入不一致",
-                "5rmxmuyx8ww0": "保存成功"
+                "5rmxmuyx8ww0": "保存成功",
+                "5sbl13vo7p00": "进行中",
+                "5sbl13vo8y80": "未开始",
+                "5sbl13vo94g0": "已完成",
+                "5sbl13vo98s0": "当前密码",
+                "5sbl13vo9cs0": "新密码",
+                "5sbl13vo9h80": "确认新密码",
+                "5sbl13vo9l00": "密码已重置，请重新登录",
+                "5sbl13vo9oo0": "确定"
             }
         },
         "HomeView": {
             "index": {
                 "5rmxndjebd40": "确定",
-                "5rmxndjechc0": "保存成功"
+                "5rmxndjechc0": "保存成功",
+                "5sbl1zs8izg0": "保存修改"
             }
         },
         "NotificationRecord": {
