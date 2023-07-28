@@ -107,6 +107,8 @@ const deployBtn = async () => {
         const resp = await _deploy(instanceStore.current.id);
         if (resp.status === 200) {
             onlyMessage('操作成功');
+        }
+    }
 };
 
 const resetBtn = async () => {

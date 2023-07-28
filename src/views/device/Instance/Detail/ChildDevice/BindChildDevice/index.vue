@@ -108,8 +108,6 @@ const props = defineProps({
         default: () => [],
     },
 });
-
-const { t } = useI18n()
 const instanceStore = useInstanceStore();
 const { detail } = storeToRefs(instanceStore);
 

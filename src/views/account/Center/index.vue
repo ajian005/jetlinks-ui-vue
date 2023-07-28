@@ -28,16 +28,16 @@
                 <div class="person-header-item-action">
                     <j-space :size="24">
                         <j-button class="btn" @click="visible = true"
-                            >查看详情</j-button
+                            >{{t('account.Center.index.5rmy0nei4ag0')}}</j-button
                         >
                         <j-button @click="editInfoVisible = true"
-                            >编辑资料</j-button
+                            >{{t('account.Center.index.5rmy0nei4fk0')}}</j-button
                         >
                         <j-button
                             v-if="permission"
                             @click="editPasswordVisible = true"
                         >
-                            修改密码
+                            {{t('account.Center.index.5rmy0nei4ko0')}}
                         </j-button>
                     </j-space>
                 </div>
@@ -159,7 +159,7 @@ const onAvatarChange = (url: string) => {
         avatar: url,
     }).then((resp) => {
         if (resp.status === 200) {
-            onlyMessage('操作成功', 'success');
+            onlyMessage(t('account.Center.index.5scldtl46tw0'), 'success');
             user.getUserInfo();
         }
     });

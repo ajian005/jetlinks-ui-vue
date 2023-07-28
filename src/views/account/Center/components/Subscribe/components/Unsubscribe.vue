@@ -1,21 +1,21 @@
 <template>
     <j-modal :width="'384px'" visible @cancel="emit('close')" :footer="null">
         <template v-if="getType === 'notifier-dingTalk'">
-            <div class="tip">请先绑定钉钉账号</div>
+            <div class="tip">{{t('Subscribe.components.Unsubscribe.5scknvi0g280')}}</div>
         </template>
         <template v-else-if="getType === 'notifier-weixin'">
-            <div class="tip">请先绑定企业微信账号</div>
+            <div class="tip">{{t('Subscribe.components.Unsubscribe.5scknvi0h900')}}</div>
         </template>
         <template v-else-if="getType === 'notifier-email'">
-            <div class="tip">请先绑定邮箱</div>
+            <div class="tip">{{t('Subscribe.components.Unsubscribe.5scknvi0hgw0')}}</div>
         </template>
         <template v-else>
-            <div class="tip">请先绑定手机号</div>
+            <div class="tip">{{t('Subscribe.components.Unsubscribe.5scknvi0hmw0')}}</div>
         </template>
         <div class="btn">
             <j-space>
-                <j-button @click="emit('close')">取消</j-button>
-                <j-button @click="onBind" type="primary">立即绑定</j-button>
+                <j-button @click="emit('close')">{{t('Subscribe.components.Unsubscribe.5scknvi0ht40')}}</j-button>
+                <j-button @click="onBind" type="primary">{{t('Subscribe.components.Unsubscribe.5scknvi0hyc0')}}</j-button>
             </j-space>
         </div>
         <EditInfo
@@ -38,7 +38,9 @@
 import { useUserInfo } from '@/store/userInfo';
 import EditInfo from '../../EditInfo/index.vue';
 import Bind from './Bind.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const user = useUserInfo();
 const emit = defineEmits(['close', 'save']);
 

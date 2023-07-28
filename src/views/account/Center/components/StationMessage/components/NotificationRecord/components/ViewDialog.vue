@@ -8,7 +8,7 @@
     >
         <template v-if="['device-transparent-codec', 'system-event'].includes(data?.topicProvider)">
             <div>
-                <div class="label">通知流水:</div>
+                <div class="label">{{ t('NotificationRecord.components.ViewDialog.notice') }}</div>
                 <div style="padding: 10px; background-color: #fafafa">
                     <j-scrollbar height="200px">
                         <JsonViewer :value="data" />
@@ -55,7 +55,7 @@
                 </j-descriptions-item>
             </j-descriptions>
             <div>
-                <div class="label">告警流水:</div>
+                <div class="label">{{ t('NotificationRecord.components.ViewDialog.alarm') }}</div>
                 <div style="padding: 10px; background-color: #fafafa">
                     <j-scrollbar height="200px">
                         <JsonViewer
@@ -67,7 +67,7 @@
             </div>
         </template>
         <template #footer>
-            <j-button type="primary" @click="emits('update:visible', false)">确定</j-button>
+            <j-button type="primary" @click="emits('update:visible', false)">{{t('NotificationRecord.components.ViewDialog.5sckfo6ht6k0')}}</j-button>
         </template>
     </j-modal>
 </template>

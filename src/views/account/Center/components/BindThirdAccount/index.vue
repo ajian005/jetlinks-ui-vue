@@ -24,7 +24,7 @@
                             <span v-else style="color: #999">{{t('components.BindThirdAccount.index.5rmxjyjaoag0')}}</span>
                         </div>
                         <div v-if="item.others?.name" style="color: #666666">
-                            {{ item.others?.name }}（已绑定的用户名）
+                            {{ item.others?.name + t('components.BindThirdAccount.index.bind')}}
                         </div>
                     </div>
                     <div class="content-item-right">

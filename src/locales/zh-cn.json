@@ -1542,7 +1542,8 @@
                 "5rmxl9q92c80": "邮箱",
                 "5rmxl9q92ho0": "关闭",
                 "5rmxl9q92mo0": "暂无角色",
-                "5rmxl9q92tw0": "暂无组织"
+                "5rmxl9q92tw0": "暂无组织",
+                "user": "用户名："
             }
         },
         "Role": {
@@ -1732,7 +1733,8 @@
                 "5rmxjyjaohc0": "确认解除绑定嘛?",
                 "5rmxjyjaomo0": "解除绑定",
                 "5rmxjyjaos80": "立即绑定",
-                "5rmxjyjap5s0": "解绑成功"
+                "5rmxjyjap5s0": "解绑成功",
+                "bind": "（已绑定的用户名）"
             }
         },
         "EditInfo": {
@@ -1910,6 +1912,15 @@
                 "5sayetrlias0": "操作",
                 "5sayetrlisw0": "请选择",
                 "IDTip": "ID只能由数字、字母、下划线、中划线组成"
+            }
+        },
+        "UploadAvatar": {
+            "index": {
+                "5sckooyjg7s0": "更换",
+                "5sckooyjhrc0": "更换头像",
+                "5sckooyjhy80": "上传失败",
+                "format": "请上传正确格式的图片",
+                "sizeLimit": "图片大小必须小于{maxSize}M"
             }
         }
     },
@@ -6404,9 +6415,26 @@
                 "5rmxfod3ikw0": "绑定成功",
                 "5rmxfod3iqo0": "登录成功",
                 "account": "账号：",
-                "userName": "用户名",
+                "userName": "用户名：",
                 "bind": "立即绑定",
                 "bindName": "绑定名："
+            }
+        },
+        "components": {
+            "data": {
+                "alarm": "告警",
+                "productAlarm": "产品告警",
+                "deviceAlarm": "设备告警",
+                "orgAlarm": "部门告警",
+                "otherAlarm": "其他告警",
+                "productDes": "当产品类型的告警被触发时，你将在已订阅的方式中收到通知",
+                "deviceDes": "当设备类型的告警被触发时，你将在已订阅的方式中收到通知",
+                "orgDes": "当部门类型的告警被触发时，你将在已订阅的方式中收到通知",
+                "otherDes": "当其他类型的告警被触发时，你将在已订阅的方式中收到通知",
+                "system": "系统监控",
+                "business": "业务监控",
+                "systemEvent": "系统运行异常",
+                "transparent": "透传消息解析异常"
             }
         }
     },
@@ -6420,7 +6448,10 @@
                 "5rmxnnwmr7o0": "告警时间",
                 "5rmxnnwmrcs0": "告警级别",
                 "5rmxnnwmrik0": "告警说明",
-                "5rmxnnwmrn80": "告警流水"
+                "5rmxnnwmrn80": "告警流水",
+                "5sckfo6ht6k0": "确定",
+                "notice": "通知流水:",
+                "alarm": "告警流水:"
             }
         }
     },
@@ -6447,8 +6478,9 @@
         "components": {
             "Detail": {
                 "5rmxuhs2ap40": "取消订阅",
-                "5rmxuhs2bpw0": "更换接收账号",
-                "5rmxuhs2bwg0": "当前绑定的账号名称"
+                "5rmxuhs2bpw0": "更换绑定账号",
+                "5rmxuhs2bwg0": "当前绑定的账号名称",
+                "bind": "绑定账号："
             },
             "Error": {
                 "5rmxuoavajc0": "请先绑定钉钉账号",
@@ -6458,6 +6490,25 @@
                 "5rmxuoavcb40": "确定",
                 "5rmxuoavch40": "立即绑定",
                 "5rmxuoavcmg0": "打开详情编辑框"
+            },
+            "Bind": {
+                "5sckkj6en2w0": "关闭"
+            },
+            "Card": {
+                "5sckkz7nb080": "订阅",
+                "5sckkz7ncsw0": "取消订阅"
+            },
+            "Item": {
+                "5sckncl3ozo0": "操作成功",
+                "5sckncl3q5w0": "操作失败"
+            },
+            "Unsubscribe": {
+                "5scknvi0g280": "请先绑定钉钉账号",
+                "5scknvi0h900": "请先绑定企业微信账号",
+                "5scknvi0hgw0": "请先绑定邮箱",
+                "5scknvi0hmw0": "请先绑定手机号",
+                "5scknvi0ht40": "取消",
+                "5scknvi0hyc0": "立即绑定"
             }
         }
     },
@@ -6500,7 +6551,8 @@
                 "5rmy0nei4uw0": "绑定第三方账号",
                 "5rmy0nei4zk0": "我的订阅",
                 "5rmy0nei54k0": "站内信",
-                "title": "xx部门 · xx角色"
+                "title": "xx部门 · xx角色",
+                "5scldtl46tw0": "操作成功"
             }
         }
     },

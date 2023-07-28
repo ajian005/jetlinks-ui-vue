@@ -1,51 +1,53 @@
+import createI18n from '@/locales/index';
+const { t } = createI18n.global
 const initData: any[] = [
     {
         provider: 'alarm',
-        name: '告警',
+        name: t('Center.components.data.alarm'),
         children: [
             {
                 provider: 'alarm-product',
-                name: '产品告警',
+                name: t('Center.components.data.productAlarm'),
                 description:
-                    '当产品类型的告警被触发时，你将在已订阅的方式中收到通知',
+                    t('Center.components.data.productDes'),
             },
             {
                 provider: 'alarm-device',
-                name: '设备告警',
+                name: t('Center.components.data.deviceAlarm'),
                 description:
-                    '当设备类型的告警被触发时，你将在已订阅的方式中收到通知',
+                    t('Center.components.data.deviceDes'),
             },
             {
                 provider: 'alarm-org',
-                name: '部门告警',
+                name: t('Center.components.data.orgAlarm'),
                 description:
-                    '当部门类型的告警被触发时，你将在已订阅的方式中收到通知',
+                    t('Center.components.data.orgDes'),
             },
             {
                 provider: 'alarm-other',
-                name: '其他告警',
+                name: t('Center.components.data.otherAlarm'),
                 description:
-                    '当其他类型的告警被触发时，你将在已订阅的方式中收到通知',
+                    t('Center.components.data.otherDes'),
             },
         ],
     },
     {
         provider: 'system-monitor',
-        name: '系统监控',
+        name: t('Center.components.data.system'),
         children: [
             {
                 provider: 'system-event',
-                name: '系统运行异常',
+                name: t('Center.components.data.systemEvent'),
             },
         ],
     },
     {
         provider: 'system-business',
-        name: '业务监控',
+        name: t('Center.components.data.business'),
         children: [
             {
                 provider: 'device-transparent-codec',
-                name: '透传消息解析异常',
+                name: t('Center.components.data.transparent'),
             },
         ],
     },

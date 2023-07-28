@@ -61,41 +61,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:value', 'update:photoUrl']);
-<<<<<<< HEAD
-=======
-const list = [
-    {
-        value: 'internal-standalone',
-        text: t('components.ApplyList.index.5rgb17wiqzg0'),
-        imgUrl: getImage('/apply/provider1.png'),
-    },
-    {
-        value: 'internal-integrated',
-        text: t('components.ApplyList.index.5rgb17wis440'),
-        imgUrl: getImage('/apply/provider2.png'),
-    },
-    {
-        value: 'wechat-webapp',
-        text: t('components.ApplyList.index.5rgb17wis8c0'),
-        imgUrl: getImage('/apply/provider4.png'),
-    },
-    {
-        value: 'dingtalk-ent-app',
-        text: t('components.ApplyList.index.5rgb17wisbw0'),
-        imgUrl: getImage('/apply/provider3.png'),
-    },
-    {
-        value: 'third-party',
-        text: t('components.ApplyList.index.5rgb17wises0'),
-        imgUrl: getImage('/apply/provider5.png'),
-    },
-    {
-        value: 'wechat-miniapp',
-        text: t('components.ApplyList.index.5rgb17wisic0'),
-        imgUrl: getImage('/apply/provider1.png'),
-    },
-];
->>>>>>> dev-locales
 
 const defaultImg = {
     'internal-standalone': getImage('/apply/internal-standalone.png'),

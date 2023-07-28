@@ -1,23 +1,23 @@
 <template>
     <div style="width: 300px">
         <template v-if="getType === 'notifier-dingTalk'">
-            <div class="tip"><j-ellipsis :lineClamp="2">绑定账号：{{ info }}</j-ellipsis></div>
+            <div class="tip"><j-ellipsis :lineClamp="2">{{t('Subscribe.components.Detail.bind') +  info }}</j-ellipsis></div>
         </template>
         <template v-else-if="getType === 'notifier-weixin'">
-            <div class="tip"><j-ellipsis :lineClamp="2">绑定账号：{{ info }}</j-ellipsis></div>
+            <div class="tip"><j-ellipsis :lineClamp="2">{{t('Subscribe.components.Detail.bind') + info }}</j-ellipsis></div>
         </template>
         <template v-else-if="getType === 'notifier-email'">
-            <div class="tip"><j-ellipsis :lineClamp="2">绑定账号：{{ user.userInfos?.email }}</j-ellipsis></div>
+            <div class="tip"><j-ellipsis :lineClamp="2">{{t('Subscribe.components.Detail.bind') + user.userInfos?.email }}</j-ellipsis></div>
         </template>
         <template v-else>
-            <div class="tip"><j-ellipsis :lineClamp="2">绑定账号：{{ user.userInfos?.telephone }}</j-ellipsis></div>
+            <div class="tip"><j-ellipsis :lineClamp="2">{{t('Subscribe.components.Detail.bind') + user.userInfos?.telephone }}</j-ellipsis></div>
         </template>
         <div class="btn">
-            <j-button @click="emit('unsubscribe', current)">取消订阅</j-button>
+            <j-button @click="emit('unsubscribe', current)">{{t('Subscribe.components.Detail.5rmxuhs2ap40')}}</j-button>
             <j-button
                 @click="onBind"
                 type="primary"
-                >更换绑定账号</j-button
+                >{{t('Subscribe.components.Detail.5rmxuhs2bpw0')}}</j-button
             >
         </div>
     </div>

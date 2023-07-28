@@ -2,11 +2,7 @@
     <j-select
         :options="options"
         @change="change"
-<<<<<<< HEAD
         :placeholder="t('Detail.components.ToOrg.5sbk0krsd1g0')"
-=======
-        :placeholder="t('pages.iot.notice.template.selDepartment')"
->>>>>>> dev-locales
         style="width: 100%"
         :allowClear="true"
         v-model:value="_value"

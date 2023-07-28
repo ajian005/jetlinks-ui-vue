@@ -197,15 +197,8 @@
                                         }}
                                         %
                                     </div>
-                                    <div>{{ slotProps.platformConfigName }}</div>
-                                </j-col>
-                                <j-col :span="6">
-                                    <div class="card-item-content-text">{{t('iot-card.CardManagement.index.5rgbgjpzy1o0')}}</div>
-                                    <div>{{ slotProps.cardType.text }}</div>
-                                </j-col>
-                                <j-col :span="6">
                                     <div class="card-item-content-text">
-                                        {{t('iot-card.CardManagement.index.5rgbgjpzy480')}}
+                                        总共 {{ slotProps.totalFlow }} M
                                     </div>
                                 </div>
                                 <j-progress
@@ -217,6 +210,7 @@
                                         100 : 0
                                     "
                                 />
+                            </div>
                             </div>
                         </template>
                         <template #actions="item">

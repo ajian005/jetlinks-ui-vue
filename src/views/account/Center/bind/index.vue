@@ -2,7 +2,7 @@
 <template>
   <div class='page-container'>
     <div class='content-bind'>
-      <div class='title'>第三方账户绑定</div>
+      <div class='title'>{{t('Center.bind.index.5rmxfod33ws0')}}</div>
       <!-- 已登录-绑定三方账号 -->
       <template v-if='!!token'>
         <div class='info'>
@@ -15,8 +15,8 @@
                     getImage('/bind/jetlinksLogo.png')
                 "
               />
-              <div class="info-body-item"><span>账号：</span><j-ellipsis :lineClamp="2">{{ user?.username || '-' }}</j-ellipsis></div>
-              <div class="info-body-item"><span>用户名：</span><j-ellipsis :lineClamp="2">{{ user?.name || "-" }}</j-ellipsis></div>
+              <div class="info-body-item"><span>{{t('Center.bind.index.account')}}</span><j-ellipsis :lineClamp="2">{{ user?.username || '-' }}</j-ellipsis></div>
+              <div class="info-body-item"><span>{{t('Center.bind.index.userName')}}</span><j-ellipsis :lineClamp="2">{{ user?.name || "-" }}</j-ellipsis></div>
             </div>
           <img :src="getImage('/bind/Vector.png')" />
           <div class='info-body'>
@@ -31,8 +31,8 @@
                     ) || getImage('/apply/internal-standalone.png')
                 "
               />
-              <div class="info-body-item"><span>账号：</span><j-ellipsis :lineClamp="2">{{ bindUser?.result?.userId || '' }}</j-ellipsis></div>
-              <div class="info-body-item"><span>用户名：</span><j-ellipsis :lineClamp="2">{{ bindUser?.result?.name || '' }}</j-ellipsis></div>
+              <div class="info-body-item"><span>{{t('Center.bind.index.account')}}</span><j-ellipsis :lineClamp="2">{{ bindUser?.result?.userId || '' }}</j-ellipsis></div>
+              <div class="info-body-item"><span>{{t('Center.bind.index.userName')}}</span><j-ellipsis :lineClamp="2">{{ bindUser?.result?.name || '' }}</j-ellipsis></div>
             </div>
         </div>
         <div class='btn'>
@@ -164,13 +164,13 @@ const getAppInfo = async () => {
 
 
 /**
- * 立即绑定
+ * {{t('Center.bind.index.bind')}}
  */
 const handleBind = async () => {
   const code = getUrlCode()
   const res = await bindAccount(code)
   console.log('bindAccount: ', res)
-  onlyMessage('绑定成功')
+  onlyMessage(t('Center.bind.index.5rmxfod3ikw0'))
   goRedirect()
   setTimeout(() => window.close(), 1000)
 }
@@ -237,7 +237,7 @@ const handleLoginBind = () => {
       const res = await authLogin(params)
       console.log('res: ', res)
       if (res.success) {
-        onlyMessage('登录成功')
+        onlyMessage(t('Center.bind.index.5rmxfod3iqo0'))
         LocalStore.set(TOKEN_KEY, res.result!.token as string)
         goRedirect()
       }

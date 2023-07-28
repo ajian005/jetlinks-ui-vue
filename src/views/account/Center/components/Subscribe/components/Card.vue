@@ -23,7 +23,7 @@
                         :hasPermission="true"
                         @click="onCheckChange(current)"
                     >
-                        订阅
+                        {{t('Subscribe.components.Card.5sckkz7nb080')}}
                     </PermissionButton>
                     <template v-else>
                         <Detail
@@ -40,7 +40,7 @@
                             :hasPermission="true"
                             @click="onUnSubscribe(current)"
                         >
-                            取消订阅
+                            {{t('Subscribe.components.Card.5sckkz7ncsw0')}}
                         </PermissionButton>
                     </template>
                 </template>
@@ -57,7 +57,9 @@
 <script lang="ts" setup>
 import { getImage } from '@/utils/comm';
 import Detail from './Detail.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const iconMap = new Map();
 iconMap.set('notifier-dingTalk', getImage('/notice-rule/dingtalk.png'));
 iconMap.set('notifier-weixin', getImage('/notice-rule/wechat.png'));

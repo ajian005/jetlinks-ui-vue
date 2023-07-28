@@ -40,7 +40,9 @@ import {
     save_api,
 } from '@/api/account/notificationSubscription';
 import { useUserInfo } from '@/store/userInfo';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const current = ref<any>({});
 const visible = ref<boolean>(false);
 const _visible = ref<boolean>(false);
@@ -74,11 +76,11 @@ const onSubscribe = async (obj: any) => {
     };
     const resp = await save_api(_obj);
     if (resp.status === 200) {
-        onlyMessage('操作成功');
+        onlyMessage(t('Subscribe.components.Item.5sckncl3ozo0'));
         emits('refresh');
         _visible.value = false;
     } else {
-        onlyMessage('操作失败', 'error');
+        onlyMessage(t('Subscribe.components.Item.5sckncl3q5w0'), 'error');
     }
 };
 
@@ -95,10 +97,10 @@ const onUnSubscribe = async (obj: any) => {
     const resp = await save_api(_obj);
     if (resp.status === 200) {
         _visible.value = false;
-        onlyMessage('操作成功');
+        onlyMessage(t('Subscribe.components.Item.5sckncl3ozo0'));
         emits('refresh');
     } else {
-        onlyMessage('操作失败', 'error');
+        onlyMessage(t('Subscribe.components.Item.5sckncl3q5w0'), 'error');
     }
 };
 
