@@ -202,7 +202,7 @@ const handlUpdate = async (data: any) => {
         handleSearch(params.value);
         const _item = collectorAll.value.find((i: any) => i?.id === selectedKeys.value?.[0])
         emits('change', _item)
-        onlyMessage('操作成功', 'success');
+        onlyMessage(t('Collector.Tree.index.5rg7wust59c0'), 'success');
     }
 };
 const handlDelete = async (id: string) => {

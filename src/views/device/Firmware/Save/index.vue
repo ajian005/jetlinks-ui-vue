@@ -290,7 +290,7 @@ const validatorVersionValue = async (_rule:any,value:any) => {
         if(posReg.test(value.toString())){
             return resolve('');
         }else {
-            return reject('请输入1~99999之间的正整数');
+            return reject(t('Firmware.Save.index.5scp09flnyo0'));
         }
     }
     )

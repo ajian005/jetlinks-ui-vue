@@ -56,7 +56,7 @@
             <j-form-item
                 :name="['configuration', 'inheritBreakerSpec', 'type']"
                 :rules="LeftTreeRules.type"
-                label="点位熔断处理"
+                :label="t('Tree.Save.index.5scov1o7ugg0')"
             >
                 <j-card-select
                     :showImage="false"
@@ -252,10 +252,10 @@ const handleOk = async () => {
 
 const getTypeTooltip = (value: string) => {
   switch (value) {
-    case 'LowerFrequency': return '连续20次采集异常后，降低采集频率至设定频率的1/10，故障处理后，采集频率将恢复至设定频率。';
+    case 'LowerFrequency': return t('Tree.Save.index.5scov1o83g00');
     // case 'Break': return '连续10分钟异常，停止采集数据进入断开状态，设备重新启用后恢复采集状态。'
-    case 'Break': return '连续20次采集异常后，降低采集频率至设定频率的1/10，10分钟内未排除故障，将停止采集。'
-    default: return '忽略异常，保持设定采集频率。';
+    case 'Break': return t('Tree.Save.index.5scov1o83p00')
+    default: return t('Tree.Save.index.5scov1o83v40');
   }
 }
 

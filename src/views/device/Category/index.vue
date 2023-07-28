@@ -192,7 +192,7 @@ const getActions = (
             },
             popConfirm: {
                 title: t('device.Category.index.5rcy4wlxou40'),
-                okText: ' 确定',
+                okText: t('device.Category.index.verify'),
                 cancelText: t('device.Category.index.5rcy4wlxp0s0'),
                 onConfirm: async () => {
                     const resp = await deleteTree(data.id);

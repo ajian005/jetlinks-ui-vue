@@ -19,7 +19,7 @@
                                         "
                                         hasPermission="device/Firmware:update"
                                         :popConfirm="{
-                                            title: `确定批量重试`,
+                                            title: t('Task.Detail.index.batchRetry'),
                                             onConfirm: confirm,
                                         }"
                                     >

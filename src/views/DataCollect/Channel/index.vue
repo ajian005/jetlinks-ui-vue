@@ -101,7 +101,7 @@
                                         </j-col> -->
                                         <j-col :span="12">
                                             <div class="card-item-content-text">
-                                                说明
+                                                {{t('DataCollect.Channel.index.5rg5p0xfwxw0')}}
                                             </div>
                                             <div class="card-item-content-text">
                                                 <j-ellipsis>{{slotProps.description}}</j-ellipsis>

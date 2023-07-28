@@ -113,7 +113,7 @@
                         :rules="[
                             {
                                 required: true,
-                                message: '请输入',
+                                message: t('Point.Scan.Table.5rg7vqi4t1w0'),
                             },
                             {
                                 pattern: regOnlyNumber,
