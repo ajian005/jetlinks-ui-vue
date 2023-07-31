@@ -5,7 +5,7 @@
                 <template #label>
                     <div>
                         {{t('Instance.Import.file.5rcy9hmpxjo0')}}
-                        <div class="alert"><AIcon style="margin-right: 5px;" type="InfoCircleOutlined" />导入系统已存在的设备数据，不会更改已存在设备的所属产品信息</div>
+                        <div class="alert"><AIcon style="margin-right: 5px;" type="InfoCircleOutlined" />{{t('Instance.Import.file.5seygezqqe80')}}</div>
                     </div>
                 </template>
                 
@@ -26,19 +26,19 @@
                 >
                     <div class="dragger-box">
                         <AIcon class="icon" type="PlusCircleFilled" />
-                        <span style="margin: 16px 0 8px 0">点击或拖拽上传文件</span>
-                        <span>格式：.xlsx, .csv</span>
+                        <span style="margin: 16px 0 8px 0">{{t('Instance.Import.file.5seygezqr2s0')}}</span>
+                        <span>{{t('Instance.Import.file.5seygezqr8g0')}} .csv</span>
                     </div>
                 </a-upload-dragger>
             </j-form-item>
             <div style="margin-bottom: 16px">
                 <j-checkbox v-model:checked="modelRef.file.autoDeploy"
-                    >导入并启用</j-checkbox
+                    >{{t('Instance.Import.file.5seygezqrc80')}}</j-checkbox
                 >
             </div>
             <div v-if="importLoading" class="result">
                 <div v-if="flag">
-                    <j-spin size="small" style="margin-right: 10px" />正在导入
+                    <j-spin size="small" style="margin-right: 10px" />{{t('Instance.Import.file.5seyh9eo8i80')}}
                 </div>
                 <div v-else>
                     <AIcon
@@ -48,23 +48,23 @@
                             font-size: 16px;
                         "
                         type="CheckCircleOutlined"
-                    />导入完成
+                    />{{t('Instance.Import.file.5seyhfnl90k0')}}
                 </div>
-                <div>导入成功：{{ count }} 个</div>
+                <div>{{t('Instance.Import.file.5seygezqrg40',{count:count})}}</div>
                 <div>
-                    导入失败：<span style="color: #ff595e">{{ errCount }}</span>
-                    个<a
+                    {{t('Instance.Import.file.5seygezqrkk0')}}<span style="color: #ff595e">{{ errCount }}</span>
+                    {{t('Instance.Import.file.5seygezqrg40')}}<a
                         v-if="errMessage && !flag && errCount > 0"
                         style="margin-left: 20px"
                         @click="downError"
-                        >下载</a
+                        >{{t('Instance.Import.file.5seygezqro00')}}</a
                     >
                 </div>
             </div>
             <j-form-item :label="t('Instance.Import.file.5rcy9hmpy480')">
                 <div class="file-download">
-                    <j-button class="btn" @click="downFile('xlsx')">模板格式.xlsx</j-button>
-                    <j-button class="btn" @click="downFile('csv')">模板格式.csv</j-button>
+                    <j-button class="btn" @click="downFile('xlsx')">{{t('Instance.Import.file.5seygezqrrk0')}}</j-button>
+                    <j-button class="btn" @click="downFile('csv')">{{t('Instance.Import.file.5seygezqrvg0')}}</j-button>
                 </div>
             </j-form-item>
         </j-form>
@@ -121,7 +121,7 @@ const beforeUpload = (_file: any) => {
         _file.type ===
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
     if (!isCsv && !isXlsx) {
-        onlyMessage('请上传.xlsx或.csv格式文件', 'warning');
+        onlyMessage(t('Instance.Import.file.5seygezqryo0'), 'warning');
     }
     // if (!isXlsx) {
     //     onlyMessage('请上传.xlsx格式文件', 'warning');

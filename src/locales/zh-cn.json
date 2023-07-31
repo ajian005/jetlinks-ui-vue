@@ -880,7 +880,9 @@
                 "5rcyl6fnodo0": "注册时间",
                 "5rcyl6fnovc0": "最后上线时间",
                 "5rcyl6fnp2o0": "父设备",
-                "5rcyl6fnpac0": "说明"
+                "5rcyl6fnpac0": "说明",
+                "5seyber60j80": "未映射",
+                "5seyber63040": "已映射"
             }
         },
         "Log": {
@@ -1976,7 +1978,19 @@
                 "5rcy9hmpzg00": "失败",
                 "5rcy9hmpzsg0": "暂无权限，请联系管理员",
                 "5rcy9hmq07s0": "请先上传文件",
-                "amount": "总数量"
+                "amount": "总数量",
+                "5seygezqqe80": "导入系统已存在的设备数据，不会更改已存在设备的所属产品信息",
+                "5seygezqr2s0": "点击或拖拽上传文件",
+                "5seygezqr8g0": "格式：.xlsx,",
+                "5seygezqrc80": "导入并启用",
+                "5seygezqrg40": "导入成功：{count}个",
+                "5seygezqrkk0": "导入失败：",
+                "5seygezqro00": "下载",
+                "5seygezqrrk0": "模板格式.xlsx",
+                "5seygezqrvg0": "模板格式.csv",
+                "5seygezqryo0": "请上传.xlsx或.csv格式文件",
+                "5seyh9eo8i80": "正在导入",
+                "5seyhfnl90k0": "导入完成"
             },
             "index": {
                 "5rcy9v73m000": "导入",
@@ -2012,7 +2026,8 @@
                 "5rcyag5mgdw0": "名称",
                 "5rcyag5mglk0": "网关类型",
                 "5rcyag5mgu80": "状态",
-                "5rcyag5mh1k0": "说明"
+                "5rcyag5mh1k0": "说明",
+                "5seyj4n3gj80": "请选择产品，本次批量导入的设备将成为该产品的所属设备"
             }
         },
         "Export": {
@@ -2045,7 +2060,8 @@
                 "5rcyr31fqes0": "子设备",
                 "5rcyr31fqo80": "边缘端映射",
                 "5rcyr31fqww0": "操作成功！",
-                "5rcyr31fr5o0": "操作成功"
+                "5rcyr31fr5o0": "操作成功",
+                "5seyfb6whsg0": "物模型映射"
             }
         },
         "tsx": {
@@ -2391,7 +2407,9 @@
             },
             "PropertyAMap": {
                 "5rcyn0yib180": "开始动画",
-                "5rcyn0yics80": "停止动画"
+                "5rcyn0yics80": "停止动画",
+                "5seycmitlf00": "暂停动画",
+                "5seycmitmq40": "继续动画"
             },
             "Table": {
                 "5rcynbb1sr40": "详情",

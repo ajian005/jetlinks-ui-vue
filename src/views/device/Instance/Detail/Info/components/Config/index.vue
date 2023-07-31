@@ -106,7 +106,7 @@ const deployBtn = async () => {
     if (instanceStore.current.id) {
         const resp = await _deploy(instanceStore.current.id);
         if (resp.status === 200) {
-            onlyMessage('操作成功');
+            onlyMessage(t('components.Config.index.5rcyjclx5dg0'));
         }
     }
 };
@@ -115,7 +115,7 @@ const resetBtn = async () => {
     if (instanceStore.current.id) {
         const resp = await configurationReset(instanceStore.current.id);
         if (resp.status === 200) {
-            onlyMessage('恢复默认配置成功');
+            onlyMessage(t('components.Config.index.5rcyjclx65c0'));
             instanceStore.refresh(instanceStore.current.id);
         }
     }

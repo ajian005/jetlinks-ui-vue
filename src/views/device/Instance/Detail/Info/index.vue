@@ -23,10 +23,10 @@
                   {{t('Detail.Info.index.5rcyl6fnlnk0')}}
                 </template>
                 <a v-if="!inklingDeviceId" type='link' @click='giveAnInkling'>
-                  未映射
+                  {{t('Detail.Info.index.5seyber60j80')}}
                 </a>
                 <a v-else type='link' @click='inkingVisible = true'>
-                  已映射
+                  {{t('Detail.Info.index.5seyber63040')}}
                 </a>
               </j-tooltip>
             </div>

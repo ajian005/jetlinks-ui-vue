@@ -266,7 +266,7 @@ const getDetail = () => {
         ) &&
         !keys.includes('MetadataMap')
     ) {
-        list.value.push({ key: 'MetadataMap', tab: '物模型映射'});
+        list.value.push({ key: 'MetadataMap', tab: t('Instance.Detail.index.5seyfb6whsg0')});
     }
 };
 

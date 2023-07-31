@@ -4,8 +4,8 @@
             <div style="position: absolute; right: 0; top: 5px; z-index: 999">
                 <j-space>
                     <j-button type="primary" @click="onStart">{{t('Property.Detail.PropertyAMap.5rcyn0yib180')}}</j-button>
-                    <j-button type="primary" v-if="!stop" @click="onStop">暂停动画</j-button>
-                    <j-button type="primary" v-else @click="onResume">继续动画</j-button>
+                    <j-button type="primary" v-if="!stop" @click="onStop">{{t('Property.Detail.PropertyAMap.5seycmitlf00')}}</j-button>
+                    <j-button type="primary" v-else @click="onResume">{{t('Property.Detail.PropertyAMap.5seycmitmq40')}}</j-button>
                 </j-space>
             </div>
         </div>
